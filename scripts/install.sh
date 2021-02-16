@@ -55,6 +55,11 @@ fi
 
 bash ./dotfiles.sh -H
 
+# diff-so-fancy
+source ~/.bashrc
+nvm use node
+npm install -g diff-so-fancy
+
 # Get all upgrades
 sudo apt upgrade -y
 sudo apt autoremove -y
