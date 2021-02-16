@@ -50,6 +50,7 @@ if [[ "${WORKSTATION}" == "workstation" ]]; then
 else
     bash ./programs/anaconda.sh -H
     bash ./programs/direnv.sh -H
+    bash ./programs/nvm-npm-node-packages.sh -H
 fi
 
 bash ./dotfiles.sh -H

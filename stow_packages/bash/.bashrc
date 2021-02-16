@@ -170,7 +170,6 @@ function update_tmux_conf() {
 }
 alias reload_tmux="update_tmux_conf"
 
-
 # Bash completion
 source ~/.git-completion.bash
 
@@ -263,6 +262,7 @@ fi
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte.sh
 fi
+
 echo "Init conda for bash"
 eval "$(direnv hook bash)"
 export EDITOR="code --wait"
@@ -275,6 +275,11 @@ show_virtual_env() {
     fi
 }
 export -f show_virtual_env
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
 # Remove the "(base)" from the command prompt
 PS1=$(echo "$PS1" | perl -pe 's/^\(base\)\s*//')
 PS1='$(show_virtual_env) '$PS1

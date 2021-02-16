@@ -14,9 +14,9 @@ def main():
     print("home_dir: ", home_dir)
     configs = sorted([c for c in stow_dir.glob("**/*") if c.is_file()])
     for c in configs:
-        print(c)
+        # print(c)
         target_path = home_dir / c.name
-        print(target_path, target_path.exists(), target_path.is_symlink())
+        # print(target_path, target_path.exists(), target_path.is_symlink())
         if target_path.exists() and not target_path.is_symlink():
             backup_path = backup_dir / c.name
             print("Found file not managed by stow. Backing up:")
