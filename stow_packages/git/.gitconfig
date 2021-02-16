@@ -1,0 +1,160 @@
+[user]
+	name = Giscard Biamby
+	email = giscard@gmail.com
+
+[color]
+    # Use colors in Git commands that are capable of colored output when
+    # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+	ui = auto
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    pager  = true
+
+[color "branch"]
+    # Highlight current. Yellow local branches; Green remotes.
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+    # Yellow meta; Magenta line info; Red for deleltions; Green for additions.
+    meta = yellow
+    frag = magenta              # line info
+    old = red                   # deletions
+    new = green                 # additions
+    whitespace = red reverse
+
+[color "status"]
+    # Changed files are yellow.
+    # Staged files are green.
+    # New (untracked) files are cyan.
+    # Headers are gray (white dimmed)
+    # Branch is always green even in headers
+    added = green
+    branch = green
+    changed = yellow
+    header = white dim
+    untracked = cyan
+
+[core]
+    # Global `.gitattributes`
+    attributesfile = ~/.gitattributes
+
+	# editor = code --wait
+    editor = nano
+
+    excludesfile = ~/.gitignore_global
+
+    # Prevent showing files whose names contain non-ASCII symbols as unversioned.
+    # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+    precomposeunicode = false
+
+    # Speed up commands involving untracked files such as `git status`.
+    # https://git-scm.com/docs/git-update-index#_untracked_cache
+    untrackedCache = true
+
+    # https://stackoverflow.com/questions/18257622/why-is-git-core-preloadindex-default-value-false/18259086
+    preloadindex = true
+
+    # Enable the filesystem cache (for git bash | windows)
+    fscache = true
+
+[diff]
+    # Use more time to create better diffs.
+    # E.g. matching opening/closing braces from neighbour functions.
+    # See "`git help diff` --patience" and "`git help merge` recursive".
+    algorithm = patience
+
+    # (git 2.9+) Set this option to `true` to enable an experimental heuristic that
+    # shifts the hunk boundary in an attempt to make the resulting
+    # patch easier to read.
+    compactionHeuristic = true
+
+    renamelimit = 9999
+
+    color = auto
+
+    # Tells git to detect renames. If set to any boolean value,
+    # it will enable basic rename detection. If set to "copies" or "copy",
+    # it will detect copies, as well.
+    renames = copies
+
+    # Default to opendiff for visualising diffs.
+    # opendiff opens FileMerge
+    # Override with --tool=<tool> in difftool
+    # See`git help difftool`
+    # If `opendiff` is not in your $PATH, override with difftool.opendiff.path
+    # See`git help config` and search for "diff.tool"
+    #tool = opendiff
+    # tool = vimdiff
+
+[github]
+	user = GiscardBiamby
+
+[pull]
+	rebase = preserve
+
+[rebase]
+    # Use --autostash when running git pull --rebase and when rebasing interactively
+    autoStash = true
+
+[status]
+    color = auto
+
+[merge]
+    #tool = opendiff
+    # tool = vimdiff
+
+    # Always show a diffstat at the end of a merge
+    stat = true
+
+    # Git has an option to display merge conflicts in diff3 format (by default it only displays the two files to be merged).
+    conflictstyle = diff3
+
+    # Include summaries of merged commits in newly created merge commit messages
+    log = true
+
+[help]
+    # Automatically correct and execute mistyped commands
+    #autocorrect = 1
+
+    autocorrect = 10
+    # e.g.: $ git lgo
+    # WARNING: You called a Git command named 'lgo', which does not exist.
+    # Continuing under the assumption that you meant 'log'
+    # in 1.0 seconds automatically...
+
+[push]
+    # See `git help config` and search for "push.default"
+    # for more information on different options of the below setting.
+    # Setting to Git 2.0 default to surpress warning message
+    # If you use branches with different remote name, use "upstream"
+
+    # Push only the current branch
+    #
+    # default = simple #disabled for now to be compatible with debian wheezy
+
+    # Push all branches
+    #
+    # default = matching
+
+    # Make `git push` push relevant annotated tags when pushing branches out.
+    followTags = true
+
+[credential]
+    # cache the password for http-auth
+    helper = cache
+    # for "Git Credential Manager for Windows"
+    #helper = manager
+
+[log]
+    decorate = short
+
+
+[pager]
+    color = true
+    diff = diff-highlight | less
+    log = diff-highlight | less
+    show = diff-highlight | less

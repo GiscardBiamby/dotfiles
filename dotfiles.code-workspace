@@ -1,0 +1,32 @@
+{
+	"folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "../victoria-dot"
+        },
+        {
+            "path": ".."
+        }
+    ],
+    "settings": {
+        "workbench.colorCustomizations": {
+            "activityBar.activeBackground": "#cb9862",
+            "activityBar.activeBorder": "#cfefe0",
+            "activityBar.background": "#cb9862",
+            "activityBar.foreground": "#15202b",
+            "activityBar.inactiveForeground": "#15202b99",
+            "activityBarBadge.background": "#cfefe0",
+            "activityBarBadge.foreground": "#15202b",
+            "statusBar.background": "#bc7f3e",
+            "statusBar.foreground": "#15202b",
+            "statusBarItem.hoverBackground": "#966531",
+            "titleBar.activeBackground": "#bc7f3e",
+            "titleBar.activeForeground": "#15202b",
+            "titleBar.inactiveBackground": "#bc7f3e99",
+            "titleBar.inactiveForeground": "#15202b99"
+        },
+        "peacock.color": "#bc7f3e"
+    }
+}
