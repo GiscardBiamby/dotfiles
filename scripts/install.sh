@@ -38,6 +38,9 @@ install optipng
 install figlet
 install lolcat
 
+git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+
+
 # Programs
 if [[ "${WORKSTATION}" == "workstation" ]]; then
     # Run all scripts in programs/
