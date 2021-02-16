@@ -19,9 +19,10 @@ def main():
         print(target_path, target_path.exists(), target_path.is_symlink())
         if target_path.exists() and not target_path.is_symlink():
             backup_path = backup_dir / c.name
-            print("target_path: ", target_path)
+            print("Found file not managed by stow. Backing up:")
+            print("file: ", target_path)
             print("backup path: ", backup_path)
-            # shutil.move(target_path, backup_path)
+            shutil.move(target_path, backup_path)
 
 
 if __name__ == "__main__":
