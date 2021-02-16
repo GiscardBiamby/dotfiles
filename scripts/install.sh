@@ -24,6 +24,7 @@ install htop
 install nmap
 install silversearcher-ag
 install pigz
+install stow
 install tmux
 install tree
 install unzip
