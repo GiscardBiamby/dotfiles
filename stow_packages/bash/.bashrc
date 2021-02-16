@@ -159,6 +159,18 @@ function mlc() {
     find $1 -name \*.md -exec markdown-link-check -p {} \;
 }
 
+function gitBranch() {
+    # Displays current branch
+    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+function update_tmux_conf() {
+    # Reload .tmux.conf
+    tmux source-file ~/.tmux.conf
+}
+alias reload_tmux="update_tmux_conf"
+
+
 # Bash completion
 source ~/.git-completion.bash
 
@@ -240,16 +252,7 @@ if [ "${UID}" -eq "0" ]; then
     pointerC="${txtred}"
 fi
 
-gitBranch() {
-    # Displays current branch
-    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-update_tmux_conf() {
-    tmux source-file ~/.tmux.conf
-}
-
 export PS1="${pathC}\w ${gitC}\$(gitBranch) ${pointerC}\$${normalC} "
-
 
 # My stuff:
 if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
