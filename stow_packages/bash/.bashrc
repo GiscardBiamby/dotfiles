@@ -244,6 +244,9 @@ gitBranch() {
     # Displays current branch
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
+update_tmux_conf() {
+    tmux source-file ~/.tmux.conf
+}
 
 export PS1="${pathC}\w ${gitC}\$(gitBranch) ${pointerC}\$${normalC} "
 
