@@ -38,3 +38,4 @@ sudo systemctl enable ssh.service
 # Load dconf settings:
 # dconf load /org/gnome/ < .config/dconf/settings.dconf
 dconf load /com/gexperts/Tilix/ < .config/dconf/tilix.dconf
+dconf load /org/gnome/terminal/ < .config/dconf/terminal.dconf
