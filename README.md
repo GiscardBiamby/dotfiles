@@ -13,30 +13,31 @@ Add or delete files in `scripts/install.sh` and `scripts/programs/` to modify yo
 After installing your fresh OS, do:
 
 ```sh
-sudo apt install git vim -y
+sudo apt install git -y
 ```
 
-Use nano to create any SSH keys you need to access GitHub, and remember to run `ssh-add` as well as `chmod 600 <key_name>`. Then clone this repository:
+Use nano to create any SSH keys you need to access GitHub, and remember to run `eval "$(ssh-agent)"` and then `ssh-add`, as well as `chmod 600 <key_name>`. Then clone this repository:
 
 ```sh
 git clone git@github.com:GiscardBiamby/dotfiles.git
-
-# Or use HTTPS
+# OR use HTTPS
 git clone https://github.com/GiscardBiamby/dotfiles.git
 ```
 
 Close Firefox if it's open, then run the installation script.
+
+For server only:
 
 ```sh
 cd dotfiles/scripts/
 ./install.sh
 ```
 
-If you like, set up [powerline-shell](https://github.com/b-ryan/powerline-shell):
+For workstation only (installs GUI apps like chrome, firefox, GIMP, etc):
 
 ```sh
-cd powerline-shell/
-sudo python3 setup.py install
+cd dotfiles/scripts/
+./install.sh "workstation"
 ```
 
 Uncomment the relevant lines in `.bashrc`, then restart your terminal to see changes, or run:
@@ -46,7 +47,7 @@ cd ~
 source .bashrc
 ```
 
-## Fix screen tearing (e.g., choppy animation when dragging windows around)
+## Fix screen tearing (e.g., choppy animation when dragging windows around, for workstation only)
 
 Also note, different web results use different file names, so I did this but with multiple file names, i’m not sure which one is the one that makes it work:
 Nvidia-nomodeset.conf and nvidia-drm-nomodeset.conf
