@@ -1,0 +1,7 @@
+// Empty
+[
+    {
+        "key": "ctrl+alt+i",
+        "command": "python.sortImports"
+    }
+]
