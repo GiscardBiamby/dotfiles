@@ -170,6 +170,11 @@ function update_tmux_conf() {
 }
 alias reload_tmux="update_tmux_conf"
 
+function ssh_fix() {
+    eval "$(ssh-agent)";
+    ssh-add;
+}
+
 # Bash completion
 source ~/.git-completion.bash
 
