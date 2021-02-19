@@ -45,11 +45,14 @@ git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt -
 
 # Programs
 if [[ "${WORKSTATION}" == "workstation" ]]; then
-    # Run all scripts in programs/
+    # For workstation (meaning I want GUI apps), run all scripts in ./scripts/programs/:
     for f in programs/*.sh; do bash "$f" -H; done
 else
+    # For server, only install command line things:
     bash ./programs/anaconda.sh -H
     bash ./programs/direnv.sh -H
+    bash ./programs/docker.sh -H
+    bash ./programs/nvidia-docker-toolkit.sh -H
     bash ./programs/nvm-npm-node-packages.sh -H
 fi
 

@@ -21,6 +21,7 @@
             "titleBar.inactiveBackground": "#bc7f3e99",
             "titleBar.inactiveForeground": "#15202b99"
         },
-        "peacock.color": "#bc7f3e"
+        "peacock.color": "#bc7f3e",
+        "python.pythonPath": "/home/gbiamby/anaconda3/envs/mal/bin/python"
     }
 }
