@@ -20,4 +20,5 @@ sudo systemctl restart docker
 
 # A working setup can be tested by running a base CUDA container:
 echo "If the install worked, you should see nvidia-smi output:"
-sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+# sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+sudo docker run --rm --gpus all nvidia/cuda:10.2-base nvidia-smi
