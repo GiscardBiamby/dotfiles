@@ -286,3 +286,8 @@ export NVM_DIR="$HOME/.nvm"
 # Remove the "(base)" from the command prompt
 PS1=$(echo "$PS1" | perl -pe 's/^\(base\)\s*//')
 PS1='$(show_virtual_env) '$PS1
+
+# For AMD CPU's, set this so that Intel MKL library will use AVX2 optimizations
+if (lscpu | grep "AMD Ryzen"); then
+    export MKL_DEBUG_CPU_TYPE=5
+fi

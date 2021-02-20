@@ -47,6 +47,17 @@ cd ~
 source .bashrc
 ```
 
+## On Systems with AMD CPU
+
+[Install blas to improve math library performance (numpy, scikit, etc)](https://www.pugetsystems.com/labs/hpc/AMD-Ryzen-3900X-vs-Intel-Xeon-2175W-Python-numpy---MKL-vs-OpenBLAS-1560/)
+
+Do this for any conda env's:
+
+```
+conda activate <ENV_NAME>
+conda install -y blas=*=openblas
+```
+
 ## Fix screen tearing (e.g., choppy animation when dragging windows around, for workstation only)
 
 Also note, different web results use different file names, so I did this but with multiple file names, i’m not sure which one is the one that makes it work:
