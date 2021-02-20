@@ -45,7 +45,8 @@ git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt -
 
 # Programs
 if [[ "${WORKSTATION}" == "workstation" ]]; then
-    # For workstation (meaning I want GUI apps), run all scripts in ./scripts/programs/:
+    # For workstation (meaning I want all command line + GUI apps), run all scripts in
+    # ./scripts/programs/:
     for f in programs/*.sh; do bash "$f" -H; done
 else
     # For server, only install command line things:
@@ -56,9 +57,13 @@ else
     bash ./programs/nvm-npm-node-packages.sh -H
 fi
 
+# Use GNU stow to deploy all the doffiles:
 bash ./dotfiles.sh -H
 
-# diff-so-fancy
+# Install diff-so-fancy
+#
+# Note: it seems like i still have to run this step manually for some reason, to get diff-so-fancy
+# to work
 source ~/.bashrc
 nvm use node
 npm install -g diff-so-fancy
