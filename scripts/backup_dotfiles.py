@@ -10,7 +10,8 @@ def backup_file(target_path: Path, backup_dir: Path, path: Path) -> None:
         backup_path = backup_dir / path.name
         print(f"File not managed by stow. Backing up: {target_path} --> {backup_path}")
         # shutil.move(str(target_path), backup_path)
-        backup_path.write_bytes(target_path.read_bytes())
+        # backup_path.write_bytes(target_path.read_bytes())
+        target_path.rename(backup_path)
 
 
 def main():

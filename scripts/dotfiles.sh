@@ -11,3 +11,7 @@ stow --target="${HOME}" direnv
 stow --target="${HOME}" git
 stow --target="${HOME}" tmux
 popd
+
+pushd ../.config/Code
+stow --target="${HOME}/.config/Code/User" User
+popd
