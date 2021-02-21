@@ -12,6 +12,9 @@ stow --target="${HOME}" git
 stow --target="${HOME}" tmux
 popd
 
+# Manage vscode settings and keybindings if vscode is installed:
 pushd ../.config/Code
-stow --target="${HOME}/.config/Code/User" User
+if [[ -d "${HOME}/.config/Code/User" ]]; then
+    stow --target="${HOME}/.config/Code/User" User
+fi
 popd
