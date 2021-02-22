@@ -3,6 +3,7 @@
 . util.sh
 
 echo "Installing workstation tools"
+sudo add-apt-repository ppa:solaar-unifying/ppa
 sudo apt-add-repository universe
 sudo apt update
 
