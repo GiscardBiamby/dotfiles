@@ -15,10 +15,18 @@ sudo add-apt-repository \
         stable"
 sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io
-sudo docker run hello-world
 
+# Create a user so you don't have to sudo for every docker command:
+# https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+
+# Test:
+docker run hello-world
+
+# Services:
 sudo systemctl --now enable docker
-
 # Enable docker service on bootup:
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
