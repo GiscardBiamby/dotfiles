@@ -18,6 +18,8 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io
 
 # Create a user so you don't have to sudo for every docker command:
 # https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+#
+# Note: seems like yuo may need to logout and/or reboot to have the group settings take effect
 sudo groupadd docker
 sudo usermod -aG docker $USER
 newgrp docker
