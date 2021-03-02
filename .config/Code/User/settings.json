@@ -241,7 +241,6 @@
     "todo-tree.tree.showScanModeButton": false,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "window.restoreWindows": "all",
-    "window.zoomLevel": 0,
     "workbench.colorCustomizations": {
         "activityBar.activeBorder": "#2979FF",
         "activityBar.background": "#163414",
@@ -329,5 +328,6 @@
     "git.autofetch": true,
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-    }
+    },
+    "jupyter.maxOutputSize": 1500
 }
