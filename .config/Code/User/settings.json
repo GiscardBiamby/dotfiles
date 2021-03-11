@@ -17,6 +17,7 @@
         "IESDS",
         "Jupyter",
         "LMDB",
+        "PYTHONPATH",
         "Popen",
         "Posix",
         "Pylance",
@@ -276,7 +277,12 @@
     "workbench.settings.openDefaultKeybindings": true,
     "workbench.statusBar.feedback.visible": false,
     "workbench.tree.indent": 15,
-    "workbench.editorAssociations": [],
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
     "workbench.activityBar.visible": true,
     "latex-workshop.message.update.show": false,
     "python.languageServer": "Pylance",
@@ -329,5 +335,6 @@
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
     },
-    "jupyter.maxOutputSize": 1500
+    "jupyter.maxOutputSize": 1500,
+    "window.zoomLevel": 1
 }
