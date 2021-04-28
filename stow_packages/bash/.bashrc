@@ -91,6 +91,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias ag='ag --hidden --path-to-ignore ~/.agignore'
 # TODO: Move to .bash_aliases:
 # New stuff, haven't tried yet:
 # alias cp='cp -Rv'
