@@ -16,6 +16,7 @@ function install() {
 install 2ndshift.fresh-material
 install aaron-bond.better-comments
 install AffenWiesel.matlab-formatter
+install batisteo.vscode-django
 install betwo.vscode-linux-binary-preview
 install christian-kohler.path-intellisense
 install codezombiech.gitignore
@@ -23,9 +24,12 @@ install CoenraadS.bracket-pair-colorizer-2
 install DavidAnson.vscode-markdownlint
 install dcasella.monokai-plusplus
 install donjayamanne.githistory
+install dunstontc.vscode-docker-syntax
+install EditorConfig.EditorConfig
 install Equinusocio.vsc-community-material-theme
 install Equinusocio.vsc-material-theme
 install equinusocio.vsc-material-theme-icons
+install esbenp.prettier-vscode
 install foxundermoon.shell-format
 install Gimly81.matlab
 install Gruntfuggly.todo-tree
@@ -62,6 +66,7 @@ install natqe.reload
 install njpwerner.autodocstring
 install oderwat.indent-rainbow
 install origamid.origamid-theme
+install p1c2u.docker-compose
 install philsinatra.popping-and-locking-vscode-black
 install PKief.material-icon-theme
 install quilicicf.markdown-spec-formatter
@@ -76,7 +81,9 @@ install stkb.rewrap
 install streetsidesoftware.code-spell-checker
 install stuart.unique-window-colors
 install tinaciousdesign.theme-tinaciousdesign
+install tommorris.mako
 install tomoki1207.pdf
 install vikas.code-navigation
 install vscode-icons-team.vscode-icons
-install woodywoodsta.vscode-material-syntax-dark --force
+install woodywoodsta.vscode-material-syntax-dark
+install zaaack.markdown-editor

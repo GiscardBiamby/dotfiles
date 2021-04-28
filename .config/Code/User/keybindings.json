@@ -3,5 +3,9 @@
     {
         "key": "ctrl+alt+i",
         "command": "python.sortImports"
+    },
+    {
+        "key": "ctrl+shift+alt+m",
+        "command": "markdown-editor.openEditor"
     }
 ]
