@@ -19,3 +19,8 @@ if [[ -d "${HOME}/.config/Code/User" ]]; then
     stow --target="${HOME}/.config/Code/User" User
 fi
 popd
+pushd ../.config
+if [[ -d "${HOME}/.config/Code" ]]; then
+    stow --target="${HOME}/.config/Code" Code
+fi
+popd
