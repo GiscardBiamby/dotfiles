@@ -271,6 +271,10 @@ echo "Init conda for bash"
 eval "$(direnv hook bash)"
 export EDITOR="code --wait"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
 # For direnv to show correct conda env in the PS1 bash prompt
 # (https://github.com/direnv/direnv/wiki/Python#restoring-the-ps1):
 show_virtual_env() {
@@ -280,9 +284,6 @@ show_virtual_env() {
 }
 export -f show_virtual_env
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # Remove the "(base)" from the command prompt
 PS1=$(echo "$PS1" | perl -pe 's/^\(base\)\s*//')
