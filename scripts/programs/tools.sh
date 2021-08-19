@@ -23,6 +23,7 @@ install nedit
 install okular
 install openssh-client
 install openssh-server
+install pandoc
 install remmina
 install smartmontools
 install solaar
@@ -33,6 +34,7 @@ install unetbootin
 install usbutils
 install util-linux
 install vlc
+install texlive-xetex texlive-fonts-recommended texlive-latex-recommended
 
 sudo systemctl enable ssh.service
 
