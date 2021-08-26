@@ -559,7 +559,7 @@
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "eq-material-theme-icons-light",
     "workbench.settings.openDefaultKeybindings": true,
     "workbench.statusBar.feedback.visible": false,
     "workbench.tree.indent": 15
