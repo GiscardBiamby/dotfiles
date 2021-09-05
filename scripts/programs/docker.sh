@@ -1,4 +1,5 @@
 #!/bin/bash
+set +e
 
 echo "🐋 Installing Docker"
 sudo apt update
@@ -22,7 +23,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io
 # Note: seems like yuo may need to logout and/or reboot to have the group settings take effect
 sudo groupadd docker
 sudo usermod -aG docker $USER
-newgrp docker
+# newgrp docker
 
 # Test:
 docker run hello-world
