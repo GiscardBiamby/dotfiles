@@ -25,6 +25,9 @@ export PATH=$PATH:/usr/bin/Postman
     echo "StartupNotify=true"
 } >> /usr/share/applications/Postman.desktop
 
+rm linux64
+rm linux64.1
+
 # Uninstall
 # sudo rm -r /usr/bin/Postman
 # sudo rm -r /usr/share/applications/Postman.desktop
