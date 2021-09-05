@@ -3,8 +3,5 @@
 . util.sh
 
 echo "Installing dropbox"
-# TODO: Download and install dropbox
-# sudo add-apt-repository ppa:phoerious/keepassxc -y
-# sudo apt update
-# install keepassxc
-
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+~/.dropbox-dist/dropboxd
