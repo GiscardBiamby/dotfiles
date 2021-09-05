@@ -190,7 +190,7 @@ fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/gbiamby/anaconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
+__conda_setup="$('/home/gbiamby/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -284,6 +284,8 @@ show_virtual_env() {
 }
 export -f show_virtual_env
 
+# Only on workstations, maybe need a separate include
+export PATH=$PATH:/usr/bin/Postman
 
 # Remove the "(base)" from the command prompt
 PS1=$(echo "$PS1" | perl -pe 's/^\(base\)\s*//')
