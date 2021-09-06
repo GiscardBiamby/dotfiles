@@ -28,13 +28,13 @@ install remmina
 install smartmontools
 install solaar
 install spotify
+install texlive-xetex texlive-fonts-recommended texlive-latex-recommended
 install texstudio
 install tilix
 install unetbootin
 install usbutils
 install util-linux
 install vlc
-install texlive-xetex texlive-fonts-recommended texlive-latex-recommended
 
 sudo systemctl enable ssh.service
 

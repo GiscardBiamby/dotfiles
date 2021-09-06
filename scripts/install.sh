@@ -47,7 +47,7 @@ git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt -
 if [[ "${WORKSTATION}" == "workstation" ]]; then
     # For workstation (meaning I want all command line + GUI apps), run all scripts in
     # ./scripts/programs/:
-    for f in programs/*.sh; do bash "$f" -H; done
+    for f in programs/*.sh; do bash "sudo $f" -H; done
 else
     # For server, only install command line things:
     bash ./programs/anaconda.sh -H
