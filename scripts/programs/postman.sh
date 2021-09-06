@@ -1,4 +1,5 @@
 #!/bin/bash
+set +e
 
 . util.sh
 
@@ -26,7 +27,6 @@ export PATH=$PATH:/usr/bin/Postman
 } >> /usr/share/applications/Postman.desktop
 
 rm linux64
-rm linux64.1
 
 # Uninstall
 # sudo rm -r /usr/bin/Postman
