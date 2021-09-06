@@ -2,7 +2,7 @@
 
 . util.sh
 
-echo "Installing postman"
+echo "📮 Installing postman"
 # https://www.how2shout.com/linux/how-to-install-postman-on-ubuntu-20-04-lts-linux/
 wget https://dl.pstmn.io/download/latest/linux64
 sudo tar -xvf linux64 -C /usr/bin

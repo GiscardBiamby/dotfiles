@@ -2,7 +2,7 @@
 
 . util.sh
 
-echo "Installing anaconda"
+echo "🐍 Installing anaconda"
 
 if [[ ! -f "anaconda3_x86_64.sh" ]]; then
     wget -O - https://www.anaconda.com/distribution/ 2>/dev/null |
