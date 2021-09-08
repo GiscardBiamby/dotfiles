@@ -22,6 +22,7 @@ install "dconf*"
 install gnupg
 install gzip
 install htop
+install net-tools
 install nmap
 install silversearcher-ag
 install pigz
