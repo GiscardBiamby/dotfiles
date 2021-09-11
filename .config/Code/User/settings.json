@@ -352,7 +352,6 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.copyWithSyntaxHighlighting": false,
     "editor.cursorSmoothCaretAnimation": true,
-    "editor.detectIndentation": false,
     "editor.fontLigatures": true,
     "editor.largeFileOptimizations": false,
     "editor.mouseWheelZoom": true,
@@ -521,7 +520,7 @@
     "vsicons.presets.jsonOfficial": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "window.restoreWindows": "all",
-    "window.zoomLevel": 3,
+    "window.zoomLevel": 2,
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "activityBar.activeBorder": "#2979FF",
@@ -562,5 +561,6 @@
     "workbench.iconTheme": "eq-material-theme-icons-light",
     "workbench.settings.openDefaultKeybindings": true,
     "workbench.statusBar.feedback.visible": false,
-    "workbench.tree.indent": 15
+    "workbench.tree.indent": 15,
+    "editor.detectIndentation": false
 }

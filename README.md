@@ -1,6 +1,6 @@
 # dotfiles
 
-Based on: <https://github.com/victoriadrake/dotfiles>
+Based on: [https://github.com/victoriadrake/dotfiles](https://github.com/victoriadrake/dotfiles)
 
 My preferred starting configuration for Ubuntu Desktop. Current version 20.04 Focal Fossa.
 
@@ -33,7 +33,7 @@ cd dotfiles/scripts/
 ./install.sh
 ```
 
-For workstation only (installs GUI apps like chrome, firefox, GIMP, etc):
+For workstation only (installs GUI apps like chrome, Firefox, GIMP, etc):
 
 ```sh
 cd dotfiles/scripts/
@@ -49,16 +49,18 @@ source .bashrc
 
 ## On Systems with AMD CPU
 
+__UPDATE__: This step is no longer necessary? The `.bashsrc` entries
+
 [Install blas to improve math library performance (numpy, scikit, etc)](https://www.pugetsystems.com/labs/hpc/AMD-Ryzen-3900X-vs-Intel-Xeon-2175W-Python-numpy---MKL-vs-OpenBLAS-1560/)
 
 Do this for any conda env's:
 
-```
+```bash
 conda activate <ENV_NAME>
 conda install -y blas=*=openblas
 ```
 
-## Fix screen tearing (e.g., choppy animation when dragging windows around, for workstation only)
+## Fix screen tearing (e.g., choppy animation when dragging windows around, for workstation only) for systems with NVIDIA GPU
 
 Also note, different web results use different file names, so I did this but with multiple file names, i’m not sure which one is the one that makes it work:
 Nvidia-nomodeset.conf and nvidia-drm-nomodeset.conf
@@ -118,6 +120,33 @@ dconf dump /org/gnome/ > .config/dconf/settings.dconf
 
 Run `man dconf` on your machine for more.
 
+## Zotero and ZotFile: Use Dropbox for Syncing PDFs
+
+To use Dropbox to manage paper pdf's in Zotero (instead of Zotero's storage, which is limited to 300MB), install the Zotfile plugin. This lets your Zotero library sync across devices. Zotero will still manage the library entries and metadata via it's own storage. With this setup and around 200 papers in my library, my Dropbox has ~400MB of PDF's, and the library only uses up ~11MB of my Zotero free storage.
+
+1. Install the Zotfile extension
+2. Choose a folder inside your Dropbox dir that will store your pdf's. Let's call this the `$ZOTERO_ATTACHMENTS_DIR`. For example: `$ZOTERO_ATTACHMENTS_DIR=/home/username/Dropbox/private/Zotero/main/`.
+3. Zotero-> Edit -> Preferences -> Advanced -> Files and Folders -> Base Directory: __Set this to your `$ZOTERO_ATTACHMENTS_DIR` folder__
+4. Zotero-> Sync -> Settings -> File Syncing -> Sync attachment files in My Library using: Zotero
+5. Zotero -> Tools -> Zotfile Preferences -> General Settings -> Location of Files -> Custom Location: __Set this to your `$ZOTERO_ATTACHMENTS_DIR` folder__
+6. If you need to convert existing library entries from Zotero storage to this Dropbox synced location, select the entire My Library -> right click -> Manage Attachments -> Rename Attachments. (Note, if you have done Manage Attachments -> Send to Tablet,  you will have to do Manage Attachments -> Get From Tablet before you can perform this step.
+
+### Zotero and ZotFile: Sending to/from Tablet
+
+This section is only relevant if you want to use a workflow where you can manually send papers to your tablet (via a cloud synced folder, e.g., Dropbox), read/annotate on the tablet, and then get back the annotations onto your computer (via Manage Attachments -> Get From Tablet). If you don't have a tablet or don't want to use that workflow you can ignore this section.
+
+1. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Use ZotFile to send and get files from tablet -> **CHECKED**
+2. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Location of Files on Tablet-> Base Folder: `$ZOTERO_TABLET_DIR`
+3. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Location of Files on Tablet -> Subfolders: Select "Create subfolders from zotero collections" option
+
+Don't use the `$ZOTERO_ATTACHMENTS_DIR` for this. I typically set this to a sibling folder to `ZOTERO_ATTACHMENTS_DIR`. These are not environment variables. I'm just using this notation for the formatting in this markdown. So I then have:
+
+
+| Folder                    | Path                                            |
+| --------------------------- | ------------------------------------------------- |
+| `$ZOTERO_ATTACHMENTS_DIR` | `/home/username/Dropbox/private/Zotero/main/`   |
+| `$ZOTERO_TABLET_DIR`      | `/home/username/Dropbox/private/Zotero/tablet/` |
+
 ## Your personal CLI tool Makefile
 
 See the Makefile in this repository for some helpful command aliases. Read about [self-documenting Makefiles on my blog](https://victoria.dev/blog/how-to-create-a-self-documenting-makefile/).
@@ -125,5 +154,5 @@ See the Makefile in this repository for some helpful command aliases. Read about
 ## Recommended additions
 
 * GNOME Tweaks
-* [Emoji Selector](https://extensions.gnome.org/extension/1162/emoji-selector/) ❤️✨🦄
+* [Emoji Selector](https://extensions.gnome.org/extension/1162/emoji-selector/)
 * [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)

@@ -1,27 +1,26 @@
 {
-	"folders": [
+    "folders": [
         {
             "path": "."
         }
     ],
     "settings": {
         "workbench.colorCustomizations": {
-            "activityBar.activeBackground": "#cb9862",
-            "activityBar.activeBorder": "#cfefe0",
-            "activityBar.background": "#cb9862",
+            "activityBar.activeBackground": "#acb5be",
+            "activityBar.activeBorder": "#bf4080",
+            "activityBar.background": "#acb5be",
             "activityBar.foreground": "#15202b",
             "activityBar.inactiveForeground": "#15202b99",
-            "activityBarBadge.background": "#cfefe0",
-            "activityBarBadge.foreground": "#15202b",
-            "statusBar.background": "#bc7f3e",
+            "activityBarBadge.background": "#bf4080",
+            "activityBarBadge.foreground": "#e7e7e7",
+            "statusBar.background": "#909ca7",
             "statusBar.foreground": "#15202b",
-            "statusBarItem.hoverBackground": "#966531",
-            "titleBar.activeBackground": "#bc7f3e",
+            "statusBarItem.hoverBackground": "#748390",
+            "titleBar.activeBackground": "#909ca7",
             "titleBar.activeForeground": "#15202b",
-            "titleBar.inactiveBackground": "#bc7f3e99",
+            "titleBar.inactiveBackground": "#909ca799",
             "titleBar.inactiveForeground": "#15202b99"
         },
-        "peacock.color": "#bc7f3e",
-        "python.pythonPath": "/home/gbiamby/anaconda3/envs/mal/bin/python"
+        "peacock.color": "#909ca7"
     }
 }
