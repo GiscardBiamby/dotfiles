@@ -172,10 +172,9 @@ function update_tmux_conf() {
 alias reload_tmux="update_tmux_conf"
 
 function ssh_fix() {
-    eval "$(ssh-agent)";
-    ssh-add;
+    eval "$(ssh-agent)"
+    ssh-add
 }
-
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -190,7 +189,7 @@ fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/gbiamby/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/gbiamby/anaconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -291,10 +290,11 @@ export PATH=$PATH:/usr/bin/Postman
 PS1=$(echo "$PS1" | perl -pe 's/^\(base\)\s*//')
 PS1='$(show_virtual_env) '$PS1
 
-# For AMD CPU's, set this so that Intel MKL library will use AVX2 optimizations
-if (lscpu | grep "AMD Ryzen"); then
-    export MKL_DEBUG_CPU_TYPE=5
-fi
+## This workaround no longer works with newer Intel MKL lib versions.
+# # For AMD CPU's, set this so that Intel MKL library will use AVX2 optimizations
+# if (lscpu | grep "AMD Ryzen"); then
+#     export MKL_DEBUG_CPU_TYPE=5
+# fi
 
 # ## For home desktop only. The way I installed the NVIDIA drivers made it necessary to set these
 # ## manually for some reason:
