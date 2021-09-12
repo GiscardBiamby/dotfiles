@@ -295,3 +295,16 @@ PS1='$(show_virtual_env) '$PS1
 if (lscpu | grep "AMD Ryzen"); then
     export MKL_DEBUG_CPU_TYPE=5
 fi
+
+# ## For home desktop only. The way I installed the NVIDIA drivers made it necessary to set these
+# ## manually for some reason:
+# # CUDA
+# export CUDA_HOME=/usr/local/cuda
+# export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
+# export PATH=${PATH}:/usr/local/cuda/bin
+# ## Arch list for compiling some pytorch projects, DeepFill, and the other hackathon one:
+# # export TORCH_CUDA_ARCH_LIST="Turing,Ampere"
+# export TORCH_CUDA_ARCH_LIST=7.5
+# # export TORCH_CUDA_ARCH_LIST=8.6
+# ## To force the nvidia-smi GPU order to be the same as the GPU device ordinals in pytorch:
+# export CUDA_DEVICE_ORDER=PCI_BUS_ID
