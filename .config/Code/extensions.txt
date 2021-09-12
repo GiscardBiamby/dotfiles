@@ -3,6 +3,7 @@ install aaron-bond.better-comments
 install AffenWiesel.matlab-formatter
 install ban.spellright
 install batisteo.vscode-django
+install Bauke.horizon-vscode
 install betwo.vscode-linux-binary-preview
 install bungcip.better-toml
 install christian-kohler.path-intellisense
@@ -29,7 +30,6 @@ install jaredkent.laserwave
 install jeffersonlicet.snipped
 install johnpapa.vscode-peacock
 install JohnyGeorges.jetjet-theme
-install jolaleye.horizon-theme-vscode
 install kriegalex.vscode-cudacpp
 install kuscamara.electron
 install mechatroner.rainbow-csv
@@ -39,9 +39,11 @@ install mikestead.dotenv
 install mohsen1.prettify-json
 install mr-ubik.hackerman-syntax
 install ms-azuretools.vscode-docker
+install ms-ossdata.vscode-postgresql
 install ms-python.python
 install ms-python.vscode-pylance
 install ms-toolsai.jupyter
+install ms-toolsai.jupyter-keymap
 install ms-vscode-remote.remote-containers
 install ms-vscode-remote.remote-ssh
 install ms-vscode-remote.remote-ssh-edit
@@ -52,6 +54,7 @@ install ms-vscode.Theme-TomorrowKit
 install ms-vsliveshare.vsliveshare
 install ms-vsliveshare.vsliveshare-audio
 install ms-vsliveshare.vsliveshare-pack
+install mtxr.sqltools
 install natqe.reload
 install njpwerner.autodocstring
 install oderwat.indent-rainbow
@@ -68,7 +71,6 @@ install Shan.code-settings-sync
 install shardulm94.trailing-spaces
 install spikespaz.vscode-smoothtype
 install stkb.rewrap
-install streetsidesoftware.code-spell-checker
 install stuart.unique-window-colors
 install TakumiI.markdowntable
 install tinaciousdesign.theme-tinaciousdesign
@@ -78,3 +80,4 @@ install vikas.code-navigation
 install vscode-icons-team.vscode-icons
 install woodywoodsta.vscode-material-syntax-dark
 install zaaack.markdown-editor
+install ziyasal.vscode-open-in-github

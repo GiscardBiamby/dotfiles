@@ -10,7 +10,7 @@ save-dconf: ## Save dconf settings to .config/dconf/settings.dconf
 	dconf dump /org/gnome/terminal/ > .config/dconf/terminal.dconf
 
 save-vsce: ## Save a list of VSC extensions to .config/Code/extensions.txt
-	code --list-extensions | xargs -L 1 > ~/.config/Code/extensions.txt
+	code --list-extensions | xargs -L 1 echo install > ~/.config/Code/extensions.txt
 
 save: save-dconf save-vsce ## Update dconf and vsc extensions files
 
