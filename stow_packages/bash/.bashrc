@@ -262,12 +262,14 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     source $HOME/.bash-git-prompt/gitprompt.sh
 fi
 
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-    source /etc/profile.d/vte.sh
-fi
+# # This has to do with TILIX. I don't think it's needed anymore.
+# if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+#     source /etc/profile.d/vte.sh
+# fi
 
 echo "Init conda for bash"
 eval "$(direnv hook bash)"
+
 export EDITOR="code --wait"
 
 export NVM_DIR="$HOME/.nvm"
