@@ -31,6 +31,7 @@ install spotify
 install texlive-xetex texlive-fonts-recommended texlive-latex-recommended
 install texstudio
 install tilix
+install ubuntu-restricted-extras
 install unetbootin
 install usbutils
 install util-linux
