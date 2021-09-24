@@ -7,6 +7,7 @@
 echo "Installing Microsoft Fonts (to help LibreOffice)"
 
 pushd ~/
+echo $(pwd)
 mkdir -p .fonts
 
 echo "Install Microsoft’s TrueType Core fonts"

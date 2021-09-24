@@ -28,7 +28,9 @@ install remmina
 install smartmontools
 install solaar
 install spotify
-install texlive-xetex texlive-fonts-recommended texlive-latex-recommended
+install texlive-xetex
+install texlive-fonts-recommended
+install texlive-plain-generic
 install texstudio
 install tilix
 install ubuntu-restricted-extras
