@@ -88,9 +88,9 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -alF --group-directories-first'
+alias la='ls -A --group-directories-first'
+alias l='ls -CF --group-directories-first'
 alias ag='ag --hidden --path-to-ignore ~/.agignore'
 # TODO: Move to .bash_aliases:
 # New stuff, haven't tried yet:
@@ -147,14 +147,6 @@ function cd() {
     ls -ACF
 }
 
-# GHCLI install or upgrade
-function getghcli() {
-    wget -q -P tmp/ https://github.com/cli/cli/releases/download/v"$@"/gh_"$@"_linux_amd64.deb
-    cd tmp/ && sudo dpkg -i gh_"$@"_linux_amd64.deb
-    cd .. && rm -rf tmp/
-    gh --version
-}
-
 # Markdown link check in a folder, recursive
 function mlc() {
     find $1 -name \*.md -exec markdown-link-check -p {} \;
@@ -174,6 +166,38 @@ alias reload_tmux="update_tmux_conf"
 function ssh_fix() {
     eval "$(ssh-agent)"
     ssh-add
+}
+
+function user_disk_space() {
+    df -h --output=target,used /home/* | sed 1d | sort -k2 -h
+}
+
+function biggest_folders() {
+    local path="${1:-./}"
+    local num_results="${2:-20}"
+    du -ah "${path}" | sort -h -r | head -n "${num_results}"
+}
+# ex - archive extractor
+# usage: ex <file>
+extract() {
+    if [ -f $1 ]; then
+        case $1 in
+        *.tar.bz2) tar xjf $1 ;;
+        *.tar.gz) tar xzf $1 ;;
+        *.bz2) bunzip2 $1 ;;
+        *.rar) unrar x $1 ;;
+        *.gz) gunzip $1 ;;
+        *.tar) tar xf $1 ;;
+        *.tbz2) tar xjf $1 ;;
+        *.tgz) tar xzf $1 ;;
+        *.zip) unzip $1 ;;
+        *.Z) uncompress $1 ;;
+        *.7z) 7z x $1 ;;
+        *) echo "'$1' cannot be extracted via ex()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
 }
 
 # enable programmable completion features (you don't need to enable
@@ -298,15 +322,15 @@ PS1='$(show_virtual_env) '$PS1
 #     export MKL_DEBUG_CPU_TYPE=5
 # fi
 
-# ## For home desktop only. The way I installed the NVIDIA drivers made it necessary to set these
-# ## manually for some reason:
-# # CUDA
-# export CUDA_HOME=/usr/local/cuda
-# export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
-# export PATH=${PATH}:/usr/local/cuda/bin
-# ## Arch list for compiling some pytorch projects, DeepFill, and the other hackathon one:
-# # export TORCH_CUDA_ARCH_LIST="Turing,Ampere"
-# export TORCH_CUDA_ARCH_LIST=7.5
-# # export TORCH_CUDA_ARCH_LIST=8.6
-# ## To force the nvidia-smi GPU order to be the same as the GPU device ordinals in pytorch:
-# export CUDA_DEVICE_ORDER=PCI_BUS_ID
+## For home desktop only. The way I installed the NVIDIA drivers made it necessary to set these
+## manually for some reason:
+# CUDA
+export CUDA_HOME=/usr/local/cuda
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
+export PATH=${PATH}:/usr/local/cuda/bin
+## Arch list for compiling some pytorch projects, DeepFill, and the other hackathon one:
+# export TORCH_CUDA_ARCH_LIST="Turing,Ampere"
+export TORCH_CUDA_ARCH_LIST=7.5
+# export TORCH_CUDA_ARCH_LIST=8.6
+## To force the nvidia-smi GPU order to be the same as the GPU device ordinals in pytorch:
+export CUDA_DEVICE_ORDER=PCI_BUS_ID
