@@ -177,6 +177,16 @@ function biggest_folders() {
     local num_results="${2:-20}"
     du -ah "${path}" | sort -h -r | head -n "${num_results}"
 }
+
+function sync_dir() {
+    # Sync one dir to another, showing progress, resume if possible, enable compression. This
+    # function ensures that the files are synced rather than the folder itself being transfered.
+    local src="${1}"
+    local target="${2}"
+    [[ "${src}" != */ ]] && src="${src}/"
+    [[ "${target}" != */ ]] && src="${target}/"
+    rsync -xauvzrP "${src}" "${target}"
+}
 # ex - archive extractor
 # usage: ex <file>
 extract() {
