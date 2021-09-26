@@ -81,3 +81,7 @@ function extract() {
         echo "'$1' is not a valid file"
     fi
 }
+
+function list_git_repos() {
+    find . -maxdepth 10 -type d -exec test -e '{}/.git' ';' -printf "is git repo: %p\n"
+}
