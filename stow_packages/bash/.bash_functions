@@ -34,6 +34,13 @@ function biggest_folders() {
     du -ah "${path}" | sort -h -r | head -n "${num_results}"
 }
 
+function find_large_files() {
+    local path="${1:-./}"
+    local size="${2:-500}"
+    echo "Finding files in '${path}', larger than: ${size}M..."
+    find "${path}" -xdev -type f -size "+${size}M" -exec du -sh {} \;
+}
+
 function dir_size() {
     local path="${1:-./}"
     du -h --max-depth=0 "${path}"
