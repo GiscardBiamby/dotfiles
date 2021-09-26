@@ -183,13 +183,21 @@ function biggest_folders() {
     du -ah "${path}" | sort -h -r | head -n "${num_results}"
 }
 
+function dir_size() {
+    local path="${1:-./}"
+    du -h --max-depth=0 "${path}"
+}
+
 function sync_dir() {
     # Sync one dir to another, showing progress, resume if possible, enable compression. This
     # function ensures that the files are synced rather than the folder itself being transfered.
     local src="${1}"
     local target="${2}"
+    # Ensure paths have trailing slashes so we sync folder contents rather than folder itself:
     [[ "${src}" != */ ]] && src="${src}/"
     [[ "${target}" != */ ]] && src="${target}/"
+    echo "Synching dir FROM: '${src}', TO: '${target}'..."
+    dir_size "${src}"
     rsync -xauvzrP "${src}" "${target}"
 }
 # ex - archive extractor
