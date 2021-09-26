@@ -72,64 +72,12 @@ xterm* | rxvt*)
 
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+# Functions
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
 fi
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -ahlF --group-directories-first'
-alias la='ls -A --group-directories-first'
-alias l='ls -CF --group-directories-first'
-alias ag='ag --hidden --path-to-ignore ~/.agignore'
-# TODO: Move to .bash_aliases:
-# New stuff, haven't tried yet:
-# alias cp='cp -Rv'
-# alias ls='ls --color=auto -ACF'
-# alias ll='ls --color=auto -alF'
-alias grep='grep --color=auto'
-alias grepw='grep --color=auto -Hrnwi'
-# alias mkdir='mkdir -pv'
-alias mv='mv -v'
-# alias weather='curl wttr.in/?0'
-# alias wget='wget -c'
-# alias tree="tree -aI 'test*|.git|node_modules|resources'"
-# alias gcom='git commit'
-# alias gsup='git status'
-# alias goto='git checkout'
-# alias branches='git branch -v'
-# alias firewood='for remote in `git branch -r`; do git branch --track ${remote#origin/} $remote; done'
-# alias remotes='git remote -v'
-# # py
-# alias pip='pip3'
-# alias pym='python3 manage.py'
-# alias mkenv='python3 -m venv env'
-# alias startenv='source env/bin/activate && which python3'
-# alias stopenv='deactivate'
-# # Use programs without a root-equivalent group
-# alias docker='sudo docker'
-# alias docker-compose='sudo docker-compose'
-# alias prtn='sudo protonvpn'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -145,83 +93,6 @@ if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
     GIT_PROMPT_ONLY_IN_REPO=1
     source $HOME/.bash-git-prompt/gitprompt.sh
 fi
-
-# Show contents of dir after action
-function cd() {
-    builtin cd "$1"
-    ls -ACF
-}
-
-# Markdown link check in a folder, recursive
-function mlc() {
-    find $1 -name \*.md -exec markdown-link-check -p {} \;
-}
-
-function gitBranch() {
-    # Displays current branch
-    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-}
-
-function update_tmux_conf() {
-    # Reload .tmux.conf
-    tmux source-file ~/.tmux.conf
-}
-alias reload_tmux="update_tmux_conf"
-
-function ssh_fix() {
-    eval "$(ssh-agent)"
-    ssh-add
-}
-
-function user_disk_space() {
-    df -h --output=target,used /home/* | sed 1d | sort -k2 -h
-}
-
-function biggest_folders() {
-    local path="${1:-./}"
-    local num_results="${2:-20}"
-    du -ah "${path}" | sort -h -r | head -n "${num_results}"
-}
-
-function dir_size() {
-    local path="${1:-./}"
-    du -h --max-depth=0 "${path}"
-}
-
-function sync_dir() {
-    # Sync one dir to another, showing progress, resume if possible, enable compression. This
-    # function ensures that the files are synced rather than the folder itself being transfered.
-    local src="${1}"
-    local target="${2}"
-    # Ensure paths have trailing slashes so we sync folder contents rather than folder itself:
-    [[ "${src}" != */ ]] && src="${src}/"
-    [[ "${target}" != */ ]] && src="${target}/"
-    echo "Synching dir FROM: '${src}', TO: '${target}'..."
-    dir_size "${src}"
-    rsync -xauvzrP "${src}" "${target}"
-}
-# ex - archive extractor
-# usage: ex <file>
-extract() {
-    if [ -f $1 ]; then
-        case $1 in
-        *.tar.bz2) tar xjf $1 ;;
-        *.tar.gz) tar xzf $1 ;;
-        *.bz2) bunzip2 $1 ;;
-        *.rar) unrar x $1 ;;
-        *.gz) gunzip $1 ;;
-        *.tar) tar xf $1 ;;
-        *.tbz2) tar xjf $1 ;;
-        *.tgz) tar xzf $1 ;;
-        *.zip) unzip $1 ;;
-        *.Z) uncompress $1 ;;
-        *.7z) 7z x $1 ;;
-        *) echo "'$1' cannot be extracted via ex()" ;;
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -328,28 +199,9 @@ show_virtual_env() {
 }
 export -f show_virtual_env
 
-# Only on workstations, maybe need a separate include
-export PATH=$PATH:/usr/bin/Postman
-
 # Remove the "(base)" from the command prompt
 PS1=$(echo "$PS1" | perl -pe 's/^\(base\)\s*//')
 PS1='$(show_virtual_env) '$PS1
 
-## This workaround no longer works with newer Intel MKL lib versions.
-# # For AMD CPU's, set this so that Intel MKL library will use AVX2 optimizations
-# if (lscpu | grep "AMD Ryzen"); then
-#     export MKL_DEBUG_CPU_TYPE=5
-# fi
-
-# ## For home desktop only. The way I installed the NVIDIA drivers made it necessary to set these
-# ## manually for some reason:
-# # CUDA
-# export CUDA_HOME=/usr/local/cuda
-# export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
-# export PATH=${PATH}:/usr/local/cuda/bin
-# ## Arch list for compiling some pytorch projects, DeepFill, and the other hackathon one:
-# # export TORCH_CUDA_ARCH_LIST="Turing,Ampere"
-# export TORCH_CUDA_ARCH_LIST=7.5
-# # export TORCH_CUDA_ARCH_LIST=8.6
-# ## To force the nvidia-smi GPU order to be the same as the GPU device ordinals in pytorch:
-# export CUDA_DEVICE_ORDER=PCI_BUS_ID
+# Load machine-specific bashrc if one exists:
+[ -f "$HOME/.bashrc_$HOSTNAME" ] && . "$HOME/.bashrc_$HOSTNAME"
