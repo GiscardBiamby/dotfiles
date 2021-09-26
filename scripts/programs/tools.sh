@@ -5,6 +5,7 @@
 echo "Installing workstation tools"
 sudo add-apt-repository ppa:solaar-unifying/ppa
 sudo apt-add-repository universe
+sudo add-apt-repository ppa:jonmagon/kdiskmark
 sudo apt update
 
 # Workstation only
@@ -19,6 +20,7 @@ install gnome-tweaks
 install gnome-tweak-tool
 install gparted
 install gscan2pdf
+install kdiskmark
 install nedit
 install okular
 install openssh-client

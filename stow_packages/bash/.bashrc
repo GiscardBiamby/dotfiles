@@ -88,7 +88,7 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF --group-directories-first'
+alias ll='ls -ahlF --group-directories-first'
 alias la='ls -A --group-directories-first'
 alias l='ls -CF --group-directories-first'
 alias ag='ag --hidden --path-to-ignore ~/.agignore'
@@ -139,6 +139,11 @@ if [ -f ~/.git-completion.bash ]; then
 
     # Add git completion to aliases
     __git_complete goto _git_checkout
+fi
+
+if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+    GIT_PROMPT_ONLY_IN_REPO=1
+    source $HOME/.bash-git-prompt/gitprompt.sh
 fi
 
 # Show contents of dir after action
@@ -291,10 +296,6 @@ fi
 export PS1="${pathC}\w ${gitC}\$(gitBranch) ${pointerC}\$${normalC} "
 
 # My stuff:
-if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
-    GIT_PROMPT_ONLY_IN_REPO=1
-    source $HOME/.bash-git-prompt/gitprompt.sh
-fi
 
 # # This has to do with TILIX. I don't think it's needed anymore.
 # if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
@@ -332,15 +333,15 @@ PS1='$(show_virtual_env) '$PS1
 #     export MKL_DEBUG_CPU_TYPE=5
 # fi
 
-## For home desktop only. The way I installed the NVIDIA drivers made it necessary to set these
-## manually for some reason:
-# CUDA
-export CUDA_HOME=/usr/local/cuda
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
-export PATH=${PATH}:/usr/local/cuda/bin
-## Arch list for compiling some pytorch projects, DeepFill, and the other hackathon one:
-# export TORCH_CUDA_ARCH_LIST="Turing,Ampere"
-export TORCH_CUDA_ARCH_LIST=7.5
-# export TORCH_CUDA_ARCH_LIST=8.6
-## To force the nvidia-smi GPU order to be the same as the GPU device ordinals in pytorch:
-export CUDA_DEVICE_ORDER=PCI_BUS_ID
+# ## For home desktop only. The way I installed the NVIDIA drivers made it necessary to set these
+# ## manually for some reason:
+# # CUDA
+# export CUDA_HOME=/usr/local/cuda
+# export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/cuda/lib64
+# export PATH=${PATH}:/usr/local/cuda/bin
+# ## Arch list for compiling some pytorch projects, DeepFill, and the other hackathon one:
+# # export TORCH_CUDA_ARCH_LIST="Turing,Ampere"
+# export TORCH_CUDA_ARCH_LIST=7.5
+# # export TORCH_CUDA_ARCH_LIST=8.6
+# ## To force the nvidia-smi GPU order to be the same as the GPU device ordinals in pytorch:
+# export CUDA_DEVICE_ORDER=PCI_BUS_ID
