@@ -522,7 +522,6 @@
     "vsicons.presets.jsonOfficial": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "window.restoreWindows": "all",
-    "window.zoomLevel": 1,
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "activityBar.activeBorder": "#2979FF",
@@ -567,5 +566,8 @@
     "workbench.tree.indent": 15,
     "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "window.zoomLevel": 1,
+    "notebook.cellToolbarVisibility": "hover",
+    "notebook.output.textLineLimit": 120
 }

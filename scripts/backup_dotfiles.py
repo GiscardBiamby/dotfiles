@@ -42,7 +42,26 @@ def main():
         for c in configs:
             target_path = home_dir / str(c).replace(dotfiles_dir, "")
             backup_file(target_path, get_backup_dir(c, backup_dir), c)
-            # print(target_path, target_path.exists(), target_path.is_symlink())
+
+    # Backup files in .local that get stowed:
+    print("\nBackup files in ~/.local/share/ that get stowed...")
+    dotfiles_dir = str((home_dir / "dotfiles").absolute()) + "/"
+    for config_dir in ["jupyter"]:
+        config_dir = (Path("../.local/share/") / config_dir).resolve()
+        configs = sorted([c for c in config_dir.glob("**/*") if c.is_file()])
+        for c in configs:
+            target_path = home_dir / str(c).replace(dotfiles_dir, "")
+            backup_file(target_path, get_backup_dir(c, backup_dir), c)
+
+    # Backup files in .local that get stowed:
+    print("\nBackup files in ~/.jupyter/ that get stowed...")
+    dotfiles_dir = str((home_dir / "dotfiles").absolute()) + "/"
+    for config_dir in ["nbconfig"]:
+        config_dir = (Path("../.jupyter/") / config_dir).resolve()
+        configs = sorted([c for c in config_dir.glob("**/*") if c.is_file()])
+        for c in configs:
+            target_path = home_dir / str(c).replace(dotfiles_dir, "")
+            backup_file(target_path, get_backup_dir(c, backup_dir), c)
 
 
 def get_backup_dir(path: Path, backup_dir: Path) -> Path:
