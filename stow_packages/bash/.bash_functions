@@ -88,8 +88,19 @@ function extract() {
 }
 
 function tar_multicore() {
+    # If 2nd arg is not specified, uses the first arg (folder to compress) + ".tar.gz" as the
+    # output filename
     local folder_path="${1}"
     local out_name="${2}"
+    if [ -z "$2" ]; then
+        # echo "No argument supplied"
+        out_name="${folder_path%/}.tar.gz"
+    else
+        if [[ $out_name != *.tar.gz ]]; then
+            echo "Invalid archive name was specified: ${out_name}"
+            return
+        fi
+    fi
 
     echo "input folder: ${folder_path}"
     echo "output file : ${out_name}"
