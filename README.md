@@ -1,6 +1,8 @@
 # dotfiles
 
-Based on: [https://github.com/victoriadrake/dotfiles](https://github.com/victoriadrake/dotfiles)
+A nice dotfiles repo example: <https://github.com/anishathalye/dotfiles/blob/master/bashrc>
+
+Based on: <https://github.com/victoriadrake/dotfiles>
 
 My preferred starting configuration for Ubuntu Desktop. Current version 20.04 Focal Fossa.
 
@@ -122,7 +124,7 @@ Run `man dconf` on your machine for more.
 
 ## Zotero and ZotFile: Use Dropbox for Syncing PDFs
 
-To use Dropbox to manage paper pdf's in Zotero (instead of Zotero's storage, which is limited to 300MB), install the Zotfile plugin. This lets your Zotero library sync across devices. Zotero will still manage the library entries and metadata via it's own storage. With this setup and around 200 papers in my library, my Dropbox has ~400MB of PDF's, and the library only uses up ~11MB of my Zotero free storage.
+To use Dropbox to manage paper pdf's in Zotero (instead of Zotero's storage, which is limited to 300MB), install the Zotfile plugin. This lets your Zotero library sync across devices. Zotero will still manage the library entries and metadata via it's own storage. With this setup and around 200 papers in my library, my Dropbox has \~400MB of PDF's, and the library only uses up \~11MB of my Zotero free storage.
 
 1. Install the Zotfile extension
 2. Choose a folder inside your Dropbox dir that will store your pdf's. Let's call this the `$ZOTERO_ATTACHMENTS_DIR`. For example: `$ZOTERO_ATTACHMENTS_DIR=/home/username/Dropbox/private/Zotero/main/`.
@@ -135,15 +137,14 @@ To use Dropbox to manage paper pdf's in Zotero (instead of Zotero's storage, whi
 
 This section is only relevant if you want to use a workflow where you can manually send papers to your tablet (via a cloud synced folder, e.g., Dropbox), read/annotate on the tablet, and then get back the annotations onto your computer (via Manage Attachments -> Get From Tablet). If you don't have a tablet or don't want to use that workflow you can ignore this section.
 
-1. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Use ZotFile to send and get files from tablet -> **CHECKED**
+1. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Use ZotFile to send and get files from tablet -> __CHECKED__
 2. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Location of Files on Tablet-> Base Folder: `$ZOTERO_TABLET_DIR`
 3. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Location of Files on Tablet -> Subfolders: Select "Create subfolders from zotero collections" option
 
 Don't use the `$ZOTERO_ATTACHMENTS_DIR` for this. I typically set this to a sibling folder to `ZOTERO_ATTACHMENTS_DIR`. These are not environment variables. I'm just using this notation for the formatting in this markdown. So I then have:
 
-
 | Folder                    | Path                                            |
-| --------------------------- | ------------------------------------------------- |
+| ------------------------- | ----------------------------------------------- |
 | `$ZOTERO_ATTACHMENTS_DIR` | `/home/username/Dropbox/private/Zotero/main/`   |
 | `$ZOTERO_TABLET_DIR`      | `/home/username/Dropbox/private/Zotero/tablet/` |
 
