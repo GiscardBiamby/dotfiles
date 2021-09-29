@@ -28,22 +28,27 @@ function user_disk_space() {
     df -h --output=target,used /home/* | sed 1d | sort -k2 -h
 }
 
-function biggest_folders() {
+function get_biggest_folders() {
     local path="${1:-./}"
     local num_results="${2:-20}"
     du -ah "${path}" | sort -h -r | head -n "${num_results}"
 }
 
-function find_large_files() {
+function get_large_files() {
     local path="${1:-./}"
     local size="${2:-500}"
     echo "Finding files in '${path}', larger than: ${size}M..."
     find "${path}" -xdev -type f -size "+${size}M" -exec du -sh {} \;
 }
 
-function dir_size() {
+function get_dir_size() {
     local path="${1:-./}"
     du -h --max-depth=0 "${path}"
+}
+
+function get_file_count() {
+    local path="${1:-./}"
+    find "${path}" -type f | wc -l
 }
 
 function sync_dir() {
@@ -80,6 +85,15 @@ function extract() {
     else
         echo "'$1' is not a valid file"
     fi
+}
+
+function tar_multicore() {
+    local folder_path="${1}"
+    local out_name="${2}"
+
+    echo "input folder: ${folder_path}"
+    echo "output file : ${out_name}"
+    tar --use-compress-program="pigz -k " -cf "${out_name}" "${folder_path}"
 }
 
 function list_git_repos() {
