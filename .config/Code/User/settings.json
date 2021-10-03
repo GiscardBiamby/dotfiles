@@ -564,5 +564,16 @@
     "workbench.iconTheme": "eq-material-theme-icons-light",
     "workbench.settings.openDefaultKeybindings": true,
     "workbench.statusBar.feedback.visible": false,
-    "workbench.tree.indent": 15
+    "workbench.tree.indent": 15,
+    "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "window.zoomLevel": 1,
+    "notebook.cellToolbarVisibility": "hover",
+    "notebook.output.textLineLimit": 120,
+    "git.detectSubmodulesLimit": 100,
+    "git.fetchOnPull": true,
+    "git.showPushSuccessNotification": true,
+    "git.supportCancellation": true,
+    "git.untrackedChanges": "separate"
 }
