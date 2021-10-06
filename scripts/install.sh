@@ -50,6 +50,7 @@ if [[ "${WORKSTATION}" == "workstation" ]]; then
     # For workstation (meaning I want all command line + GUI apps), run all scripts in
     # ./scripts/programs/:
     for f in programs/*.sh; do bash "sudo $f" -H; done
+    pip install gitup
 else
     # For server, only install command line things:
     bash ./programs/anaconda.sh -H
@@ -57,6 +58,7 @@ else
     # bash ./programs/docker.sh -H
     # bash ./programs/nvidia-docker-toolkit.sh -H
     bash ./programs/nvm-npm-node-packages.sh -H
+    pip install gitup
 fi
 
 # Use GNU stow to deploy all the doffiles:
