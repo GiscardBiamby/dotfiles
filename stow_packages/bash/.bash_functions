@@ -110,3 +110,19 @@ function tar_multicore() {
 function list_git_repos() {
     find . -maxdepth 10 -type d -exec test -e '{}/.git' ';' -printf "is git repo: %p\n"
 }
+
+function clean_notebook() {
+    local notebook_path="${1}"
+    python -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace "${notebook_path}"
+    # python -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace *.ipynb **/*.ipynb
+}
+
+function run_notebook() {
+    local notebook_path="${1}"
+    python3 -m nbconvert --ExecutePreprocessor.timeout=-1 --execute --inplace "${notebook_path}"
+}
+
+function clean_git_history_for_notebooks() {
+    git filter-branch --tree-filter \
+        "python3 -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace *.ipynb **/*.ipynb || true"
+}
