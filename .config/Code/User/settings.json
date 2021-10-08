@@ -575,5 +575,6 @@
     "git.fetchOnPull": true,
     "git.showPushSuccessNotification": true,
     "git.supportCancellation": true,
-    "git.untrackedChanges": "separate"
+    "git.untrackedChanges": "separate",
+    "cSpell.allowCompoundWords": true
 }
