@@ -71,6 +71,7 @@ install Shan.code-settings-sync
 install shardulm94.trailing-spaces
 install spikespaz.vscode-smoothtype
 install stkb.rewrap
+install streetsidesoftware.code-spell-checker
 install stuart.unique-window-colors
 install TakumiI.markdowntable
 install tinaciousdesign.theme-tinaciousdesign
