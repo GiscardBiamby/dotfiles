@@ -477,7 +477,7 @@
     "python.dataScience.maxOutputSize": 1200,
     "python.dataScience.sendSelectionToInteractiveWindow": false,
     "python.dataScience.textOutputLimit": 0,
-    "python.defaultInterpreterPath": "/home/gbiamby/anaconda3/envs/h4d_env/bin/python",
+    "python.defaultInterpreterPath": "/home/gbiamby/anaconda3/envs/sem-unfoil2/bin/python",
     "python.diagnostics.sourceMapsEnabled": true,
     "python.envFile": "${workspaceFolder}/.env",
     "python.formatting.provider": "black",
@@ -522,7 +522,6 @@
     "vsicons.presets.jsonOfficial": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "window.restoreWindows": "all",
-    "window.zoomLevel": 3,
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "activityBar.activeBorder": "#2979FF",
@@ -568,7 +567,6 @@
     "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "window.zoomLevel": 1,
     "notebook.cellToolbarVisibility": "hover",
     "notebook.output.textLineLimit": 120,
     "git.detectSubmodulesLimit": 100,
