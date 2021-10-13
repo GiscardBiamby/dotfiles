@@ -41,8 +41,8 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # Bash completion.
-if [ -f ~/.bash_completion ]; then
-    . ~/.bash_completion
+if [ -f ~/.bash_complete ]; then
+    . ~/.bash_complete
 fi
 
 # Bash prompt.
