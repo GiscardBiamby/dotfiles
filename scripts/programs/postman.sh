@@ -5,8 +5,8 @@ set +e
 
 echo "📮 Installing postman"
 # https://www.how2shout.com/linux/how-to-install-postman-on-ubuntu-20-04-lts-linux/
-wget https://dl.pstmn.io/download/latest/linux64
-sudo tar -xvf linux64 -C /usr/bin
+wget https://dl.pstmn.io/download/latest/linux64 -O ./programs/downloads/linux64
+sudo tar -xvf ./programs/downloads/linux64 -C /usr/bin
 
 # TODO: Add to .bashrc
 export PATH=$PATH:/usr/bin/Postman
@@ -26,7 +26,7 @@ export PATH=$PATH:/usr/bin/Postman
     echo "StartupNotify=true"
 } >> /usr/share/applications/Postman.desktop
 
-rm linux64
+rm ./programs/downloads/linux64
 
 # Uninstall
 # sudo rm -r /usr/bin/Postman
