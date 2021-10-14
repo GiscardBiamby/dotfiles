@@ -1,13 +1,188 @@
 {
-    "snippets" : [
+    "snippets": [
         {
-            "name" : "example",
-            "code" : [
+            "name": "example",
+            "code": [
                 "# This is an example snippet!",
                 "# To create your own, add a new snippet block to the",
                 "# snippets.json file in your jupyter nbextensions directory:",
                 "# /nbextensions/snippets/snippets.json",
                 "import this"
+            ]
+        },
+        {
+            "name": "Disp. Entire DataFrame",
+            "code": [
+                "with pd.option_context(\"display.max_rows\", None, \"display.max_columns\", None):",
+                "display(df)"
+            ]
+        },
+        {
+            "name": "Imports 1",
+            "code": [
+                "%autosave 60",
+                "%load_ext autoreload",
+                "%autoreload 2",
+                "%matplotlib inline",
+                "",
+                "import sys",
+                "from pathlib import Path"
+            ]
+        },
+        {
+            "name": "Imports 2",
+            "code": [
+                "local_path = str(Path(\"../../twitter\").resolve())",
+                "if local_path not in sys.path:",
+                "    sys.path.append(local_path)"
+            ]
+        },
+        {
+            "name": "Imports 3",
+            "code": [
+                "import json",
+                "import os",
+                "from io import BytesIO",
+                "from typing import Dict, List, Optional, Union, cast",
+                "from urllib.parse import ParseResult, urlparse",
+                "import matplotlib.pyplot as plt",
+                "",
+                "# Multi-core pandas compat:",
+                "# import pandas as pd",
+                "import modin.pandas as pd",
+                "import numpy as np",
+                "",
+                "# from PIL import Image",
+                "import PIL.Image as pil_img",
+                "import ray",
+                "from IPython.display import Image, display, set_matplotlib_formats",
+                "from matplotlib.patches import Rectangle",
+                "from tqdm import tqdm",
+                "",
+                "import ucb_twitter.twitter_json as ucb",
+                "",
+                "ray.init(ignore_reinit_error=True)"
+            ]
+        },
+        {
+            "name": "Display Configs",
+            "code": [
+                "pd.set_option(\"display.max_colwidth\", None)",
+                "pd.set_option(\"display.max_columns\", 15)",
+                "pd.set_option(\"display.max_rows\", 50)",
+                "# Suitable default display for floats",
+                "pd.options.display.float_format = \"{:,.2f}\".format",
+                "",
+                "plt.rcParams[\"figure.figsize\"] = (12, 10)",
+                "",
+                "# This one is optional -- change graphs to SVG only use if you don't have a ",
+                "# lot of points/lines in your graphs. Can also just use ['retina'] if you ",
+                "# don't want SVG.",
+                "%config InlineBackend.figure_formats = ['retina']",
+                "set_matplotlib_formats(\"pdf\", \"png\")"
+            ]
+        },
+        {
+            "name": "Show Image Samples",
+            "code": [
+                "from IPython.core.display import HTML, Markdown",
+                "",
+                "",
+                "def show_samples(df: pd.DataFrame, n_samples: int = 20):",
+                "    df_random = df.sample(n=n_samples)",
+                "",
+                "    for idx, img_row in df_random.iterrows():",
+                "        print(\"-\" * 100)",
+                "        img = pil_img.open(img_row[\"full_path\"])",
+                "        img.thumbnail((1080, 640), pil_img.NEAREST)",
+                "        display(img)",
+                "        print(",
+                "            \"Predicted: \",",
+                "            img_row[\"filtering_class_id\"],",
+                "            img_row[\"filtering_class_name\"],",
+                "        )",
+                "        print(\"\")",
+                "",
+                "",
+                "show_samples(df_preds, 50)"
+            ]
+        },
+        {
+            "name": "matplotlib Display Options",
+            "code": [
+                "from IPython.display import set_matplotlib_formats",
+                "set_matplotlib_formats('pdf', 'png')",
+                "plt.rcParams['savefig.dpi'] = 75",
+                "",
+                "plt.rcParams['figure.autolayout'] = False",
+                "plt.rcParams['figure.figsize'] = 10, 6",
+                "plt.rcParams['axes.labelsize'] = 18",
+                "plt.rcParams['axes.titlesize'] = 20",
+                "plt.rcParams['font.size'] = 16",
+                "plt.rcParams['lines.linewidth'] = 2.0",
+                "plt.rcParams['lines.markersize'] = 8",
+                "plt.rcParams['legend.fontsize'] = 14",
+                "",
+                "plt.rcParams['text.usetex'] = True",
+                "plt.rcParams['font.family'] = \"serif\"",
+                "plt.rcParams['font.serif'] = \"cm\"",
+                "plt.rcParams['text.latex.preamble'] = \"\\usepackage{subdepth}, \\usepackage{type1cm}\""
+            ]
+        },
+        {
+            "name": "Cache Computation w np.savez",
+            "code": [
+                "recalc = False",
+                "",
+                "if recalc==True:",
+                "    ### create data1, data2, ... arrays",
+                "",
+                "    outfile = open(data_dir+\"data1_data2.npz\", \"w\")",
+                "    np.savez(outfile, data1=data1, data2=data2)",
+                "    outfile.close()",
+                "else:",
+                "    infile = open(data_dir+\"data1_data2.npz\")",
+                "    npzfile = np.load(infile)",
+                "    data1 = npzfile[\"data1\"]",
+                "    data2 = npzfile[\"data2\"]",
+                "    infile.close()"
+            ]
+        },
+        {
+            "name": "Metadata for Figure Cells",
+            "code": [
+                "# ",
+                "\"caption\": \"somecaption\",",
+                "\"label\": \"fig:somelabel\",",
+                "\"widefigure\": true"
+            ]
+        },
+        {
+            "name": "Logging",
+            "code": [
+                "import logging",
+                "handler = logging.StreamHandler()",
+                "handler = logging.FileHandler(filename=\"log.txt\", mode=\"a\")",
+                "formatter = logging.Formatter(\"%(levelname)s: %(message)s\")",
+                "handler.setFormatter(formatter)",
+                "",
+                "logger = logging.getLogger()",
+                "logger.setLevel(logging.DEBUG)",
+                "",
+                "# Override the default handler",
+                "logger.handlers = [handler]",
+                "",
+                "logging.error(\"this is an error\")",
+                "logging.warning(\"this is a warning\")"
+            ]
+        },
+        {
+            "name": "Parameterization with Environment Variables",
+            "code": [
+                "report_date = %env REPORT_DATE",
+                "",
+                "## From command line (also consider using Papermill, which you can pip install):",
+                "# REPORT_DATE=2018-01-01 jupyter nbconvert --to html --execute report.ipynb"
             ]
         }
     ]
