@@ -23,7 +23,9 @@
         "printview/main": true,
         "snippets_menu/main": true,
         "runtools/main": true,
-        "spellchecker/main": true
+        "spellchecker/main": true,
+        "jupyter-js-widgets/extension": false,
+        "pydeck/extension": false
     },
     "autosavetime_starting_interval": "1",
     "notify": {
@@ -31,5 +33,16 @@
     },
     "ruler_color": [
         "#ff9500"
-    ]
+    ],
+    "jupyter-black": {
+        "hotkeys": {
+            "process_all": "ctrl-shift-i",
+            "process_selected": "ctrl-i"
+        },
+        "kernel_config_map_json": "{\n  \"python\": {\n    \"library\": \"import json\\ndef black_reformat(cell_text):\\n    import black\\n    import re\\n    cell_text = re.sub('^%', '#%#', cell_text, flags=re.M)\\n    reformated_text = black.format_str(cell_text, mode=black.FileMode())\\n    return re.sub('^#%#', '%', reformated_text, flags=re.M)\",\n    \"prefix\": \"print(json.dumps(black_reformat(u\",\n    \"postfix\": \")))\"\n  },\n  \"javascript\": {\n    \"library\": \"jsbeautify = require('js-beautify')\",\n    \"prefix\": \"console.log(JSON.stringify(jsbeautify.js_beautify(\",\n    \"postfix\": \")));\"\n  }\n}",
+        "register_hotkey": true
+    },
+    "isort": {
+        "kernel_config_map_json": "{\n  \"python\": {\n    \"library\": \"import json, isort\\ndef _isort_refactor_cell(src):\\n    try:\\n        tree = isort.SortImports(file_contents=src).output\\n    except Exception:\\n        return src \\n    else:\\n        return str(tree)[:-1]\",\n    \"prefix\": \"print(json.dumps(_isort_refactor_cell(u\",\n    \"postfix\": \")))\"\n  }\n}\n"
+    }
 }
