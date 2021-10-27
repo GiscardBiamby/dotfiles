@@ -25,7 +25,8 @@
     "runtools/main": true,
     "spellchecker/main": true,
     "jupyter-js-widgets/extension": false,
-    "pydeck/extension": false
+    "pydeck/extension": false,
+    "hinterland/hinterland": true
   },
   "autosavetime_starting_interval": "1",
   "notify": {
