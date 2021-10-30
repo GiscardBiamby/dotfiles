@@ -60,7 +60,7 @@ function sync_dir() {
     [[ "${src}" != */ ]] && src="${src}/"
     [[ "${target}" != */ ]] && src="${target}/"
     echo "Synching dir FROM: '${src}', TO: '${target}'..."
-    dir_size "${src}"
+    get_dir_size "${src}"
     rsync -xauvzrP "${src}" "${target}"
 }
 
@@ -94,7 +94,7 @@ function tar_multicore() {
     local out_name="${2}"
     if [ -z "$2" ]; then
         # echo "No argument supplied"
-        out_name="${folder_path%/}.tar.gz"
+        out_name="${folder_path}.tar.gz"
     else
         if [[ $out_name != *.tar.gz ]]; then
             echo "Invalid archive name was specified: ${out_name}"
