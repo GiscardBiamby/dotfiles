@@ -589,5 +589,7 @@
     "git.untrackedChanges": "separate",
     "cSpell.allowCompoundWords": true,
     "git.confirmSync": false,
+    "files.legacyWatcher": "off",
+    "todo-tree.general.enableFileWatcher": true,
     "window.zoomLevel": 1
 }
