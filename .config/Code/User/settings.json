@@ -259,6 +259,7 @@
         "panopticapi",
         "Parallelization",
         "pdf's",
+        "popd",
         "Popen",
         "Posix",
         "preds",
@@ -269,6 +270,7 @@
         "psutil",
         "Psychographics",
         "puppeteering",
+        "pushd",
         "pyarrow",
         "pycache",
         "pycocotools",
@@ -297,6 +299,7 @@
         "resnet",
         "RESNETS",
         "rmtree",
+        "Rohrbach",
         "roibatch",
         "rpartition",
         "s",
@@ -348,6 +351,8 @@
         "visualnews",
         "vscode's",
         "wandb",
+        "webdav",
+        "webdavs",
         "WLOG",
         "WORKDIR",
         "xrange",
@@ -591,5 +596,6 @@
     "git.confirmSync": false,
     "files.legacyWatcher": "off",
     "todo-tree.general.enableFileWatcher": true,
-    "window.zoomLevel": 1
+    "editor.guides.bracketPairs": "active",
+    "editor.bracketPairColorization.enabled": true
 }
