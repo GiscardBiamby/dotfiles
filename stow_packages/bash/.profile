@@ -32,6 +32,7 @@ if [ -d "/usr/local/cuda-10.2/bin/" ]; then
     export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 fi
 
-# Only on workstations, maybe need a separate include
-export PATH=$PATH:/usr/bin/Postman
+# # Only on workstations, maybe need a separate include
+# export PATH=$PATH:/usr/bin/Postman
+[ -f "/usr/bin/Postman" ] && export PATH="$PATH:/usr/bin/Postman"
 

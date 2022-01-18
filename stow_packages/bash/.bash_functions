@@ -1,7 +1,7 @@
 # Show contents of dir after action
 function cd() {
     builtin cd "$1"
-    ls -ACF
+    ll
 }
 
 # Markdown link check in a folder, recursive
