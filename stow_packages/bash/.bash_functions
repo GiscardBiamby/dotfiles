@@ -126,3 +126,7 @@ function clean_git_history_for_notebooks() {
     git filter-branch --tree-filter \
         "python3 -m nbconvert --ClearOutputPreprocessor.enabled=True --inplace *.ipynb **/*.ipynb || true"
 }
+
+function map_shared() {
+    sshfs -o idmap=user gbiamby@cthu5:/shared bair_shared
+}
