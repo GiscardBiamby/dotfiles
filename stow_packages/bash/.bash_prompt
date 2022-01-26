@@ -109,4 +109,4 @@ PS1=$(echo "$PS1" | perl -pe 's/^\(base\)\s*//')
 PS1='$(show_virtual_env) '$PS1
 
 # Load machine-specific bashrc if one exists:
-[ -f "$HOME/.bashrc_$HOSTNAME" ] && . "$HOME/.bashrc_$HOSTNAME"
+[ -f "$HOME/.bashrc_${HOSTNAME}" ] && . "$HOME/.bashrc_${HOSTNAME}"
