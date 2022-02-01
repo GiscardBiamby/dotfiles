@@ -128,5 +128,5 @@ function clean_git_history_for_notebooks() {
 }
 
 function map_shared() {
-    sshfs -o idmap=user gbiamby@cthu5:/shared bair_shared
+    sshfs -o idmap=user gbiamby@cthu5:/shared ~/bair_shared
 }
