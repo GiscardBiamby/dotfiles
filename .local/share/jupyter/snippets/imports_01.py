@@ -13,7 +13,7 @@ import sklearn as skl
 from IPython.display import Image, display
 from matplotlib_inline.backend_inline import set_matplotlib_formats
 from matplotlib.patches import Rectangle
-from tqdm import tqdm
+from tqdm.notebook import tqdm
 
 # Multi-core pandas compat:
 # import pandas as pd
