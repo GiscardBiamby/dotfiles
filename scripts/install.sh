@@ -27,6 +27,7 @@ install net-tools
 install nmap
 install silversearcher-ag
 install pigz
+install shellcheck
 install stow
 install tmux
 install tree
