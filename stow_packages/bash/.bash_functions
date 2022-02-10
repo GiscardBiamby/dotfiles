@@ -61,6 +61,7 @@ function sync_dir() {
     [[ "${target}" != */ ]] && src="${target}/"
     echo "Synching dir FROM: '${src}', TO: '${target}'..."
     get_dir_size "${src}"
+    mkdir -p "${target}"
     rsync -xauvzrP "${src}" "${target}"
 }
 
