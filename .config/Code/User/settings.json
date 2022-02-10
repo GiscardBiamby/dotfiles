@@ -20,9 +20,13 @@
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "autoDocstring.docstringFormat": "google",
     "autoDocstring.startOnNewLine": true,
     "breadcrumbs.enabled": true,
+    "cSpell.allowCompoundWords": true,
     "cSpell.enableFiletypes": [
         "!cpp",
         "!csharp",
@@ -375,10 +379,12 @@
         "zfill"
     ],
     "diffEditor.ignoreTrimWhitespace": false,
+    "editor.bracketPairColorization.enabled": true,
     "editor.copyWithSyntaxHighlighting": false,
     "editor.cursorSmoothCaretAnimation": true,
     "editor.detectIndentation": false,
     "editor.fontLigatures": true,
+    "editor.guides.bracketPairs": "active",
     "editor.largeFileOptimizations": false,
     "editor.mouseWheelZoom": true,
     "editor.renderControlCharacters": true,
@@ -392,27 +398,28 @@
     },
     "files.autoSave": "afterDelay",
     "files.exclude": {
-        "**/__pycache__/**": true,
+        "**/*.pyc": true,
         "**/.DS_Store": true,
         "**/.git": true,
         "**/.pytest_cache": true,
-        "**/*.pyc": true,
-        "**/XDG_CACHE_HOME": true
+        "**/XDG_CACHE_HOME": true,
+        "**/__pycache__/**": true
     },
+    "files.legacyWatcher": "off",
     "files.watcherExclude": {
-        "**/__pycache__/**": true,
+        "**/*.pyc": true,
         "**/.DS_Store": true,
         "**/.git": true,
         "**/.gitbak": true,
         "**/.pytest_cache/**": true,
-        "**/*.pyc": true,
+        "**/__pycache__/**": true,
         "**/chipped_500/**": true,
-        "**/coco_chipped/**": true,
-        "**/coco_vanilla/**": true,
         "**/coco/**/*.txt": true,
         "**/coco/annotations/**": true,
         "**/coco/images/**": true,
         "**/coco/labels/**": true,
+        "**/coco_chipped/**": true,
+        "**/coco_vanilla/**": true,
         "**/data/**": true,
         "**/data/Xview/**": true,
         "**/datasets/**": true,
@@ -429,7 +436,13 @@
         "data/**": true
     },
     "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.detectSubmodulesLimit": 100,
+    "git.fetchOnPull": true,
+    "git.showPushSuccessNotification": true,
     "git.suggestSmartCommit": false,
+    "git.supportCancellation": true,
+    "git.untrackedChanges": "separate",
     "githubPullRequests.fileListLayout": "tree",
     "jupyter.allowUnauthorizedRemoteConnection": true,
     "jupyter.alwaysTrustNotebooks": true,
@@ -445,8 +458,10 @@
         "default": "right",
         "jupyter-notebook": "left"
     },
+    "notebook.cellToolbarVisibility": "hover",
     "notebook.diff.ignoreOutputs": true,
     "notebook.lineNumbers": "on",
+    "notebook.output.textLineLimit": 120,
     "peacock.favoriteColors": [
         {
             "name": "Angular Red",
@@ -492,8 +507,8 @@
     "pylance.insidersChannel": "daily",
     "python.analysis.completeFunctionParens": true,
     "python.analysis.diagnosticMode": "workspace",
-    "python.analysis.memory.keepLibraryAst": true,
     "python.analysis.indexing": true,
+    "python.analysis.memory.keepLibraryAst": true,
     "python.analysis.symbolsHierarchyDepthLimit": 15,
     "python.analysis.typeCheckingMode": "strict",
     "python.autoComplete.addBrackets": true,
@@ -527,10 +542,21 @@
     "sync.forceUpload": true,
     "sync.gist": "84d1a6b5297e9f9834c1c83473a87e07",
     "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.defaultProfile.linux": "my_bash",
+    "terminal.integrated.enableShellIntegration": true,
     "terminal.integrated.experimentalRefreshOnResume": true,
-    "terminal.integrated.inheritEnv": false,
-    "terminal.integrated.scrollback": 100000,
-    "terminal.integrated.shell.linux": "/bin/bash",
+    "terminal.integrated.inheritEnv": true,
+    "terminal.integrated.profiles.linux": {
+        "my_bash": {
+            "args": [
+                "--login"
+            ],
+            "path": "bash"
+        }
+    },
+    "terminal.integrated.scrollback": 1000000,
+    "todo-tree.general.enableFileWatcher": true,
+    // "terminal.integrated.shell.linux": "/bin/bash",
     "todo-tree.general.tags": [
         "BUG",
         "HACK",
@@ -587,22 +613,5 @@
     "workbench.iconTheme": "eq-material-theme-icons-light",
     "workbench.settings.openDefaultKeybindings": true,
     "workbench.statusBar.feedback.visible": false,
-    "workbench.tree.indent": 15,
-    "[yaml]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "notebook.cellToolbarVisibility": "hover",
-    "notebook.output.textLineLimit": 120,
-    "git.detectSubmodulesLimit": 100,
-    "git.fetchOnPull": true,
-    "git.showPushSuccessNotification": true,
-    "git.supportCancellation": true,
-    "git.untrackedChanges": "separate",
-    "cSpell.allowCompoundWords": true,
-    "git.confirmSync": false,
-    "files.legacyWatcher": "off",
-    "todo-tree.general.enableFileWatcher": true,
-    "editor.guides.bracketPairs": "active",
-    "editor.bracketPairColorization.enabled": true,
-    "terminal.integrated.enableShellIntegration": true
+    "workbench.tree.indent": 15
 }
