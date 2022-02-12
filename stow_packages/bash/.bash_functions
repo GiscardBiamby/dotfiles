@@ -129,5 +129,13 @@ function clean_git_history_for_notebooks() {
 }
 
 function map_shared() {
-    sshfs -o idmap=user gbiamby@cthu5:/shared ~/bair_shared
+    TARGET_PATH=~/bair_shared
+    mkdir -p "${TARGET_PATH}"
+    sshfs -o idmap=user gbiamby@cthu5:/shared "${TARGET_PATH}"
+}
+
+function map_cthu() {
+    TARGET_PATH=~/bair_cthu5
+    mkdir -p "${TARGET_PATH}"
+    sshfs -o idmap=user gbiamby@cthu5:/home/gbiamby/ "${TARGET_PATH}"
 }
