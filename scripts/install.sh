@@ -22,6 +22,7 @@ install "dconf*"
 install gnupg
 install gzip
 install htop
+install jq
 install ncdu
 install net-tools
 install nmap

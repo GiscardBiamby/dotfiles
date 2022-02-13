@@ -139,3 +139,8 @@ function map_cthu() {
     mkdir -p "${TARGET_PATH}"
     sshfs -o idmap=user gbiamby@cthu5:/home/gbiamby/ "${TARGET_PATH}"
 }
+
+function json_pretty() {
+    local json_path="${1}"
+    cat "${json_path}" | jq -r '.' > "pretty_${json_path}"
+}
