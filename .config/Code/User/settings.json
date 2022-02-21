@@ -318,6 +318,7 @@
         "semafor",
         "semaforprogram",
         "serializable",
+        "setaf",
         "setuptools",
         "Shilliday",
         "shutil",
@@ -547,19 +548,25 @@
     "security.workspace.trust.untrustedFiles": "open",
     "sync.forceUpload": true,
     "sync.gist": "84d1a6b5297e9f9834c1c83473a87e07",
-    "terminal.integrated.automationShell.linux": "bash",
+    "terminal.integrated.automationShell.linux": "my_bash",
+    // "terminal.integrated.automationProfile.linux": "my_bash",
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.defaultProfile.linux": "my_bash",
+    "terminal.integrated.enableBell": true,
     "terminal.integrated.enableShellIntegration": true,
     "terminal.integrated.experimentalRefreshOnResume": true,
     "terminal.integrated.inheritEnv": true,
+    "terminal.integrated.persistentSessionScrollback": 1000000,
     "terminal.integrated.profiles.linux": {
         "my_bash": {
             "args": [
                 "--login"
             ],
             "path": "bash"
-        }
+        },
+        "bash": null,
+        "Javascript Debug Terminal": null,
+        "R Terminal": null,
     },
     "terminal.integrated.scrollback": 1000000,
     "todo-tree.general.enableFileWatcher": true,
@@ -580,6 +587,7 @@
     "vsicons.presets.jsonOfficial": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "window.restoreWindows": "all",
+    "window.zoomLevel": 1,
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "activityBar.activeBorder": "#2979FF",
@@ -610,6 +618,7 @@
     },
     "workbench.colorTheme": "Tinacious Design",
     "workbench.editor.enablePreview": true,
+    "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.revealIfOpen": true,
     "workbench.editor.untitled.hint": "hidden",
     "workbench.editorAssociations": {
@@ -618,7 +627,5 @@
     "workbench.iconTheme": "eq-material-theme-icons-light",
     "workbench.settings.openDefaultKeybindings": true,
     "workbench.statusBar.feedback.visible": false,
-    "workbench.tree.indent": 15,
-    "workbench.editor.highlightModifiedTabs": true,
-    "window.zoomLevel": 1
+    "workbench.tree.indent": 15
 }
