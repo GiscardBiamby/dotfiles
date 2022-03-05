@@ -1,4 +1,3 @@
-from IPython.display import set_matplotlib_formats
 set_matplotlib_formats('pdf', 'png')
 plt.rcParams['savefig.dpi'] = 75
 

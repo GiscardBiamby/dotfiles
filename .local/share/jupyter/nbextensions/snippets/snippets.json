@@ -42,26 +42,20 @@
             "code": [
                 "import json",
                 "import os",
-                "from io import BytesIO",
-                "from typing import Dict, List, Optional, Union, cast",
+                "from collections import Counter, OrderedDict",
+                "from copy import deepcopy",
+                "from typing import Any Dict, List, Optional, Union, cast",
                 "from urllib.parse import ParseResult, urlparse",
                 "import matplotlib.pyplot as plt",
                 "",
-                "# Multi-core pandas compat:",
-                "# import pandas as pd",
-                "import modin.pandas as pd",
-                "import numpy as np",
                 "",
                 "# from PIL import Image",
                 "import PIL.Image as pil_img",
                 "import ray",
                 "from IPython.display import Image, display, set_matplotlib_formats",
                 "from matplotlib.patches import Rectangle",
-                "from tqdm import tqdm",
-                "",
-                "import ucb_twitter.twitter_json as ucb",
-                "",
-                "ray.init(ignore_reinit_error=True)"
+                "from tqdm.contrib import tenumerate, tmap, tzip",
+                "from tqdm.contrib.bells import tqdm, trange"
             ]
         },
         {
@@ -110,7 +104,6 @@
         {
             "name": "matplotlib Display Options",
             "code": [
-                "from IPython.display import set_matplotlib_formats",
                 "set_matplotlib_formats('pdf', 'png')",
                 "plt.rcParams['savefig.dpi'] = 75",
                 "",
