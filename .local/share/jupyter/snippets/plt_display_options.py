@@ -13,4 +13,4 @@ plt.rcParams['text.usetex'] = True
 
 plt.rcParams['font.family'] = "serif"
 plt.rcParams['font.serif'] = "cm"
-plt.rcParams['text.latex.preamble'] = "\\usepackage{subdepth}, \\usepackage{type1cm}"
+# plt.rcParams['text.latex.preamble'] = "\\usepackage{subdepth}, \\usepackage{type1cm}"

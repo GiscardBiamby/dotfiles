@@ -1,4 +1,6 @@
 from IPython.core.display import HTML, Markdown
+
+
 def show_samples(df: pd.DataFrame, n_samples: int = 20):
     df_random = df.sample(n=n_samples)
 
