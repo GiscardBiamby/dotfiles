@@ -25,15 +25,10 @@ install nedit
 install okular
 install openssh-client
 install openssh-server
-install pandoc
 install remmina
 install smartmontools
 install solaar
 install spotify
-install texlive-xetex
-install texlive-fonts-recommended
-install texlive-plain-generic
-install texstudio
 install tilix
 install ubuntu-restricted-extras
 install unetbootin

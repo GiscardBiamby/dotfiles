@@ -27,14 +27,20 @@ install ncdu
 install net-tools
 install nmap
 install silversearcher-ag
+install pandoc
 install pigz
 install shellcheck
 install stow
+install texlive-xetex
+install texlive-fonts-recommended
+install texlive-plain-generic
+install texstudio
 install tmux
 install tree
 install unzip
 install wget
 install xclip
+
 
 # Image processing
 install jpegoptim
