@@ -421,19 +421,19 @@
     },
     "files.legacyWatcher": "off",
     "files.watcherExclude": {
-        "**/*.pyc": true,
+        "**/__pycache__/**": true,
         "**/.DS_Store": true,
         "**/.git": true,
         "**/.gitbak": true,
         "**/.pytest_cache/**": true,
-        "**/__pycache__/**": true,
+        "**/*.pyc": true,
         "**/chipped_500/**": true,
+        "**/coco_chipped/**": true,
+        "**/coco_vanilla/**": true,
         "**/coco/**/*.txt": true,
         "**/coco/annotations/**": true,
         "**/coco/images/**": true,
         "**/coco/labels/**": true,
-        "**/coco_chipped/**": true,
-        "**/coco_vanilla/**": true,
         "**/data/**": true,
         "**/data/Xview/**": true,
         "**/datasets/**": true,
@@ -627,7 +627,7 @@
         "titleBar.activeBackground": "#1F491D",
         "titleBar.activeForeground": "#F5FBF5"
     },
-    "workbench.colorTheme": "Tinacious Design",
+    "workbench.colorTheme": "Tomorrow",
     "workbench.editor.enablePreview": true,
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.revealIfOpen": true,
@@ -639,6 +639,12 @@
     "workbench.settings.openDefaultKeybindings": true,
     "workbench.statusBar.feedback.visible": false,
     "workbench.tree.indent": 15,
-    "window.zoomLevel": 2,
-    "diffEditor.ignoreTrimWhitespace": true
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "grammarly.patterns": [
+        "**/readme.md",
+        "**/README.md",
+        "**/*.txt",
+        "**/*.md"
+    ]
 }

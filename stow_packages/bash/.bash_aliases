@@ -23,6 +23,7 @@ alias ll='ls -ahlF --group-directories-first'
 alias la='ls -a --group-directories-first'
 alias l='ls -CF --group-directories-first'
 alias ag='ag --hidden --path-to-ignore ~/.agignore'
+alias xclip="xclip -selection c"
 
 # New stuff, haven't tried yet:
 alias grep='grep --color=auto'
