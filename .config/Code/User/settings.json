@@ -93,6 +93,7 @@
         "autopep",
         "BAIR",
         "Barreleye",
+        "batchify",
         "bbox",
         "bboxes",
         "Bcrypt",
@@ -322,6 +323,7 @@
         "savez",
         "scipy",
         "scrollback",
+        "segmentations",
         "semafor",
         "semaforprogram",
         "serializable",
@@ -357,6 +359,7 @@
         "unchipped",
         "UNFOIL",
         "unsequestered",
+        "unsqueeze",
         "uritools",
         "vaallocb",
         "VAALPP",
@@ -412,12 +415,12 @@
     },
     "files.autoSave": "afterDelay",
     "files.exclude": {
-        "**/*.pyc": true,
+        "**/__pycache__/**": true,
         "**/.DS_Store": true,
         "**/.git": true,
         "**/.pytest_cache": true,
-        "**/XDG_CACHE_HOME": true,
-        "**/__pycache__/**": true
+        "**/*.pyc": true,
+        "**/XDG_CACHE_HOME": true
     },
     "files.legacyWatcher": "off",
     "files.watcherExclude": {
@@ -435,10 +438,16 @@
         "**/coco/images/**": true,
         "**/coco/labels/**": true,
         "**/data/**": true,
+        "**/data/eval_3.2/**": true,
+        "**/data/eval2-samples/**": true,
+        "**/data/tests/eval*": true,
         "**/data/Xview/**": true,
         "**/datasets/**": true,
         "**/experiments/**": true,
+        "**/messages/messages/**": true,
         "**/seg_chipped_500/**": true,
+        "**/semafor/datalake/**": true,
+        "**/semafor/sandbox/**": true,
         "**/split_unchipped/**": true,
         "**/train2014/**": true,
         "**/val2014/**": true,
@@ -446,8 +455,7 @@
         "**/weights/**": true,
         "**/yolov3/data/coco**/**": true,
         "**/yolov3/data/xview**/**": true,
-        "/data/**": true,
-        "data/**": true
+        "/data/**": true
     },
     "git.autofetch": true,
     "git.confirmSync": false,
@@ -518,7 +526,6 @@
             "value": "#8b6cf1"
         }
     ],
-    "pylance.insidersChannel": "daily",
     "python.analysis.completeFunctionParens": true,
     "python.analysis.diagnosticMode": "workspace",
     "python.analysis.indexing": true,
@@ -627,7 +634,7 @@
         "titleBar.activeBackground": "#1F491D",
         "titleBar.activeForeground": "#F5FBF5"
     },
-    "workbench.colorTheme": "Tomorrow",
+    "workbench.colorTheme": "Juicy (rainglow)",
     "workbench.editor.enablePreview": true,
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.revealIfOpen": true,
@@ -640,11 +647,14 @@
     "workbench.statusBar.feedback.visible": false,
     "workbench.tree.indent": 15,
     "terminal.integrated.enableMultiLinePasteWarning": false,
-    "diffEditor.ignoreTrimWhitespace": false,
     "grammarly.patterns": [
         "**/readme.md",
         "**/README.md",
         "**/*.txt",
         "**/*.md"
-    ]
+    ],
+    "diffEditor.ignoreTrimWhitespace": false,
+    "window.zoomLevel": 1,
+    "python.pylanceLspNotebooksEnabled": true,
+    "jupyter.pylanceHandlesNotebooks": true
 }

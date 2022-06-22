@@ -154,7 +154,7 @@
 
 [credential]
     # cache the password for http-auth
-    helper = cache
+	helper = store
     # for "Git Credential Manager for Windows"
     #helper = manager
 
