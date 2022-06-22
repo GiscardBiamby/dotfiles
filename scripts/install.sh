@@ -34,6 +34,7 @@ install stow
 install texlive-xetex
 install texlive-fonts-recommended
 install texlive-plain-generic
+install texlive-extra-utils
 install texstudio
 install tmux
 install tree
