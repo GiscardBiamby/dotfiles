@@ -8,13 +8,11 @@
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
-    "[latex]": {
-        "editor.defaultFormatter": "James-Yu.latex-workshop"
-    },
     "[markdown]": {
         "editor.defaultFormatter": "quilicicf.markdown-spec-formatter"
     },
     "[python]": {
+    
         "editor.defaultFormatter": "ms-python.python"
     },
     "[typescriptreact]": {
@@ -23,7 +21,7 @@
     "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "autoDocstring.docstringFormat": "google",
+    "autoDocstring.docstringFormat": "sphinx",
     "autoDocstring.startOnNewLine": true,
     "breadcrumbs.enabled": true,
     "cSpell.allowCompoundWords": true,
@@ -83,6 +81,7 @@
         "AOM's",
         "aomsdk",
         "API's",
+        "Aptima",
         "arange",
         "ARPU",
         "Arslan",
@@ -133,6 +132,7 @@
         "cudnn",
         "CVPR",
         "Cyprien",
+        "Damiano",
         "DARPA",
         "DARPA’s",
         "DASHIFIED",
@@ -172,6 +172,7 @@
         "facemask",
         "Fanalyze",
         "finetune",
+        "Fiscus",
         "framedets",
         "fsdet",
         "fvcore",
@@ -188,6 +189,7 @@
         "GPU's",
         "gpus",
         "graceluo",
+        "Graciarena",
         "groupby",
         "hackathon",
         "heatmap",
@@ -250,6 +252,7 @@
         "mkdir",
         "mmbt",
         "mmdet",
+        "mmsegmentation",
         "mobilenetv",
         "moco",
         "moderna",
@@ -445,6 +448,7 @@
         "**/datasets/**": true,
         "**/experiments/**": true,
         "**/messages/messages/**": true,
+        "**/mmcv/tests/**": true,
         "**/seg_chipped_500/**": true,
         "**/semafor/datalake/**": true,
         "**/semafor/sandbox/**": true,
@@ -453,6 +457,7 @@
         "**/val2014/**": true,
         "**/vanilla/**": true,
         "**/weights/**": true,
+        "**/work_dirs/**": true,
         "**/yolov3/data/coco**/**": true,
         "**/yolov3/data/xview**/**": true,
         "/data/**": true
@@ -606,7 +611,6 @@
     "vsicons.presets.jsonOfficial": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "window.restoreWindows": "all",
-    "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "activityBar.activeBorder": "#2979FF",
         "activityBar.background": "#163414",
@@ -634,7 +638,7 @@
         "titleBar.activeBackground": "#1F491D",
         "titleBar.activeForeground": "#F5FBF5"
     },
-    "workbench.colorTheme": "Juicy (rainglow)",
+    "workbench.colorTheme": "Tinacious Design",
     "workbench.editor.enablePreview": true,
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.revealIfOpen": true,
@@ -654,7 +658,27 @@
         "**/*.md"
     ],
     "diffEditor.ignoreTrimWhitespace": false,
-    "window.zoomLevel": 1,
     "python.pylanceLspNotebooksEnabled": true,
-    "jupyter.pylanceHandlesNotebooks": true
+    "jupyter.pylanceHandlesNotebooks": true,
+    "prettier.configPath": "/home/gbiamby/proj/prettier.config",
+    "[latex]": {
+        "editor.defaultFormatter": "nickfode.latex-formatter"
+    },
+    "python.linting.ignorePatterns": [
+        "**/site-packages/**/*.py",
+        ".vscode/*.py",
+        "**/mmsegmentation/configs/**"
+    ],
+    "window.commandCenter": true,
+    "window.titleBarStyle": "custom",
+    "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "python.analysis.inlayHints.variableTypes": true,
+    "editor.maxTokenizationLineLength": 200000,
+    "makefile.buildBeforeLaunch": false,
+    "makefile.configureAfterCommand": false,
+    "makefile.configureOnEdit": false,
+    "makefile.configureOnOpen": false,
+    "window.zoomLevel": 2
 }
