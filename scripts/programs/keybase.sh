@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. util.sh
+. ../util.sh
 
 echo "🔐  Installing Keybase"
 curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb

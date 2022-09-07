@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. util.sh
+. ../util.sh
 
 echo "🔐 Installing keepassxc"
 sudo add-apt-repository ppa:phoerious/keepassxc -y

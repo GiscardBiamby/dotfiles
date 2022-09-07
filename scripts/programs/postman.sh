@@ -1,7 +1,7 @@
 #!/bin/bash
 set +e
 
-. util.sh
+. ../util.sh
 
 echo "📮 Installing postman"
 # https://www.how2shout.com/linux/how-to-install-postman-on-ubuntu-20-04-lts-linux/

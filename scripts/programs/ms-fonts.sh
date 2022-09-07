@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. util.sh
+. ../util.sh
 
 # https://www.pcworld.com/article/2863497/how-to-install-microsoft-fonts-in-linux-office-suites.html
 # https://lexics.github.io/installing-ms-fonts

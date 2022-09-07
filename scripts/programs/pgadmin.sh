@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. util.sh
+. ../util.sh
 
 echo "Installing pgadmin"
 # https://www.pgadmin.org/download/pgadmin-4-apt/

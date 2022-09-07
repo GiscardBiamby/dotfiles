@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. util.sh
+. ../util.sh
 
 echo "📹🎙 Installing OBS"
 install ffmpeg

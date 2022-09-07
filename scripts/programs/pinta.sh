@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. util.sh
+. ../util.sh
 
 echo "🖌 Installing Pinta"
 sudo add-apt-repository ppa:pinta-maintainers/pinta-stable

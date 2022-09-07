@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. util.sh
+. ../util.sh
 
 echo "Installing workstation tools"
 sudo add-apt-repository ppa:solaar-unifying/ppa
