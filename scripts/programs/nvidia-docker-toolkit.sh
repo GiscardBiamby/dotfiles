@@ -3,18 +3,23 @@
 echo "🐋 Installing NVIDIA Container Toolkit"
 # https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
 
+# On nvidia-container-toolkit nvidia-container-runtime vs nvidia-docker2, this is crazy:
+# https://github.com/NVIDIA/nvidia-docker/issues/1268
+
 # Setup the stable repository and the GPG key:
 distribution=$(
     . /etc/os-release
     echo $ID$VERSION_ID
-)
-echo "distribution: ${distribution}"
-curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
-curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+) &&
+    curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg &&
+    curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list |
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' |
+        sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
 # install nvidia-docker2
 sudo apt-get update
-sudo apt-get install -y nvidia-container-toolkit nvidia-container-runtime
+# sudo apt-get install -y nvidia-container-toolkit nvidia-container-runtime
+sudo apt-get install -y nvidia-docker2
 
 # Restart docker daemon:
 sudo systemctl daemon-reload
