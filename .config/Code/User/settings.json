@@ -9,7 +9,7 @@
         "editor.defaultFormatter": "vscode.json-language-features"
     },
     "[markdown]": {
-        "editor.defaultFormatter": "quilicicf.markdown-spec-formatter"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[python]": {
     
@@ -657,10 +657,8 @@
         "**/*.txt",
         "**/*.md"
     ],
-    "diffEditor.ignoreTrimWhitespace": false,
     "python.pylanceLspNotebooksEnabled": true,
     "jupyter.pylanceHandlesNotebooks": true,
-    "prettier.configPath": "/home/gbiamby/proj/prettier.config",
     "[latex]": {
         "editor.defaultFormatter": "nickfode.latex-formatter"
     },
@@ -680,5 +678,7 @@
     "makefile.configureAfterCommand": false,
     "makefile.configureOnEdit": false,
     "makefile.configureOnOpen": false,
-    "window.zoomLevel": 2
+    "window.zoomLevel": 3,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "terminal.integrated.smoothScrolling": true
 }
