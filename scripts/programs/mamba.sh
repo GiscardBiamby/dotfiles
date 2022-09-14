@@ -19,3 +19,4 @@ mamba install -c tartansandal mamba-bash-completion
 
 # https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/pip-interoperability.html:
 conda config --set pip_interop_enabled True
+conda config --set auto_activate_base False
