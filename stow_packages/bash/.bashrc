@@ -63,12 +63,12 @@ else
     fi
 fi
 unset __conda_setup
+# <<< conda initialize <<<
+
 
 if [ -f "/home/gbiamby/mambaforge/etc/profile.d/mamba.sh" ]; then
     . "/home/gbiamby/mambaforge/etc/profile.d/mamba.sh"
 fi
-# <<< conda initialize <<<
-
 # My stuff:
 
 # # This has to do with TILIX. I don't think it's needed anymore.
