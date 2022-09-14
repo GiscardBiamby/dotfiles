@@ -19,6 +19,7 @@ install git
 # Common
 install curl
 install "dconf*"
+install ffmpeg
 install gnupg
 install gzip
 install htop
