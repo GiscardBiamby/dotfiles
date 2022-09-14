@@ -24,3 +24,11 @@
 # conda install -c conda-forge conda-bash-completion
 
 # rm ./programs/downloads/anaconda3_x86_64.sh
+
+
+# ##
+# ## Uninstall
+# conda activate base
+# conda install -c anaconda anaconda-clean
+# anaconda-clean --all
+# rm -rf ~/anaconda3

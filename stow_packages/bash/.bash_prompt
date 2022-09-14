@@ -95,7 +95,7 @@ fi
 
 export PS1="${pathC}\w ${gitC}\$(gitBranch) ${pointerC}\$${normalC} "
 
-# For direnv to show correct conda env in the PS1 bash prompt
+# For direnv to show correct conda/mamba env in the PS1 bash prompt
 # (https://github.com/direnv/direnv/wiki/Python#restoring-the-ps1):
 show_virtual_env() {
     if [[ -n "$CONDA_DEFAULT_ENV" && -n "$DIRENV_DIR" ]]; then

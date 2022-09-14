@@ -543,7 +543,7 @@
     "python.dataScience.maxOutputSize": 1200,
     "python.dataScience.sendSelectionToInteractiveWindow": false,
     "python.dataScience.textOutputLimit": 0,
-    "python.defaultInterpreterPath": "/home/gbiamby/anaconda3/envs/sem-unfoil2/bin/python",
+    "python.defaultInterpreterPath": "/home/gbiamby/mambaforge/envs/sem-unfoil2/bin/python",
     "python.diagnostics.sourceMapsEnabled": true,
     "python.envFile": "${workspaceFolder}/.env",
     "python.formatting.provider": "black",
@@ -557,7 +557,7 @@
         "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
     ],
     "python.linting.pylintEnabled": false,
-    "python.pythonPath": "/home/gbiamby/anaconda3/envs/h4d_env/bin/python",
+    "python.pythonPath": "/home/gbiamby/mambaforge/envs/h4d_env/bin/python",
     "python.showStartPage": false,
     "python.testing.autoTestDiscoverOnSaveEnabled": false,
     "pythonTestExplorer.testFramework": "unittest",
