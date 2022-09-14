@@ -62,7 +62,7 @@ if [[ "${WORKSTATION}" == "workstation" ]]; then
     pip install gitup
 else
     # For server, only install command line things:
-    bash ./programs/anaconda.sh -H
+    bash ./programs/mamba.sh -H
     bash ./programs/direnv.sh -H
     # bash ./programs/docker.sh -H
     # bash ./programs/nvidia-docker-toolkit.sh -H

@@ -1,9 +1,9 @@
 env_prompt: '({default_env}) '
 
-channel_priority: strict
+# channel_priority: strict
 
-dependencies:
-  - mkl
-  - dkl-devel
-  - libblas=*=*mkl
-  - blas=*=*mkl
+# dependencies:
+#   - mkl
+#   - dkl-devel
+#   - libblas=*=*mkl
+#   - blas=*=*mkl
