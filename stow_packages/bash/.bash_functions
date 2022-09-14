@@ -142,5 +142,11 @@ function map_cthu() {
 
 function json_pretty() {
     local json_path="${1}"
-    cat "${json_path}" | jq -r '.' > "pretty_${json_path}"
+    cat "${json_path}" | jq -r '.' >"pretty_${json_path}"
+}
+
+function deactivate_envs() {
+    for i in $(seq ${CONDA_SHLVL}); do
+        conda deactivate
+    done
 }
