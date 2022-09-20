@@ -1,3 +1,4 @@
 # *
 *.deb
 /scripts/programs/downloads/
+.DS_Store
