@@ -66,8 +66,8 @@ main() {
 
   info "======= Configuration ======="
   wait_input
-  #setup_osx
-  success "Finished configuring MacOS defaults. NOTE: A restart is needed"
+  # setup_osx
+  # success "Finished configuring MacOS defaults. NOTE: A restart is needed"
   code_as_default_text_editor
   success "Finished setting up VSCode as default text editor"
   stow_dotfiles
