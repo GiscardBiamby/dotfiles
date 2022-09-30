@@ -8,42 +8,40 @@ REPO_PATH="$HOME/dotfiles"
 reset_color=$(tput sgr 0)
 
 info() {
-  printf "%s[*] %s%s\n" "$(tput setaf 4)" "$1" "$reset_color"
+    printf "%s[*] %s%s\n" "$(tput setaf 4)" "$1" "$reset_color"
 }
 
 success() {
-  printf "%s[*] %s%s\n" "$(tput setaf 2)" "$1" "$reset_color"
+    printf "%s[*] %s%s\n" "$(tput setaf 2)" "$1" "$reset_color"
 }
 
 err() {
-  printf "%s[*] %s%s\n" "$(tput setaf 1)" "$1" "$reset_color"
+    printf "%s[*] %s%s\n" "$(tput setaf 1)" "$1" "$reset_color"
 }
 
 warn() {
-  printf "%s[*] %s%s\n" "$(tput setaf 3)" "$1" "$reset_color"
+    printf "%s[*] %s%s\n" "$(tput setaf 3)" "$1" "$reset_color"
 }
-
 
 install_xcode() {
-  if xcode-select -p > /dev/null; then
-    warn "xCode Command Line Tools already installed"
-  else
-    info "Installing xCode Command Line Tools..."
-    xcode-select --install
-    sudo xcodebuild -license accept
-  fi
+    if xcode-select -p >/dev/null; then
+        warn "xCode Command Line Tools already installed"
+    else
+        info "Installing xCode Command Line Tools..."
+        xcode-select --install
+        sudo xcodebuild -license accept
+    fi
 }
 
-
 install_homebrew() {
-  export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-  if hash brew &>/dev/null; then
-    warn "Homebrew already installed"
-  else
-    info "Installing homebrew..."
-    sudo --validate  # reset `sudo` timeout to use Homebrew install in noninteractive mode
-    CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  fi
+    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+    if hash brew &>/dev/null; then
+        warn "Homebrew already installed"
+    else
+        info "Installing homebrew..."
+        sudo --validate # reset `sudo` timeout to use Homebrew install in noninteractive mode
+        CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    fi
 }
 
 info "####### dotfiles #######"
@@ -63,6 +61,3 @@ info "Change path to $REPO_PATH"
 cd "$REPO_PATH" >/dev/null
 
 ./@macOS/install.sh
-
-
-
