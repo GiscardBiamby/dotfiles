@@ -1,27 +1,27 @@
 # Cask apps:
 apps=(
-  abricotine
-  anki
-  clipy
-  docker
-  dropbox
-  firefox
-  google-chrome
-  keepassxc
-  kitty
-  mactex
-  mambaforge
-  obs
-  rectangle
-  signal
-  slack
-  sublime-text
-  texstudio
-  typora
-  veracrypt
-  visual-studio-code
-  vlc
-  zotero
+    abricotine
+    anki
+    clipy
+    docker
+    dropbox
+    firefox
+    google-chrome
+    keepassxc
+    kitty
+    mactex
+    mambaforge
+    obs
+    rectangle
+    signal
+    slack
+    sublime-text
+    texstudio
+    typora
+    veracrypt
+    visual-studio-code
+    vlc
+    zotero
 )
 
 # Apple Store apps:
@@ -32,28 +32,28 @@ apps=(
 # )
 
 install_macos_apps() {
-  info "Installing macOS apps..."
-  install_brew_casks "${apps[@]}"
+    info "Installing macOS apps..."
+    install_brew_casks "${apps[@]}"
 }
 
 install_masApps() {
-  info "App Store Apps Install disabled. Skipping this step"
-  #info "Installing App Store apps..."
-  #for app in "${masApps[@]}"; do
-  #  mas install $app
-  #done
+    info "App Store Apps Install disabled. Skipping this step"
+    #info "Installing App Store apps..."
+    #for app in "${masApps[@]}"; do
+    #  mas install $app
+    #done
 }
 
 install_mamba() {
-  curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-  bash Mambaforge-$(uname)-$(uname -m).sh
-  rm Mambaforge-$(uname)-$(uname -m).sh
-  # https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/pip-interoperability.html:
-  conda config --set pip_interop_enabled True
-  conda config --set auto_activate_base False
+    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+    bash Mambaforge-$(uname)-$(uname -m).sh
+    rm Mambaforge-$(uname)-$(uname -m).sh
+    # https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/pip-interoperability.html:
+    conda config --set pip_interop_enabled True
+    conda config --set auto_activate_base False
 
-  # Not sure if the channel is required. It could be that it didn't work when i tried without the
-  # channel because I forgot to restart the terminal (I sourced ~/.bash_profile instead):
-  # mamba install -c tartansandal conda-bash-completion
-  # mamba install -c tartansandal mamba-bash-completion
+    # Not sure if the channel is required. It could be that it didn't work when i tried without the
+    # channel because I forgot to restart the terminal (I sourced ~/.bash_profile instead):
+    # mamba install -c tartansandal conda-bash-completion
+    # mamba install -c tartansandal mamba-bash-completion
 }
