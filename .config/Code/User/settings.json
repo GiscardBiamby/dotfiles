@@ -9,17 +9,18 @@
         "editor.defaultFormatter": "vscode.json-language-features"
     },
     "[markdown]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "quilicicf.markdown-spec-formatter"
     },
     "[python]": {
     
-        "editor.defaultFormatter": "ms-python.python"
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.formatOnType": true
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[yaml]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "autoDocstring.docstringFormat": "sphinx",
     "autoDocstring.startOnNewLine": true,
@@ -660,7 +661,6 @@
         "**/*.txt",
         "**/*.md"
     ],
-    "python.pylanceLspNotebooksEnabled": true,
     "jupyter.pylanceHandlesNotebooks": true,
     "[latex]": {
         "editor.defaultFormatter": "nickfode.latex-formatter"
@@ -673,16 +673,17 @@
     "window.commandCenter": true,
     "window.titleBarStyle": "custom",
     "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-    "python.analysis.inlayHints.functionReturnTypes": true,
     "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-    "python.analysis.inlayHints.variableTypes": true,
     "editor.maxTokenizationLineLength": 200000,
     "makefile.buildBeforeLaunch": false,
     "makefile.configureAfterCommand": false,
     "makefile.configureOnEdit": false,
     "makefile.configureOnOpen": false,
     "window.zoomLevel": 2,
-    "diffEditor.ignoreTrimWhitespace": false,
     "terminal.integrated.smoothScrolling": true,
-    "python.condaPath": "/home/gbiamby/mambaforge/condabin/mamba"
+    "python.condaPath": "/home/gbiamby/mambaforge/condabin/mamba",
+    "isort.check": true,
+    "githubPullRequests.createOnPublishBranch": "never",
+    "githubPullRequests.pullBranch": "never",
+    "editor.minimap.autohide": true
 }

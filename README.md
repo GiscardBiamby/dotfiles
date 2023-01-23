@@ -77,7 +77,15 @@ Go to the Nvidia X Server Settings -> X server Display Configuration -> Advanced
 You have to do this once for each display.
 Save the changes to Xorg.conf and restart the system.
 
-## Random Helpful Stuff (TM)
+## Random Helpful Stuff
+
+## Make vscode run in native wayland mode
+
+Add these flags to the two `code` commands in `/usr/share/applications/code.desktop`: 
+
+```bash
+code --enable-features=UseOzonePlatform --ozone-platform=wayland 
+```
 
 ### Clone all your remote repositories
 
