@@ -84,7 +84,7 @@ Save the changes to Xorg.conf and restart the system.
 Add these flags to the two `code` commands in `/usr/share/applications/code.desktop`: 
 
 ```bash
-code --enable-features=UseOzonePlatform --ozone-platform=wayland 
+code --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations
 ```
 
 ### Clone all your remote repositories
