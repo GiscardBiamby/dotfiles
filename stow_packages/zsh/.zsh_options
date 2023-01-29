@@ -17,8 +17,10 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 # removes blank lines from history
 setopt HIST_REDUCE_BLANKS
+# CORRECT corrects commands only
 setopt CORRECT
-setopt CORRECT_ALL
+# CORRECT_ALL corrects commands AND arguments
+unsetopt CORRECT_ALL
 
 ##
 ## Advanced zsh completions
