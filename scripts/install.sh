@@ -9,14 +9,11 @@ if [[ "${1}" == "workstation" ]]; then
 fi
 
 # Update Ubuntu and get standard repository programs
-sudo apt update && sudo apt full-upgrade -y
-
-# git
 add-apt-repository ppa:git-core/ppa
-sudo apt update
-install git
+sudo apt update && sudo apt update -y
 
 # Common
+install git
 install curl
 install "dconf*"
 install ffmpeg
@@ -78,7 +75,7 @@ bash ./dotfiles.sh -H
 #
 # Note: it seems like i still have to run this step manually for some reason, to get diff-so-fancy
 # to work
-source ~/.bashrc
+source ~/.bash_profile
 nvm use node
 npm install -g diff-so-fancy
 
