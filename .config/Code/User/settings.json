@@ -679,7 +679,6 @@
     "makefile.configureAfterCommand": false,
     "makefile.configureOnEdit": false,
     "makefile.configureOnOpen": false,
-    "window.zoomLevel": 2,
     "terminal.integrated.smoothScrolling": true,
     "python.condaPath": "/home/gbiamby/mambaforge/condabin/mamba",
     "isort.check": true,

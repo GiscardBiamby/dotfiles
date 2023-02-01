@@ -24,3 +24,10 @@ export TORCH_CUDA_ARCH_LIST=7.5
 # export TORCH_CUDA_ARCH_LIST=8.6
 ## To force the nvidia-smi GPU order to be the same as the GPU device ordinals in pytorch:
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
+# Misc. attempts to get video acceleration working in ubuntu/nvidia/wayland/(firefox||chrome)
+export LIBVA_DRIVER_NAME=nvidia
+export VDPAU_DRIVER=nvidia
+export NVD_BACKEND=direct
+export MOZ_DISABLE_RDD_SANDBOX=1
+export EGL_PLATFORM=wayland
+export __EGL_VENDOR_LIBRARY_FILENAMES="/usr/share/glvnd/egl_vendor.d/10_nvidia.json"
