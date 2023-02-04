@@ -405,7 +405,7 @@
     ],
     "editor.bracketPairColorization.enabled": true,
     "editor.copyWithSyntaxHighlighting": false,
-    "editor.cursorSmoothCaretAnimation": true,
+    "editor.cursorSmoothCaretAnimation": "on",
     "editor.detectIndentation": false,
     "editor.fontLigatures": true,
     "editor.guides.bracketPairs": "active",
@@ -684,5 +684,7 @@
     "isort.check": true,
     "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.pullBranch": "never",
-    "editor.minimap.autohide": true
+    "editor.minimap.autohide": true,
+    "telemetry.telemetryLevel": "error",
+    "notebook.kernelPicker.type": "mru"
 }

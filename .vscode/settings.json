@@ -1,6 +1,6 @@
 {
     "diffEditor.ignoreTrimWhitespace": false,
-    "editor.cursorSmoothCaretAnimation": true,
+    "editor.cursorSmoothCaretAnimation": "on",
     "editor.renderControlCharacters": true,
     "editor.renderWhitespace": "all",
     "editor.wordWrapColumn": 100,
