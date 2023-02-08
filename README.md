@@ -79,9 +79,9 @@ Save the changes to Xorg.conf and restart the system.
 
 ## Random Helpful Stuff
 
-## Make vscode run in native wayland mode
+## Make vscode run in native Wayland mode
 
-Add these flags to the two `code` commands in `/usr/share/applications/code.desktop`: 
+Add these flags to the two `code` commands in `/usr/share/applications/code.desktop`:
 
 ```bash
 code --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WaylandWindowDecorations

@@ -437,34 +437,25 @@
         "**/.gitbak": true,
         "**/.pytest_cache/**": true,
         "**/*.pyc": true,
-        "**/chipped_500/**": true,
-        "**/coco_chipped/**": true,
         "**/coco_vanilla/**": true,
         "**/coco/**/*.txt": true,
         "**/coco/annotations/**": true,
         "**/coco/images/**": true,
         "**/coco/labels/**": true,
-        "**/data/**": true,
         "**/data/eval_3.2/**": true,
         "**/data/eval2-samples/**": true,
         "**/data/tests/eval*": true,
-        "**/data/Xview/**": true,
         "**/datasets/**": true,
         "**/experiments/**": true,
         "**/messages/messages/**": true,
         "**/mmcv/tests/**": true,
-        "**/seg_chipped_500/**": true,
         "**/semafor/datalake/**": true,
         "**/semafor/sandbox/**": true,
-        "**/split_unchipped/**": true,
         "**/train2014/**": true,
         "**/val2014/**": true,
         "**/vanilla/**": true,
         "**/weights/**": true,
-        "**/work_dirs/**": true,
-        "**/yolov3/data/coco**/**": true,
-        "**/yolov3/data/xview**/**": true,
-        "/data/**": true
+        "**/work_dirs/**": true
     },
     "git.autofetch": true,
     "git.confirmSync": false,
@@ -556,7 +547,6 @@
     "python.linting.flake8Args": [
         "--verbose"
     ],
-    "python.linting.flake8Enabled": true,
     "python.linting.pylintArgs": [
         "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
     ],
@@ -686,5 +676,16 @@
     "githubPullRequests.pullBranch": "never",
     "editor.minimap.autohide": true,
     "telemetry.telemetryLevel": "error",
-    "notebook.kernelPicker.type": "mru"
+    "notebook.kernelPicker.type": "mru",
+    "editor.mouseWheelScrollSensitivity": 2,
+    "editor.smoothScrolling": true,
+    "editor.stickyScroll.enabled": true,
+    "terminal.integrated.mouseWheelScrollSensitivity": 2,
+    "notebook.experimental.outputScrolling": true,
+    "workbench.list.smoothScrolling": true,
+    "python.linting.flake8Enabled": true,
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
+    ]
 }
