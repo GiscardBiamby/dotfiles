@@ -158,4 +158,3 @@ function kill_vscode_server() {
     # Delete related files and folder
     rm -rf $HOME/.vscode-server # Or ~/.vscode-server-insiders
 }
-ß
