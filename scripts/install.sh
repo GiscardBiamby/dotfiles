@@ -13,6 +13,8 @@ add-apt-repository ppa:git-core/ppa
 sudo apt update && sudo apt update -y
 
 # Common
+install p7zip
+install p7zip-rar
 install git
 install curl
 install "dconf*"
