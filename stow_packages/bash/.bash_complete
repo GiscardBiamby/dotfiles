@@ -36,3 +36,7 @@ _pip_completion() {
 }
 complete -o default -F _pip_completion pip
 # pip bash completion end
+
+if [ -f ~/.bash_completions/pycomic.sh ]; then
+    source ~/.bash_completions/pycomic.sh
+fi
