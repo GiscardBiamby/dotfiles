@@ -191,4 +191,57 @@ I already enabled the environment variables in `stow_packages/bash/.bashrc_brb`,
 
 Other links
 
-https://askubuntu.com/questions/1093954/vainfo-returns-libva-error-usr-lib-x86-64-linux-gnu-dri-i965-drv-video-so-ini
+<https://askubuntu.com/questions/1093954/vainfo-returns-libva-error-usr-lib-x86-64-linux-gnu-dri-i965-drv-video-so-ini>
+
+# Setup AMD GPU Pro Drivers
+
+__Update__: Abandon effort to install amdgpu-pro drivers. Or even the amdgpu ones from the amd website. The reason is (1) the open source one seems to work fine for the most part. The only thing missing is AMF for media encoding, e.g., I cannot use the AMD dGPU for hardware encoding in OBS Studio. (2) Installing amdgpu drivers is straightforward except for the fact that it doesn't work with my version of the linux kernel. I get apt errors when I try to install them. Things related to configuring kms. Seems like it is related to gcc and/or llvm version differences. If I were running a 5.x kernel I think the process would work. Not sure.
+
+## Uninstall Attempts to Install amdgpu:
+
+* Boot into recovery mode (not sure if necessary)
+* `sudo amdgpu-install --uninstall && sudo apt --fix-broken install && sudo apt autoremove`
+* Make sure amdgpu is NOT blacklisted, and reboot
+* Run `glxinfo | grep "OpenGL vendor string" | cut -f2 -d":" | xargs`, it should return "AMD".
+* `vainfo` should return clean results and no errors
+
+## Install amdgpu Driver from AMD
+
+<https://amdgpu-install.readthedocs.io/en/latest/install-script.html>
+This looks promising: <https://www.reddit.com/r/Amd/comments/rkrbyl/amd_updates_amdgpupro_driver_for_linux_with_a_new/>
+
+<https://askubuntu.com/questions/1417418/unmet-dependencies-ubuntu-22-04-amdgpu-hip-support>
+
+I also ran into this issue after upgrading a machine to 22.04.1 LTS and using an older RX 580 GPU with kernel version 5.15.0-56. In case anyone out there is in my situation and comes here, as of this writing (Dec 2022), the following worked for me:
+
+Use the amdgpu-install version 22.40 from <https://repo.radeon.com/amdgpu-install/22.40/ubuntu/jammy/amdgpu-install_5.4.50401-1_all.deb>
+
+* Install with the command `sudo amdgpu-install --usecase=workstation -y  --opencl=rocr --vulkan=pro --accept-eula --no-32`
+
+* Install the Mesa OpenCL shared library with `sudo apt install -y mesa-opencl-icd`
+
+The `-y` and `--accept-eula` skips the EULA prompt and the apt prompt. `--usecase=workstation`, `--opencl=rocr`, and `--vulkan=pro` install options installs both graphics and OpenCL components, skipping the open-source vulkan. Finally, the `--no-32` skips installing 32-bit components, which was also giving me issues on some attempts.
+
+`mesa-opencl-icd` is required in order to get the library `libMesaOpenCL.so.1` on my system. After installing this, I am able to see my GPU with `clinfo -l`:
+
+```bash
+$> sudo clinfo -l
+Platform #0: AMD Accelerated Parallel Processing
+Platform #1: Clover
+`-- Device #0: Radeon RX 580 Series (polaris10, LLVM 13.0.1, DRM 3.49, 5.15.0-56-generic)
+Platform #2: Portable Computing Language
+ `-- Device #0: pthread-Intel(R) Xeon(R) CPU E5-2670 0 @ 2.60GHz
+```
+
+Fixed issue with apt errors by running:
+
+```bash
+sudo apt remove libgl1-amdgpu-mesa-dri mesa-amdgpu-va-drivers amdgpu-lib
+sudo apt --fix-broken install
+sudo apt autoremove
+```
+
+Ensure you are using AMDGPU-PRO driver: `glxinfo | grep "OpenGL vendor string" | cut -f2 -d":" | xargs`
+If it returns AMD, then you are running open source driver. If it returns Advanced Micro Devices, Inc., then you are running proprietary driver.
+
+If you install or reinstall amdgpu, and then get a blackscreen when rebooting, check `/etc/modprobe.d/blacklist-amdgpu.conf`, make sure it is not blacklisting the amdgpu driver.

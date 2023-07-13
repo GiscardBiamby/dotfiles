@@ -156,6 +156,7 @@
         "discriminatorzdim",
         "dists",
         "dlib",
+        "dload",
         "dockerignore",
         "doctest",
         "doctests",
@@ -188,6 +189,7 @@
         "Giscard",
         "Giscard's",
         "Gitlab",
+        "Glip",
         "GPU's",
         "gpus",
         "graceluo",
@@ -208,6 +210,7 @@
         "inplace",
         "ints",
         "invariances",
+        "IOMMU",
         "iopath",
         "ipykernel",
         "ipynb",
@@ -218,6 +221,7 @@
         "isort",
         "iterrows",
         "itertools",
+        "itertuples",
         "jaccard",
         "jsons",
         "Jupyter",
@@ -236,6 +240,7 @@
         "Kubernetes",
         "laielli",
         "leaderboard",
+        "libvirtd",
         "LMDB",
         "loeffler",
         "logit",
@@ -280,6 +285,8 @@
         "owncloud",
         "panopticapi",
         "Parallelization",
+        "patchified",
+        "patchify",
         "pdf's",
         "popd",
         "Popen",
@@ -296,6 +303,8 @@
         "pyarrow",
         "pycache",
         "pycocotools",
+        "PYCOM",
+        "pycomic",
         "pydocstyle",
         "pydoctest",
         "pyenv",
@@ -309,6 +318,7 @@
         "pytorch",
         "querry",
         "randn",
+        "rarfile",
         "rcfile",
         "rcnn",
         "realpath",
@@ -325,10 +335,12 @@
         "Rohrbach",
         "roibatch",
         "rpartition",
+        "rtype",
         "s",
         "savez",
         "scipy",
         "scrollback",
+        "segm",
         "segmentations",
         "semafor",
         "semaforprogram",
@@ -360,10 +372,14 @@
         "trainvalno",
         "twosix",
         "TYPECHECK",
+        "typer",
         "tzip",
         "ultralytics",
         "unchipped",
         "UNFOIL",
+        "uniquify",
+        "unpatchify",
+        "unrar",
         "unsequestered",
         "unsqueeze",
         "uritools",
@@ -375,6 +391,7 @@
         "Vandelay",
         "Vanter",
         "venv",
+        "vfio",
         "vggoriginal",
         "visdrone",
         "visualnews",
@@ -414,7 +431,7 @@
     "editor.renderControlCharacters": true,
     "editor.renderWhitespace": "all",
     "editor.suggestSelection": "first",
-    "editor.wordWrapColumn": 88,
+    "editor.wordWrapColumn": 100,
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
     "files.associations": {
@@ -531,7 +548,7 @@
     "python.analysis.indexing": true,
     "python.analysis.memory.keepLibraryAst": true,
     "python.analysis.symbolsHierarchyDepthLimit": 15,
-    "python.analysis.typeCheckingMode": "strict",
+    "python.analysis.typeCheckingMode": "basic",
     "python.autoComplete.addBrackets": true,
     "python.dataScience.allowUnauthorizedRemoteConnection": true,
     "python.dataScience.askForKernelRestart": false,
@@ -671,7 +688,6 @@
     "makefile.configureOnOpen": false,
     "terminal.integrated.smoothScrolling": true,
     "python.condaPath": "/home/gbiamby/mambaforge/condabin/mamba",
-    "isort.check": true,
     "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.pullBranch": "never",
     "editor.minimap.autohide": true,
@@ -681,11 +697,47 @@
     "editor.smoothScrolling": true,
     "editor.stickyScroll.enabled": true,
     "terminal.integrated.mouseWheelScrollSensitivity": 2,
-    "notebook.experimental.outputScrolling": true,
     "workbench.list.smoothScrolling": true,
-    "python.linting.flake8Enabled": true,
     "jupyter.widgetScriptSources": [
         "jsdelivr.com",
         "unpkg.com"
-    ]
+    ],
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.autoImportUserSymbols": true,
+    "remote.SSH.remotePlatform": {
+        "angler": "linux"
+    },
+    "grammarly.files.exclude": [
+        "requirements.txt",
+        "constraints.txt"
+    ],
+    "notebook.output.scrolling": true,
+    "git.openRepositoryInParentFolders": "never",
+    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, Menlo, Monaco, 'Courier New'",
+    "diffEditor.diffAlgorithm": "advanced",
+    "editor.minimap.showSlider": "always",
+    "editor.cursorBlinking": "smooth",
+    "settingsSync.ignoredSettings": [
+        "editor.fontFamily"
+    ],
+    "isort.showNotifications": "onWarning",
+    "black-formatter.showNotifications": "onWarning",
+    "isort.check": true,
+    "isort.interpreter": [
+        "/home/gbiamby/mambaforge/envs/pycomic/bin/python"
+    ],
+    "isort.importStrategy": "fromEnvironment",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "[dockercompose]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
