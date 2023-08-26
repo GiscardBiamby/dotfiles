@@ -1,6 +1,15 @@
 {
+    "[dockercompose]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
@@ -8,22 +17,22 @@
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
+    "[latex]": {
+        "editor.defaultFormatter": "nickfode.latex-formatter"
+    },
     "[markdown]": {
         "editor.defaultFormatter": "quilicicf.markdown-spec-formatter"
     },
     "[python]": {
-    
         "editor.defaultFormatter": "ms-python.python",
         "editor.formatOnType": true
-    },
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "autoDocstring.docstringFormat": "sphinx",
     "autoDocstring.startOnNewLine": true,
+    "black-formatter.showNotifications": "onWarning",
     "breadcrumbs.enabled": true,
     "cSpell.allowCompoundWords": true,
     "cSpell.enableFiletypes": [
@@ -210,7 +219,6 @@
         "inplace",
         "ints",
         "invariances",
-        "IOMMU",
         "iopath",
         "ipykernel",
         "ipynb",
@@ -240,7 +248,6 @@
         "Kubernetes",
         "laielli",
         "leaderboard",
-        "libvirtd",
         "LMDB",
         "loeffler",
         "logit",
@@ -331,6 +338,7 @@
         "repurposing",
         "resnet",
         "RESNETS",
+        "Ritwik",
         "rmtree",
         "Rohrbach",
         "roibatch",
@@ -355,6 +363,8 @@
         "submodule",
         "subscore",
         "subscores",
+        "Suzie",
+        "Suzie's",
         "symlink",
         "tenumerate",
         "termcolor",
@@ -391,10 +401,10 @@
         "Vandelay",
         "Vanter",
         "venv",
-        "vfio",
         "vggoriginal",
         "visdrone",
         "visualnews",
+        "vmcondev",
         "vocoding",
         "vscode's",
         "vstack",
@@ -420,16 +430,26 @@
         "yubikey",
         "zfill"
     ],
+    "diffEditor.diffAlgorithm": "advanced",
+    "diffEditor.ignoreTrimWhitespace": false,
     "editor.bracketPairColorization.enabled": true,
     "editor.copyWithSyntaxHighlighting": false,
+    "editor.cursorBlinking": "smooth",
     "editor.cursorSmoothCaretAnimation": "on",
     "editor.detectIndentation": false,
+    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, Menlo, Monaco, 'Courier New'",
     "editor.fontLigatures": true,
     "editor.guides.bracketPairs": "active",
     "editor.largeFileOptimizations": false,
+    "editor.maxTokenizationLineLength": 200000,
+    "editor.minimap.autohide": true,
+    "editor.minimap.showSlider": "always",
+    "editor.mouseWheelScrollSensitivity": 2,
     "editor.mouseWheelZoom": true,
     "editor.renderControlCharacters": true,
     "editor.renderWhitespace": "all",
+    "editor.smoothScrolling": true,
+    "editor.stickyScroll.enabled": true,
     "editor.suggestSelection": "first",
     "editor.wordWrapColumn": 100,
     "explorer.autoReveal": false,
@@ -478,18 +498,42 @@
     "git.confirmSync": false,
     "git.detectSubmodulesLimit": 100,
     "git.fetchOnPull": true,
+    "git.openRepositoryInParentFolders": "never",
     "git.showPushSuccessNotification": true,
     "git.suggestSmartCommit": false,
     "git.supportCancellation": true,
     "git.untrackedChanges": "separate",
+    "githubPullRequests.createOnPublishBranch": "never",
     "githubPullRequests.fileListLayout": "tree",
+    "githubPullRequests.pullBranch": "never",
+    "grammarly.files.exclude": [
+        "requirements.txt",
+        "constraints.txt"
+    ],
+    "grammarly.patterns": [
+        "**/readme.md",
+        "**/README.md",
+        "**/*.txt",
+        "**/*.md"
+    ],
+    "isort.check": true,
+    "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
     "jupyter.allowUnauthorizedRemoteConnection": true,
     "jupyter.alwaysTrustNotebooks": true,
     "jupyter.askForKernelRestart": false,
     "jupyter.maxOutputSize": 1500,
+    "jupyter.pylanceHandlesNotebooks": true,
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
+    ],
     "latex-workshop.intellisense.package.enabled": true,
     "latex-workshop.message.update.show": false,
     "latex-workshop.view.pdf.viewer": "tab",
+    "makefile.buildBeforeLaunch": false,
+    "makefile.configureAfterCommand": false,
+    "makefile.configureOnEdit": false,
+    "makefile.configureOnOpen": false,
     "markdown.preview.breaks": true,
     "markdown.preview.typographer": true,
     "materialTheme.accent": "Blue",
@@ -499,7 +543,9 @@
     },
     "notebook.cellToolbarVisibility": "hover",
     "notebook.diff.ignoreOutputs": true,
+    "notebook.kernelPicker.type": "mru",
     "notebook.lineNumbers": "on",
+    "notebook.output.scrolling": true,
     "notebook.output.textLineLimit": 120,
     "peacock.favoriteColors": [
         {
@@ -543,6 +589,8 @@
             "value": "#8b6cf1"
         }
     ],
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.autoImportUserSymbols": true,
     "python.analysis.completeFunctionParens": true,
     "python.analysis.diagnosticMode": "workspace",
     "python.analysis.indexing": true,
@@ -550,6 +598,7 @@
     "python.analysis.symbolsHierarchyDepthLimit": 15,
     "python.analysis.typeCheckingMode": "basic",
     "python.autoComplete.addBrackets": true,
+    "python.condaPath": "/home/gbiamby/mambaforge/condabin/mamba",
     "python.dataScience.allowUnauthorizedRemoteConnection": true,
     "python.dataScience.askForKernelRestart": false,
     "python.dataScience.maxOutputSize": 1200,
@@ -564,6 +613,11 @@
     "python.linting.flake8Args": [
         "--verbose"
     ],
+    "python.linting.ignorePatterns": [
+        "**/site-packages/**/*.py",
+        ".vscode/*.py",
+        "**/mmsegmentation/configs/**"
+    ],
     "python.linting.pylintArgs": [
         "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
     ],
@@ -573,37 +627,48 @@
     "python.testing.autoTestDiscoverOnSaveEnabled": false,
     "pythonTestExplorer.testFramework": "unittest",
     "redhat.telemetry.enabled": false,
+    "remote.SSH.remotePlatform": {
+        "angler": "linux"
+    },
     "remote.SSH.showLoginTerminal": true,
     "rewrap.wrappingColumn": 88,
     "security.workspace.trust.untrustedFiles": "open",
+    "settingsSync.ignoredSettings": [
+        "editor.fontFamily"
+    ],
+    "isort.showNotifications": "onWarning",
     "sync.forceUpload": true,
     "sync.gist": "84d1a6b5297e9f9834c1c83473a87e07",
+    "telemetry.telemetryLevel": "error",
     // "terminal.integrated.automationShell.linux": "my_bash",
     "terminal.integrated.automationProfile.linux": {
         "args": [
             "--login"
         ],
-        "path": "bash",
-        "icon": "console"
+        "icon": "console",
+        "path": "bash"
     },
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.defaultProfile.linux": "my_bash",
     "terminal.integrated.enableBell": true,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
     "terminal.integrated.experimentalRefreshOnResume": true,
     "terminal.integrated.inheritEnv": true,
+    "terminal.integrated.mouseWheelScrollSensitivity": 2,
     "terminal.integrated.persistentSessionScrollback": 1000000,
     "terminal.integrated.profiles.linux": {
+        "bash": null,
+        "Javascript Debug Terminal": null,
         "my_bash": {
             "args": [
                 "--login"
             ],
             "path": "bash"
         },
-        "bash": null,
-        "Javascript Debug Terminal": null,
-        "R Terminal": null,
+        "R Terminal": null
     },
     "terminal.integrated.scrollback": 1000000,
+    "terminal.integrated.smoothScrolling": true,
     "todo-tree.general.enableFileWatcher": true,
     // "terminal.integrated.shell.linux": "/bin/bash",
     "todo-tree.general.tags": [
@@ -618,10 +683,13 @@
     ],
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
     "todo-tree.tree.showScanModeButton": false,
+    "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
     "vsicons.dontShowNewVersionMessage": true,
     "vsicons.presets.jsonOfficial": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "window.commandCenter": true,
     "window.restoreWindows": "all",
+    "window.titleBarStyle": "custom",
     "workbench.colorCustomizations": {
         "activityBar.activeBorder": "#2979FF",
         "activityBar.background": "#163414",
@@ -658,86 +726,10 @@
         "*.ipynb": "jupyter-notebook"
     },
     "workbench.iconTheme": "vscode-icons",
+    "workbench.list.smoothScrolling": true,
     "workbench.settings.openDefaultKeybindings": true,
     "workbench.statusBar.feedback.visible": false,
     "workbench.tree.indent": 15,
-    "terminal.integrated.enableMultiLinePasteWarning": false,
-    "grammarly.patterns": [
-        "**/readme.md",
-        "**/README.md",
-        "**/*.txt",
-        "**/*.md"
-    ],
-    "jupyter.pylanceHandlesNotebooks": true,
-    "[latex]": {
-        "editor.defaultFormatter": "nickfode.latex-formatter"
-    },
-    "python.linting.ignorePatterns": [
-        "**/site-packages/**/*.py",
-        ".vscode/*.py",
-        "**/mmsegmentation/configs/**"
-    ],
-    "window.commandCenter": true,
-    "window.titleBarStyle": "custom",
-    "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-    "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-    "editor.maxTokenizationLineLength": 200000,
-    "makefile.buildBeforeLaunch": false,
-    "makefile.configureAfterCommand": false,
-    "makefile.configureOnEdit": false,
-    "makefile.configureOnOpen": false,
-    "terminal.integrated.smoothScrolling": true,
-    "python.condaPath": "/home/gbiamby/mambaforge/condabin/mamba",
-    "githubPullRequests.createOnPublishBranch": "never",
-    "githubPullRequests.pullBranch": "never",
-    "editor.minimap.autohide": true,
-    "telemetry.telemetryLevel": "error",
-    "notebook.kernelPicker.type": "mru",
-    "editor.mouseWheelScrollSensitivity": 2,
-    "editor.smoothScrolling": true,
-    "editor.stickyScroll.enabled": true,
-    "terminal.integrated.mouseWheelScrollSensitivity": 2,
-    "workbench.list.smoothScrolling": true,
-    "jupyter.widgetScriptSources": [
-        "jsdelivr.com",
-        "unpkg.com"
-    ],
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
-    },
-    "[scss]": {
-        "editor.defaultFormatter": "vscode.css-language-features"
-    },
-    "python.analysis.autoImportCompletions": true,
-    "python.analysis.autoImportUserSymbols": true,
-    "remote.SSH.remotePlatform": {
-        "angler": "linux"
-    },
-    "grammarly.files.exclude": [
-        "requirements.txt",
-        "constraints.txt"
-    ],
-    "notebook.output.scrolling": true,
-    "git.openRepositoryInParentFolders": "never",
-    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, Menlo, Monaco, 'Courier New'",
-    "diffEditor.diffAlgorithm": "advanced",
-    "editor.minimap.showSlider": "always",
-    "editor.cursorBlinking": "smooth",
-    "settingsSync.ignoredSettings": [
-        "editor.fontFamily"
-    ],
-    "isort.showNotifications": "onWarning",
-    "black-formatter.showNotifications": "onWarning",
-    "isort.check": true,
-    "isort.interpreter": [
-        "/home/gbiamby/mambaforge/envs/pycomic/bin/python"
-    ],
-    "isort.importStrategy": "fromEnvironment",
-    "diffEditor.ignoreTrimWhitespace": false,
-    "[dockercompose]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    "window.title": "${remoteName}${separator}${activeEditorShort}${separator}${rootName}${separator}${profileName}",
+    "window.zoomLevel": 1
 }

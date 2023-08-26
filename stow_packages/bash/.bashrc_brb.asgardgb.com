@@ -18,6 +18,7 @@ export PATH="/home/gbiamby/.ebcli-virtual-env/executables:$PATH"
 export CUDA_HOME=/usr/local/cuda
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export PATH=/usr/local/ripgrep_all${PATH:+:${PATH}}
 ## Arch list for compiling some pytorch projects, DeepFill, and the other hackathon one:
 # export TORCH_CUDA_ARCH_LIST="Turing,Ampere"
 export TORCH_CUDA_ARCH_LIST=7.5
@@ -38,3 +39,4 @@ export EGL_PLATFORM=wayland
 # entries and added this, as i'm currently using AMD dGPU to drive main display and only using
 # NVIDIA dGPU for guest OS via qemu/kvm GPU pass-through:
 export LIBVA_DRIVER_NAME=radeonsi
+
