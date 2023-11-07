@@ -39,6 +39,7 @@ install texstudio
 install tmux
 install tree
 install unzip
+install wakeonlan
 install wget
 install xclip
 

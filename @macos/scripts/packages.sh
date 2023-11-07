@@ -48,6 +48,7 @@ packages=(
     tree
     usbutils
     util-linux
+    wakeonlan
     wget
     yubico-piv-tool
     yubikey-agent
