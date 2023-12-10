@@ -42,6 +42,9 @@ install unzip
 install wakeonlan
 install wget
 install xclip
+install zsh
+install zsh-autosuggestions
+install zsh-syntax-highlighting
 
 
 # Image processing

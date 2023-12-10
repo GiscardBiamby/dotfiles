@@ -11,6 +11,7 @@ stow --target="${HOME}" direnv
 stow --target="${HOME}" git
 stow --target="${HOME}" tmux
 stow --target="${HOME}" ag
+stow --target="${HOME}" zsh_linux
 popd
 
 # Manage vscode settings and keybindings if vscode is installed:

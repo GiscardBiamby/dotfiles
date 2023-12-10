@@ -1,11 +1,21 @@
 // Empty
 [
     {
-        "key": "ctrl+alt+i",
-        "command": "python.sortImports"
-    },
-    {
         "key": "ctrl+shift+alt+m",
         "command": "markdown-editor.openEditor"
+    },
+    {
+        "key": "shift+alt+o",
+        "command": "-editor.action.organizeImports",
+        "when": "textInputFocus && !editorReadonly && supportedCodeAction =~ /(\\s|^)source\\.organizeImports\\b/"
+    },
+    {
+        "key": "ctrl+alt+i",
+        "command": "-workbench.action.chat.open",
+        "when": "hasChatProvider"
+    },
+    {
+        "key": "ctrl+alt+i",
+        "command": "ruff.executeOrganizeImports"
     }
 ]

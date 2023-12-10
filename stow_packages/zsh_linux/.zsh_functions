@@ -29,26 +29,26 @@ function user_disk_space() {
 }
 
 function get_biggest_folders() {
-    local path="${1:-./}"
+    local _path="${1:-./}"
     local num_results="${2:-20}"
-    du -ah "${path}" | sort -h -r | head -n "${num_results}"
+    du -ah "${_path}" | sort -h -r | head -n "${num_results}"
 }
 
 function get_large_files() {
-    local path="${1:-./}"
+    local _path="${1:-./}"
     local size="${2:-500}"
-    echo "Finding files in '${path}', larger than: ${size}M..."
-    find "${path}" -xdev -type f -size "+${size}M" -exec du -sh {} \;
+    echo "Finding files in '${_path}', larger than: ${size}M..."
+    find "${_path}" -xdev -type f -size "+${size}M" -exec du -sh {} \;
 }
 
 function get_dir_size() {
-    local path="${1:-./}"
-    du -h --max-depth=0 "${path}"
+    local _path="${1:-./}"
+    du -h --max-depth=0 "${_path}"
 }
 
 function get_file_count() {
-    local path="${1:-./}"
-    find "${path}" -type f | wc -l
+    local _path="${1:-./}"
+    find "${_path}" -type f | wc -l
 }
 
 function sync_dir() {
