@@ -74,6 +74,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     colorize
+    conda-zsh-completion
     copybuffer
     direnv
     docker
@@ -98,6 +99,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
+autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 
@@ -131,17 +133,21 @@ export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/${USER}/mambaforge/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
+__conda_setup="$('/home/gbiamby/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/${USER}/${USER}/etc/profile.d/conda.sh" ]; then
-        . "/home/${USER}/${USER}/etc/profile.d/conda.sh"
+    if [ -f "/home/gbiamby/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/home/gbiamby/mambaforge/etc/profile.d/conda.sh"
     else
-        export PATH="/home/${USER}/mambaforge/bin:$PATH"
+        export PATH="/home/gbiamby/mambaforge/bin:$PATH"
     fi
 fi
 unset __conda_setup
+
+if [ -f "/home/gbiamby/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/home/gbiamby/mambaforge/etc/profile.d/mamba.sh"
+fi
 # <<< conda initialize <<<
 
 # This causes a `__mamba_exe:3: no such file or directory: ./mamba` error, but it was in my .bashrc:
