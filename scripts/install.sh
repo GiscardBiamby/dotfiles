@@ -65,6 +65,7 @@ if [[ "${WORKSTATION}" == "workstation" ]]; then
     for f in programs/*.sh; do bash "sudo $f" -H; done
     pip install gitup
 else
+    bash ./programs/oh-my-zsh.sh -H
     # For server, only install command line things:
     bash ./programs/mamba.sh -H
     bash ./programs/direnv.sh -H

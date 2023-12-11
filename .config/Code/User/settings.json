@@ -721,7 +721,6 @@
     "workbench.editor.enablePreview": true,
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.revealIfOpen": true,
-    "workbench.editor.untitled.hint": "hidden",
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
@@ -731,5 +730,6 @@
     "workbench.statusBar.feedback.visible": false,
     "workbench.tree.indent": 15,
     "window.title": "${remoteName}${separator}${activeEditorShort}${separator}${rootName}${separator}${profileName}",
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
+    "workbench.editor.empty.hint": "hidden"
 }

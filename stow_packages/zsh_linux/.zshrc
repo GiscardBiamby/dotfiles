@@ -8,6 +8,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH_THEME="random"
+# ZSH_THEME="apple"
 ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
@@ -70,7 +72,32 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+    colorize
+    copybuffer
+    direnv
+    docker
+    docker-compose
+    git
+    git-prompt
+    gitignore
+    git-extras
+    git-lfs
+    history
+    nvm
+    npm
+    pip
+    python
+    rsync
+    ssh-agent
+    systemd
+    tmux
+    ubuntu
+    vscode
+    # other plugins...
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -82,11 +109,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='code --wait'
+else
+    export EDITOR='nano'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -104,7 +131,7 @@ export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/${USER}/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/${USER}/mambaforge/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -123,9 +150,6 @@ unset __conda_setup
 # fi
 
 eval "$(direnv hook zsh)"
-
-export EDITOR="code --wait"
-
 
 # Shell Options
 if [ -f ~/.zsh_options ]; then
