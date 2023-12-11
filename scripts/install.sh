@@ -10,7 +10,7 @@ fi
 
 # Update Ubuntu and get standard repository programs
 add-apt-repository ppa:git-core/ppa
-sudo apt update && sudo apt update -y
+sudo apt update
 
 # Common
 install p7zip
@@ -87,8 +87,8 @@ nvm use node
 npm install -g diff-so-fancy
 
 # Get all upgrades
-sudo apt upgrade -y
-sudo apt autoremove -y
+# sudo apt upgrade -y
+# sudo apt autoremove -y
 
 # Fun hello
 figlet "Hello!" | lolcat
