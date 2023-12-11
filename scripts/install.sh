@@ -29,6 +29,7 @@ install nmap
 install silversearcher-ag
 install pandoc
 install pigz
+install python-is-python3
 install shellcheck
 install stow
 install texlive-xetex
@@ -43,8 +44,6 @@ install wakeonlan
 install wget
 install xclip
 install zsh
-install zsh-autosuggestions
-install zsh-syntax-highlighting
 
 
 # Image processing
