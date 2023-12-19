@@ -9,6 +9,9 @@ if [[ "${1}" == "workstation" ]]; then
 fi
 
 # Update Ubuntu and get standard repository programs
+sudo apt update -y
+
+# git
 add-apt-repository ppa:git-core/ppa
 sudo apt update
 
