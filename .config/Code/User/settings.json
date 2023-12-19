@@ -466,7 +466,6 @@
         "**/*.pyc": true,
         "**/XDG_CACHE_HOME": true
     },
-    "files.legacyWatcher": "off",
     "files.watcherExclude": {
         "**/__pycache__/**": true,
         "**/.DS_Store": true,
@@ -503,37 +502,16 @@
     "git.suggestSmartCommit": false,
     "git.supportCancellation": true,
     "git.untrackedChanges": "separate",
-    "githubPullRequests.createOnPublishBranch": "never",
-    "githubPullRequests.fileListLayout": "tree",
-    "githubPullRequests.pullBranch": "never",
-    "grammarly.files.exclude": [
-        "requirements.txt",
-        "constraints.txt"
-    ],
-    "grammarly.patterns": [
-        "**/readme.md",
-        "**/README.md",
-        "**/*.txt",
-        "**/*.md"
-    ],
     "isort.check": true,
     "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
     "jupyter.allowUnauthorizedRemoteConnection": true,
-    "jupyter.alwaysTrustNotebooks": true,
     "jupyter.askForKernelRestart": false,
-    "jupyter.maxOutputSize": 1500,
-    "jupyter.pylanceHandlesNotebooks": true,
     "jupyter.widgetScriptSources": [
         "jsdelivr.com",
         "unpkg.com"
     ],
     "latex-workshop.intellisense.package.enabled": true,
-    "latex-workshop.message.update.show": false,
     "latex-workshop.view.pdf.viewer": "tab",
-    "makefile.buildBeforeLaunch": false,
-    "makefile.configureAfterCommand": false,
-    "makefile.configureOnEdit": false,
-    "makefile.configureOnOpen": false,
     "markdown.preview.breaks": true,
     "markdown.preview.typographer": true,
     "materialTheme.accent": "Blue",
@@ -543,7 +521,6 @@
     },
     "notebook.cellToolbarVisibility": "hover",
     "notebook.diff.ignoreOutputs": true,
-    "notebook.kernelPicker.type": "mru",
     "notebook.lineNumbers": "on",
     "notebook.output.scrolling": true,
     "notebook.output.textLineLimit": 120,
@@ -590,42 +567,16 @@
         }
     ],
     "python.analysis.autoImportCompletions": true,
-    "python.analysis.autoImportUserSymbols": true,
     "python.analysis.completeFunctionParens": true,
     "python.analysis.diagnosticMode": "workspace",
     "python.analysis.indexing": true,
-    "python.analysis.memory.keepLibraryAst": true,
-    "python.analysis.symbolsHierarchyDepthLimit": 15,
     "python.analysis.typeCheckingMode": "basic",
-    "python.autoComplete.addBrackets": true,
     "python.condaPath": "/home/gbiamby/mambaforge/condabin/mamba",
-    "python.dataScience.allowUnauthorizedRemoteConnection": true,
-    "python.dataScience.askForKernelRestart": false,
-    "python.dataScience.maxOutputSize": 1200,
-    "python.dataScience.sendSelectionToInteractiveWindow": false,
-    "python.dataScience.textOutputLimit": 0,
     "python.defaultInterpreterPath": "/home/gbiamby/mambaforge/envs/sem_env/bin/python",
     "python.diagnostics.sourceMapsEnabled": true,
     "python.envFile": "${workspaceFolder}/.env",
-    "python.formatting.provider": "black",
-    "python.jediMemoryLimit": -1,
     "python.languageServer": "Pylance",
-    "python.linting.flake8Args": [
-        "--verbose"
-    ],
-    "python.linting.ignorePatterns": [
-        "**/site-packages/**/*.py",
-        ".vscode/*.py",
-        "**/mmsegmentation/configs/**"
-    ],
-    "python.linting.pylintArgs": [
-        "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*"
-    ],
-    "python.linting.pylintEnabled": false,
-    "python.pythonPath": "/home/gbiamby/mambaforge/envs/h4d_env/bin/python",
-    "python.showStartPage": false,
     "python.testing.autoTestDiscoverOnSaveEnabled": false,
-    "pythonTestExplorer.testFramework": "unittest",
     "redhat.telemetry.enabled": false,
     "remote.SSH.remotePlatform": {
         "angler": "linux"
@@ -637,19 +588,16 @@
         "editor.fontFamily"
     ],
     "isort.showNotifications": "onWarning",
-    "sync.forceUpload": true,
-    "sync.gist": "84d1a6b5297e9f9834c1c83473a87e07",
     "telemetry.telemetryLevel": "error",
-    // "terminal.integrated.automationShell.linux": "my_bash",
     "terminal.integrated.automationProfile.linux": {
         "args": [
             "--login"
         ],
         "icon": "console",
-        "path": "bash"
+        "path": "zsh"
     },
     "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.defaultProfile.linux": "my_bash",
+    "terminal.integrated.defaultProfile.linux": "my_zsh",
     "terminal.integrated.enableBell": true,
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "terminal.integrated.experimentalRefreshOnResume": true,
@@ -659,6 +607,12 @@
     "terminal.integrated.profiles.linux": {
         "bash": null,
         "Javascript Debug Terminal": null,
+        "my_zsh": {
+            "args": [
+                "--login"
+            ],
+            "path": "zsh"
+        },
         "my_bash": {
             "args": [
                 "--login"
@@ -669,8 +623,6 @@
     },
     "terminal.integrated.scrollback": 1000000,
     "terminal.integrated.smoothScrolling": true,
-    "todo-tree.general.enableFileWatcher": true,
-    // "terminal.integrated.shell.linux": "/bin/bash",
     "todo-tree.general.tags": [
         "BUG",
         "HACK",
@@ -682,11 +634,9 @@
         "[x]"
     ],
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-    "todo-tree.tree.showScanModeButton": false,
     "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
     "vsicons.dontShowNewVersionMessage": true,
     "vsicons.presets.jsonOfficial": true,
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "window.commandCenter": true,
     "window.restoreWindows": "all",
     "window.titleBarStyle": "custom",
@@ -727,9 +677,16 @@
     "workbench.iconTheme": "vscode-icons",
     "workbench.list.smoothScrolling": true,
     "workbench.settings.openDefaultKeybindings": true,
-    "workbench.statusBar.feedback.visible": false,
     "workbench.tree.indent": 15,
     "window.title": "${remoteName}${separator}${activeEditorShort}${separator}${rootName}${separator}${profileName}",
-    "window.zoomLevel": 1,
-    "workbench.editor.empty.hint": "hidden"
+    "workbench.editor.empty.hint": "hidden",
+    "terminal.integrated.shellIntegration.suggestEnabled": true,
+    "editor.fastScrollSensitivity": 9,
+    "workbench.list.fastScrollSensitivity": 9,
+    "terminal.integrated.fastScrollSensitivity": 9,
+    "window.zoomLevel": 3,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    }
 }
