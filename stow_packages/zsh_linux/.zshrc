@@ -133,7 +133,7 @@ export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/gbiamby/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/gbiamby/mambaforge/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -156,6 +156,9 @@ fi
 # fi
 
 eval "$(direnv hook zsh)"
+# TODO: Add a server specific .zshrc.HOSTNAME file that has server specific settings:
+eval $(ssh-agent -s)
+ssh-add
 
 # Shell Options
 if [ -f ~/.zsh_options ]; then
