@@ -1,3 +1,8 @@
+# .zshrc is for interactive shells. You set options for the interactive shell there with the setopt
+# and unsetopt commands. You can also load shell modules, set your history options, change your
+# prompt, set up zle and completion, et cetera. You also set any variables that are only used in the
+# interactive shell (e.g. $LS_COLORS).
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
