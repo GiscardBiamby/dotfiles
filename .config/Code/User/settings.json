@@ -21,7 +21,12 @@
         "editor.defaultFormatter": "nickfode.latex-formatter"
     },
     "[markdown]": {
-        "editor.defaultFormatter": "quilicicf.markdown-spec-formatter"
+        "editor.defaultFormatter": "mervin.markdown-formatter",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": true,
+            "strings": true
+        }
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.python",
