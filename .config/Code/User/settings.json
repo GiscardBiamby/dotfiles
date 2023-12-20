@@ -693,5 +693,6 @@
     "editor.defaultFormatter": "ms-python.black-formatter",
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
-    }
+    },
+    "git.terminalGitEditor": true
 }
