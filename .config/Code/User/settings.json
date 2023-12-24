@@ -605,7 +605,6 @@
     "terminal.integrated.defaultProfile.linux": "my_zsh",
     "terminal.integrated.enableBell": true,
     "terminal.integrated.enableMultiLinePasteWarning": false,
-    "terminal.integrated.experimentalRefreshOnResume": true,
     "terminal.integrated.inheritEnv": true,
     "terminal.integrated.mouseWheelScrollSensitivity": 2,
     "terminal.integrated.persistentSessionScrollback": 1000000,
@@ -689,7 +688,6 @@
     "editor.fastScrollSensitivity": 9,
     "workbench.list.fastScrollSensitivity": 9,
     "terminal.integrated.fastScrollSensitivity": 9,
-    "window.zoomLevel": 3,
     "editor.defaultFormatter": "ms-python.black-formatter",
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
