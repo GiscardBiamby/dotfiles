@@ -3,9 +3,9 @@
 . ../util.sh
 
 echo "Installing workstation tools"
-sudo add-apt-repository ppa:solaar-unifying/ppa
-sudo apt-add-repository universe
-sudo add-apt-repository ppa:jonmagon/kdiskmark
+sudo add-apt-repository ppa:solaar-unifying/ppa -y
+sudo apt-add-repository universe -y
+sudo add-apt-repository ppa:jonmagon/kdiskmark -y
 sudo apt update
 
 # Workstation only

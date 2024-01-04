@@ -6,7 +6,7 @@ echo "Installing Oh-my-zsh"
 
 if [[ ! -f ~/.oh-my-zsh/oh-my-zsh.sh ]]; then
     info "Installing oh my zsh..."
-    ZSH=~/.oh-my-zsh ZSH_DISABLE_COMPFIX=true sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    ZSH=~/.oh-my-zsh ZSH_DISABLE_COMPFIX=true sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -s --batch
 
     chmod 744 ~/.oh-my-zsh/oh-my-zsh.sh
 else

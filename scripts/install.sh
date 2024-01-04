@@ -64,7 +64,7 @@ git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt -
 if [[ "${WORKSTATION}" == "workstation" ]]; then
     # For workstation (meaning I want all command line + GUI apps), run all scripts in
     # ./scripts/programs/:
-    for f in programs/*.sh; do bash "sudo $f" -H; done
+    for f in programs/*.sh; do bash "./$f" -H; done
     pip install gitup
 else
     bash ./programs/oh-my-zsh.sh -H
@@ -77,7 +77,7 @@ else
     pip install gitup
 fi
 
-# Use GNU stow to deploy all the doffiles:
+# Use GNU stow to deploy all the dotfiles:
 bash ./dotfiles.sh -H
 
 # Install diff-so-fancy

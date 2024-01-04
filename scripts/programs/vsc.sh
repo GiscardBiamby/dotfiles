@@ -19,17 +19,15 @@ install AffenWiesel.matlab-formatter
 install ban.spellright
 install batisteo.vscode-django
 install betwo.vscode-linux-binary-preview
-install bungcip.better-toml
+install tamasfe.even-better-toml
 install christian-kohler.path-intellisense
 install clarkyu.vscode-sql-beautify
 install codezombiech.gitignore
-install CoenraadS.bracket-pair-colorizer-2
 install DavidAnson.vscode-markdownlint
 install dcasella.monokai-plusplus
 install donjayamanne.githistory
 install dunstontc.vscode-docker-syntax
 install EditorConfig.EditorConfig
-install Equinusocio.vsc-community-material-theme
 install Equinusocio.vsc-material-theme
 install equinusocio.vsc-material-theme-icons
 install esbenp.prettier-vscode
@@ -65,7 +63,6 @@ install ms-vscode-remote.vscode-remote-extensionpack
 install ms-vscode.cpptools
 install ms-vscode.Theme-TomorrowKit
 install ms-vsliveshare.vsliveshare
-install ms-vsliveshare.vsliveshare-audio
 install ms-vsliveshare.vsliveshare-pack
 install natqe.reload
 install njpwerner.autodocstring
@@ -79,7 +76,6 @@ install richie5um2.vscode-sort-json
 install ryu1kn.partial-diff
 install sabertazimi.latex-snippets
 install sallar.vscode-duotone-dark
-install Shan.code-settings-sync
 install shardulm94.trailing-spaces
 install spikespaz.vscode-smoothtype
 install stkb.rewrap
