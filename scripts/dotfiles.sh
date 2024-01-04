@@ -9,6 +9,7 @@ stow --target="${HOME}" bash
 stow --target="${HOME}" conda
 stow --target="${HOME}" direnv
 stow --target="${HOME}" git
+stow --target="${HOME}" kitty
 stow --target="${HOME}" tmux
 stow --target="${HOME}" ag
 stow --target="${HOME}" zsh_linux

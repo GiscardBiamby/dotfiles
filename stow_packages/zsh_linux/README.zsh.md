@@ -7,7 +7,6 @@ Here is a non-exhaustive list, in execution-order, of what each file tends to co
 .zlogout is sometimes used to clear and reset the terminal. It is called when exiting, not when opening.
 You should go through the configuration files of random Github users to get a better idea of what each file should contain.
 
-Just for my own notes / confirmation and to help anybody else, the ultimate order is .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login] → [.zlogout sometimes]. – 
+Just for my own notes / confirmation and to help anybody else, the ultimate order is .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if login] → [.zlogout sometimes]. –
 Gabriel L.
- May 18, 2016 at 20:48 
-
+ May 18, 2016 at 20:48
