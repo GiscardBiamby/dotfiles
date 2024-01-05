@@ -23,6 +23,11 @@ sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/Desktop/ki
 gio set ~/Desktop/kitty*.desktop metadata::trusted true
 chmod a+x ~/Desktop/kitty*.desktop
 
+# Download themes
+mkdir -p ~/.config/kitty/kitty-themes/
+git clone --depth 1 https://github.com/dexpota/kitty-themes.git ~/.config/kitty/kitty-themes
+
+
 # Uninstall
 # rm -rf ~/.config/kitty
 # rm -rf ~/.local/kitty.app
