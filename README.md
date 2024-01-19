@@ -15,6 +15,8 @@ Add or delete files in `scripts/install.sh` and `scripts/programs/` to modify yo
 After installing your fresh OS, do:
 
 ```sh
+# Change default shell to zsh:
+sudo chsh -s /bin/zsh
 sudo apt install git -y
 ```
 
@@ -46,7 +48,31 @@ Uncomment the relevant lines in `.bashrc`, then restart your terminal to see cha
 
 ```sh
 cd ~
-source .bashrc
+source .zshrc
+```
+
+## Manual Steps
+
+### Fix error in bash-git-prompt
+
+TODO: Automate this (with sed?)
+
+There is a bug in newer versions of bash-git-prompt, in their `set_gitprompt_dir()` function. Edit `~/.bash-git-prompt/gitpromp.sh`, replacing the function with this one:
+
+```bash
+function git_prompt_dir() {
+  # assume the gitstatus.sh is in the same directory as this script
+  # code thanks to http://stackoverflow.com/questions/59895
+  if [[ -z "${__GIT_PROMPT_DIR:+x}" ]]; then
+    local SOURCE="${BASH_SOURCE[0]}"
+    while [[ -h "${SOURCE}" ]]; do
+      local DIR="$( command cd -P "$( dirname "${SOURCE}" )" && pwd )"
+      SOURCE="$(readlink "${SOURCE}")"
+      [[ ${SOURCE} != /* ]] && SOURCE="${DIR}/${SOURCE}"
+    done
+    __GIT_PROMPT_DIR="$( command cd -P "$( dirname "${SOURCE}" )" && pwd )"
+  fi
+}
 ```
 
 ## On Systems with AMD CPU

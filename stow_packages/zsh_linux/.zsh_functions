@@ -58,7 +58,7 @@ function sync_dir() {
     local target="${2}"
     # Ensure paths have trailing slashes so we sync folder contents rather than folder itself:
     [[ "${src}" != */ ]] && src="${src}/"
-    [[ "${target}" != */ ]] && src="${target}/"
+    [[ "${target}" != */ ]] && target="${target}/"
     echo "Synching dir FROM: '${src}', TO: '${target}'..."
     get_dir_size "${src}"
     mkdir -p "${target}"
