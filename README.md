@@ -16,7 +16,7 @@ After installing your fresh OS, do:
 
 ```sh
 # Change default shell to zsh:
-sudo chsh -s /bin/zsh
+sudo chsh -s /bin/zsh $USER
 sudo apt install git -y
 ```
 

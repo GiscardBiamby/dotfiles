@@ -16,6 +16,6 @@
     },
     {
         "key": "ctrl+alt+i",
-        "command": "ruff.executeOrganizeImports"
+        "command": "editor.action.organizeImports"
     }
 ]
