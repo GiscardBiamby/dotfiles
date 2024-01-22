@@ -57,7 +57,7 @@ source .zshrc
 
 TODO: Automate this (with sed?)
 
-There is a bug in newer versions of bash-git-prompt, in their `set_gitprompt_dir()` function. Edit `~/.bash-git-prompt/gitpromp.sh`, replacing the function with this one:
+There is a bug in newer versions of bash-git-prompt, in their `set_gitprompt_dir()` function. Edit `~/.bash-git-prompt/gitprompt.sh`, replacing the function with this one:
 
 ```bash
 function git_prompt_dir() {
