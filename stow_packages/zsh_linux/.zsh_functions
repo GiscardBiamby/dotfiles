@@ -137,7 +137,7 @@ function map_shared() {
 function map_cthu() {
     TARGET_PATH=~/bair_cthu5
     mkdir -p "${TARGET_PATH}"
-    sshfs -o idmap=user gbiamby@cthu5:/home/gbiamby/ "${TARGET_PATH}"
+    sshfs -o idmap=user gbiamby@cthulhu5:/home/gbiamby/ "${TARGET_PATH}"
 }
 
 function json_pretty() {

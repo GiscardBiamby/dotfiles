@@ -441,7 +441,7 @@
     "editor.cursorBlinking": "smooth",
     "editor.cursorSmoothCaretAnimation": "on",
     "editor.detectIndentation": false,
-    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, Menlo, Monaco, 'Courier New'",
+    "editor.fontFamily": "'Source Code Pro','Droid Sans Mono', 'monospace', monospace, Menlo, Monaco, 'Courier New'",
     "editor.fontLigatures": true,
     "editor.guides.bracketPairs": "active",
     "editor.largeFileOptimizations": false,
@@ -568,6 +568,10 @@
         {
             "name": "light-purple",
             "value": "#8b6cf1"
+        },
+        {
+            "name": "Skeletor Purple",
+            "value": "#6c1cfe"
         }
     ],
     "python.analysis.autoImportCompletions": true,
@@ -687,10 +691,16 @@
     "editor.fastScrollSensitivity": 9,
     "workbench.list.fastScrollSensitivity": 9,
     "terminal.integrated.fastScrollSensitivity": 9,
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
     "git.terminalGitEditor": true,
-    "window.zoomLevel": 1
+    "peacock.affectEditorGroupBorder": true,
+    "peacock.affectDebuggingStatusBar": true,
+    "peacock.affectPanelBorder": true,
+    "peacock.affectSideBarBorder": true,
+    "peacock.affectTabActiveBorder": true,
+    "window.zoomLevel": 2,
+    "workbench.editor.wrapTabs": true
 }

@@ -145,7 +145,7 @@ else
     if [ -f "/home/${USER}/mambaforge/etc/profile.d/conda.sh" ]; then
         . "/home/${USER}/mambaforge/etc/profile.d/conda.sh"
     else
-        export PATH="/home/gbiamby/mambaforge/bin:$PATH"
+        export PATH="/home/${USER}/mambaforge/bin:$PATH"
     fi
 fi
 unset __conda_setup

@@ -71,6 +71,7 @@ else
     # For server, only install command line things:
     bash ./programs/mamba.sh -H
     bash ./programs/direnv.sh -H
+    bash ./programs/vim.sh -H
     # bash ./programs/docker.sh -H
     # bash ./programs/nvidia-docker-toolkit.sh -H
     bash ./programs/nvm-npm-node-packages.sh -H
