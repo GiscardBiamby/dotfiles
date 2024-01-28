@@ -3,3 +3,4 @@
 /scripts/programs/downloads/
 .DS_Store
 **/direnv/allow
+**/*.swp
