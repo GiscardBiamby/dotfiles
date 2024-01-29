@@ -111,6 +111,7 @@ endif
 
 " Color Scheme
 colorscheme gruvbox
+set background=dark
 
 " Plugins
 
