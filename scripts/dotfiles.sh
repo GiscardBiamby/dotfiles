@@ -8,8 +8,21 @@ echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 source "${SCRIPT_DIR}/util.sh"
 
 pushd "${SCRIPT_DIR}"
-python backup_dotfiles.py
+python3 backup_dotfiles.py
 popd
+
+# Detect machine
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    MSYS_NT*)   machine=Git;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+echo "${machine}"
+
 
 pushd "${PROJ_ROOT}/stow_packages"
 stow --target="${HOME}" ag
@@ -17,10 +30,15 @@ stow --target="${HOME}" bash
 stow --target="${HOME}" conda
 stow --target="${HOME}" direnv
 stow --target="${HOME}" git
-stow --target="${HOME}" kitty
 stow --target="${HOME}" tmux
 stow --target="${HOME}" vim
-stow --target="${HOME}" zsh_linux
+if [[ "${machine}" == "Linux" ]]; then
+    stow --target="${HOME}" kitty
+    stow --target="${HOME}" zsh_linux
+fi
+if [[ "${machine}" == "Mac" ]]; then
+    stow --target="${HOME}" zsh
+fi
 popd
 
 # Manage vscode settings and keybindings if vscode is installed:
@@ -48,6 +66,6 @@ if [[ -d "${HOME}/.jupyter" ]]; then
 fi
 popd
 
-pushd "${PROJ_ROOT}/stow_packages/vim"
-stow --target="${HOME}/.vim" .vim
-popd
+# pushd "${PROJ_ROOT}/stow_packages/vim"
+# stow --target="${HOME}/.vim" .vim
+# popd
