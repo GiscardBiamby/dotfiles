@@ -66,8 +66,9 @@ fi
 #     git submodule add --depth 1 https://github.com/ "${DOT_VIM_CLONE_DIR}/pack/syntax/start/PLUGIN_NAME"
 # fi
 
-# # TO update the submodules:
+# # TO update the submodules(only one is needed, but what's the difference/which is better?):
 # git submodule update --remote --merge
+# git submodule update --recursive --remote
 
 popd
 

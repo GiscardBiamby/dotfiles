@@ -78,6 +78,13 @@ else
     pip install gitup
 fi
 
+# Pull submodules (e.g., used in vim/.vim/ for plugins):
+git submodule update --init --recursive
+# git submodule update --remote --merge
+# # TO update the submodules(only one is needed, but what's the difference/which is better?):
+# git submodule update --recursive --remote
+
+
 # Use GNU stow to deploy all the dotfiles:
 bash ./dotfiles.sh -H
 
