@@ -16,3 +16,9 @@
 [submodule "stow_packages/vim/.vim/pack/colors/start/gruvbox"]
 	path = stow_packages/vim/.vim/pack/colors/start/gruvbox
 	url = https://github.com/gruvbox-community/gruvbox
+[submodule "stow_packages/vim/.vim/pack/syntax/start/vim-indent-guides"]
+	path = stow_packages/vim/.vim/pack/syntax/start/vim-indent-guides
+	url = https://github.com/preservim/vim-indent-guides
+[submodule "stow_packages/vim/.vim/pack/plugins/start/vim-cool"]
+	path = stow_packages/vim/.vim/pack/plugins/start/vim-cool
+	url = https://github.com/romainl/vim-cool

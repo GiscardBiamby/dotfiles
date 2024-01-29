@@ -4,7 +4,7 @@
 # the script was launched from:
 SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "SCRIPT_DIR: ${SCRIPT_DIR}"
-PROJ_ROOT="${SCRIPT_DIR}/../.."
+PROJ_ROOT="${SCRIPT_DIR}/../../.."
 VIM_DIR="${PROJ_ROOT}/stow_packages/vim"
 PACK_DIR="${VIM_DIR}/.vim/pack"
 source "${SCRIPT_DIR}/../util.sh"
@@ -32,6 +32,9 @@ fi
 if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/plugins/start/vim-smooth-scroll" ]]; then
     git submodule add --depth 1 https://github.com/terryma/vim-smooth-scroll "${DOT_VIM_CLONE_DIR}/pack/plugins/start/vim-smooth-scroll"
 fi
+if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/plugins/start/vim-cool" ]]; then
+    git submodule add --depth 1 https://github.com/romainl/vim-cool "${DOT_VIM_CLONE_DIR}/pack/plugins/start/vim-cool"
+fi
 # if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/plugins/start/PLUGIN_NAME" ]]; then
 #     git submodule add --depth 1 https://github.com/ "${DOT_VIM_CLONE_DIR}/pack/plugins/start/PLUGIN_NAME"
 # fi
@@ -42,6 +45,15 @@ if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/colors/start/gruvbox" ]]; then
 fi
 # if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/colors/start/PLUGIN_NAME" ]]; then
 #     git submodule add --depth 1 https://github.com/ "${DOT_VIM_CLONE_DIR}/pack/colors/start/PLUGIN_NAME"
+# fi
+
+
+## Syntax
+if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/syntax/start/vim-indent-guides" ]]; then
+    git submodule add --depth 1 https://github.com/preservim/vim-indent-guides "${DOT_VIM_CLONE_DIR}/pack/syntax/start/vim-indent-guides"
+fi
+# if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/syntax/start/PLUGIN_NAME" ]]; then
+#     git submodule add --depth 1 https://github.com/ "${DOT_VIM_CLONE_DIR}/pack/syntax/start/PLUGIN_NAME"
 # fi
 
 # # TO update the submodules:
