@@ -34,14 +34,20 @@ set expandtab
 " Do not save backup files.
 set nobackup
 
+" Automatically save before :next, :make etc. "
+set autowrite
+
+" Set default encoding to UTF-8
+set encoding=UTF-8
+
 " Do not let cursor scroll below or above N number of lines when scrolling.
 set scrolloff=10
 
-" Do not wrap lines. Allow long lines to extend as far as the line goes.
-set nowrap
+" Make Vim to handle long lines nicely.
+set wrap
+set textwidth=80
+set formatoptions=qrn1
 
-" While searching though a file incrementally highlight matching characters as you type.
-set incsearch
 
 " Ignore capital letters during search.
 set ignorecase
@@ -55,6 +61,9 @@ set showcmd
 
 " Show the mode you are on the last line.
 set showmode
+
+" While searching though a file incrementally highlight matching characters as you type.
+set incsearch
 
 " Show matching words during a search.
 set showmatch
@@ -74,3 +83,31 @@ set wildmode=list:longest
 " There are certain files that we would never want to edit with Vim.
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+" Allow backspace to work over auto-indents, EOLs, and 'over the start position of where you
+" started insert mode'. Without start, you can enter Insert mode, type a bit, and then when
+" backspacing, only delete back as far as the start of Insert mode.
+set backspace=indent,eol,start  " Makes backspace key more powerful.
+
+
+" Apply the indentation of the current line to the next line.
+set autoindent
+set smartindent
+set complete-=i
+set showmatch
+set smarttab
+
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+    set mouse=a
+endif
+
+" If Linux then set ttymouse
+let s:uname = system("echo -n \"$(uname)\"")
+if !v:shell_error && s:uname == "Linux" && !has('nvim')
+    set ttymouse=xterm
+endif
+
+" Color Scheme
+colorscheme gruvbox

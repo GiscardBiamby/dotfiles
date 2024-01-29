@@ -47,3 +47,7 @@ if [[ -d "${HOME}/.jupyter" ]]; then
     stow --target="${HOME}/.jupyter/nbconfig" nbconfig
 fi
 popd
+
+pushd "${PROJ_ROOT}/stow_packages/vim"
+stow --target="${HOME}/.vim" .vim
+popd

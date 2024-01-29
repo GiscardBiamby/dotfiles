@@ -1,0 +1,18 @@
+[submodule "stow_packages/vim/.vim/pack/plugins/start/fzf.vim"]
+	path = stow_packages/vim/.vim/pack/plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule "stow_packages/vim/.vim/pack/plugins/start/vim-airline"]
+	path = stow_packages/vim/.vim/pack/plugins/start/vim-airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule "stow_packages/vim/.vim/pack/plugins/start/nerdtree"]
+	path = stow_packages/vim/.vim/pack/plugins/start/nerdtree
+	url = https://github.com/scrooloose/nerdtree
+[submodule "stow_packages/vim/.vim/pack/plugins/start/vim-surround"]
+	path = stow_packages/vim/.vim/pack/plugins/start/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "stow_packages/vim/.vim/pack/plugins/start/vim-smooth-scroll"]
+	path = stow_packages/vim/.vim/pack/plugins/start/vim-smooth-scroll
+	url = https://github.com/terryma/vim-smooth-scroll
+[submodule "stow_packages/vim/.vim/pack/colors/start/gruvbox"]
+	path = stow_packages/vim/.vim/pack/colors/start/gruvbox
+	url = https://github.com/gruvbox-community/gruvbox
