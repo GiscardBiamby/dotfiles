@@ -75,6 +75,14 @@ function git_prompt_dir() {
 }
 ```
 
+<!-- ### Make Anki use Wayland
+
+Edit `/usr/local/share/applications/anki.desktop`, add `ANKI_WAYLAND=1` before the exec:
+
+```
+Exec=ANKI_WAYLAND=1 anki %f
+``` -->
+
 ## On Systems with AMD CPU
 
 __UPDATE__: This step is no longer necessary? The `.bashsrc` entries
