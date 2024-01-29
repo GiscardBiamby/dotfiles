@@ -35,6 +35,9 @@ fi
 if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/plugins/start/vim-cool" ]]; then
     git submodule add --depth 1 https://github.com/romainl/vim-cool "${DOT_VIM_CLONE_DIR}/pack/plugins/start/vim-cool"
 fi
+if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/plugins/start/vim-eunuch" ]]; then
+    git submodule add --depth 1 https://github.com/tpope/vim-eunuch "${DOT_VIM_CLONE_DIR}/pack/plugins/start/vim-eunuch"
+fi
 # if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/plugins/start/PLUGIN_NAME" ]]; then
 #     git submodule add --depth 1 https://github.com/ "${DOT_VIM_CLONE_DIR}/pack/plugins/start/PLUGIN_NAME"
 # fi
@@ -43,6 +46,13 @@ fi
 if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/colors/start/gruvbox" ]]; then
     git submodule add --depth 1 https://github.com/gruvbox-community/gruvbox "${DOT_VIM_CLONE_DIR}/pack/colors/start/gruvbox"
 fi
+if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/colors/start/vim-devicons" ]]; then
+    git submodule add --depth 1 https://github.com/ryanoasis/vim-devicons "${DOT_VIM_CLONE_DIR}/pack/colors/start/vim-devicons"
+fi
+if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/colors/start/rainbow_parentheses.vim" ]]; then
+    git submodule add --depth 1 https://github.com/junegunn/rainbow_parentheses.vim "${DOT_VIM_CLONE_DIR}/pack/colors/start/rainbow_parentheses.vim"
+fi
+
 # if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/colors/start/PLUGIN_NAME" ]]; then
 #     git submodule add --depth 1 https://github.com/ "${DOT_VIM_CLONE_DIR}/pack/colors/start/PLUGIN_NAME"
 # fi

@@ -22,3 +22,12 @@
 [submodule "stow_packages/vim/.vim/pack/plugins/start/vim-cool"]
 	path = stow_packages/vim/.vim/pack/plugins/start/vim-cool
 	url = https://github.com/romainl/vim-cool
+[submodule "stow_packages/vim/.vim/pack/colors/start/vim-devicons"]
+	path = stow_packages/vim/.vim/pack/colors/start/vim-devicons
+	url = https://github.com/ryanoasis/vim-devicons
+[submodule "stow_packages/vim/.vim/pack/colors/start/rainbow_parentheses.vim"]
+	path = stow_packages/vim/.vim/pack/colors/start/rainbow_parentheses.vim
+	url = https://github.com/junegunn/rainbow_parentheses.vim
+[submodule "stow_packages/vim/.vim/pack/plugins/start/vim-eunuch"]
+	path = stow_packages/vim/.vim/pack/plugins/start/vim-eunuch
+	url = https://github.com/tpope/vim-eunuch
