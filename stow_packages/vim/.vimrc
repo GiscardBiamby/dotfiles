@@ -116,3 +116,8 @@ colorscheme gruvbox
 
 " Enable vim-indent-guides on startup:
 let g:indent_guides_enable_on_vim_startup = 1
+
+" ack.vim use ag if available, otherwise use Ack:
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif

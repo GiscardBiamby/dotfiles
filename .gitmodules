@@ -31,3 +31,9 @@
 [submodule "stow_packages/vim/.vim/pack/plugins/start/vim-eunuch"]
 	path = stow_packages/vim/.vim/pack/plugins/start/vim-eunuch
 	url = https://github.com/tpope/vim-eunuch
+[submodule "stow_packages/vim/.vim/pack/plugins/start/ack.vim"]
+	path = stow_packages/vim/.vim/pack/plugins/start/ack.vim
+	url = https://github.com/mileszs/ack.vim
+[submodule "stow_packages/vim/.vim/pack/syntax/start/ale"]
+	path = stow_packages/vim/.vim/pack/syntax/start/ale
+	url = https://github.com/dense-analysis/ale

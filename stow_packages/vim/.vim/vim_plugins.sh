@@ -38,6 +38,9 @@ fi
 if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/plugins/start/vim-eunuch" ]]; then
     git submodule add --depth 1 https://github.com/tpope/vim-eunuch "${DOT_VIM_CLONE_DIR}/pack/plugins/start/vim-eunuch"
 fi
+if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/plugins/start/ack.vim" ]]; then
+    git submodule add --depth 1 https://github.com/mileszs/ack.vim "${DOT_VIM_CLONE_DIR}/pack/plugins/start/ack.vim"
+fi
 # if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/plugins/start/PLUGIN_NAME" ]]; then
 #     git submodule add --depth 1 https://github.com/ "${DOT_VIM_CLONE_DIR}/pack/plugins/start/PLUGIN_NAME"
 # fi
@@ -61,6 +64,9 @@ fi
 ## Syntax
 if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/syntax/start/vim-indent-guides" ]]; then
     git submodule add --depth 1 https://github.com/preservim/vim-indent-guides "${DOT_VIM_CLONE_DIR}/pack/syntax/start/vim-indent-guides"
+fi
+if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/syntax/start/ale" ]]; then
+    git submodule add --depth 1 https://github.com/dense-analysis/ale "${DOT_VIM_CLONE_DIR}/pack/syntax/start/ale"
 fi
 # if [[ ! -d "${DOT_VIM_CLONE_DIR}/pack/syntax/start/PLUGIN_NAME" ]]; then
 #     git submodule add --depth 1 https://github.com/ "${DOT_VIM_CLONE_DIR}/pack/syntax/start/PLUGIN_NAME"
