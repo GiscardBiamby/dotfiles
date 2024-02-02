@@ -78,35 +78,37 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    ag
     colorize
     conda-zsh-completion
     copybuffer
     direnv
     docker
     docker-compose
+    extract
     fzf
+    gcloud
     git
     git-prompt
     gitignore
     git-extras
     git-lfs
+    gpg-agent
     history
+    keychain
     nvm
     npm
     pip
     python
     rsync
     ssh-agent
-    systemd
-    tmux
-    ubuntu
-    vscode
     # other plugins...
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
 autoload -U compinit && compinit
-
+zstyle :omz:plugins:keychain agents gpg,ssh
+zstyle :omz:plugins:keychain identities id_ed25519 id_ed25519_sem id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
 source $ZSH/oh-my-zsh.sh
 
 # User configuration

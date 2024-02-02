@@ -701,6 +701,6 @@
     "peacock.affectPanelBorder": true,
     "peacock.affectSideBarBorder": true,
     "peacock.affectTabActiveBorder": true,
-    "window.zoomLevel": 2,
+    "window.zoomLevel": 1,
     "workbench.editor.wrapTabs": true
 }
