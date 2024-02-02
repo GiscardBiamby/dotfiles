@@ -84,6 +84,7 @@ plugins=(
     direnv
     docker
     docker-compose
+    fzf
     git
     git-prompt
     gitignore
@@ -179,3 +180,4 @@ fi
 if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
+

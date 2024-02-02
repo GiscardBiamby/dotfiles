@@ -15,6 +15,7 @@ install cpu-checker
 install exfat-fuse
 install exfat-utils
 install ffmpeg
+install fzf
 install gimp
 install gnome-tweaks
 install gnome-tweak-tool
