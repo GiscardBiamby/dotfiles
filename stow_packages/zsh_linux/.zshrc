@@ -164,9 +164,13 @@ fi
 # fi
 
 eval "$(direnv hook zsh)"
-# TODO: Add a server specific .zshrc.HOSTNAME file that has server specific settings:
+
 eval $(ssh-agent -s)
 # ssh-add
+
+
+# Load machine-specific bashrc if one exists:
+[ -f "$HOME/.zshrc_local" ] && . "$HOME/.zshrc_local"
 
 # Shell Options
 if [ -f ~/.zsh_options ]; then
