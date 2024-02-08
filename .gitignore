@@ -4,3 +4,5 @@
 .DS_Store
 **/direnv/allow
 **/*.swp
+
+.zshrc_local
