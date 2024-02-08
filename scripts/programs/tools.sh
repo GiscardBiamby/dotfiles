@@ -6,6 +6,7 @@ echo "Installing workstation tools"
 sudo add-apt-repository ppa:solaar-unifying/ppa -y
 sudo apt-add-repository universe -y
 sudo add-apt-repository ppa:jonmagon/kdiskmark -y
+sudo add-apt-repository ppa:tomtomtom/yt-dlp -y
 sudo apt update
 
 # Workstation only
@@ -36,6 +37,7 @@ install unetbootin
 install usbutils
 install util-linux
 install vlc
+install yt-dlp
 
 sudo systemctl enable ssh.service
 
