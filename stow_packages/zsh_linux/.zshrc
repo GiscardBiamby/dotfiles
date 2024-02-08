@@ -102,10 +102,21 @@ plugins=(
     python
     rsync
     ssh-agent
-    # other plugins...
-    zsh-autosuggestions
-    zsh-syntax-highlighting
 )
+# Load custom pugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
+if [[ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/yt-dlp ]]; then
+    echo "Loading zsh plugin: yt-dlp"
+    plugins+=(yt-dlp)
+fi
+if [[ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
+    echo "Loading zsh plugin: zsh-autosuggestions"
+    plugins+=(zsh-autosuggestions)
+fi
+if [[ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]]; then
+    echo "Loading zsh plugin: zsh-syntax-highlighting"
+    plugins+=(zsh-syntax-highlighting)
+fi
+
 autoload -U compinit && compinit
 zstyle :omz:plugins:keychain agents gpg,ssh
 zstyle :omz:plugins:keychain identities id_ed25519 id_ed25519_sem id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
