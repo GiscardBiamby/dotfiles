@@ -148,7 +148,12 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+## PATH
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+# Manually installe noisetorch
+if [ -d "/opt/noisetorch/bin" ] ; then
+    PATH="/opt/noisetorch/bin:$PATH"
+fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
