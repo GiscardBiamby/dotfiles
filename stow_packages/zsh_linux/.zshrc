@@ -104,18 +104,23 @@ plugins=(
     ssh-agent
 )
 # Load custom pugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
-if [[ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/yt-dlp ]]; then
-    echo "Loading zsh plugin: yt-dlp"
-    plugins+=(yt-dlp)
-fi
-if [[ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions ]]; then
+if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
     echo "Loading zsh plugin: zsh-autosuggestions"
     plugins+=(zsh-autosuggestions)
 fi
-if [[ -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting ]]; then
+if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
     echo "Loading zsh plugin: zsh-syntax-highlighting"
     plugins+=(zsh-syntax-highlighting)
 fi
+if [[ -d ~/.oh-my-zsh/custom/plugins/conda-zsh-completion ]]; then
+    echo "Loading zsh plugin: conda-zsh-completion"
+    plugins+=(conda-zsh-completion)
+fi
+if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
+    echo "Loading zsh plugin: yt-dlp"
+    plugins+=(yt-dlp)
+fi
+
 
 autoload -U compinit && compinit
 zstyle :omz:plugins:keychain agents gpg,ssh
