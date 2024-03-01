@@ -72,30 +72,47 @@ HIST_STAMPS="yyyy-mm-dd--%H-%M"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     ag
-    colorize 
-    command-not-found 
+    colorize
+    command-not-found
     conda-zsh-completion
-    copybuffer 
-    direnv 
-    docker 
-    docker-compose 
-    extract 
+    copybuffer
+    direnv
+    docker
+    docker-compose
+    extract
     gcloud
-    git 
+    git
     git-prompt
     gitignore
     git-extras
     git-lfs
     gpg-agent
-    nvm 
-    npm 
-    pip 
+    nvm
+    npm
+    pip
     python
     rsync
-    ssh-agent 
+    ssh-agent
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
+# Load custom pugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
+if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
+    echo "Loading zsh plugin: zsh-autosuggestions"
+    plugins+=(zsh-autosuggestions)
+fi
+if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
+    echo "Loading zsh plugin: zsh-syntax-highlighting"
+    plugins+=(zsh-syntax-highlighting)
+fi
+if [[ -d ~/.oh-my-zsh/custom/plugins/conda-zsh-completion ]]; then
+    echo "Loading zsh plugin: conda-zsh-completion"
+    plugins+=(conda-zsh-completion)
+fi
+if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
+    echo "Loading zsh plugin: yt-dlp"
+    plugins+=(yt-dlp)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -146,7 +163,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/gbiamby/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/gbiamby/mambaforge/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -162,6 +179,9 @@ if [ -f "/Users/gbiamby/mambaforge/etc/profile.d/mamba.sh" ]; then
     . "/Users/gbiamby/mambaforge/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
+
+# Load machine-specific bashrc if one exists:
+[ -f "$HOME/.zshrc_local" ] && . "$HOME/.zshrc_local"
 
 # Shell Options
 if [ -f ~/.zsh_options ]; then
@@ -181,4 +201,3 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-

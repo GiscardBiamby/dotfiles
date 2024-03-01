@@ -102,6 +102,7 @@ plugins=(
     python
     rsync
     ssh-agent
+    tmux
 )
 # Load custom pugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
 if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
@@ -155,7 +156,7 @@ fi
 
 ## PATH
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
-# Manually installe noisetorch
+# Manually install noisetorch. Still need to load the app and activate it after each startup.
 if [ -d "/opt/noisetorch/bin" ] ; then
     PATH="/opt/noisetorch/bin:$PATH"
 fi
