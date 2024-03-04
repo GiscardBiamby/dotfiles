@@ -188,8 +188,7 @@ fi
 eval "$(direnv hook zsh)"
 
 eval $(ssh-agent -s)
-# ssh-add
-
+ssh-add ~/.ssh/id_rsa-bairdev
 
 # Load machine-specific bashrc if one exists:
 [ -f "$HOME/.zshrc_local" ] && . "$HOME/.zshrc_local"
