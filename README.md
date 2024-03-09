@@ -24,6 +24,8 @@ Use nano to create any SSH keys you need to access GitHub, and remember to run `
 
 ```sh
 git clone git@github.com:GiscardBiamby/dotfiles.git
+git submodule update --init --recursive
+
 # OR use HTTPS
 git clone https://github.com/GiscardBiamby/dotfiles.git
 ```
