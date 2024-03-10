@@ -153,14 +153,6 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 ## PATH
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
@@ -188,13 +180,8 @@ if [ -f "/home/${USER}/mambaforge/etc/profile.d/mamba.sh" ]; then
 fi
 # <<< conda initialize <<<
 
-# This causes a `__mamba_exe:3: no such file or directory: ./mamba` error, but it was in my .bashrc:
-# if [ -f "/home/${USER}/mambaforge/etc/profile.d/mamba.sh" ]; then
-#     . "/home/${USER}/mambaforge/etc/profile.d/mamba.sh"
-# fi
 
 eval "$(direnv hook zsh)"
-
 eval $(ssh-agent -s)
 # ssh-add ~/.ssh/id_rsa-bairdev
 
