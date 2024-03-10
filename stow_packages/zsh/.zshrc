@@ -114,6 +114,12 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
     plugins+=(yt-dlp)
 fi
 
+# Update this to only do auto complete cache once every 24hr, it slows down zsh startup time by a lot:
+autoload -U compinit
+for dump in ~/.zcompdump(N.mh+24); do
+    compinit
+done
+compinit -C
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -203,4 +209,4 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-ssh-add ~/.ssh/id_rsa-bairdev
+# ssh-add ~/.ssh/id_rsa-bairdev
