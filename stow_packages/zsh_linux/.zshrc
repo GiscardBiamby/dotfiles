@@ -103,7 +103,7 @@ plugins=(
     pip
     python
     rsync
-    ssh-agent
+    # ssh-agent
     tmux
 )
 # Load custom pugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
@@ -138,6 +138,7 @@ compinit -C
 zstyle :omz:plugins:keychain agents gpg,ssh
 zstyle :omz:plugins:keychain identities id_ed25519 id_ed25519_sem id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
 source $ZSH/oh-my-zsh.sh
+eval `keychain --eval id_ed25519 id_rsa-bairdev`
 
 
 
@@ -180,11 +181,14 @@ fi
 
 
 eval "$(direnv hook zsh)"
-eval $(ssh-agent -s)
+
+# eval $(ssh-agent -s)
 # ssh-add ~/.ssh/id_rsa-bairdev
 
 # Load machine-specific bashrc if one exists:
-[ -f "$HOME/.zshrc_local" ] && . "$HOME/.zshrc_local"
+if [[ -f "$HOME/.zshrc_local" ]]; then
+    . "$HOME/.zshrc_local"
+fi
 
 # Shell Options
 if [ -f ~/.zsh_options ]; then
