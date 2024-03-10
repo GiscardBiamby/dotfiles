@@ -23,16 +23,22 @@
     "[markdown]": {
         "editor.defaultFormatter": "mervin.markdown-formatter",
         "editor.quickSuggestions": {
-            "other": true,
             "comments": true,
+            "other": true,
             "strings": true
         }
     },
     "[python]": {
         "editor.formatOnType": true
     },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "accessibility.signals.terminalBell": {
+        "sound": "on"
     },
     "autoDocstring.docstringFormat": "sphinx",
     "autoDocstring.startOnNewLine": true,
@@ -440,7 +446,9 @@
     "editor.copyWithSyntaxHighlighting": false,
     "editor.cursorBlinking": "smooth",
     "editor.cursorSmoothCaretAnimation": "on",
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.detectIndentation": false,
+    "editor.fastScrollSensitivity": 9,
     "editor.fontFamily": "'Source Code Pro','Droid Sans Mono', 'monospace', monospace, Menlo, Monaco, 'Courier New'",
     "editor.fontLigatures": true,
     "editor.guides.bracketPairs": "active",
@@ -505,8 +513,10 @@
     "git.showPushSuccessNotification": true,
     "git.suggestSmartCommit": false,
     "git.supportCancellation": true,
+    "git.terminalGitEditor": true,
     "git.untrackedChanges": "separate",
     "isort.check": true,
+    "isort.showNotifications": "onWarning",
     "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
     "jupyter.allowUnauthorizedRemoteConnection": true,
     "jupyter.askForKernelRestart": false,
@@ -528,6 +538,11 @@
     "notebook.lineNumbers": "on",
     "notebook.output.scrolling": true,
     "notebook.output.textLineLimit": 120,
+    "peacock.affectDebuggingStatusBar": true,
+    "peacock.affectEditorGroupBorder": true,
+    "peacock.affectPanelBorder": true,
+    "peacock.affectSideBarBorder": true,
+    "peacock.affectTabActiveBorder": true,
     "peacock.favoriteColors": [
         {
             "name": "Angular Red",
@@ -595,7 +610,6 @@
     "settingsSync.ignoredSettings": [
         "editor.fontFamily"
     ],
-    "isort.showNotifications": "onWarning",
     "telemetry.telemetryLevel": "error",
     "terminal.integrated.automationProfile.linux": {
         "args": [
@@ -606,29 +620,31 @@
     },
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.defaultProfile.linux": "my_zsh",
-    "terminal.integrated.enableBell": true,
     "terminal.integrated.enableMultiLinePasteWarning": false,
+    "terminal.integrated.enableVisualBell": true,
+    "terminal.integrated.fastScrollSensitivity": 9,
     "terminal.integrated.inheritEnv": true,
     "terminal.integrated.mouseWheelScrollSensitivity": 2,
     "terminal.integrated.persistentSessionScrollback": 1000000,
     "terminal.integrated.profiles.linux": {
         "bash": null,
         "Javascript Debug Terminal": null,
-        "my_zsh": {
-            "args": [
-                "--login"
-            ],
-            "path": "zsh"
-        },
         "my_bash": {
             "args": [
                 "--login"
             ],
             "path": "bash"
         },
+        "my_zsh": {
+            "args": [
+                "--login"
+            ],
+            "path": "zsh"
+        },
         "R Terminal": null
     },
     "terminal.integrated.scrollback": 1000000,
+    "terminal.integrated.shellIntegration.suggestEnabled": true,
     "terminal.integrated.smoothScrolling": true,
     "todo-tree.general.tags": [
         "BUG",
@@ -646,7 +662,9 @@
     "vsicons.presets.jsonOfficial": true,
     "window.commandCenter": true,
     "window.restoreWindows": "all",
+    "window.title": "${remoteName}${separator}${activeEditorShort}${separator}${rootName}${separator}${profileName}",
     "window.titleBarStyle": "custom",
+    "window.zoomLevel": 1,
     "workbench.colorCustomizations": {
         "activityBar.activeBorder": "#2979FF",
         "activityBar.background": "#163414",
@@ -675,32 +693,17 @@
         "titleBar.activeForeground": "#F5FBF5"
     },
     "workbench.colorTheme": "Tinacious Design",
+    "workbench.editor.empty.hint": "hidden",
     "workbench.editor.enablePreview": true,
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.editor.revealIfOpen": true,
+    "workbench.editor.wrapTabs": true,
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
     "workbench.iconTheme": "vscode-icons",
+    "workbench.list.fastScrollSensitivity": 9,
     "workbench.list.smoothScrolling": true,
     "workbench.settings.openDefaultKeybindings": true,
-    "workbench.tree.indent": 15,
-    "window.title": "${remoteName}${separator}${activeEditorShort}${separator}${rootName}${separator}${profileName}",
-    "workbench.editor.empty.hint": "hidden",
-    "terminal.integrated.shellIntegration.suggestEnabled": true,
-    "editor.fastScrollSensitivity": 9,
-    "workbench.list.fastScrollSensitivity": 9,
-    "terminal.integrated.fastScrollSensitivity": 9,
-    "editor.defaultFormatter": "charliermarsh.ruff",
-    "[shellscript]": {
-        "editor.defaultFormatter": "foxundermoon.shell-format"
-    },
-    "git.terminalGitEditor": true,
-    "peacock.affectEditorGroupBorder": true,
-    "peacock.affectDebuggingStatusBar": true,
-    "peacock.affectPanelBorder": true,
-    "peacock.affectSideBarBorder": true,
-    "peacock.affectTabActiveBorder": true,
-    "window.zoomLevel": 1,
-    "workbench.editor.wrapTabs": true
+    "workbench.tree.indent": 15
 }
