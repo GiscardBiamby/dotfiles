@@ -125,23 +125,21 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
 fi
 
 
+
+# Update this to only do auto complete cache once every 24hr. The original code (commented out line)
+# slows down zsh startup time by a lot:
+#
 # autoload -U compinit && compinit
-# Update this to only do auto complete cache once every 24hr, it slows down zsh startup time by a lot:
 autoload -U compinit
 for dump in ~/.zcompdump(N.mh+24); do
-  compinit
+    compinit
 done
 compinit -C
 zstyle :omz:plugins:keychain agents gpg,ssh
 zstyle :omz:plugins:keychain identities id_ed25519 id_ed25519_sem id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then

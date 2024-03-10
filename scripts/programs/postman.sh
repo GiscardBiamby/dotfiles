@@ -1,12 +1,16 @@
 #!/bin/bash
+
+# Get the directory of this script so that we can reference paths correctly no matter which folder
+# the script was launched from:
+SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "SCRIPT_DIR: ${SCRIPT_DIR}"
+source "${SCRIPT_DIR}/../util.sh"
+
 set +e
-
-. ../util.sh
-
 echo "📮 Installing postman"
 # https://www.how2shout.com/linux/how-to-install-postman-on-ubuntu-20-04-lts-linux/
-wget https://dl.pstmn.io/download/latest/linux64 -O ./programs/downloads/linux64
-sudo tar -xvf ./programs/downloads/linux64 -C /usr/bin
+wget https://dl.pstmn.io/download/latest/linux64 -O "${SCRIPT_DIR}/downloads/linux64"
+sudo tar -xvf "${SCRIPT_DIR}/downloads/linux64" -C /usr/bin
 
 # TODO: Add to .bashrc
 export PATH=$PATH:/usr/bin/Postman
@@ -26,7 +30,7 @@ export PATH=$PATH:/usr/bin/Postman
     echo "StartupNotify=true"
 } >> /usr/share/applications/Postman.desktop
 
-rm ./programs/downloads/linux64
+rm "${SCRIPT_DIR}/downloads/linux64"
 
 # Uninstall
 # sudo rm -r /usr/bin/Postman

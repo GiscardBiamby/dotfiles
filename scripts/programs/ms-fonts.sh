@@ -1,6 +1,10 @@
 #!/bin/bash
 
-. ../util.sh
+# Get the directory of this script so that we can reference paths correctly no matter which folder
+# the script was launched from:
+SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "SCRIPT_DIR: ${SCRIPT_DIR}"
+source "${SCRIPT_DIR}/../util.sh"
 
 # https://www.pcworld.com/article/2863497/how-to-install-microsoft-fonts-in-linux-office-suites.html
 # https://lexics.github.io/installing-ms-fonts

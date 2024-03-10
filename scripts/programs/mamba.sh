@@ -1,14 +1,20 @@
 #!/bin/bash
 
-. ../util.sh
+# Get the directory of this script so that we can reference paths correctly no matter which folder
+# the script was launched from:
+SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "SCRIPT_DIR: ${SCRIPT_DIR}"
+source "${SCRIPT_DIR}/../util.sh"
 
 echo "🐍 Installing mamba"
 
 # https://github.com/conda-forge/miniforge#mambaforge
 # Latest installers with Mamba in the base environment:
-mkdir -p ./programs/downloads/micromamba
-wget -O "./programs/downloads/micromamba/Mambaforge-$(uname)-$(uname -m).sh" "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-bash ./programs/downloads/micromamba/Mambaforge-$(uname)-$(uname -m).sh -b -f
+mkdir -p "${SCRIPT_DIR}/downloads/micromamba"
+wget \
+    "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh" \
+    -O "${SCRIPT_DIR}/downloads/micromamba/Mambaforge-$(uname)-$(uname -m).sh"
+bash "${SCRIPT_DIR}/downloads/micromamba/Mambaforge-$(uname)-$(uname -m).sh" -b -f
 
 source ~/.bashprofile
 
