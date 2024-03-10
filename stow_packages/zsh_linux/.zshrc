@@ -1,3 +1,5 @@
+# zmodload zsh/zprof # top of your .zshrc file
+
 # .zshrc is for interactive shells. You set options for the interactive shell there with the setopt
 # and unsetopt commands. You can also load shell modules, set your history options, change your
 # prompt, set up zle and completion, et cetera. You also set any variables that are only used in the
@@ -96,8 +98,8 @@ plugins=(
     gpg-agent
     history
     keychain
-    nvm
-    npm
+    # nvm
+    # npm
     pip
     python
     rsync
@@ -123,7 +125,13 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
 fi
 
 
-autoload -U compinit && compinit
+# autoload -U compinit && compinit
+# Update this to only do auto complete cache once every 24hr, it slows down zsh startup time by a lot:
+autoload -U compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 zstyle :omz:plugins:keychain agents gpg,ssh
 zstyle :omz:plugins:keychain identities id_ed25519 id_ed25519_sem id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
 source $ZSH/oh-my-zsh.sh
@@ -188,7 +196,7 @@ fi
 eval "$(direnv hook zsh)"
 
 eval $(ssh-agent -s)
-ssh-add ~/.ssh/id_rsa-bairdev
+# ssh-add ~/.ssh/id_rsa-bairdev
 
 # Load machine-specific bashrc if one exists:
 [ -f "$HOME/.zshrc_local" ] && . "$HOME/.zshrc_local"
@@ -208,3 +216,5 @@ if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
+# To profile the zsh load speed uncomment the top line and this bottom line:
+# zprof # bottom of .zshrc

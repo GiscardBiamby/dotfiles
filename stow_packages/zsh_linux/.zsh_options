@@ -25,7 +25,7 @@ unsetopt CORRECT_ALL
 ##
 ## Advanced zsh completions
 # https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
-autoload -Uz compinit && compinit
+##<!-- autoload -Uz compinit && compinit -->
 
 ##
 ## case insensitive path-completion
