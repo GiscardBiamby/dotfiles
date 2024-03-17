@@ -98,7 +98,7 @@ plugins=(
     gpg-agent
     history
     keychain
-    # nvm
+    nvm
     # npm
     pip
     python
