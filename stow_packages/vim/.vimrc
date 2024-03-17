@@ -103,11 +103,16 @@ if has('mouse')
     set mouse=a
 endif
 
+set mouse=a
+
+" # Disabling this section because it was causing a bug where mouse scroll worked in tmux but 
+" # not in plain terminal:
+" #
 " If Linux then set ttymouse
-let s:uname = system("echo -n \"$(uname)\"")
-if !v:shell_error && s:uname == "Linux" && !has('nvim')
-    set ttymouse=xterm
-endif
+" let s:uname = system("echo -n \"$(uname)\"")
+" if !v:shell_error && s:uname == "Linux" && !has('nvim')
+"     set ttymouse=xterm
+" endif
 
 " Color Scheme
 colorscheme gruvbox

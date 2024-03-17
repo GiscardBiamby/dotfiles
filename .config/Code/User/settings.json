@@ -587,6 +587,10 @@
         {
             "name": "Skeletor Purple",
             "value": "#6c1cfe"
+        },
+        {
+            "name": "DarkPurp",
+            "value": "#190777"
         }
     ],
     "python.analysis.autoImportCompletions": true,

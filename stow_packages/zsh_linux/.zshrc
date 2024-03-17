@@ -130,28 +130,32 @@ fi
 # slows down zsh startup time by a lot:
 #
 # autoload -U compinit && compinit
-autoload -U compinit
+autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
     compinit
 done
 compinit -C
-zstyle :omz:plugins:keychain agents gpg,ssh
-zstyle :omz:plugins:keychain identities id_ed25519 id_ed25519_sem id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
-source $ZSH/oh-my-zsh.sh
-eval `keychain --eval id_ed25519 id_rsa-bairdev`
 
+zstyle :omz:plugins:keychain agents gpg,ssh
+zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
+# zstyle :omz:plugins:ssh-agent agent-forwarding yes
+# zstyle :omz:plugins:ssh-agent lazy yes
+# zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
+# zstyle :omz:plugins:ssh-agent identities id_ed25519 id_ed25519_sem id_rsa-bairdev
+source $ZSH/oh-my-zsh.sh
+
+# ssh
+# eval `keychain --eval id_ed25519 id_rsa-bairdev`
+# eval $(ssh-agent -s)
+# ssh-add ~/.ssh/id_rsa-bairdev
 
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='code --wait'
 else
-    export EDITOR='nano'
+    export EDITOR='vim'
 fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 
 ## PATH
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
@@ -182,10 +186,7 @@ fi
 
 eval "$(direnv hook zsh)"
 
-# eval $(ssh-agent -s)
-# ssh-add ~/.ssh/id_rsa-bairdev
-
-# Load machine-specific bashrc if one exists:
+# Load machine-specific .zshrc_local if one exists:
 if [[ -f "$HOME/.zshrc_local" ]]; then
     . "$HOME/.zshrc_local"
 fi
