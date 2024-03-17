@@ -4,11 +4,6 @@ function cd() {
     ls
 }
 
-# Markdown link check in a folder, recursive
-function mlc() {
-    find $1 -name \*.md -exec markdown-link-check -p {} \;
-}
-
 function gitBranch() {
     # Displays current branch
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
@@ -155,6 +150,8 @@ function kill_vscode_server() {
     # Kill server processes
     # kill -9 $(ps aux | \grep vscode-server | \grep "${USER"} | \grep -v grep | awk '{print $2}')
     kill -9 $(ps aux | \grep vscode-server | \grep -v grep | awk '{print $2}')
+    # # Adding this newer version that  only kills for the user
+    # kill -9 $(pgrep -u $USER vscode-server)
     # Delete related files and folder
     rm -rf $HOME/.vscode-server # Or ~/.vscode-server-insiders
 }

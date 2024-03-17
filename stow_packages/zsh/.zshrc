@@ -47,7 +47,7 @@ ZSH_THEME="apple"
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -114,49 +114,44 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
     plugins+=(yt-dlp)
 fi
 
-# Update this to only do auto complete cache once every 24hr, it slows down zsh startup time by a lot:
-autoload -U compinit
+# Update this to only do auto complete cache once every 24hr. The original code (commented out line)
+# slows down zsh startup time by a lot:
+#
+# autoload -U compinit && compinit
+autoload -Uz compinit
 for dump in ~/.zcompdump(N.mh+24); do
     compinit
 done
 compinit -C
+
+zstyle :omz:plugins:ssh-agent agent-forwarding yes
+zstyle :omz:plugins:ssh-agent lazy yes
+zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
+zstyle :omz:plugins:ssh-agent identities id_ed25519 id_ed25519_sem id_rsa-bairdev
 source $ZSH/oh-my-zsh.sh
+# Don't think these are needed since the plugins are loaded above:
+# source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# User configuration
+#ssh
+# ssh-add ~/.ssh/id_rsa-bairdev
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='code --wait'
+else
+    export EDITOR='vim'
+fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
+## PATH
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # yubikey
 # To use this SSH agent, set this variable in your ~/.zshrc and/or ~/.bashrc:
@@ -187,7 +182,7 @@ if [ -f "/Users/gbiamby/mambaforge/etc/profile.d/mamba.sh" ]; then
 fi
 # <<< conda initialize <<<
 
-# Load machine-specific bashrc if one exists:
+# Load machine-specific .zshrc_local if one exists:
 [ -f "$HOME/.zshrc_local" ] && . "$HOME/.zshrc_local"
 
 # Shell Options
@@ -209,4 +204,3 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# ssh-add ~/.ssh/id_rsa-bairdev
