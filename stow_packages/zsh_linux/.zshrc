@@ -126,22 +126,22 @@ fi
 
 
 
-# Update this to only do auto complete cache once every 24hr. The original code (commented out line)
-# slows down zsh startup time by a lot:
-#
-# autoload -U compinit && compinit
 autoload -Uz compinit
+# Do auto complete cache once every 24hr. The original code (commented out line)
+# slows down zsh startup time by a lot:
 for dump in ~/.zcompdump(N.mh+24); do
     compinit
 done
 compinit -C
 
+# Keychain: will start, start ssh-agent for you if it has not yet been started, use ssh-add to add
+# your id_rsa private key file to ssh-agent, and set up your shell environment so that ssh will be
+# able to find ssh-agent. If ssh-agent is already running, keychain will ensure that your id_rsa
+# private key has been added to ssh-agent and then set up your environment so that ssh can find the
+# already-running ssh-agent.
 zstyle :omz:plugins:keychain agents gpg,ssh
 zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
-# zstyle :omz:plugins:ssh-agent agent-forwarding yes
-# zstyle :omz:plugins:ssh-agent lazy yes
-# zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
-# zstyle :omz:plugins:ssh-agent identities id_ed25519 id_ed25519_sem id_rsa-bairdev
+
 source $ZSH/oh-my-zsh.sh
 
 # ssh
