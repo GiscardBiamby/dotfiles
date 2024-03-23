@@ -27,6 +27,7 @@ install gnome-tweaks
 install gnome-tweak-tool
 install gparted
 install gscan2pdf
+install imwheel
 install kdiskmark
 install nedit
 install okular
