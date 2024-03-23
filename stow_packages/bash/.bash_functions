@@ -51,18 +51,98 @@ function get_file_count() {
     find "${path}" -type f | wc -l
 }
 
+
 function sync_dir() {
-    # Sync one dir to another, showing progress, resume if possible, enable compression. This
-    # function ensures that the files are synced rather than the folder itself being transfered.
+    # TL;DR; Copy missing, don't touch files on the target if they already exist
+
+    # Sync one dir to another, showing progress, resume if possible. This function ensures that the
+    # files are synced rather than the folder itself being transferred. The third parameter is
+    # optional, it allows you to add additional flags to the rsync command (for example a common one
+    # might be '-z' to enable compression).
     local src="${1}"
     local target="${2}"
+    local flags="${3:-}"
     # Ensure paths have trailing slashes so we sync folder contents rather than folder itself:
     [[ "${src}" != */ ]] && src="${src}/"
-    [[ "${target}" != */ ]] && src="${target}/"
+    [[ "${target}" != */ ]] && target="${target}/"
     echo "Synching dir FROM: '${src}', TO: '${target}'..."
     get_dir_size "${src}"
     mkdir -p "${target}"
-    rsync -xauvzrP "${src}" "${target}"
+
+    #   - -a: The archive mode. It's a shorthand that includes several other options: -rlptgoD. It
+    #     makes rsync replicate directories recursively (-r), copy symbolic links as symbolic links
+    #     (-l), preserve permissions (-p), preserve modification times (-t), preserve group (-g),
+    #     preserve owner (super-user only, -o), and preserve device files (super-user only) and
+    #     special files (-D). Essentially, it ensures that the target is a mirror of the source with
+    #     many filesystem attributes preserved.
+    #   - -u: This option enables the update mode, which means rsync will skip any files that are
+    #     newer on the receiver side. It's useful for keeping changes made to files on the target
+    #     that haven't been updated in the source, avoiding overwriting newer files with older ones.
+    #   - --ignore-existing: This tells rsync to skip updating files that already exist on the
+    #     destination. Unlike -u, which skips files based on the modification time,
+    #     --ignore-existing will ignore the file entirely if it exists on the target, regardless of
+    #     its modification time or content changes.
+    #   - -z: Enables compression during the transfer. It compresses the file data as it is sent to
+    #     the destination machine, which can reduce the amount of data being transmitted - useful
+    #     for slow connections. However, it might add overhead for very fast networks or when
+    #     transferring already compressed files.
+    #   - --ignore-existing: This tells rsync to skip updating files that already exist on the
+    #     destination. Unlike -u, which skips files based on the modification time,
+    #     --ignore-existing will ignore the file entirely if it exists on the target, regardless of
+    #     its modification time or content changes.
+    #   - --delete: This flag is crucial for your requirement to make the target an exact copy of
+    #     the source. It tells rsync to delete extraneous files from the target directory—those
+    #     files that are not present in the source directory. This ensures that the target directory
+    #     only contains files that are present in the source directory.
+    rsync -auh --ignore-existing --info=progress2 --no-inc-recursive "${flags}" "${src}" "${target}"
+}
+
+function mirror_dir() {
+    # TL;DR; Force target dir to be an exact copy of source, deleting items from target if they are
+    # not in source.
+
+    # Show progress, resume if possible, no compression. This function ensures that the files are
+    # synced rather than the folder itself being transferred. The third parameter is optional, it
+    # allows you to add additional flags to the rysync command (for example a common one might be
+    # '-z' to enable compression).
+    #
+    #   Add `--delete` to remove files on target that are not on source
+    local src="${1}"
+    local target="${2}"
+    local flags="${3:-}"
+    # Ensure paths have trailing slashes so we sync folder contents rather than folder itself:
+    [[ "${src}" != */ ]] && src="${src}/"
+    [[ "${target}" != */ ]] && target="${target}/"
+    echo "Synching dir FROM: '${src}', TO: '${target}'..."
+    get_dir_size "${src}"
+    mkdir -p "${target}"
+
+    #   - -a: The archive mode. It's a shorthand that includes several other options: -rlptgoD. It
+    #     makes rsync replicate directories recursively (-r), copy symbolic links as symbolic links
+    #     (-l), preserve permissions (-p), preserve modification times (-t), preserve group (-g),
+    #     preserve owner (super-user only, -o), and preserve device files (super-user only) and
+    #     special files (-D). Essentially, it ensures that the target is a mirror of the source with
+    #     many filesystem attributes preserved.
+    #   - -u: This option enables the update mode, which means rsync will skip any files that are
+    #     newer on the receiver side. It's useful for keeping changes made to files on the target
+    #     that haven't been updated in the source, avoiding overwriting newer files with older ones.
+    #   - --ignore-existing: This tells rsync to skip updating files that already exist on the
+    #     destination. Unlike -u, which skips files based on the modification time,
+    #     --ignore-existing will ignore the file entirely if it exists on the target, regardless of
+    #     its modification time or content changes.
+    #   - -z: Enables compression during the transfer. It compresses the file data as it is sent to
+    #     the destination machine, which can reduce the amount of data being transmitted - useful
+    #     for slow connections. However, it might add overhead for very fast networks or when
+    #     transferring already compressed files.
+    #   - --ignore-existing: This tells rsync to skip updating files that already exist on the
+    #     destination. Unlike -u, which skips files based on the modification time,
+    #     --ignore-existing will ignore the file entirely if it exists on the target, regardless of
+    #     its modification time or content changes.
+    #   - --delete: This flag is crucial for your requirement to make the target an exact copy of
+    #     the source. It tells rsync to delete extraneous files from the target directory—those
+    #     files that are not present in the source directory. This ensures that the target directory
+    #     only contains files that are present in the source directory.
+    rsync -ah --info=progress2 --no-inc-recursive "${flags}" "${src}" "${target}"
 }
 
 # ex - archive extractor
