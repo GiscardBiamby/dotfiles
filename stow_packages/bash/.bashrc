@@ -71,7 +71,7 @@ fi
 
 
 # My stuff:
-export PATH="/usr/local/krb5/bin:$PATH"
+export PATH="/usr/local/ossh/bin:/usr/local/krb5/bin:$PATH"
 
 # # This has to do with TILIX. I don't think it's needed anymore.
 # if [ $TILIX_ID ] || [ $VTE_VERSION ]; then

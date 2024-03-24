@@ -158,7 +158,7 @@ else
 fi
 
 ## PATH
-export PATH="/usr/local/krb5/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+export PATH="/usr/local/ossh/bin:/usr/local/krb5/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 # Manually install noisetorch. Still need to load the app and activate it after each startup.
 if [ -d "/opt/noisetorch/bin" ] ; then
     PATH="/opt/noisetorch/bin:$PATH"

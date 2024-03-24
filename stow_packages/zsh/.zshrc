@@ -146,7 +146,7 @@ fi
 
 
 ## PATH
-export PATH="/usr/local/krb5/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+export PATH="/usr/local/ossh/bin:/usr/local/krb5/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
