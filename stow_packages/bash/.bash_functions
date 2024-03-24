@@ -51,7 +51,6 @@ function get_file_count() {
     find "${path}" -type f | wc -l
 }
 
-
 function sync_dir() {
     # TL;DR; Copy missing, don't touch files on the target if they already exist
 
