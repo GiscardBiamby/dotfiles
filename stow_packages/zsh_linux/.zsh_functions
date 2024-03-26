@@ -141,6 +141,11 @@ function mirror_dir() {
     #     the source. It tells rsync to delete extraneous files from the target directory—those
     #     files that are not present in the source directory. This ensures that the target directory
     #     only contains files that are present in the source directory.
+    #   - --compress-choice=zstd: Enable zstd compression (faster and better compression than zlib)
+    #   - --compress-level=9: Increase the compression level from the default of 3 (tradeoff vs
+    #     maximum of 19)
+    #   - --checksum-choice=xxh3: Use xxh3 hashing algorithm (very fast)
+
     rsync -ah --info=progress2 --no-inc-recursive "${flags}" "${src}" "${target}"
 }
 

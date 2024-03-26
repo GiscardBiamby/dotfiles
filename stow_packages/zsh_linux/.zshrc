@@ -1,3 +1,11 @@
+# For Tilix:
+# https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
+# On Ubuntu you probably need a symlink for vte.sh in order for the below line to work:
+# ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+    source /etc/profile.d/vte.sh
+fi
+
 # zmodload zsh/zprof # top of your .zshrc file
 
 # .zshrc is for interactive shells. You set options for the interactive shell there with the setopt
@@ -158,6 +166,7 @@ else
 fi
 
 ## PATH
+export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
 export PATH="/usr/local/ossh/bin:/usr/local/krb5/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 # Manually install noisetorch. Still need to load the app and activate it after each startup.
 if [ -d "/opt/noisetorch/bin" ] ; then
