@@ -146,7 +146,20 @@ fi
 
 
 ## PATH
-export PATH="/usr/local/ossh/bin:/usr/local/krb5/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+# Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
+path=(
+    "/usr/local/ossh/bin"
+    "/usr/local/krb5/bin"
+    "/usr/local/bin"
+    "/usr/local/sbin"
+    "~/bin"
+    "/usr/bin/Postman/app"
+    $path
+)
+# Manually install noisetorch. Still need to load the app and activate it after each startup.
+if [ -d "/opt/noisetorch/bin" ] ; then
+    path+="/opt/noisetorch/bin"
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
@@ -181,6 +194,7 @@ if [ -f "/Users/gbiamby/mambaforge/etc/profile.d/mamba.sh" ]; then
     . "/Users/gbiamby/mambaforge/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
+export PATH
 
 # Load machine-specific .zshrc_local if one exists:
 [ -f "$HOME/.zshrc_local" ] && . "$HOME/.zshrc_local"

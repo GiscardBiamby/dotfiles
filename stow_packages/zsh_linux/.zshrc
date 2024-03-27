@@ -167,10 +167,19 @@ fi
 
 ## PATH
 export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
-export PATH="/usr/local/ossh/bin:/usr/local/krb5/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
+# Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
+path=(
+    "/usr/local/ossh/bin"
+    "/usr/local/krb5/bin"
+    "/usr/local/bin"
+    "/usr/local/sbin"
+    "~/bin"
+    "/usr/bin/Postman/app"
+    $path
+)
 # Manually install noisetorch. Still need to load the app and activate it after each startup.
 if [ -d "/opt/noisetorch/bin" ] ; then
-    PATH="/opt/noisetorch/bin:$PATH"
+    path+="/opt/noisetorch/bin"
 fi
 
 # >>> conda initialize >>>
@@ -191,11 +200,12 @@ if [ -f "/home/${USER}/mambaforge/etc/profile.d/mamba.sh" ]; then
     . "/home/${USER}/mambaforge/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
+export PATH
 
 
 eval "$(direnv hook zsh)"
 
-# Load machine-specific .zshrc_local if one exists:
+# Load machine-specific .zshrc_local if one exists (it's not managed by stow):
 if [[ -f "$HOME/.zshrc_local" ]]; then
     . "$HOME/.zshrc_local"
 fi
