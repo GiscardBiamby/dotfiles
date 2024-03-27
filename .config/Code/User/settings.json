@@ -709,5 +709,6 @@
     "workbench.list.fastScrollSensitivity": 9,
     "workbench.list.smoothScrolling": true,
     "workbench.settings.openDefaultKeybindings": true,
-    "workbench.tree.indent": 15
+    "workbench.tree.indent": 15,
+    "remote.SSH.useFlock": false
 }
