@@ -9,8 +9,28 @@ source "${SCRIPT_DIR}/../util.sh"
 # https://support.yubico.com/hc/en-us/articles/360013708900-Using-Your-U2F-YubiKey-with-Linux
 echo "Installing yubikey support for linux"
 wget \
-    https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rules \
-    -O "${SCRIPT_DIR}/downloads/70-u2f.rules"
+    https://github.com/Yubico/libfido2/blob/main/udev/70-u2f.rules -O "${SCRIPT_DIR}/downloads/70-u2f.rules"
 sudo cp "${SCRIPT_DIR}/downloads/70-u2f.rules" /etc/udev/rules.d/70-u2f.rules
 
-# TODO: Install yuubikey manager (I think it was some kind of .AppImage)
+# https://support.yubico.com/hc/en-us/articles/360016649039-Installing-Yubico-Software-on-Linux
+#
+# Packages below (in order): YubiKey Manager (CLI), YubiKey Personalization Tool (GUI),
+echo "Installing: YubiKey Manager (CLI), YubiKey Personalization Tool (GUI), libpam-yubico, libpam-u2f, YubiKey Manager (GUI)..."
+sudo apt install -y yubikey-manager libpam-yubico libpam-u2f yubikey-manager-qt
+
+# Note: yubikey-personalization-gui (YubiKey Personalization Tool (GUI)) is replaced by YubiKey
+# Manager (GUI, CLI). Used to configure a YubiKey device.
+
+# Yubico Authenticator
+echo "Installing Yubico Authenticator to /usr/local/bin/"
+wget \
+    https://developers.yubico.com/yubioath-flutter/Releases/yubico-authenticator-latest-linux.tar.gz \
+    -O "${SCRIPT_DIR}/downloads/yubico-authenticator-latest-linux.tar.gz"
+pushd "${SCRIPT_DIR}/downloads"
+tar -xvzf yubico-authenticator-latest-linux.tar.gz
+yubi_dir=$(find . -type d -iname "yubico-authenticator-*")
+sudo rm -rf "/usr/local/bin/${yubi_dir}/"
+sudo mv "${yubi_dir}" /usr/local/bin/
+popd
+echo "Installing yubikey authenticator desktop integration"
+"/usr/local/bin/${yubi_dir}/desktop_integration.sh" -i
