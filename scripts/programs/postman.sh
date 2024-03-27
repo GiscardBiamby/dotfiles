@@ -12,9 +12,6 @@ echo "📮 Installing postman"
 wget https://dl.pstmn.io/download/latest/linux64 -O "${SCRIPT_DIR}/downloads/linux64"
 sudo tar -xvf "${SCRIPT_DIR}/downloads/linux64" -C /usr/bin
 
-# TODO: Add to .bashrc
-export PATH=$PATH:/usr/bin/Postman
-
 # Setup desktop shortcut
 {
     echo "[Desktop Entry]"
