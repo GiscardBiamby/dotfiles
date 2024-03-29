@@ -1,14 +1,34 @@
 #!/bin/bash
 
+# Get the directory of this script so that we can reference paths correctly no matter which folder
+# the script was launched from:
+SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "SCRIPT_DIR: ${SCRIPT_DIR}"
+source "${SCRIPT_DIR}/../util.sh"
+
 # https://code.visualstudio.com/docs/setup/linux
 echo "⌨️  Installing VSCode"
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+pushd "${SCRIPT_DIR}/downloads"
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
+popd
 sudo apt install -y apt-transport-https
 sudo apt update
 sudo apt install -y code
-rm microsoft.gpg
+
+# Debian and moving files to trash
+#
+# If you see an error when deleting files from the VS Code Explorer on the Debian operating system,
+# it might be because the trash implementation that VS Code is using is not there.
+sudo apt install gvfs libglib2.0-bin
+
+## Not sure if I want this or not. gedit or whatever small editor is nicer to open text files from
+## the ubuntu file explorer:
+# sudo update-alternatives --set editor /usr/bin/code
+
+
 function install() {
     name="${1}"
     code --install-extension ${name} --force
