@@ -24,7 +24,7 @@ sudo apt install -y code
 # it might be because the trash implementation that VS Code is using is not there.
 sudo apt install gvfs libglib2.0-bin
 
-## Not sure if I want this or not. gedit or whatever small editor is nicer to open text files from
+## Not sure if I want this or not. gedit or whatever small default editor is nicer to open text files from
 ## the ubuntu file explorer:
 # sudo update-alternatives --set editor /usr/bin/code
 
