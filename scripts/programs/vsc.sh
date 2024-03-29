@@ -38,7 +38,6 @@ function install() {
 install 2ndshift.fresh-material
 install aaron-bond.better-comments
 install AffenWiesel.matlab-formatter
-install ban.spellright
 install batisteo.vscode-django
 install betwo.vscode-linux-binary-preview
 install charliermarsh.ruff
