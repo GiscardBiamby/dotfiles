@@ -398,6 +398,7 @@
         "TYPECHECK",
         "typer",
         "tzip",
+        "udev",
         "ultralytics",
         "unchipped",
         "UNFOIL",
@@ -441,8 +442,10 @@
         "ymin",
         "yolo",
         "yolov",
+        "yubico",
         "yubikey",
-        "zfill"
+        "zfill",
+        "zotero"
     ],
     "diffEditor.diffAlgorithm": "advanced",
     "diffEditor.ignoreTrimWhitespace": false,

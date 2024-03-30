@@ -4,6 +4,7 @@
 # the script was launched from:
 SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "SCRIPT_DIR: ${SCRIPT_DIR}"
+# shellcheck disable=SC1091
 source "${SCRIPT_DIR}/../util.sh"
 
 # https://support.yubico.com/hc/en-us/articles/360013708900-Using-Your-U2F-YubiKey-with-Linux

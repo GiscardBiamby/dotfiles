@@ -4,8 +4,8 @@
 # the script was launched from:
 SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "SCRIPT_DIR: ${SCRIPT_DIR}"
+# shellcheck disable=SC1091
 source "${SCRIPT_DIR}/../util.sh"
-
 
 echo "Installing veracrypt"
 

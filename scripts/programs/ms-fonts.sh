@@ -4,6 +4,7 @@
 # the script was launched from:
 SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "SCRIPT_DIR: ${SCRIPT_DIR}"
+# shellcheck disable=SC1091
 source "${SCRIPT_DIR}/../util.sh"
 
 # https://www.pcworld.com/article/2863497/how-to-install-microsoft-fonts-in-linux-office-suites.html
