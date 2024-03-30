@@ -8,6 +8,8 @@ echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 source "${SCRIPT_DIR}/../util.sh"
 
 echo "🕪 Installing noisetorch 🕪"
+# THis script follows a customized install procedure to get around nosuid issue mentioned here:
+# https://github.com/noisetorch/NoiseTorch/issues/341
 
 NOISETORCH_VERSION=$(wget -q -O - 'https://api.github.com/repos/noisetorch/NoiseTorch/releases/latest' \
     | jq -r '.name')
@@ -16,7 +18,7 @@ mkdir -p "${SCRIPT_DIR}/downloads/noisetorch"
 pushd "${SCRIPT_DIR}/downloads/noisetorch"
 
 echo "Downloading noisetorch version ${NOISETORCH_VERSION}"
-# Get latest release (this might be brittle)
+# Get latest release (this might be brittle -- api might change)
 # shellcheck disable=SC2046
 wget $(wget -q -O - 'https://api.github.com/repos/noisetorch/NoiseTorch/releases/latest' \
     | jq -r '.assets[] | select(.name | endswith(".tgz")).browser_download_url') \
