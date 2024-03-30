@@ -30,6 +30,7 @@ stow --target="${HOME}" bash
 stow --target="${HOME}" conda
 stow --target="${HOME}" direnv
 stow --target="${HOME}" git
+stow --target="${HOME}" shellcheck
 stow --target="${HOME}" tmux
 stow --target="${HOME}" vim
 if [[ "${machine}" == "Linux" ]]; then
