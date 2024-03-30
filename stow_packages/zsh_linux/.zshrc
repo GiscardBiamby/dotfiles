@@ -227,7 +227,10 @@ fi
 
 # Customize the prompt to show directory:
 # PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %{%}%c%{%} $(git_prompt_info)"
-PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %F{blue}%~%f $(git_prompt_info)"
+export PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %F{blue}%~%f $(git_prompt_info)"
+
+# Display if login/interactive shell
+[[ $- == *i* ]] && echo 'Interactive shell' || echo 'Not interactive shell'
 
 # To profile the zsh load speed uncomment the top line and this bottom line:
 # zprof # bottom of .zshrc
