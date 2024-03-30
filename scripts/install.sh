@@ -26,6 +26,7 @@ install gnupg
 install gzip
 install htop
 install jq
+install libvirtiofsd
 install ncdu
 install net-tools
 install nmap
