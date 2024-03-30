@@ -225,5 +225,9 @@ if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
+# Customize the prompt to show directory:
+# PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %{%}%c%{%} $(git_prompt_info)"
+PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %F{blue}%~%f $(git_prompt_info)"
+
 # To profile the zsh load speed uncomment the top line and this bottom line:
 # zprof # bottom of .zshrc
