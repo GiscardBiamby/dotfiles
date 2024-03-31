@@ -58,11 +58,18 @@ install optipng
 install figlet
 install lolcat
 
+# TODO: Is this still needed now that we use zsh plugins?
 git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
 
 # Programs
 if [[ "${WORKSTATION}" == "workstation" ]]; then
+    # Fix issue where if a security key is connected to the machine, Ubuntu login screens tries to
+    # ask you for a smartcard instead of letting you pick a user:
+    sudo -u gdm env -u XDG_RUNTIME_DIR \
+        -u DISPLAY DCONF_PROFILE=gdm dbus-run-session \
+        gsettings set org.gnome.login-screen enable-smartcard-authentication false
+
     # For workstation (meaning I want all command line + GUI apps), run all scripts in
     # ./scripts/programs/:
     for f in programs/*.sh; do bash "./$f" -H; done
