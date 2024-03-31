@@ -4,15 +4,12 @@ A nice dotfiles repo example: <https://github.com/anishathalye/dotfiles/blob/mas
 
 Based on: <https://github.com/victoriadrake/dotfiles>
 
-My preferred starting configuration for Ubuntu Desktop. Current version 20.04 Focal Fossa.
-
-The [installation script included](./scripts/install.sh) will install a suggested serving of programs and applications, found within the `scripts/` directory. Please verify that you want these before running the script.
+My preferred starting configuration for Ubuntu Desktop. Current version 23.10 Mantic. This includes dotfiles as well as software install scripts for mac and linux.
 
 Add or delete files in `scripts/install.sh` and `scripts/programs/` to modify your installation.
 
 ## Usage
 
-After installing your fresh OS, do:
 
 ```sh
 # Change default shell to zsh:
@@ -20,14 +17,13 @@ sudo chsh -s /bin/zsh $USER
 sudo apt install git -y
 ```
 
-Use nano to create any SSH keys you need to access GitHub, and remember to run `eval "$(ssh-agent)"` and then `ssh-add`, as well as `chmod 600 <key_name>`. Then clone this repository:
+Setup `~/.ssh/` keys for GitHub, and remember to run `eval "$(ssh-agent)"` and then `ssh-add`, as well as `chmod 600 <private_key_name>` / `chmod 644 <pub_key_name>`. Then clone this repository:
 
 ```sh
-git clone git@github.com:GiscardBiamby/dotfiles.git
-git submodule update --init --recursive
+git clone git@github.com:GiscardBiamby/dotfiles.git --recurse-submodules
 
 # OR use HTTPS
-git clone https://github.com/GiscardBiamby/dotfiles.git
+git clone https://github.com/GiscardBiamby/dotfiles.git --recurse-submodules
 ```
 
 Close Firefox if it's open, then run the installation script.
@@ -46,12 +42,9 @@ cd dotfiles/scripts/
 ./install.sh "workstation"
 ```
 
-Uncomment the relevant lines in `.bashrc`, then restart your terminal to see changes, or run:
+Restart your terminal or `source ~/.zshrc` to see changes.
 
-```sh
-cd ~
-source .zshrc
-```
+There are some weird things happening with nvm that I haven't looked into yet. But it can block diff-so-fancy from installing correctly, forcing you to install in manually.
 
 ## Manual Steps
 

@@ -39,13 +39,23 @@ stow --target="${HOME}" shellcheck
 stow --target="${HOME}" tmux
 stow --target="${HOME}" vim
 stow --target="${HOME}" vscode
+
 if [[ "${machine}" == "Linux" ]]; then
     stow --target="${HOME}" kitty
     stow --target="${HOME}" zsh_linux
+
+    hostname=$(hostname)
+    echo "hostname: $hostname"
+    if [[ $hostname == brb* ]]; then
+        echo "STOWING"
+        sudo stow --target="/usr/share" usr_share
+    fi
 fi
 if [[ "${machine}" == "Mac" ]]; then
     stow --target="${HOME}" zsh
 fi
+
+
 popd
 
 
