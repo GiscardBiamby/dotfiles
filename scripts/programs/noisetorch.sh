@@ -54,7 +54,7 @@ set -e
 #         Voice activation threshold (default -1)
 #   -u    Unload supressor
 
-noisetorch \\
+/opt/noisetorch/bin/noisetorch \\
     -s alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_04_09_55304-00.iec958-stereo \\
     -i -o \\
     -t 75
@@ -66,17 +66,22 @@ chmod +x ./noisetorch_autostart.sh
 sudo mv ./noisetorch_autostart.sh /usr/local/bin/noisetorch_autostart.sh
 
 echo "Add autostart entry"
-cat - > ~/.config/autostart/noisetorch.desktop <<EOT
+cat - > ~/.config/autostart/noisetorch_autostart.desktop <<EOT
 [Desktop Entry]
-Type=Application
+Comment[en_US]=noisetorch_autostart
+Comment=noisetorch_autostart
 Exec=/usr/local/bin/noisetorch_autostart.sh
 Hidden=false
+Name[en_US]=noisetorch_autostart
+Name=noisetorch_autostart
 NoDisplay=false
+StartupNotify=False
+Terminal=false
+Type=Application
 X-GNOME-Autostart-enabled=true
-Name[en_US]=noisetorch
-Name=noisetorch
-Comment[en_US]=noisetorch
-Comment=noisetorch
 EOT
+cp ~/.config/autostart/noisetorch_autostart.desktop ~/.local/share/applications/
 
 popd
+
+echo "Finished noisetorch install."
