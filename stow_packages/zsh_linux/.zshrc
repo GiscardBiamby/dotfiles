@@ -1,3 +1,5 @@
+# zmodload zsh/zprof # top of your .zshrc file
+
 # For Tilix:
 # https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
 # On Ubuntu you probably need a symlink for vte.sh in order for the below line to work:
@@ -6,7 +8,6 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte.sh
 fi
 
-# zmodload zsh/zprof # top of your .zshrc file
 
 # .zshrc is for interactive shells. You set options for the interactive shell there with the setopt
 # and unsetopt commands. You can also load shell modules, set your history options, change your
@@ -25,7 +26,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="random"
 # ZSH_THEME="apple"
-ZSH_THEME="robbyrussell"
+ZSH_THEME="gbiamby"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -64,7 +65,7 @@ ZSH_THEME="robbyrussell"
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -133,10 +134,8 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
 fi
 
 
-
 autoload -Uz compinit
-# Do auto complete cache once every 24hr. The original code (commented out line)
-# slows down zsh startup time by a lot:
+# Do auto complete cache once every 24hr. The original code slows down zsh startup time by a lot:
 for dump in ~/.zcompdump(N.mh+24); do
     compinit
 done
@@ -166,7 +165,11 @@ else
 fi
 
 ## PATH
-export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
+if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
+    export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
+else
+    echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
+fi
 # Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
 path=(
     "/usr/local/ossh/bin"
@@ -227,7 +230,7 @@ fi
 
 # Customize the prompt to show directory:
 # PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %{%}%c%{%} $(git_prompt_info)"
-export PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %F{blue}%~%f $(git_prompt_info)"
+# export PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %F{blue}%~%f $(git_prompt_info)"
 
 # Display if login/interactive shell
 [[ $- == *i* ]] && echo 'Interactive shell' || echo 'Not interactive shell'
