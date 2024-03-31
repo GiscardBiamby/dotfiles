@@ -35,3 +35,5 @@ sudo mv "${yubi_dir}" /usr/local/bin/
 popd
 echo "Installing yubikey authenticator desktop integration"
 "/usr/local/bin/${yubi_dir}/desktop_integration.sh" -i
+
+echo "Finished Yubikey installation. For more details on linking yubikey to your ubuntu account see: https://support.yubico.com/hc/en-us/articles/360016649099-Ubuntu-Linux-Login-Guide-U2F"
