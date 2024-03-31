@@ -23,16 +23,22 @@ case "${unameOut}" in
 esac
 echo "${machine}"
 
-
+# Install stow packages
+mkdir -p "${HOME}/.config"
 pushd "${PROJ_ROOT}/stow_packages"
 stow --target="${HOME}" ag
 stow --target="${HOME}" bash
+stow --target="${HOME}" chrome
+stow --target="${HOME}" chromium
 stow --target="${HOME}" conda
 stow --target="${HOME}" direnv
 stow --target="${HOME}" git
+stow --target="${HOME}" omz
+stow --target="${HOME}" ripgrep
 stow --target="${HOME}" shellcheck
 stow --target="${HOME}" tmux
 stow --target="${HOME}" vim
+stow --target="${HOME}" vscode
 if [[ "${machine}" == "Linux" ]]; then
     stow --target="${HOME}" kitty
     stow --target="${HOME}" zsh_linux
@@ -42,22 +48,6 @@ if [[ "${machine}" == "Mac" ]]; then
 fi
 popd
 
-mkdir -p "${HOME}/.config"
-stow -v --target="${HOME}/.config" --dir="${PROJ_ROOT}/stow_packages" chrome
-stow -v --target="${HOME}/.oh-my-zsh" --dir="${PROJ_ROOT}/stow_packages" omz
-
-# Manage vscode settings and keybindings if vscode is installed:
-pushd "${PROJ_ROOT}/.config/Code"
-if [[ -d "${HOME}/.config/Code/User" ]]; then
-    stow --target="${HOME}/.config/Code/User" User
-fi
-popd
-
-pushd "${PROJ_ROOT}/.config"
-if [[ -d "${HOME}/.config/Code" ]]; then
-    stow --target="${HOME}/.config/Code" Code
-fi
-popd
 
 pushd "${PROJ_ROOT}/.local/share"
 if [[ -d "${HOME}/.local/share/jupyter" ]]; then

@@ -382,6 +382,7 @@
         "symlink",
         "tenumerate",
         "termcolor",
+        "Tilix",
         "timeit",
         "timm",
         "tini",
@@ -445,7 +446,9 @@
         "yubico",
         "yubikey",
         "zfill",
-        "zotero"
+        "zmodload",
+        "zotero",
+        "zprof"
     ],
     "diffEditor.diffAlgorithm": "advanced",
     "diffEditor.ignoreTrimWhitespace": false,
