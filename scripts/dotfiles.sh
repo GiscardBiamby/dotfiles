@@ -42,6 +42,10 @@ if [[ "${machine}" == "Mac" ]]; then
 fi
 popd
 
+mkdir -p "${HOME}/.config"
+stow -v --target="${HOME}/.config" --dir="${PROJ_ROOT}/stow_packages" chrome
+stow -v --target="${HOME}/.oh-my-zsh" --dir="${PROJ_ROOT}/stow_packages" omz
+
 # Manage vscode settings and keybindings if vscode is installed:
 pushd "${PROJ_ROOT}/.config/Code"
 if [[ -d "${HOME}/.config/Code/User" ]]; then
