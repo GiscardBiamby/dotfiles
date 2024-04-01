@@ -47,8 +47,11 @@ if [[ "${machine}" == "Linux" ]]; then
     hostname=$(hostname)
     echo "hostname: $hostname"
     if [[ $hostname == brb* ]]; then
-        echo "STOWING"
-        sudo stow --target="/usr/share" usr_share
+        echo "STOWING brb specific files into /usr/..."
+        sudo stow --target="/usr/share" usr_share --adopt
+        sudo stow --target="/usr/local" usr_local --adopt
+        sudo desktop-file-install /usr/share/applications/code.desktop
+        sudo desktop-file-install /usr/share/applications/code-url-handler.desktop
     fi
 fi
 if [[ "${machine}" == "Mac" ]]; then

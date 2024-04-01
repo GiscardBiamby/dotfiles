@@ -40,31 +40,31 @@ alias mv='mv -v'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 # alias code='code --enable-features=UseOzonePlatform --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto --ozone-platform=wayland'
-function run_vscode() {
-    local file="${1:-}"
-    echo "launching code"
-    echo "${file}"
-    /usr/bin/code \
-        --enable-features=UseOzonePlatform \
-        --ozone-platform=wayland \
-        --enable-features=WaylandWindowDecorations \
-        --ozone-platform-hint=auto \
-        --enable-gpu-rasterization \
-        --enable-native-gpu-memory-buffers \
-        --enable-features=VaapiVideoDecoder \
-        --enable-features=VaapiVideoEncoder \
-        --enable-accelerated-video \
-        --enable-accelerated-video-decode \
-        --enable-accelerated-mjpeg-decode \
-        --enable-unsafe-webgpu \
-        --enable-zero-copy \
-        --enable-raw-draw \
-        --enable-oop-rasterization \
-        --enable-gpu-compositing \
-        --enable-skia-graphite \
-        --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
-        --use-vulkan \
-        --enable-gpu-memory-buffer-compositor-resources \
-        --unity-launch "${file}"
-}
-alias code='run_vscode'
+# function run_vscode() {
+#     local file="${1:-}"
+#     echo "launching code"
+#     echo "${file}"
+#     /usr/bin/code \
+#         --enable-features=UseOzonePlatform \
+#         --ozone-platform=wayland \
+#         --enable-features=WaylandWindowDecorations \
+#         --ozone-platform-hint=auto \
+#         --enable-gpu-rasterization \
+#         --enable-native-gpu-memory-buffers \
+#         --enable-features=VaapiVideoDecoder \
+#         --enable-features=VaapiVideoEncoder \
+#         --enable-accelerated-video \
+#         --enable-accelerated-video-decode \
+#         --enable-accelerated-mjpeg-decode \
+#         --enable-unsafe-webgpu \
+#         --enable-zero-copy \
+#         --enable-raw-draw \
+#         --enable-oop-rasterization \
+#         --enable-gpu-compositing \
+#         --enable-skia-graphite \
+#         --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
+#         --use-vulkan \
+#         --enable-gpu-memory-buffer-compositor-resources \
+#         --unity-launch "${file}"
+# }
+alias code='/usr/local/bin/launch_vscode.sh'

@@ -2,6 +2,15 @@
     "folders": [
         {
             "path": "."
+        },
+        {
+            "path": "../.config"
+        },
+        {
+            "path": "../.local"
+        },
+        {
+            "path": "../../../usr/share/applications"
         }
     ],
     "settings": {
