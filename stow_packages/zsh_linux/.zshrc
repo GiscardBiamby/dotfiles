@@ -70,7 +70,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -100,14 +100,16 @@ plugins=(
     fzf
     gcloud
     git
-    git-prompt
+    # This makes the zsh prompt really slow when you're in a git repo. We replace it
+    # with git-branch-name (which has to be manually installed)
+    # git-prompt
     gitignore
     git-extras
     git-lfs
-    gpg-agent
+    # gpg-agent
     history
-    keychain
-    nvm
+    # keychain
+    # nvm
     # npm
     pip
     python
@@ -132,7 +134,10 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
     echo "Loading zsh plugin: yt-dlp"
     plugins+=(yt-dlp)
 fi
-
+function git_prompt_info() {
+    ref=$(git-branch-name -q -h 12 -b 64) || return
+    echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}${ZSH_THEME_GIT_PROMPT_CLEAN}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+}
 
 autoload -Uz compinit
 # Do auto complete cache once every 24hr. The original code slows down zsh startup time by a lot:
@@ -146,15 +151,10 @@ compinit -C
 # able to find ssh-agent. If ssh-agent is already running, keychain will ensure that your id_rsa
 # private key has been added to ssh-agent and then set up your environment so that ssh can find the
 # already-running ssh-agent.
-zstyle :omz:plugins:keychain agents gpg,ssh
-zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
+# zstyle :omz:plugins:keychain agents gpg,ssh
+# zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev
 
 source $ZSH/oh-my-zsh.sh
-
-# ssh
-# eval `keychain --eval id_ed25519 id_rsa-bairdev`
-# eval $(ssh-agent -s)
-# ssh-add ~/.ssh/id_rsa-bairdev
 
 
 # Preferred editor for local and remote sessions
@@ -183,6 +183,9 @@ path=(
 # Manually install noisetorch. Still need to load the app and activate it after each startup.
 if [ -d "/opt/noisetorch/bin" ] ; then
     path+="/opt/noisetorch/bin"
+fi
+if [[ -d "${HOME}/local/bin" ]]; then
+    path+="${HOME}/local/bin"
 fi
 
 # >>> conda initialize >>>
