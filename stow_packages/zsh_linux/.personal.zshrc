@@ -172,6 +172,7 @@ else
 fi
 # Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
 path=(
+    "${HOME}/local/bin"
     "/usr/local/ossh/bin"
     "/usr/local/krb5/bin"
     "/usr/local/bin"
@@ -180,13 +181,7 @@ path=(
     "/usr/bin/Postman/app"
     $path
 )
-# Manually install noisetorch. Still need to load the app and activate it after each startup.
-if [ -d "/opt/noisetorch/bin" ] ; then
-    path+="/opt/noisetorch/bin"
-fi
-if [[ -d "${HOME}/local/bin" ]]; then
-    path+="${HOME}/local/bin"
-fi
+
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -234,6 +229,7 @@ if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
+# Load modules
 set +e
 module load cseinit
 module load cse/cmake/latest

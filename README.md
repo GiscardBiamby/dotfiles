@@ -7,13 +7,23 @@
 sudo chsh -s /bin/zsh $USER
 ```
 
-```sh
+Run through the cpan setup, just accept the defaults. This will setup perl environment vars and local perl modules lib
+
+```bash
+cpan
+# launch "cpan" and run:
+install Test::Output
+```
+
+Clone the repo and install omz and dotfiles:
+
+```bash
 git clone git@github.com:GiscardBiamby/dotfiles.git --recurse-submodules
 cd dotfiles
 git checkout hpc
 
 # Install omz:
-~/dotfiles/scripts/oh-my-zsh.sh
+~/dotfiles/scripts/programs/oh-my-zsh.sh
 
 # Install zsh plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -23,12 +33,16 @@ git clone https://github.com/clavelm/yt-dlp-omz-plugin.git ${ZSH_CUSTOM:-~/.oh-m
 
 rsync -auh --ignore-existing ~/dotfiles/stow_packages/stow/local/ ~/local/
 exec zsh
+path+="${HOME}/local/bin"; export PATH
 ~/dotfiles/scripts/dotfiles.sh
 ```
 
 __install fast version of git-branch-name, and use this instead of the git-prompt zsh plugin__
 (don't need it's part of dotfiles)
+
 ```bash
+mkdir -p ~/local/src
+cd ~/local/src
 git clone https://github.com/notfed/git-branch-name
 cd git-branch-name
 make

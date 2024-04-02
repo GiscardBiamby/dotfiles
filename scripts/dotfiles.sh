@@ -21,7 +21,7 @@ case "${unameOut}" in
     MSYS_NT*)   machine=Git;;
     *)          machine="UNKNOWN:${unameOut}"
 esac
-echo "${machine}"
+echo "Machine: ${machine}"
 
 # Install stow packages
 mkdir -p "${HOME}/.config"
@@ -41,23 +41,12 @@ stow --target="${HOME}" tmux
 stow --target="${HOME}" vim
 stow --target="${HOME}" vscode
 
-if [[ "${machine}" == "Linux" ]]; then
-    stow --target="${HOME}" kitty
-    stow --target="${HOME}" zsh_linux
+stow --target="${HOME}" kitty
+stow --target="${HOME}" zsh_linux
 
-    hostname=$(hostname)
-    echo "hostname: $hostname"
-    if [[ $hostname == brb* ]]; then
-        echo "STOWING brb specific files into /usr/..."
-        sudo stow --target="/usr/share" usr_share --adopt
-        sudo stow --target="/usr/local" usr_local --adopt
-        sudo desktop-file-install /usr/share/applications/code.desktop
-        sudo desktop-file-install /usr/share/applications/code-url-handler.desktop
-    fi
-fi
-if [[ "${machine}" == "Mac" ]]; then
-    stow --target="${HOME}" zsh
-fi
+hostname=$(hostname)
+echo "hostname: $hostname"
+
 
 
 popd
