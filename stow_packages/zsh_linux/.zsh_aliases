@@ -68,3 +68,4 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 #         --unity-launch "${file}"
 # }
 alias code='/usr/local/bin/launch_vscode.sh'
+alias git_log="git log --graph --color --oneline --branches"

@@ -130,10 +130,10 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/conda-zsh-completion ]]; then
     echo "Loading zsh plugin: conda-zsh-completion"
     plugins+=(conda-zsh-completion)
 fi
-if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
-    echo "Loading zsh plugin: yt-dlp"
-    plugins+=(yt-dlp)
-fi
+# if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
+#     echo "Loading zsh plugin: yt-dlp"
+#     plugins+=(yt-dlp)
+# fi
 function git_prompt_info() {
     ref=$(git-branch-name -q -h 12 -b 64) || return
     echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}${ZSH_THEME_GIT_PROMPT_CLEAN}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
