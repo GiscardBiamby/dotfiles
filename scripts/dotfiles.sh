@@ -11,18 +11,6 @@ pushd "${SCRIPT_DIR}"
 python3 backup_dotfiles.py
 popd
 
-# Detect machine
-unameOut="$(uname -s)"
-case "${unameOut}" in
-    Linux*)     machine=Linux;;
-    Darwin*)    machine=Mac;;
-    CYGWIN*)    machine=Cygwin;;
-    MINGW*)     machine=MinGw;;
-    MSYS_NT*)   machine=Git;;
-    *)          machine="UNKNOWN:${unameOut}"
-esac
-echo "Machine: ${machine}"
-
 # Install stow packages
 mkdir -p "${HOME}/.config"
 pushd "${PROJ_ROOT}/stow_packages"
