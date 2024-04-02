@@ -187,20 +187,20 @@ fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/${USER}/mambaforge/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+__conda_setup="$('${HOME}/mambaforge/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/${USER}/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/home/${USER}/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "${HOME}/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "${HOME}/mambaforge/etc/profile.d/conda.sh"
     else
-        export PATH="/home/${USER}/mambaforge/bin:$PATH"
+        export PATH="${HOME}/mambaforge/bin:$PATH"
     fi
 fi
 unset __conda_setup
 
-if [ -f "/home/${USER}/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/home/${USER}/mambaforge/etc/profile.d/mamba.sh"
+if [ -f "${HOME}/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "${HOME}/mambaforge/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
 export PATH
@@ -211,6 +211,9 @@ eval "$(direnv hook zsh)"
 # Load machine-specific .zshrc_local if one exists (it's not managed by stow):
 if [[ -f "$HOME/.zshrc_local" ]]; then
     . "$HOME/.zshrc_local"
+fi
+if [[ -f "$HOME/.zshrc_${HOSTNAME}" ]]; then
+    . "$HOME/.zshrc_${HOSTNAME}"
 fi
 
 # Shell Options
@@ -233,7 +236,7 @@ fi
 # export PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %F{blue}%~%f $(git_prompt_info)"
 
 # Display if login/interactive shell
-[[ $- == *i* ]] && echo 'Interactive shell' || echo 'Not interactive shell'
+# [[ $- == *i* ]] && echo 'Interactive shell' || echo 'Not interactive shell'
 
 # To profile the zsh load speed uncomment the top line and this bottom line:
 # zprof # bottom of .zshrc
