@@ -234,6 +234,11 @@ if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
+set +e
+module load cseinit
+module load cse/cmake/latest
+set -e
+
 # Customize the prompt to show directory:
 # PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %{%}%c%{%} $(git_prompt_info)"
 # export PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %F{blue}%~%f $(git_prompt_info)"
