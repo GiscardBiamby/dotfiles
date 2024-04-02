@@ -49,7 +49,7 @@
     attributesfile = ~/.gitattributes
 
 	# editor = code --wait
-    editor = nano
+    editor = vim
 
     excludesfile = ~/.gitignore_global
 
@@ -68,7 +68,7 @@
     fscache = true
 
     #Configuring git to use diff-so-fancy
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	# pager = diff-so-fancy | less --tabs=4 -RFX
 
 [diff]
     # Use more time to create better diffs.
@@ -163,9 +163,9 @@
 
 [pager]
     color = true
-    diff = diff-so-fancy | less --tabs=1,5 -RFX
-    log = diff-so-fancy | less --tabs=1,5 -RFX
-    show = diff-so-fancy | less --tabs=1,5 -RFX
+    # diff = diff-so-fancy | less --tabs=1,5 -RFX
+    # log = diff-so-fancy | less --tabs=1,5 -RFX
+    # show = diff-so-fancy | less --tabs=1,5 -RFX
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
