@@ -33,6 +33,7 @@ stow --target="${HOME}" chromium
 stow --target="${HOME}" conda
 stow --target="${HOME}" direnv
 stow --target="${HOME}" git
+stow --target="${HOME}" local_bin
 stow --target="${HOME}" omz
 stow --target="${HOME}" ripgrep
 stow --target="${HOME}" shellcheck
