@@ -52,7 +52,7 @@ function get_file_count() {
 }
 
 function sync_dir() {
-    # TL;DR; Copy missing, don't touch files on the target if they already exist
+    # TL;DR; Copy dir (replace files if source!=target )
 
     # Sync one dir to another, showing progress, resume if possible. This function ensures that the
     # files are synced rather than the folder itself being transferred. The third parameter is
@@ -93,7 +93,7 @@ function sync_dir() {
     #     the source. It tells rsync to delete extraneous files from the target directory—those
     #     files that are not present in the source directory. This ensures that the target directory
     #     only contains files that are present in the source directory.
-    rsync -auh --ignore-existing --info=progress2 --no-inc-recursive "${flags}" "${src}" "${target}"
+    rsync -auh --info=progress2 --no-inc-recursive "${src}" "${target}"
 }
 
 function mirror_dir() {

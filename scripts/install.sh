@@ -32,6 +32,7 @@ install net-tools
 install nmap
 install silversearcher-ag
 install pandoc
+install piper
 install pigz
 install python-is-python3
 install shellcheck
