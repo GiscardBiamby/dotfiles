@@ -242,3 +242,7 @@ function kill_vscode_server() {
     # Delete related files and folder
     rm -rf $HOME/.vscode-server # Or ~/.vscode-server-insiders
 }
+
+function get_interactive_node() {
+    qsub -l select=1:ncpus=128:mpiprocs=128:ngpus=2 -A "${ACCOUNT}" -q debug -l walltime=000:30:00 -I
+}

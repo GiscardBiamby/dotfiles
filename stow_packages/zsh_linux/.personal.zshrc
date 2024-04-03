@@ -152,11 +152,6 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
 ## PATH
-if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
-    export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
-else
-    echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
-fi
 # Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
 path=(
     "${HOME}/local/bin"
