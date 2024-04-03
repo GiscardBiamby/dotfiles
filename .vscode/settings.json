@@ -17,21 +17,6 @@
         "./mal/mal"
     ],
     "python.envFile": "${workspaceFolder}/.env",
-    "python.formatting.blackArgs": [
-        "--line-length",
-        "100"
-    ],
-    "python.formatting.provider": "black",
-    "python.linting.enabled": true,
-    "python.linting.flake8Args": [
-        "--verbose"
-    ],
-    "python.linting.flake8Enabled": true,
-    "python.linting.pylintArgs": [
-        "--generated-members=numpy.* ,torch.* ,cv2.* , cv.*",
-        "--rcfile=${workspaceFolder}/code/.pylintrc"
-    ],
-    "python.linting.pylintEnabled": true,
     "python.testing.pytestEnabled": false,
     "python.testing.unittestArgs": [
         "-v",
@@ -42,14 +27,6 @@
     ],
     "python.testing.unittestEnabled": false,
     "rewrap.wrappingColumn": 100,
-    "spellright.language": [
-        "en_US"
-    ],
-    "spellright.documentTypes": [
-        "markdown",
-        "latex",
-        "plaintext"
-    ],
     "peacock.color": "#909ca7",
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#acb5be",

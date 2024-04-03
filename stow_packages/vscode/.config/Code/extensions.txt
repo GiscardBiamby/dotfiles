@@ -1,6 +1,5 @@
 install 2ndshift.fresh-material
 install aaron-bond.better-comments
-install ban.spellright
 install batisteo.vscode-django
 install Bauke.horizon-vscode
 install betwo.vscode-linux-binary-preview
