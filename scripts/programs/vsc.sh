@@ -38,12 +38,10 @@ function install() {
 
 install 2ndshift.fresh-material
 install aaron-bond.better-comments
-install AffenWiesel.matlab-formatter
 install batisteo.vscode-django
 install betwo.vscode-linux-binary-preview
 install charliermarsh.ruff
 install christian-kohler.path-intellisense
-install clarkyu.vscode-sql-beautify
 install codezombiech.gitignore
 install DavidAnson.vscode-markdownlint
 install dcasella.monokai-plusplus
@@ -58,8 +56,6 @@ install esbenp.prettier-vscode
 install euskadi31.json-pretty-printer
 install foxundermoon.shell-format
 install george-alisson.html-preview-vscode
-install Gimly81.matlab
-install GitHub.vscode-pull-request-github
 install gruntfuggly.todo-tree
 install guyskk.language-cython
 install hedinne.popping-and-locking-vscode
@@ -98,7 +94,6 @@ install ms-vscode-remote.remote-ssh-edit
 install ms-vscode-remote.remote-wsl
 install ms-vscode-remote.vscode-remote-extensionpack
 install ms-vscode.cpptools
-install ms-vscode.makefile-tools
 install ms-vscode.remote-explorer
 install ms-vscode.Theme-TomorrowKit
 install ms-vsliveshare.vsliveshare
@@ -121,7 +116,6 @@ install shd101wyy.markdown-preview-enhanced
 install spikespaz.vscode-smoothtype
 install stkb.rewrap
 install streetsidesoftware.code-spell-checker
-install stuart.unique-window-colors
 install TakumiI.markdowntable
 install tamasfe.even-better-toml
 install technosophos.vscode-make
