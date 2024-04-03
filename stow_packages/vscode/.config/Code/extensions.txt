@@ -3,9 +3,7 @@ install aaron-bond.better-comments
 install batisteo.vscode-django
 install Bauke.horizon-vscode
 install betwo.vscode-linux-binary-preview
-install bungcip.better-toml
 install christian-kohler.path-intellisense
-install clarkyu.vscode-sql-beautify
 install codezombiech.gitignore
 install CoenraadS.bracket-pair-colorizer-2
 install DavidAnson.vscode-markdownlint
@@ -13,12 +11,10 @@ install dcasella.monokai-plusplus
 install donjayamanne.githistory
 install dunstontc.vscode-docker-syntax
 install EditorConfig.EditorConfig
-install Equinusocio.vsc-community-material-theme
 install Equinusocio.vsc-material-theme
 install equinusocio.vsc-material-theme-icons
 install esbenp.prettier-vscode
 install foxundermoon.shell-format
-install GitHub.vscode-pull-request-github
 install Gruntfuggly.todo-tree
 install guyskk.language-cython
 install hedinne.popping-and-locking-vscode
@@ -64,12 +60,10 @@ install richie5um2.vscode-sort-json
 install ryu1kn.partial-diff
 install sabertazimi.latex-snippets
 install sallar.vscode-duotone-dark
-install Shan.code-settings-sync
 install shardulm94.trailing-spaces
 install spikespaz.vscode-smoothtype
 install stkb.rewrap
 install streetsidesoftware.code-spell-checker
-install stuart.unique-window-colors
 install TakumiI.markdowntable
 install tinaciousdesign.theme-tinaciousdesign
 install tommorris.mako
