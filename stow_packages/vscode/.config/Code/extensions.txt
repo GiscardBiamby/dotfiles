@@ -1,6 +1,5 @@
 install 2ndshift.fresh-material
 install aaron-bond.better-comments
-install AffenWiesel.matlab-formatter
 install ban.spellright
 install batisteo.vscode-django
 install Bauke.horizon-vscode
@@ -20,7 +19,6 @@ install Equinusocio.vsc-material-theme
 install equinusocio.vsc-material-theme-icons
 install esbenp.prettier-vscode
 install foxundermoon.shell-format
-install Gimly81.matlab
 install GitHub.vscode-pull-request-github
 install Gruntfuggly.todo-tree
 install guyskk.language-cython

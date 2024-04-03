@@ -38,7 +38,6 @@ function install() {
 
 install 2ndshift.fresh-material
 install aaron-bond.better-comments
-install AffenWiesel.matlab-formatter
 install batisteo.vscode-django
 install betwo.vscode-linux-binary-preview
 install charliermarsh.ruff
@@ -58,7 +57,6 @@ install esbenp.prettier-vscode
 install euskadi31.json-pretty-printer
 install foxundermoon.shell-format
 install george-alisson.html-preview-vscode
-install Gimly81.matlab
 install GitHub.vscode-pull-request-github
 install gruntfuggly.todo-tree
 install guyskk.language-cython
@@ -98,7 +96,6 @@ install ms-vscode-remote.remote-ssh-edit
 install ms-vscode-remote.remote-wsl
 install ms-vscode-remote.vscode-remote-extensionpack
 install ms-vscode.cpptools
-install ms-vscode.makefile-tools
 install ms-vscode.remote-explorer
 install ms-vscode.Theme-TomorrowKit
 install ms-vsliveshare.vsliveshare
