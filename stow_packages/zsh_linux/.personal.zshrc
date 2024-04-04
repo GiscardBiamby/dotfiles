@@ -93,42 +93,35 @@ plugins=(
     colorize
     # conda-zsh-completion
     # copybuffer
-    # direnv
-    # docker
+    direnv
+    docker
     # docker-compose
     # extract
     # fzf
     # gcloud
-    # git
-    # gitignore
-    # git-extras
-    # git-lfs
-    # history
-    # pip
-    # python
-    # rsync
+    git
+    gitignore
+    git-extras
+    git-lfs
+    history
+    pip
+    python
+    rsync
     # tmux
 )
-# Load custom plugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
-# if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
-#     echo "Loading zsh plugin: zsh-autosuggestions"
-#     plugins+=(zsh-autosuggestions)
-# fi
-# if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
-#     echo "Loading zsh plugin: zsh-syntax-highlighting"
-#     plugins+=(zsh-syntax-highlighting)
-# fi
-# if [[ -d ~/.oh-my-zsh/custom/plugins/conda-zsh-completion ]]; then
-#     echo "Loading zsh plugin: conda-zsh-completion"
-#     plugins+=(conda-zsh-completion)
-# fi
-
-function git_prompt_info() {
-    ref = ""
-    echo ""
-    # ref=$(git-branch-name -q -h 12 -b 64) || return
-    echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}${ZSH_THEME_GIT_PROMPT_CLEAN}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
-}
+Load custom plugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
+if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
+    echo "Loading zsh plugin: zsh-autosuggestions"
+    plugins+=(zsh-autosuggestions)
+fi
+if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
+    echo "Loading zsh plugin: zsh-syntax-highlighting"
+    plugins+=(zsh-syntax-highlighting)
+fi
+if [[ -d ~/.oh-my-zsh/custom/plugins/conda-zsh-completion ]]; then
+    echo "Loading zsh plugin: conda-zsh-completion"
+    plugins+=(conda-zsh-completion)
+fi
 
 autoload -Uz compinit
 # Do auto complete cache once every 24hr. The original code slows down zsh startup time by a lot:

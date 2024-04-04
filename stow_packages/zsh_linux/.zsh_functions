@@ -243,6 +243,10 @@ function kill_vscode_server() {
     rm -rf $HOME/.vscode-server # Or ~/.vscode-server-insiders
 }
 
-function get_interactive_node() {
+function get_ml_mode_pbs() {
+    # TODO: fix this. How do you differentiate between viz and mla nodes here?
     qsub -l select=1:ncpus=128:mpiprocs=128:ngpus=2 -A "${ACCOUNT}" -q debug -l walltime=000:30:00 -I
+}
+function get_viz_node_slurm() {
+    srun --pty --gres=gpu:a40:1 -q debug -A "${ACCOUNT}" -C viz --time=00:60:00 bash -i
 }
