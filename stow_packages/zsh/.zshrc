@@ -148,12 +148,12 @@ fi
 ## PATH
 # Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
 path=(
+    "~/local/bin"
     "/usr/local/ossh/bin"
     "/usr/local/krb5/bin"
     "/usr/local/bin"
     "/usr/local/sbin"
     "~/bin"
-    "/usr/bin/Postman/app"
     $path
 )
 # Manually install noisetorch. Still need to load the app and activate it after each startup.
