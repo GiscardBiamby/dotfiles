@@ -737,7 +737,6 @@
     "remote.SSH.useFlock": false,
     "remote.SSH.path": "/usr/local/ossh/bin/ssh",
     "remote.SSH.connectTimeout": 30,
-    "workbench.startupEditor": "none",
     "remote.SSH.defaultExtensions": [
         "aaron-bond.better-comments",
         "charliermarsh.ruff",

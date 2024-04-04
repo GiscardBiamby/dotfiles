@@ -10,3 +10,4 @@ StartupNotify=true
 Categories=Utility;TextEditor;Development;IDE;
 MimeType=x-scheme-handler/vscode;
 Keywords=vscode;
+X-Desktop-File-Install-Version=0.26

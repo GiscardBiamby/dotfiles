@@ -1,7 +1,7 @@
 #!/bin/bash
 # file="${1}"
-echo "${1}"
-echo "Lauching with ${1}"
+echo "${@}"
+echo "Lauching with ${@}" >> "/home/gbiamby/code.log"
 /usr/bin/code \
     --enable-features=UseOzonePlatform \
     --ozone-platform=wayland \
@@ -23,5 +23,5 @@ echo "Lauching with ${1}"
     --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
     --use-vulkan \
     --enable-gpu-memory-buffer-compositor-resources \
-    --unity-launch "${1}"
+    --new-window "${@}"
 

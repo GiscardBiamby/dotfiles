@@ -12,10 +12,7 @@
         "**/XDG_CACHE_HOME": true,
         "**/__pycache__/**": true
     },
-    "jupyter.allowUnauthorizedRemoteConnection": true,
-    "python.analysis.extraPaths": [
-        "./mal/mal"
-    ],
+    "python.analysis.extraPaths": [],
     "python.envFile": "${workspaceFolder}/.env",
     "python.testing.pytestEnabled": false,
     "python.testing.unittestArgs": [
@@ -27,32 +24,4 @@
     ],
     "python.testing.unittestEnabled": false,
     "rewrap.wrappingColumn": 100,
-    "peacock.color": "#909ca7",
-    "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#acb5be",
-        "activityBar.activeBorder": "#ee90bb",
-        "activityBar.background": "#acb5be",
-        "activityBar.foreground": "#15202b",
-        "activityBar.inactiveForeground": "#15202b99",
-        "activityBarBadge.background": "#bf4080",
-        "activityBarBadge.foreground": "#e7e7e7",
-        "sash.hoverBorder": "#acb5be",
-        "statusBar.background": "#909ca7",
-        "statusBar.foreground": "#15202b",
-        "statusBarItem.hoverBackground": "#748390",
-        "statusBarItem.remoteBackground": "#909ca7",
-        "statusBarItem.remoteForeground": "#15202b",
-        "titleBar.activeBackground": "#909ca7",
-        "titleBar.activeForeground": "#15202b",
-        "titleBar.inactiveBackground": "#909ca799",
-        "titleBar.inactiveForeground": "#15202b99",
-        "commandCenter.border": "#15202b99",
-        "editorGroup.border": "#acb5be",
-        "panel.border": "#acb5be",
-        "sideBar.border": "#acb5be",
-        "statusBar.debuggingBackground": "#a79b90",
-        "statusBar.debuggingForeground": "#15202b",
-        "tab.activeBorder": "#acb5be"
-    },
-    "peacock.remoteColor": "#1857a4",
 }

@@ -242,3 +242,10 @@ function kill_vscode_server() {
     # Delete related files and folder
     rm -rf $HOME/.vscode-server # Or ~/.vscode-server-insiders
 }
+
+function restart_pipewire() {
+    # Sometimes my audio gets scratchy, and has weird echos and reverb. Seems to happen after wake
+    # from sleep. This fixes it without having to reboot.
+    systemctl --user restart pipewire.service
+    systemctl --user restart pipewire-pulse.service
+}
