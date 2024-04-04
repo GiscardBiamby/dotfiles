@@ -109,7 +109,7 @@ plugins=(
     rsync
     # tmux
 )
-Load custom plugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
+# Load custom plugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
 if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
     echo "Loading zsh plugin: zsh-autosuggestions"
     plugins+=(zsh-autosuggestions)
