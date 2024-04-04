@@ -33,6 +33,7 @@ stow --target="${HOME}" chromium
 stow --target="${HOME}" conda
 stow --target="${HOME}" direnv
 stow --target="${HOME}" git
+stow --target="${HOME}" jupyter --restow
 stow --target="${HOME}" omz
 stow --target="${HOME}" ripgrep
 stow --target="${HOME}" shellcheck
@@ -63,17 +64,6 @@ fi
 popd
 
 
-pushd "${PROJ_ROOT}/.local/share"
-if [[ -d "${HOME}/.local/share/jupyter" ]]; then
-    stow --target="${HOME}/.local/share/jupyter" jupyter
-fi
-popd
-
-pushd "${PROJ_ROOT}/.jupyter"
-if [[ -d "${HOME}/.jupyter" ]]; then
-    stow --target="${HOME}/.jupyter/nbconfig" nbconfig
-fi
-popd
 
 # pushd "${PROJ_ROOT}/stow_packages/vim"
 # stow --target="${HOME}/.vim" .vim
