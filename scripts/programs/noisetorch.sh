@@ -37,6 +37,7 @@ set -e
 
 # The device_id
 # "alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_04_09_55304-00.iec958-stereo"
+# "alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_04_09_55304-00.analog-stereo"
 # comes from running "noisetorch -l"
 
 # Usage of noisetorch:
@@ -54,8 +55,10 @@ set -e
 #         Voice activation threshold (default -1)
 #   -u    Unload supressor
 
+# Query this so we get whatever is currently enabled (eitherthe analog or the digital device)
+yeti_id=$(noisetorch -l | grep -i "alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone" | sed 's/Device ID://')
 /opt/noisetorch/bin/noisetorch \\
-    -s alsa_input.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2020_04_09_55304-00.iec958-stereo \\
+    -s ${yeti_id} \\
     -i -o \\
     -t 75
 
