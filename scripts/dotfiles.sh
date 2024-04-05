@@ -34,6 +34,7 @@ stow --target="${HOME}" conda
 stow --target="${HOME}" direnv
 stow --target="${HOME}" git
 stow --target="${HOME}" jupyter --restow
+stow --adopt --target="${HOME}" obsidian
 stow --target="${HOME}" omz
 stow --target="${HOME}" ripgrep
 stow --target="${HOME}" shellcheck
@@ -50,10 +51,10 @@ if [[ "${machine}" == "Linux" ]]; then
     echo "hostname: $hostname"
     if [[ $hostname == brb* ]]; then
         echo "STOWING brb specific files into /usr/..."
-        sudo stow --target="/usr/share" usr_share --adopt
+        # sudo stow --target="/usr/share" usr_share --adopt
         sudo stow --target="/usr/local" usr_local --adopt
-        sudo desktop-file-install /usr/share/applications/code.desktop
-        sudo desktop-file-install /usr/share/applications/code-url-handler.desktop
+        sudo desktop-file-install ~/.local/share/applications/code.desktop
+        sudo desktop-file-install ~/.local/share/applications/code-url-handler.desktop
     fi
 fi
 if [[ "${machine}" == "Mac" ]]; then
