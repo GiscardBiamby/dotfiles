@@ -248,5 +248,9 @@ function get_ml_mode_pbs() {
     qsub -l select=1:ncpus=128:mpiprocs=128:ngpus=2 -A "${ACCOUNT}" -q debug -l walltime=000:30:00 -I
 }
 function get_viz_node_slurm() {
-    srun --pty --gres=gpu:a40:1 -q debug -A "${ACCOUNT}" -C viz --time=00:60:00 bash -i
+    if [[ $BC_HOST == "nautilus" ]]; then
+        srun --pty --gres=gpu:a40:1 -q debug -A "${ACCOUNT}" -C viz --time=00:30:00 bash -i
+    else
+        srun --pty --gres=gpu:a40:1 -q debug -A "${ACCOUNT}" -C viz --time=00:60:00 bash -i
+    fi
 }
