@@ -1,5 +1,4 @@
-host_short=$(hostname | cut -d'.' -f1)
-PROMPT="%(?:%{$fg_bold[green]%}%1{➜%} :%{$fg_bold[red]%}%1{➜%} ) ${host_short}:%{$fg[cyan]%}%~%{$reset_color%}"
+PROMPT="%(?:%{$fg_bold[green]%}%1{➜%} :%{$fg_bold[red]%}%1{➜%} ) ${SHORT_HOST}:%{$fg[cyan]%}%~%{$reset_color%}"
 # PROMPT+=' $(git_prompt_info)> '
 # PROMPT+=' $(~/local/bin/git-branch-name)> '
 ref=$(~/local/bin/git-branch-name -q -h 6 -b 20) || return
