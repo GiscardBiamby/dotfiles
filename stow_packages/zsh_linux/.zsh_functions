@@ -24,6 +24,11 @@ function ssh_fix() {
     ssh-add
 }
 
+function ppgrep() {
+    # pgrep but with better output, e.g., process name:
+    pgrep "$@" | xargs --no-run-if-empty ps fp
+}
+
 function user_disk_space() {
     df -h --output=target,used /home/* | sed 1d | sort -k2 -h
 }

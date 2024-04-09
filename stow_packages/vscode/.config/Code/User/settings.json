@@ -29,7 +29,8 @@
         }
     },
     "[python]": {
-        "editor.formatOnType": true
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
     },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -144,6 +145,8 @@
         "coldstart",
         "conda",
         "consts",
+        "contig",
+        "contigs",
         "Conv",
         "convd",
         "convolutional",
@@ -151,6 +154,7 @@
         "coronavirus",
         "covid",
         "cpan",
+        "cpus",
         "ctdet",
         "cthu",
         "cuda",
@@ -165,6 +169,7 @@
         "datalake",
         "datapoints",
         "datasets",
+        "DCMAKE",
         "dconf",
         "dconfig",
         "dealscore",
@@ -220,6 +225,7 @@
         "gpus",
         "graceluo",
         "Graciarena",
+        "gres",
         "groupby",
         "hackathon",
         "heatmap",
@@ -243,6 +249,7 @@
         "iscrowd",
         "isdecimal",
         "isin",
+        "isna",
         "isort",
         "iterrows",
         "itertools",
@@ -260,6 +267,7 @@
         "Kirill",
         "Kitware",
         "kmeans",
+        "kmer",
         "KPI's",
         "kube",
         "kubectl",
@@ -275,6 +283,7 @@
         "matplotlib",
         "maxormin",
         "medifor",
+        "mers",
         "microservice",
         "Mingyang",
         "miniconda",
@@ -300,7 +309,10 @@
         "nltk",
         "noqa",
         "norecursedirs",
+        "nprocs",
+        "ntasks",
         "numpy",
+        "nunique",
         "onnx",
         "opencv",
         "operationalized",
@@ -322,6 +334,7 @@
         "pretrained",
         "printf",
         "probs",
+        "PROCS",
         "protobuf",
         "psutil",
         "Psychographics",
@@ -369,10 +382,12 @@
         "rtype",
         "s",
         "savez",
+        "SBATCH",
         "scipy",
         "scrollback",
         "segm",
         "segmentations",
+        "SEGSIZE",
         "semafor",
         "semaforprogram",
         "serializable",
@@ -383,6 +398,7 @@
         "Slurm",
         "Snopes",
         "sqlalchemy",
+        "srun",
         "submitit",
         "submodule",
         "subscore",
@@ -419,6 +435,7 @@
         "unrar",
         "unsequestered",
         "unsqueeze",
+        "UPCXX",
         "uritools",
         "vaallocb",
         "VAALPP",
@@ -432,6 +449,7 @@
         "visdrone",
         "visualnews",
         "vitb",
+        "vitl",
         "vmcondev",
         "vocoding",
         "vscode's",
@@ -478,7 +496,6 @@
     "editor.guides.bracketPairs": "active",
     "editor.largeFileOptimizations": false,
     "editor.maxTokenizationLineLength": 200000,
-    "editor.minimap.autohide": true,
     "editor.minimap.showSlider": "always",
     "editor.mouseWheelScrollSensitivity": 2,
     "editor.mouseWheelZoom": true,
@@ -619,6 +636,26 @@
         {
             "name": "DarkPurp",
             "value": "#190777"
+        },
+        {
+            "name": "Moon Knight",
+            "value": "#bdb4ca"
+        },
+        {
+            "name": "Lime",
+            "value": "#8fae12"
+        },
+        {
+            "name": "Eden Green",
+            "value": "#092e38"
+        },
+        {
+            "name": "Highlighter Yellow",
+            "value": "#d2e06c"
+        },
+        {
+            "name": "Barbie",
+            "value": "#da2fbd"
         }
     ],
     "python.analysis.autoImportCompletions": true,
@@ -835,5 +872,6 @@
         "ziyasal.vscode-open-in-github",
     ],
     "terminal.integrated.cursorStyle": "line",
-    "slurm-dashboard.job-dashboard.showJobInfo": true
+    "slurm-dashboard.job-dashboard.showJobInfo": true,
+    "editor.minimap.autohide": true,
 }
