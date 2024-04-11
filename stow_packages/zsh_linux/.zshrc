@@ -172,6 +172,8 @@ else
 fi
 # Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
 path=(
+    "${HOME}/.local/bin"
+    "${HOME}/local/bin"
     "/usr/local/ossh/bin"
     "/usr/local/krb5/bin"
     "/usr/local/bin"

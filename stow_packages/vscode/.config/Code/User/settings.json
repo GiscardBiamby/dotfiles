@@ -877,4 +877,7 @@
     "slurm-dashboard.job-dashboard.showJobInfo": true,
     "editor.minimap.autohide": true,
     "slurm-dashboard.job-dashboard.refreshInterval": 30,
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
 }
