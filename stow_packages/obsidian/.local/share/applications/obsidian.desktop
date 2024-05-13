@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Obsidian
-Exec=/bin/bash -c "export OBSIDIAN_USE_WAYLAND=1 /opt/Obsidian/obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland %U"
+# Exec=/bin/bash -c "export OBSIDIAN_USE_WAYLAND=1 /opt/Obsidian/obsidian --enable-features=UseOzonePlatform --ozone-platform=wayland %U"
+Exec=/opt/Obsidian/obsidian
 Terminal=false
 Type=Application
 Icon=obsidian
