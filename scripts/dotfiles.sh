@@ -41,15 +41,14 @@ stow --target="${HOME}" shellcheck
 stow --target="${HOME}" tmux
 stow --target="${HOME}" vim
 stow --target="${HOME}" vscode
-stow --target="${HOME}" zoom
+# stow --target="${HOME}" zoom
 
 if [[ "${machine}" == "Linux" ]]; then
-    stow --target="${HOME}" kitty
     stow --target="${HOME}" zsh_linux
 
     hostname=$(hostname)
     echo "hostname: $hostname"
-    if [[ $hostname == brb* ]]; then
+    if [[ $hostname == brb* || $hostname == ub* ]]; then
         echo "STOWING brb specific files into /usr/..."
         # sudo stow --target="/usr/share" usr_share --adopt
         sudo stow --target="/usr/local" usr_local --adopt

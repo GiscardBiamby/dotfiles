@@ -45,12 +45,18 @@ echo "Lauching with ${1}"
 #     --unity-launch "${1}"
 
 # Trying this starting with 2024-05-13
-/usr/bin/code \
-    --enable-features=UseOzonePlatform \
-    --ozone-platform=wayland \
-    --enable-features=WaylandWindowDecorations \
-    --ozone-platform-hint=auto \
+# /usr/bin/code \
+#     --enable-features=UseOzonePlatform \
+#     --ozone-platform=wayland \
+#     --enable-features=WaylandWindowDecorations \
+#     --ozone-platform-hint=auto \
+#     --enable-gpu-rasterization \
+#     --enable-native-gpu-memory-buffers \
+#     --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
+#     --unity-launch "${1}"
+
+
+# 2024-08-02: For use on ubxx VMs (which don't use wayland):
+/usr/bin/code  \
     --enable-gpu-rasterization \
-    --enable-native-gpu-memory-buffers \
-    --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
     --unity-launch "${1}"
