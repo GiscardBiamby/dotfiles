@@ -1,7 +1,7 @@
 #!/bin/bash
 # file="${1}"
 echo "${@}"
-echo "Lauching with ${@}" >> "/home/gbiamby/code.log"
+echo "Lauching with ${@}" >>"/home/gbiamby/code.log"
 # /usr/bin/code \
 #     --enable-features=UseOzonePlatform \
 #     --ozone-platform=wayland \
@@ -44,8 +44,7 @@ echo "Lauching with ${@}" >> "/home/gbiamby/code.log"
 #     --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
 #     --new-window "${@}"
 
-
-# Trying this starting with 2024-05-13
+# # Trying this starting with 2024-05-13
 # /usr/bin/code \
 #     --enable-features=UseOzonePlatform \
 #     --ozone-platform=wayland \
@@ -56,8 +55,22 @@ echo "Lauching with ${@}" >> "/home/gbiamby/code.log"
 #     --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
 #     --new-window "${@}"
 
-
-# 2024-08-02: For use on ubxx VMs (which don't use wayland):
-/usr/bin/code  \
-    --enable-gpu-rasterization \
-    --new-window "${@}"
+if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+    # * Trying this starting on 2024-08-01
+    # * Removed RawDraw from --enable-features, as with vscode version that I updated to today (1.92.0)
+    # * it breaks the rendering for vscode (blank window)
+    /usr/bin/code \
+        --enable-features=UseOzonePlatform \
+        --ozone-platform=wayland \
+        --enable-features=WaylandWindowDecorations \
+        --ozone-platform-hint=auto \
+        --enable-gpu-rasterization \
+        --enable-native-gpu-memory-buffers \
+        --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder \
+        --new-window "${@}"
+else
+    # * 2024-08-02: For use on ubxx VMs (which don't use wayland):
+    /usr/bin/code \
+        --enable-gpu-rasterization \
+        --new-window "${@}"
+fi

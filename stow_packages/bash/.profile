@@ -29,4 +29,3 @@ fi
 # # Only on workstations, maybe need a separate include
 # export PATH=$PATH:/usr/bin/Postman
 [ -f "/usr/bin/Postman" ] && export PATH="$PATH:/usr/bin/Postman"
-

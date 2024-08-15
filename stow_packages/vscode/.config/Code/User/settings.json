@@ -21,7 +21,8 @@
         "editor.defaultFormatter": "mathematic.vscode-latex"
     },
     "[markdown]": {
-        "editor.defaultFormatter": "mervin.markdown-formatter",
+        // "editor.defaultFormatter": "mervin.markdown-formatter",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.quickSuggestions": {
             "comments": true,
             "other": true,
@@ -304,6 +305,8 @@
         "mkdir",
         "mmbt",
         "mmdet",
+        "mmdetection",
+        "mmengine",
         "mmsegmentation",
         "mobilenetv",
         "moco",
@@ -406,6 +409,7 @@
         "rtype",
         "s",
         "sacctmgr",
+        "sahi",
         "savez",
         "SBATCH",
         "scipy",
@@ -438,6 +442,7 @@
         "Suzie",
         "Suzie's",
         "symlink",
+        "TDINO",
         "tenumerate",
         "termcolor",
         "textvqa",
@@ -454,6 +459,7 @@
         "trainvae",
         "trainval",
         "trainvalno",
+        "Tuya",
         "twosix",
         "TYPECHECK",
         "typer",
@@ -482,6 +488,7 @@
         "visdrone",
         "visualnews",
         "vitb",
+        "vitdet",
         "vitl",
         "vmcondev",
         "vocoding",
@@ -794,7 +801,7 @@
         "titleBar.activeBackground": "#1F491D",
         "titleBar.activeForeground": "#F5FBF5"
     },
-    "workbench.colorTheme": "Tinacious Design",
+    "workbench.colorTheme": "Tomorrow Night Eighties",
     "workbench.editor.empty.hint": "hidden",
     "workbench.editor.enablePreview": true,
     "workbench.editor.highlightModifiedTabs": true,
@@ -910,4 +917,8 @@
     "[cpp]": {
         "editor.defaultFormatter": "ms-vscode.cpptools"
     },
+    "scm.showChangesSummary": false,
+    "scm.showIncomingChanges": "never",
+    "scm.showOutgoingChanges": "never",
+    "files.autoSaveDelay": 500,
 }
