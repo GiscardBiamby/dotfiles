@@ -428,6 +428,7 @@
         "setuptools",
         "Shilliday",
         "shutil",
+        "simdjson",
         "slidevqa",
         "Slurm",
         "Snopes",
@@ -711,7 +712,11 @@
     "remote.SSH.remotePlatform": {
         "angler": "linux",
         "nautilus": "linux",
-        "raider": "linux"
+        "raider": "linux",
+        "raider.afrl.hpc.mil": "linux",
+        "cthulhu5": "linux",
+        "jormungandr": "linux",
+        "dgx": "linux"
     },
     "remote.SSH.showLoginTerminal": true,
     "rewrap.wrappingColumn": 88,
@@ -921,4 +926,11 @@
     "scm.showIncomingChanges": "never",
     "scm.showOutgoingChanges": "never",
     "files.autoSaveDelay": 500,
+    "scm.showHistoryGraph": false,
+    "remote.SSH.defaultForwardedPorts": [],
+    "remote.SSH.useLocalServer": false,
+    "remote.SSH.serverPickPortsFromRange": {
+        "raider": "39660-39699"
+    },
+    "auto-scroll.enabled": false,
 }

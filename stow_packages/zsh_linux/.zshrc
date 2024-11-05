@@ -174,7 +174,6 @@ fi
 path=(
     "${HOME}/.local/bin"
     "${HOME}/local/bin"
-    "/usr/local/ossh/bin"
     "/usr/local/krb5/bin"
     "/usr/local/bin"
     "/usr/local/sbin"
