@@ -18,6 +18,7 @@ sudo apt update
 # Workstation only
 install anki
 install calibre
+install cifs-utils
 install cpu-checker
 install exfat-fuse
 install exfat-utils
@@ -30,6 +31,7 @@ install gparted
 install gscan2pdf
 install imwheel
 install kdiskmark
+install keyutils
 install nedit
 install okular
 install openssh-client
