@@ -167,8 +167,8 @@ fi
 ## PATH
 if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
     export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
-else
-    echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
+# else
+#     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
 fi
 # Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
 path=(
@@ -178,7 +178,7 @@ path=(
     "/usr/local/bin"
     "/usr/local/sbin"
     "~/bin"
-    "/usr/bin/Postman/app"
+    # "/usr/bin/Postman/app"
     $path
 )
 # Manually install noisetorch. Still need to load the app and activate it after each startup.

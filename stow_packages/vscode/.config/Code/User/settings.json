@@ -806,7 +806,7 @@
         "titleBar.activeBackground": "#1F491D",
         "titleBar.activeForeground": "#F5FBF5"
     },
-    "workbench.colorTheme": "Tomorrow Night Eighties",
+    "workbench.colorTheme": "Tinacious Design",
     "workbench.editor.empty.hint": "hidden",
     "workbench.editor.enablePreview": true,
     "workbench.editor.highlightModifiedTabs": true,

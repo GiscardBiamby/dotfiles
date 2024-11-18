@@ -1,6 +1,11 @@
 #!/bin/bash
 
-. util.sh
+# Get the directory of this script so that we can reference paths correctly no matter which folder
+# the script was launched from:
+SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "SCRIPT_DIR: ${SCRIPT_DIR}"
+# shellcheck disable=SC1091
+source "${SCRIPT_DIR}/../util.sh"
 
 WORKSTATION=""
 if [[ "${1}" == "workstation" ]]; then
@@ -32,6 +37,7 @@ install net-tools
 install nmap
 install silversearcher-ag
 install pandoc
+install pip
 install piper
 install pigz
 install python-is-python3
@@ -63,6 +69,12 @@ install lolcat
 git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
 
+pushd "${SCRIPT_DIR}/../stow_packages/vim"
+git submodule update --init --recursive --remote
+popd
+
+pushd "${SCRIPT_DIR}"
+
 # Programs
 if [[ "${WORKSTATION}" == "workstation" ]]; then
     # Fix issue where if a security key is connected to the machine, Ubuntu login screens tries to
@@ -86,12 +98,14 @@ else
     bash ./programs/nvm-npm-node-packages.sh -H
     pip install gitup
 fi
+if [[ $hostname == ydrag* ]]; then
+    bash ./programs/tools_server.sh -H
+    bash ./programs/docker.sh -H
+fi
 
 # Pull submodules (e.g., used in vim/.vim/ for plugins):
-git submodule update --init --recursive
+git submodule update --init --recursive --remote
 # git submodule update --remote --merge
-# # TO update the submodules(only one is needed, but what's the difference/which is better?):
-# git submodule update --recursive --remote
 
 
 # Use GNU stow to deploy all the dotfiles:
@@ -101,7 +115,7 @@ bash ./dotfiles.sh -H
 #
 # Note: it seems like i still have to run this step manually for some reason, to get diff-so-fancy
 # to work
-source ~/.bash_profile
+source ~/.zshrc
 nvm use node
 npm install -g diff-so-fancy
 
