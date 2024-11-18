@@ -89,11 +89,11 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    ag
+    # ag
     colorize
     conda-zsh-completion
     copybuffer
-    direnv
+    # direnv
     docker
     docker-compose
     extract
@@ -207,7 +207,7 @@ fi
 export PATH
 
 
-eval "$(direnv hook zsh)"
+# eval "$(direnv hook zsh)"
 
 # Load machine-specific .zshrc_local if one exists (it's not managed by stow):
 if [[ -f "$HOME/.zshrc_local" ]]; then
