@@ -716,7 +716,9 @@
         "raider.afrl.hpc.mil": "linux",
         "cthulhu5": "linux",
         "jormungandr": "linux",
-        "dgx": "linux"
+        "dgx": "linux",
+        "ydrag": "linux",
+        "brb": "linux"
     },
     "remote.SSH.showLoginTerminal": true,
     "rewrap.wrappingColumn": 88,
