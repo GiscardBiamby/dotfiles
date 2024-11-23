@@ -9,10 +9,10 @@ source "${SCRIPT_DIR}/../util.sh"
 
 
 echo "Installing workstation tools"
-sudo add-apt-repository ppa:solaar-unifying/ppa -y
-sudo apt-add-repository universe -y
-sudo add-apt-repository ppa:jonmagon/kdiskmark -y
-sudo add-apt-repository ppa:tomtomtom/yt-dlp -y
+sudo add-apt-repository -y ppa:solaar-unifying/ppa
+sudo apt-add-repository -y universe
+sudo add-apt-repository -y ppa:jonmagon/kdiskmark
+sudo add-apt-repository -y ppa:tomtomtom/yt-dlp
 sudo apt update
 
 # Workstation only

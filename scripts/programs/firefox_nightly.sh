@@ -18,5 +18,5 @@ wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | gpg --dearmo
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/packages.mozilla.org.gpg] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null
 
 ## Install
-sudo apt-get update && sudo apt-get install firefox-nightly
+sudo apt-get update && sudo apt-get install -y firefox-nightly
 

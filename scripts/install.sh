@@ -5,7 +5,7 @@
 SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 # shellcheck disable=SC1091
-source "${SCRIPT_DIR}/../util.sh"
+source "${SCRIPT_DIR}/util.sh"
 
 WORKSTATION=""
 if [[ "${1}" == "workstation" ]]; then
@@ -17,7 +17,7 @@ fi
 sudo apt update -y
 
 # git
-add-apt-repository ppa:git-core/ppa
+add-apt-repository -y ppa:git-core/ppa
 sudo apt update
 
 # Common

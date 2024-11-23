@@ -8,6 +8,6 @@ echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 source "${SCRIPT_DIR}/../util.sh"
 
 echo "🖌 Installing Pinta"
-sudo add-apt-repository ppa:pinta-maintainers/pinta-stable
+sudo add-apt-repository -y ppa:pinta-maintainers/pinta-stable
 sudo apt update
-sudo apt-get install pinta
+sudo apt-get install -y pinta

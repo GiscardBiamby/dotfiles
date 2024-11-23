@@ -14,5 +14,5 @@ wget \
     -O "${SCRIPT_DIR}/downloads/slack-desktop-4.36.140-amd64.deb"
 sudo dpkg -i "${SCRIPT_DIR}/downloads/slack-desktop-4.36.140-amd64.deb"
 sudo apt-get update
-sudo apt-get upgrade slack-desktop
+sudo apt-get upgrade -y slack-desktop
 rm "${SCRIPT_DIR}/downloads/slack*.deb"

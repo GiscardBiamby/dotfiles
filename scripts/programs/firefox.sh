@@ -11,7 +11,7 @@ source "${SCRIPT_DIR}/../util.sh"
 echo "🦊 Installing Firefox"
 # Instructions from here on how to install ad .deb instead of snap:
 # https://www.omgubuntu.co.uk/2022/04/how-to-install-firefox-deb-apt-ubuntu-22-04
-sudo add-apt-repository ppa:mozillateam/ppa
+sudo add-apt-repository -y ppa:mozillateam/ppa
 
 # Next, alter the Firefox package priority to ensure the PPA/deb/apt version of Firefox is
 # preferred. This can be done using a slither of code from FosTips (copy and paste it whole, not

@@ -9,6 +9,6 @@ source "${SCRIPT_DIR}/../util.sh"
 
 
 echo "🔐 Installing keepassxc"
-sudo add-apt-repository ppa:phoerious/keepassxc -y
+sudo add-apt-repository -y ppa:phoerious/keepassxc
 sudo apt update
 install keepassxc

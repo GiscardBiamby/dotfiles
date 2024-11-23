@@ -18,7 +18,7 @@ echo " Installing pipewire, wireplumber, and bluetooth codecs"
 # https://www.reddit.com/r/Ubuntu/comments/qbw4pc/aptx_aptx_hd_ldac_bluetooth_codec_pulseaudio_150/
 
 # Install Bluetooth codecs AAC/LDAC/AptX:
-sudo apt install \
+sudo apt install -y \
     libfdk-aac2 \
     libldacbt-{abr,enc}2 \
     libopenaptx0
@@ -29,7 +29,7 @@ sudo apt install \
 #
 #Notice '-' at the end of 'pipewire-media-session'. This is to remove it in the same command,
 #because 'wireplumber' will be used instead.:
-sudo apt install \
+sudo apt install -y \
     libspa-0.2-bluetooth \
     libspa-0.2-jack \
     pipewire-audio-client-libraries \
