@@ -13,6 +13,23 @@ if [[ "${1}" == "workstation" ]]; then
     echo "Installing for WORKSTATION!"
 fi
 
+# Detect OS
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     OS_TYPE=Linux;;
+    Darwin*)    OS_TYPE=Mac;;
+    CYGWIN*)    OS_TYPE=Cygwin;;
+    MINGW*)     OS_TYPE=MinGw;;
+    MSYS_NT*)   OS_TYPE=Git;;
+    *)          OS_TYPE="UNKNOWN:${unameOut}"
+esac
+echo "${OS_TYPE}"
+
+if [[ "${OS_TYPE}" == "Linux" ]]; then
+    mkdir -p ~/local/bin
+    cp -r "${SCRIPT_DIR}/programs/binaries/amd64/home/local/bin/" ~/local/bin
+fi
+
 # Update Ubuntu and get standard repository programs
 sudo apt update -y
 

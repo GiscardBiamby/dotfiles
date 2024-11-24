@@ -6,3 +6,4 @@
 **/*.swp
 
 .zshrc_local
+*junk*

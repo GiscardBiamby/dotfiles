@@ -718,7 +718,8 @@
         "jormungandr": "linux",
         "dgx": "linux",
         "ydrag": "linux",
-        "brb": "linux"
+        "brb": "linux",
+        "sif": "linux"
     },
     "remote.SSH.showLoginTerminal": true,
     "rewrap.wrappingColumn": 88,
