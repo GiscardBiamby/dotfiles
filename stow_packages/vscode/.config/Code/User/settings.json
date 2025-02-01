@@ -1,6 +1,8 @@
 {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[dockercompose]": {
-        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+        //     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+        "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
@@ -31,7 +33,8 @@
     },
     "[python]": {
         "editor.formatOnType": true,
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "diffEditor.ignoreTrimWhitespace": true
     },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -529,7 +532,6 @@
     "editor.copyWithSyntaxHighlighting": false,
     "editor.cursorBlinking": "smooth",
     "editor.cursorSmoothCaretAnimation": "on",
-    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.detectIndentation": false,
     "editor.fastScrollSensitivity": 9,
     "editor.fontFamily": "'Source Code Pro','Droid Sans Mono', 'monospace', monospace, Menlo, Monaco, 'Courier New'",
@@ -552,7 +554,8 @@
         ".pylintrc": "ini",
         ".desktop": "ini",
         ".slurm": "bash",
-        ".out": "text"
+        ".out": "text",
+        "docker-compose.y*ml": "yaml"
     },
     "files.autoSave": "afterDelay",
     "files.exclude": {
@@ -719,7 +722,8 @@
         "dgx": "linux",
         "ydrag": "linux",
         "brb": "linux",
-        "sif": "linux"
+        "sif": "linux",
+        "d6": "linux"
     },
     "remote.SSH.showLoginTerminal": true,
     "rewrap.wrappingColumn": 88,
@@ -936,4 +940,6 @@
         "raider": "39660-39699"
     },
     "auto-scroll.enabled": false,
+    "explorer.confirmDragAndDrop": false,
+    "svg.preview.mode": "img",
 }

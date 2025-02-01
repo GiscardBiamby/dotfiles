@@ -255,6 +255,26 @@ function restart_pipewire() {
     systemctl --user restart pipewire-pulse.service
 }
 
+function restart_network() {
+    # Restart just brings the interface down and then up.
+    NIC_ID=enp85s0
+    sudo ip link set down "${NIC_ID}"
+    sudo ip link set up "${NIC_ID}"
+}
+
+function reset_network() {
+    # Restart is more comprehensive; includes reloading the network driver, flushing IP addresses,
+    # and routes and resetting the hardware itself.
+    # * (Identify the nic id by running `ifconfig -a`):
+    NIC_ID=enp85s0
+    # * Reload the network driver (identify the driver name by running `lshw -C network | grep driver`):
+    sudo modprobe -f atlantic
+    sudo modprobe atlantic
+    # * Restart networking service
+    sudo systemctl restart systemd-networkd
+
+}
+
 # function mount_cifs_example() {
 #     # Put a customized copy of this function into the local machine-specific .zprofiles:
 #     SHARE_NAME="SHARE_NAME"
