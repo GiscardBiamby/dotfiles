@@ -1,7 +1,9 @@
 #!/bin/bash
 # file="${1}"
-echo "${1}"
-echo "Lauching with ${1}"
+# echo "${1}"
+# echo "${@}"
+# echo "XDG_SESSION_TYPE: ${XDG_SESSION_TYPE}"
+# echo "Lauching with ${1}"
 # /usr/bin/code \
 #     --enable-features=UseOzonePlatform \
 #     --ozone-platform=wayland \
@@ -56,18 +58,44 @@ echo "Lauching with ${1}"
 #     --unity-launch "${1}"
 
 if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
-    # * Trying this starting on 2024-08-01
-    # * Removed RawDraw from --enable-features, as with vscode version that I updated to today (1.92.0)
-    # * it breaks the rendering for vscode (blank window)
+    # * For debugging, just launch without any flags:
+    # /usr/bin/code "${1}"
+
+    # * 2025-01-31 This works. You'll know it stops working if running `code ./some_file.txt` on the
+    # *  command line opens a new window (wrong) or if it opens the file in a new tab of an existing
+    # *  vs code window (correct)
+    # * Using any fo these BREAKS this setup:
+    # *     --use-vulkan
+    # *     --enable-gpu-memory-buffer-compositor-resources
+    # *     --enable-gpu-rasterization
     /usr/bin/code \
         --enable-features=UseOzonePlatform \
         --ozone-platform=wayland \
         --enable-features=WaylandWindowDecorations \
         --ozone-platform-hint=auto \
-        --enable-gpu-rasterization \
         --enable-native-gpu-memory-buffers \
-        --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder \
-        --unity-launch "${1}"
+        --enable-unsafe-webgpu \
+        --enable-zero-copy \
+        --enable-raw-draw \
+        --enable-gpu-rasterization \
+        --enable-oop-rasterization \
+        --canvas-oop-rasterization \
+        --enable-gpu-compositing \
+        --enable-skia-graphite \
+        --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
+        "${1}"
+    # * Trying this starting on 2024-08-01
+    # * Removed RawDraw from --enable-features, as with vscode version that I updated to today (1.92.0)
+    # * it breaks the rendering for vscode (blank window)
+    # /usr/bin/code \
+    #     --enable-features=UseOzonePlatform \
+    #     --ozone-platform=wayland \
+    #     --enable-features=WaylandWindowDecorations \
+    #     --ozone-platform-hint=auto \
+    #     --enable-gpu-rasterization \
+    #     --enable-native-gpu-memory-buffers \
+    #     --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder \
+    #     --unity-launch "${1}"
 else
     # 2024-08-02: For use on ubxx VMs (which don't use wayland):
     /usr/bin/code \
