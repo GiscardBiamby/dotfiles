@@ -171,11 +171,12 @@ if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
 #     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
 fi
 # Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
+# Disable the krb line in order for yubikey ssh auth to work (there must be a better way?):
 path=(
     "${HOME}/.local/bin"
     "${HOME}/local/bin"
-    # "/usr/local/krb5/bin"
     "/usr/local/bin"
+    # "/usr/local/krb5/bin"   
     "/usr/local/sbin"
     "~/bin"
     # "/usr/bin/Postman/app"

@@ -4,13 +4,13 @@
             "path": "."
         },
         {
-            "path": "../.config"
-        },
-        {
             "path": "../.local"
         },
         {
             "path": "../../../usr/share/applications"
+        },
+        {
+            "path": "../.config"
         }
     ],
     "settings": {
