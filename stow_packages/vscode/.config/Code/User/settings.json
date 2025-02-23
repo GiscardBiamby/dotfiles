@@ -33,14 +33,14 @@
     },
     "[python]": {
         "editor.formatOnType": true,
-        "editor.defaultFormatter": "ms-python.black-formatter",
-        "diffEditor.ignoreTrimWhitespace": true
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "diffEditor.ignoreTrimWhitespace": false
     },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
     },
     "[yaml]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "accessibility.signals.terminalBell": {
         "sound": "on"
@@ -237,6 +237,7 @@
         "hackathon",
         "heatmap",
         "heatmaps",
+        "hparams",
         "IESDS",
         "ifeq",
         "iloc",
@@ -325,6 +326,7 @@
         "nepochs",
         "neuropaths",
         "NGPUS",
+        "nhead",
         "Nitesh",
         "nltk",
         "NNODES",
@@ -419,6 +421,7 @@
         "scontrol",
         "scrollback",
         "sdist",
+        "sdpa",
         "segm",
         "segmentations",
         "segmentator",
@@ -463,6 +466,7 @@
         "trainvae",
         "trainval",
         "trainvalno",
+        "triu",
         "Tuya",
         "twosix",
         "TYPECHECK",
@@ -487,6 +491,8 @@
         "valminusminival",
         "Vandelay",
         "Vanter",
+        "vectorizing",
+        "vectorvlm",
         "venv",
         "vggoriginal",
         "visdrone",
@@ -522,6 +528,7 @@
         "yolov",
         "yubico",
         "yubikey",
+        "ZDIM",
         "zfill",
         "zmodload",
         "zotero",
@@ -604,7 +611,6 @@
     "git.supportCancellation": true,
     "git.terminalGitEditor": true,
     "git.untrackedChanges": "separate",
-    "isort.check": true,
     "isort.showNotifications": "onWarning",
     "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
     "jupyter.allowUnauthorizedRemoteConnection": true,
@@ -932,7 +938,7 @@
     "scm.showChangesSummary": false,
     "scm.showIncomingChanges": "never",
     "scm.showOutgoingChanges": "never",
-    "files.autoSaveDelay": 500,
+    "files.autoSaveDelay": 1500,
     "scm.showHistoryGraph": false,
     "remote.SSH.defaultForwardedPorts": [],
     "remote.SSH.useLocalServer": false,
@@ -942,4 +948,8 @@
     "auto-scroll.enabled": false,
     "explorer.confirmDragAndDrop": false,
     "svg.preview.mode": "img",
+    "github.copilot.advanced": {
+    
+    },
+    "editor.quickSuggestionsDelay": 100,
 }
