@@ -55,6 +55,9 @@ if [[ "${machine}" == "Linux" ]]; then
         sudo desktop-file-install ~/.local/share/applications/code.desktop
         sudo desktop-file-install ~/.local/share/applications/code-url-handler.desktop
     fi
+
+    mkdir "${HOME}/bin"
+    stow --target="${HOME}/bin" home_bin
 fi
 if [[ "${machine}" == "Mac" ]]; then
     stow --target="${HOME}" zsh
