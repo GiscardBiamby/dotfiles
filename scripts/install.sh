@@ -16,12 +16,12 @@ fi
 # Detect OS
 unameOut="$(uname -s)"
 case "${unameOut}" in
-    Linux*)     OS_TYPE=Linux;;
-    Darwin*)    OS_TYPE=Mac;;
-    CYGWIN*)    OS_TYPE=Cygwin;;
-    MINGW*)     OS_TYPE=MinGw;;
-    MSYS_NT*)   OS_TYPE=Git;;
-    *)          OS_TYPE="UNKNOWN:${unameOut}"
+    Linux*)     OS_TYPE=Linux ;;
+    Darwin*)    OS_TYPE=Mac ;;
+    CYGWIN*)    OS_TYPE=Cygwin ;;
+    MINGW*)     OS_TYPE=MinGw ;;
+    MSYS_NT*)   OS_TYPE=Git ;;
+    *)          OS_TYPE="UNKNOWN:${unameOut}" ;;
 esac
 echo "${OS_TYPE}"
 
@@ -73,7 +73,6 @@ install wget
 install xclip
 install zsh
 
-
 # Image processing
 install jpegoptim
 install optipng
@@ -84,7 +83,6 @@ install lolcat
 
 # TODO: Is this still needed now that we use zsh plugins?
 git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
-
 
 pushd "${SCRIPT_DIR}/../stow_packages/vim"
 git submodule update --init --recursive --remote
@@ -123,7 +121,6 @@ fi
 # Pull submodules (e.g., used in vim/.vim/ for plugins):
 git submodule update --init --recursive --remote
 # git submodule update --remote --merge
-
 
 # Use GNU stow to deploy all the dotfiles:
 bash ./dotfiles.sh -H

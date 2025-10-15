@@ -14,12 +14,12 @@ popd
 # Detect machine
 unameOut="$(uname -s)"
 case "${unameOut}" in
-    Linux*)     machine=Linux;;
-    Darwin*)    machine=Mac;;
-    CYGWIN*)    machine=Cygwin;;
-    MINGW*)     machine=MinGw;;
-    MSYS_NT*)   machine=Git;;
-    *)          machine="UNKNOWN:${unameOut}"
+    Linux*)     machine=Linux ;;
+    Darwin*)    machine=Mac ;;
+    CYGWIN*)    machine=Cygwin ;;
+    MINGW*)     machine=MinGw ;;
+    MSYS_NT*)   machine=Git ;;
+    *)          machine="UNKNOWN:${unameOut}" ;;
 esac
 echo "${machine}"
 
@@ -64,10 +64,7 @@ if [[ "${machine}" == "Mac" ]]; then
     stow --target="${HOME}" zsh
 fi
 
-
 popd
-
-
 
 # pushd "${PROJ_ROOT}/stow_packages/vim"
 # stow --target="${HOME}/.vim" .vim
