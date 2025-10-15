@@ -61,13 +61,10 @@ if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
     # * For debugging, just launch without any flags:
     # /usr/bin/code "${1}"
 
-    # * 2025-01-31 This works. You'll know it stops working if running `code ./some_file.txt` on the
-    # *  command line opens a new window (wrong) or if it opens the file in a new tab of an existing
-    # *  vs code window (correct)
-    # * Using any fo these BREAKS this setup:
-    # *     --use-vulkan
-    # *     --enable-gpu-memory-buffer-compositor-resources
-    # *     --enable-gpu-rasterization
+
+        # --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
+
+    ## 2025-03-09:
     /usr/bin/code \
         --enable-features=UseOzonePlatform \
         --ozone-platform=wayland \
@@ -82,8 +79,32 @@ if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
         --canvas-oop-rasterization \
         --enable-gpu-compositing \
         --enable-skia-graphite \
-        --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
+        --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder \
         "${1}"
+
+    # # * 2025-01-31 This works. You'll know it stops working if running `code ./some_file.txt` on the
+    # # *  command line opens a new window (wrong) or if it opens the file in a new tab of an existing
+    # # *  vs code window (correct)
+    # # * Using any fo these BREAKS this setup:
+    # # *     --use-vulkan
+    # # *     --enable-gpu-memory-buffer-compositor-resources
+    # # *     --enable-gpu-rasterization
+    # /usr/bin/code \
+    #     --enable-features=UseOzonePlatform \
+    #     --ozone-platform=wayland \
+    #     --enable-features=WaylandWindowDecorations \
+    #     --ozone-platform-hint=auto \
+    #     --enable-native-gpu-memory-buffers \
+    #     --enable-unsafe-webgpu \
+    #     --enable-zero-copy \
+    #     --enable-raw-draw \
+    #     --enable-gpu-rasterization \
+    #     --enable-oop-rasterization \
+    #     --canvas-oop-rasterization \
+    #     --enable-gpu-compositing \
+    #     --enable-skia-graphite \
+    #     --enable-features=WebRTCPipeWireCapturer,UseSkiaRenderer,VaapiVideoDecoder,CanvasOopRasterization,VaapiVideoEncoder,RawDraw \
+    #     "${1}"
     # * Trying this starting on 2024-08-01
     # * Removed RawDraw from --enable-features, as with vscode version that I updated to today (1.92.0)
     # * it breaks the rendering for vscode (blank window)

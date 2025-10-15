@@ -176,7 +176,7 @@ path=(
     "${HOME}/.local/bin"
     "${HOME}/local/bin"
     "/usr/local/bin"
-    # "/usr/local/krb5/bin"   
+    "/usr/local/krb5/bin" # needed for kerberos (kinit)
     "/usr/local/sbin"
     "~/bin"
     # "/usr/bin/Postman/app"

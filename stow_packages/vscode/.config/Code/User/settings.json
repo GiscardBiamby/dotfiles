@@ -33,7 +33,7 @@
     },
     "[python]": {
         "editor.formatOnType": true,
-        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.defaultFormatter": "ms-python.black-formatter",
         "diffEditor.ignoreTrimWhitespace": false
     },
     "[shellscript]": {
@@ -114,6 +114,7 @@
         "ARPU",
         "Arslan",
         "artigraph",
+        "asgardgb",
         "astrazeneca",
         "astype",
         "asynch",
@@ -130,6 +131,7 @@
         "biontech",
         "Bjoern's",
         "blackbox",
+        "BLAS",
         "Blazek",
         "bufsize",
         "bvaeloc",
@@ -308,6 +310,7 @@
         "MIZZOU",
         "mkdir",
         "mmbt",
+        "mmcv",
         "mmdet",
         "mmdetection",
         "mmengine",
@@ -438,6 +441,7 @@
         "slidevqa",
         "Slurm",
         "Snopes",
+        "sntp",
         "sqlalchemy",
         "squeue",
         "srun",
@@ -472,6 +476,7 @@
         "TYPECHECK",
         "typer",
         "tzip",
+        "uart",
         "udev",
         "ultralytics",
         "unbuffered",
@@ -541,7 +546,7 @@
     "editor.cursorSmoothCaretAnimation": "on",
     "editor.detectIndentation": false,
     "editor.fastScrollSensitivity": 9,
-    "editor.fontFamily": "'Source Code Pro','Droid Sans Mono', 'monospace', monospace, Menlo, Monaco, 'Courier New'",
+    "editor.fontFamily": "'Atkinson Hyperlegible Mono', 'Source Code Pro','Droid Sans Mono', 'monospace', monospace, Menlo, Monaco, 'Courier New'",
     "editor.fontLigatures": true,
     "editor.guides.bracketPairs": "active",
     "editor.largeFileOptimizations": false,
@@ -729,7 +734,8 @@
         "ydrag": "linux",
         "brb": "linux",
         "sif": "linux",
-        "d6": "linux"
+        "d6": "linux",
+        "ub24gpu": "linux"
     },
     "remote.SSH.showLoginTerminal": true,
     "rewrap.wrappingColumn": 88,
@@ -836,7 +842,8 @@
     "workbench.tree.indent": 15,
     "remote.SSH.useFlock": false,
     "python.experiments.enabled": false,
-    "remote.SSH.path": "/usr/local/ossh/bin/ssh",
+    "remote.SSH.path": "/usr/bin/ssh",
+    // "remote.SSH.path": "/usr/local/ossh/bin/ssh",
     "remote.SSH.connectTimeout": 120,
     "remote.SSH.defaultExtensions": [
         "aaron-bond.better-comments",
@@ -930,7 +937,7 @@
     ],
     "terminal.integrated.cursorStyle": "line",
     "slurm-dashboard.job-dashboard.showJobInfo": true,
-    "editor.minimap.autohide": true,
+    "editor.minimap.autohide": "mouseover",
     "slurm-dashboard.job-dashboard.refreshInterval": 30,
     "[cpp]": {
         "editor.defaultFormatter": "ms-vscode.cpptools"
@@ -952,4 +959,46 @@
     
     },
     "editor.quickSuggestionsDelay": 100,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "markdown.marp.pptx.editable": "smart",
+    "cSpell.enabledSchemes": {
+        "comment": true,
+        "file": true,
+        "gist": true,
+        "repo": true,
+        "sftp": true,
+        "untitled": true,
+        "vscode-notebook-cell": true,
+        "vscode-scm": true,
+        "vscode-userdata": true,
+        "vscode-vfs": true,
+        "vsls": true,
+        "overleaf-workshop": true
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "shellformat.effectLanguages": [
+        "shellscript",
+        "dockerfile",
+        "dotenv",
+        "hosts",
+        "jvmoptions",
+        "ignore",
+        "gitignore",
+        "properties",
+        "spring-boot-properties",
+        "azcli",
+        "bats"
+    ],
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
+    },
+    "[lua]": {
+        "editor.defaultFormatter": "yinfei.luahelper"
+    },
+    "shellformat.flag": "-ci -bn -kp",
+    "git.repositoryScanMaxDepth": -1,
+    "git-graph.repository.commits.loadMore": 300,
+    "git-graph.maxDepthOfRepoSearch": -1,
 }
