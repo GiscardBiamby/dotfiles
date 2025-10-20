@@ -11,9 +11,6 @@
         },
         {
             "path": "../.config"
-        },
-        {
-            "path": "../ubuntu-health-brb.asgardgb.com"
         }
     ],
     "settings": {

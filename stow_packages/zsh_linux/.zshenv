@@ -4,3 +4,6 @@
 
 # * Note, if you want an environment var to take effect even for GUI apps (aka .desktop shortcuts), add the environment vars to ~/.config/environment.d/
 # export MOZ_ENABLE_WAYLAND=1
+
+# Example: set the default libvirt URI for QEMU/KVM virtual machines
+export LIBVIRT_DEFAULT_URI="qemu:///system"
