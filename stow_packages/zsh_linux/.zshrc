@@ -161,7 +161,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='code --wait'
 else
-    export EDITOR='vim'
+    export EDITOR='nano'
 fi
 
 ## PATH

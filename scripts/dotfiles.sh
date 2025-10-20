@@ -41,6 +41,7 @@ stow --target="${HOME}" shellcheck
 stow --target="${HOME}" tmux
 stow --target="${HOME}" vim
 stow --target="${HOME}" vscode
+stow --target="${HOME}" user_env
 # stow --target="${HOME}" zoom
 
 if [[ "${machine}" == "Linux" ]]; then

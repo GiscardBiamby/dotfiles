@@ -48,6 +48,48 @@ There are some weird things happening with nvm that I haven't looked into yet. B
 
 ## Manual Steps
 
+### Change the `LIBVA_DRIVER_NAME` value in `~/.config/environment.d/90-libva.conf`
+
+1. Set this according to your GPU type (AMD or NVIDIA).
+This environment variable tells the VA-API (Video Acceleration API) which backend driver to use for hardware-accelerated video decoding and encoding.
+It benefits Electron apps (such as Visual Studio Code, Discord, Slack, or Obsidian) and also improves performance in Firefox and Chrome/Chromium when those browsers use VA-API for video playback or screen sharing.
+
+2. APply and verify
+Save the file, then log out and back in (or reboot) to refresh your session environment.
+
+Verify it’s loaded:
+```bash
+systemctl --user show-environment | grep LIBVA_DRIVER_NAME
+```
+
+
+To confirm inside an app (for example, the VS Code integrated terminal):
+```bash
+echo $LIBVA_DRIVER_NAME
+```
+
+3. Check that VA-API acceleration works
+
+```bash
+vainfo | grep -E "Driver version|Decode|Encode"
+```
+
+#### For Chrome/Chromium:
+
+Visit `chrome://gpu` and check that Video Decode shows Hardware accelerated.
+Visit `chrome://media-internals` while playing a video to confirm VA-API decoding.
+
+#### For Firefox:
+
+Ensure the following prefs are enabled in about:config:
+```ini
+media.ffmpeg.vaapi.enabled = true
+media.rdd-ffmpeg.enabled = true
+media.hardware-video-decoding.enabled = true
+media.hardware-video-encoding.enabled = true
+```
+Then test by playing a 1080p+ video; CPU use should drop noticeably.
+
 ### Fix error in bash-git-prompt
 
 TODO: Automate this (with sed?)
@@ -55,7 +97,7 @@ TODO: Automate this (with sed?)
 There is a bug in newer versions of bash-git-prompt, in their `set_gitprompt_dir()` function. Edit `~/.bash-git-prompt/gitprompt.sh`, replacing the function with this one:
 
 ```bash
-function git_prompt_dir() {
+function set_git_prompt_dir() {
   # assume the gitstatus.sh is in the same directory as this script
   # code thanks to http://stackoverflow.com/questions/59895
   if [[ -z "${__GIT_PROMPT_DIR:+x}" ]]; then

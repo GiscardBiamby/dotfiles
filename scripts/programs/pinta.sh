@@ -8,6 +8,16 @@ echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 source "${SCRIPT_DIR}/../util.sh"
 
 echo "🖌 Installing Pinta"
-sudo add-apt-repository -y ppa:pinta-maintainers/pinta-stable
+# THis method doesn't work on 25.10 (at least not yet):
+#sudo add-apt-repository -y ppa:pinta-maintainers/pinta-stable
+#sudo apt update
+#sudo apt-get install -y pinta
+
+# Add the xtradeb repo:
+wget https://launchpad.net/~xtradeb/+archive/ubuntu/apps/+files/xtradeb-apt-source_0.4_all.deb
+sudo apt install ./xtradeb-apt-source_0.4_all.deb
+rm ./xtradeb-apt-source_0.4_all.deb
+
 sudo apt update
 sudo apt-get install -y pinta
+
