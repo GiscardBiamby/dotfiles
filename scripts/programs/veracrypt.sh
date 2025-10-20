@@ -13,12 +13,12 @@ echo "Installing veracrypt"
 
 # GUI version
 wget \
-    https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb \
-    -O "${SCRIPT_DIR}/downloads/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb"
-sudo apt install -y "${SCRIPT_DIR}/downloads/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb"
+    https://launchpad.net/veracrypt/trunk/1.26.24/+download/veracrypt-1.26.24-Ubuntu-24.04-amd64.deb \
+    -O "${SCRIPT_DIR}/downloads/veracrypt-1.26.24-Ubuntu-24.04-amd64.deb"
+sudo apt install -y "${SCRIPT_DIR}/downloads/veracrypt-1.26.24-Ubuntu-24.04-amd64.deb"
 
 # Console version
 # wget https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-console-1.24-Update7-Ubuntu-20.04-amd64.deb
 # sudo apt install -y ./veracrypt-console-1.24-Update7-Ubuntu-20.04-amd64.deb
 
-rm "${SCRIPT_DIR}/downloads/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb"
+rm "${SCRIPT_DIR}/downloads/veracrypt-1.26.24-Ubuntu-24.04-amd64.deb"

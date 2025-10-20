@@ -10,9 +10,9 @@ source "${SCRIPT_DIR}/../util.sh"
 echo "💬 Install Slack"
 # sudo snap install slack --classic
 wget \
-    https://downloads.slack-edge.com/releases/linux/4.36.140/prod/x64/slack-desktop-4.36.140-amd64.deb \
-    -O "${SCRIPT_DIR}/downloads/slack-desktop-4.36.140-amd64.deb"
-sudo dpkg -i "${SCRIPT_DIR}/downloads/slack-desktop-4.36.140-amd64.deb"
+    https://downloads.slack-edge.com/desktop-releases/linux/x64/4.46.101/slack-desktop-4.46.101-amd64.deb \
+    -O "${SCRIPT_DIR}/downloads/slack-desktop-4.46.101-amd64.deb"
+sudo dpkg -i "${SCRIPT_DIR}/downloads/slack-desktop-4.46.101-amd64.deb"
 sudo apt-get update
 sudo apt-get upgrade -y slack-desktop
 rm "${SCRIPT_DIR}/downloads/slack*.deb"

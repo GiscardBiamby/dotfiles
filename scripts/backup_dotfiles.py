@@ -2,6 +2,7 @@ import shutil
 from datetime import datetime
 from pathlib import Path
 import pathlib as pl
+import os
 
 
 def backup_file(target_path: Path, backup_dir: Path, path: Path) -> None:
@@ -67,7 +68,7 @@ def main():
 def get_backup_dir(path: Path, backup_dir: Path) -> Path:
     dotfiles_dir = Path().resolve().parent
     backup_dir_new = Path(str(path).replace(str(dotfiles_dir), ""))
-    if str(backup_dir_new).startswith(pl.os.sep):
+    if str(backup_dir_new).startswith(os.sep):
         backup_dir_new = Path(str(backup_dir_new)[1:])
     backup_dir_new = (backup_dir / backup_dir_new).resolve()
     return backup_dir_new

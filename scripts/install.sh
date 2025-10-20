@@ -127,6 +127,8 @@ git submodule update --init --recursive --remote
 
 # Use GNU stow to deploy all the dotfiles:
 bash ./dotfiles.sh -H
+mkdir -p ~/local/bin
+cp ./scripts/programs/binaries/amd64/home/local/bin/git-branch-name ~/local/bin
 
 # Install diff-so-fancy
 #
