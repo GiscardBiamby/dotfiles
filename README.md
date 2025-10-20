@@ -10,7 +10,6 @@ Add or delete files in `scripts/install.sh` and `scripts/programs/` to modify yo
 
 ## Usage
 
-
 ```sh
 # Change default shell to zsh:
 sudo chsh -s /bin/zsh $USER
@@ -24,6 +23,12 @@ git clone git@github.com:GiscardBiamby/dotfiles.git --recurse-submodules
 
 # OR use HTTPS
 git clone https://github.com/GiscardBiamby/dotfiles.git --recurse-submodules
+```
+
+To update the submodules later:
+
+```bash
+git submodule update --remote --merge --recursive
 ```
 
 Close Firefox if it's open, then run the installation script.
@@ -51,19 +56,20 @@ There are some weird things happening with nvm that I haven't looked into yet. B
 ### Change the `LIBVA_DRIVER_NAME` value in `~/.config/environment.d/90-libva.conf`
 
 1. Set this according to your GPU type (AMD or NVIDIA).
-This environment variable tells the VA-API (Video Acceleration API) which backend driver to use for hardware-accelerated video decoding and encoding.
-It benefits Electron apps (such as Visual Studio Code, Discord, Slack, or Obsidian) and also improves performance in Firefox and Chrome/Chromium when those browsers use VA-API for video playback or screen sharing.
+   This environment variable tells the VA-API (Video Acceleration API) which backend driver to use for hardware-accelerated video decoding and encoding.
+   It benefits Electron apps (such as Visual Studio Code, Discord, Slack, or Obsidian) and also improves performance in Firefox and Chrome/Chromium when those browsers use VA-API for video playback or screen sharing.
 
 2. APply and verify
-Save the file, then log out and back in (or reboot) to refresh your session environment.
+   Save the file, then log out and back in (or reboot) to refresh your session environment.
 
 Verify it’s loaded:
+
 ```bash
 systemctl --user show-environment | grep LIBVA_DRIVER_NAME
 ```
 
-
 To confirm inside an app (for example, the VS Code integrated terminal):
+
 ```bash
 echo $LIBVA_DRIVER_NAME
 ```
@@ -82,12 +88,14 @@ Visit `chrome://media-internals` while playing a video to confirm VA-API decodin
 #### For Firefox:
 
 Ensure the following prefs are enabled in about:config:
+
 ```ini
 media.ffmpeg.vaapi.enabled = true
 media.rdd-ffmpeg.enabled = true
 media.hardware-video-decoding.enabled = true
 media.hardware-video-encoding.enabled = true
 ```
+
 Then test by playing a 1080p+ video; CPU use should drop noticeably.
 
 ### Fix error in bash-git-prompt
@@ -122,7 +130,7 @@ Exec=ANKI_WAYLAND=1 anki %f
 
 ## On Systems with AMD CPU
 
-__UPDATE__: This step is no longer necessary? The `.bashsrc` entries
+**UPDATE**: This step is no longer necessary? The `.bashsrc` entries
 
 [Install blas to improve math library performance (numpy, scikit, etc)](https://www.pugetsystems.com/labs/hpc/AMD-Ryzen-3900X-vs-Intel-Xeon-2175W-Python-numpy---MKL-vs-OpenBLAS-1560/)
 
@@ -149,7 +157,6 @@ You have to do this once for each display.
 Save the changes to Xorg.conf and restart the system.
 
 ## Random Helpful Stuff
-
 
 ### Clone all your remote repositories
 
@@ -200,16 +207,16 @@ To use Dropbox to manage paper pdf's in Zotero (instead of Zotero's storage, whi
 
 1. Install the Zotfile extension
 2. Choose a folder inside your Dropbox dir that will store your pdf's. Let's call this the `$ZOTERO_ATTACHMENTS_DIR`. For example: `$ZOTERO_ATTACHMENTS_DIR=/home/username/Dropbox/private/Zotero/main/`.
-3. Zotero-> Edit -> Preferences -> Advanced -> Files and Folders -> Base Directory: __Set this to your `$ZOTERO_ATTACHMENTS_DIR` folder__
+3. Zotero-> Edit -> Preferences -> Advanced -> Files and Folders -> Base Directory: **Set this to your `$ZOTERO_ATTACHMENTS_DIR` folder**
 4. Zotero-> Sync -> Settings -> File Syncing -> Sync attachment files in My Library using: Zotero
-5. Zotero -> Tools -> Zotfile Preferences -> General Settings -> Location of Files -> Custom Location: __Set this to your `$ZOTERO_ATTACHMENTS_DIR` folder__
-6. If you need to convert existing library entries from Zotero storage to this Dropbox synced location, select the entire My Library -> right click -> Manage Attachments -> Rename Attachments. (Note, if you have done Manage Attachments -> Send to Tablet,  you will have to do Manage Attachments -> Get From Tablet before you can perform this step.
+5. Zotero -> Tools -> Zotfile Preferences -> General Settings -> Location of Files -> Custom Location: **Set this to your `$ZOTERO_ATTACHMENTS_DIR` folder**
+6. If you need to convert existing library entries from Zotero storage to this Dropbox synced location, select the entire My Library -> right click -> Manage Attachments -> Rename Attachments. (Note, if you have done Manage Attachments -> Send to Tablet, you will have to do Manage Attachments -> Get From Tablet before you can perform this step.
 
 ### Zotero and ZotFile: Sending to/from Tablet
 
 This section is only relevant if you want to use a workflow where you can manually send papers to your tablet (via a cloud synced folder, e.g., Dropbox), read/annotate on the tablet, and then get back the annotations onto your computer (via Manage Attachments -> Get From Tablet). If you don't have a tablet or don't want to use that workflow you can ignore this section.
 
-1. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Use ZotFile to send and get files from tablet -> __CHECKED__
+1. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Use ZotFile to send and get files from tablet -> **CHECKED**
 2. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Location of Files on Tablet-> Base Folder: `$ZOTERO_TABLET_DIR`
 3. Zotero -> Tools -> Zotfile Preferences -> Tablet Settings -> Location of Files on Tablet -> Subfolders: Select "Create subfolders from zotero collections" option
 
@@ -226,6 +233,6 @@ See the Makefile in this repository for some helpful command aliases. Read about
 
 ## Recommended additions
 
-* GNOME Tweaks
-* [Emoji Selector](https://extensions.gnome.org/extension/1162/emoji-selector/)
-* [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
+- GNOME Tweaks
+- [Emoji Selector](https://extensions.gnome.org/extension/1162/emoji-selector/)
+- [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
