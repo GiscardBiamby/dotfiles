@@ -8,8 +8,8 @@ echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 source "${SCRIPT_DIR}/../util.sh"
 
 
-sudo add-apt-repository -y ppa:jonathonf/vim
-sudo apt update
+#sudo add-apt-repository -y ppa:jonathonf/vim
+#sudo apt update
 sudo apt install -y vim vim-runtime universal-ctags vim-doc vim-scripts
 
 

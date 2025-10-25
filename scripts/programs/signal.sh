@@ -13,11 +13,25 @@ echo "🗨 Installing Signal"
 # Linux distributions such as Ubuntu, Mint etc.
 
 # 1. Install our official public software signing key
-wget -O- https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+# * --- Keyring (idempotent) ---
+echo "keyring"
+# Keyring (non-interactive, idempotent)
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://updates.signal.org/desktop/apt/keys.asc -o /tmp/signal.asc
+sudo gpg --dearmor --batch --yes -o /usr/share/keyrings/signal-desktop-keyring.gpg /tmp/signal.asc
+sudo chmod a+r /usr/share/keyrings/signal-desktop-keyring.gpg
+rm -f /tmp/signal.gpg.asc
+
 
 # 2. Add our repository to your list of repositories
-echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" |
-    sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main" \
+    | sudo tee /etc/apt/sources.list.d/signal-desktop.list >/dev/null
+
 
 # 3. Update your package database and install signal
-sudo apt update -y && sudo apt install -y signal-desktop
+sudo apt update -y | true && sudo apt install -y signal-desktop
+
+
+
+
+

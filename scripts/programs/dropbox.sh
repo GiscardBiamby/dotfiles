@@ -8,6 +8,9 @@ echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 source "${SCRIPT_DIR}/../util.sh"
 
 echo "Installing dropbox"
+
+# TODO: Update this to download the .deb because that has better features and autostart functionality built in. the headless install seems to require DIY auto-start.
+
 cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 
 # Nohup to launch GUI app detached (aka. "disowned", "disentangled", "decoupled") (from:

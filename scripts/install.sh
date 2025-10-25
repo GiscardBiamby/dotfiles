@@ -30,6 +30,10 @@ if [[ "${OS_TYPE}" == "Linux" ]]; then
     cp -r "${SCRIPT_DIR}/programs/binaries/amd64/home/local/bin/" ~/local/bin
 fi
 
+if dpkg --print-foreign-architectures | grep -q '^i386$'; then
+    sudo dpkg --remove-architecture i386
+fi
+
 # Update Ubuntu and get standard repository programs
 sudo apt update -y
 
@@ -132,7 +136,6 @@ cp ./scripts/programs/binaries/amd64/home/local/bin/git-branch-name ~/local/bin
 # Note: it seems like i still have to run this step manually for some reason, to get diff-so-fancy
 # to work
 source ~/.zshrc
-nvm use node
 npm install -g diff-so-fancy
 
 # Get all upgrades

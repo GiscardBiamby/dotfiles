@@ -10,8 +10,17 @@ source "${SCRIPT_DIR}/../util.sh"
 
 # Firefox browser
 echo "🦊 Installing SublimeText"
-curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add
-sudo add-apt-repository -y "deb https://download.sublimetext.com/ apt/stable/" -y
+
+
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg -o /tmp/sublimehq-pub.gpg.asc
+sudo gpg --dearmor --batch --yes -o /etc/apt/keyrings/sublimehq-pub.gpg /tmp/sublimehq-pub.gpg.asc
+sudo chmod a+r /etc/apt/keyrings/sublimehq-pub.gpg
+rm -f /tmp/sublimehq-pub.gpg.asc
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/sublimehq-pub.gpg] https://download.sublimetext.com/ apt/stable/" \
+| sudo tee /etc/apt/sources.list.d/sublime-text.list >/dev/null
 
 ## Install
 sudo apt update

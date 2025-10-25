@@ -17,8 +17,7 @@ sudo apt update
 # Workstation only
 install cifs-utils
 install cpu-checker
-install exfat-fuse
-install exfat-utils
+install exfatprogs
 install ffmpeg
 install fzf
 install gparted

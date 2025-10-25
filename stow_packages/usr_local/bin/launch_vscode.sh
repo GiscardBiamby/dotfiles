@@ -1,20 +1,38 @@
 #!/bin/bash
-# file="${1}"
-# echo "${1}"
-# echo "${@}"
-# echo "XDG_SESSION_TYPE: ${XDG_SESSION_TYPE}"
-# echo "Lauching with ${@}"
-
+# * VS Code launcher script that adds GPU acceleration and Wayland support when launching a new instance
 REAL_CLI="/usr/share/code/bin/code"   # VS Code's real CLI entrypoint
 REAL_BIN="/usr/bin/code"              # The Electron binary launcher
 
+vscode_running() {
+    # If Code is running, --status begins with a Version line; otherwise prints a Warning
+    if "$REAL_CLI" --status 2>&1 | grep -q '^Version:'; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+has_arg() { printf '%s\0' "$@" | grep -z -q -- "$1"; }
+
 # * If we're inside a VS Code terminal OR a VS Code instance is running, delegate to the real CLI
-if [[ "$TERM_PROGRAM" == "vscode" ]] || "$REAL_CLI" --status >/dev/null 2>&1; then
+if [[ "$TERM_PROGRAM" == "vscode" ]] || vscode_running; then
+    # Explicit request for a new window wins
+    if has_arg --new-window "$@"; then
+        exec "$REAL_CLI" "$@"
+    fi
+
+    # If *no* file/folder args, treat launcher invoke (incl. Shift-click) as "open a fresh window"
+    if [[ $# -eq 0 ]]; then
+        exec "$REAL_CLI" --new-window
+    fi
+
+    # Otherwise, user opened a path → reuse existing window
     exec "$REAL_CLI" --reuse-window "$@"
 fi
 
 # * Otherwise, we are launching a new VS Code instance: add GPU/Wayland flags
 if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+    echo "Launching wayland"
 
     # # * For debugging, just launch without any flags:
     # "$REAL_BIN" "${@}"
@@ -34,6 +52,7 @@ if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
         "${@}"
 
 else
+    echo "Launching NON-wayland"
     "$REAL_BIN" \
         --enable-gpu-rasterization \
         "${@}"

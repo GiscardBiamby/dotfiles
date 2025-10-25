@@ -12,11 +12,11 @@ echo "🦊 Installing Fonts"
 
 sudo mkdir -p /usr/local/share/fonts/AtkinsonHyperlegibleMono
 # Copy OTFs — quote the path, not the glob
-sudo cp "/home/gbiamby/proj/dotfiles/scripts/programs/binaries/Atkinson Hyperlegible Mono_Final/"*.otf \
+sudo cp "${SCRIPT_DIR}/binaries/Atkinson Hyperlegible Mono_Final/"*.otf \
     /usr/local/share/fonts/AtkinsonHyperlegibleMono/
 
 sudo mkdir -p /usr/local/share/fonts/AtkinsonHyperlegibleNext
-sudo cp "/home/gbiamby/proj/dotfiles/scripts/programs/binaries/Atkinson Hyperlegible Next/"*.otf \
+sudo cp "${SCRIPT_DIR}/binaries/Atkinson Hyperlegible Next/"*.otf \
     /usr/local/share/fonts/AtkinsonHyperlegibleNext/
 
 sudo fc-cache -f -v

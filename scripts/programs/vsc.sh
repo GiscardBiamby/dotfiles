@@ -150,4 +150,4 @@ install woodywoodsta.vscode-material-syntax-dark
 install xshrim.txt-syntax
 install zaaack.markdown-editor
 install ziyasal.vscode-open-in-github
-install znck.grammarly
+
