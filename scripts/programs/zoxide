@@ -1,0 +1,3 @@
+sudo apt install zoxide fd-find
+mkdir -p ~/local/bin
+ln -s "$(command -v fdfind)" ~/local/bin/fd 

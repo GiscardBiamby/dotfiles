@@ -4,10 +4,9 @@
 # https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
 # On Ubuntu you probably need a symlink for vte.sh in order for the below line to work:
 # ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+if [[ ($TILIX_ID || $VTE_VERSION) && -f /etc/profile.d/vte.sh   ]]; then
     source /etc/profile.d/vte.sh
 fi
-
 
 # .zshrc is for interactive shells. You set options for the interactive shell there with the setopt
 # and unsetopt commands. You can also load shell modules, set your history options, change your
@@ -90,7 +89,7 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     # ag
-    colorize
+    # colorize
     conda-zsh-completion
     copybuffer
     # direnv
@@ -98,22 +97,23 @@ plugins=(
     docker-compose
     extract
     fzf
-    gcloud
+    # gcloud
     git
     git-prompt
     gitignore
     git-extras
     git-lfs
-    gpg-agent
+    # gpg-agent
     history
     keychain
-    nvm
+    # nvm
     # npm
     pip
     python
     rsync
     # ssh-agent
     tmux
+    zoxide
 )
 # Load custom pugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
 if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
@@ -133,19 +133,17 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
     plugins+=(yt-dlp)
 fi
 
+# * Tell OMZ not to run compinit (we'll do it ourselves)
+zstyle ':omz:completion' skip yes
 
-autoload -Uz compinit
-# Do auto complete cache once every 24hr. The original code slows down zsh startup time by a lot:
-for dump in ~/.zcompdump(N.mh+24); do
-    compinit
-done
-compinit -C
+# * Use the same dump file OMZ would use
+export ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump-${HOST}-${ZSH_VERSION}"
 
-# Keychain: will start, start ssh-agent for you if it has not yet been started, use ssh-add to add
-# your id_rsa private key file to ssh-agent, and set up your shell environment so that ssh will be
-# able to find ssh-agent. If ssh-agent is already running, keychain will ensure that your id_rsa
-# private key has been added to ssh-agent and then set up your environment so that ssh can find the
-# already-running ssh-agent.
+# * Keychain: will start, start ssh-agent for you if it has not yet been started, use ssh-add to add
+# * your id_rsa private key file to ssh-agent, and set up your shell environment so that ssh will be
+# * able to find ssh-agent. If ssh-agent is already running, keychain will ensure that your id_rsa
+# * private key has been added to ssh-agent and then set up your environment so that ssh can find the
+# * already-running ssh-agent.
 zstyle :omz:plugins:keychain agents gpg,ssh
 zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
 
@@ -155,7 +153,6 @@ source $ZSH/oh-my-zsh.sh
 # eval `keychain --eval id_ed25519 id_rsa-bairdev`
 # eval $(ssh-agent -s)
 # ssh-add ~/.ssh/id_rsa-bairdev
-
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -170,45 +167,7 @@ if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
 # else
 #     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
 fi
-# Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
-# Disable the krb line in order for yubikey ssh auth to work (there must be a better way?):
-path=(
-    "${HOME}/.local/bin"
-    "${HOME}/local/bin"
-    "/usr/local/bin"
-    "/usr/local/krb5/bin" # needed for kerberos (kinit)
-    "/usr/local/sbin"
-    "~/bin"
-    # "/usr/bin/Postman/app"
-    $path
-)
-# Manually install noisetorch. Still need to load the app and activate it after each startup.
-if [ -d "/opt/noisetorch/bin" ] ; then
-    path+="/opt/noisetorch/bin"
-fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/${USER}/mambaforge/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/${USER}/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/home/${USER}/mambaforge/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/${USER}/mambaforge/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/home/${USER}/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/home/${USER}/mambaforge/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
-export PATH
-
-
-# eval "$(direnv hook zsh)"
 
 # Load machine-specific .zshrc_local if one exists (it's not managed by stow):
 if [[ -f "$HOME/.zshrc_local" ]]; then
@@ -230,6 +189,22 @@ if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
+# * Do auto complete cache once every 24hr. The original code slows down zsh startup time by a lot:
+# Initialize completion ONCE with 24h caching (use zstat to avoid glob issues)
+zmodload zsh/stat
+autoload -Uz compinit
+if [[ -e "$ZSH_COMPDUMP" ]]; then
+    local -A st
+    zstat -H st -- "$ZSH_COMPDUMP"
+    if ((EPOCHSECONDS - st[mtime] < 86400)); then
+        compinit -C -d "$ZSH_COMPDUMP" # fresh: fast path
+    else
+        compinit -d "$ZSH_COMPDUMP"  # old: regenerate
+    fi
+else
+    compinit -d "$ZSH_COMPDUMP"      # missing: create
+fi
+
 # Customize the prompt to show directory:
 # PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %{%}%c%{%} $(git_prompt_info)"
 # export PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %F{blue}%~%f $(git_prompt_info)"
@@ -237,12 +212,7 @@ fi
 # Display if login/interactive shell
 [[ $- == *i* ]] && echo 'Interactive shell' || echo 'Not interactive shell'
 
-# To profile the zsh load speed uncomment the top line and this bottom line:
+
+
+# * To profile the zsh load speed uncomment the top line and this bottom line:
 # zprof # bottom of .zshrc
-if [[ -f "${HOME}/perl5/bin" ]]; then
-    PATH="${HOME}/perl5/bin${PATH:+:${PATH}}"; export PATH;
-    PERL5LIB="/home/gbiamby/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-    PERL_LOCAL_LIB_ROOT="/home/gbiamby/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-    PERL_MB_OPT="--install_base \"/home/gbiamby/perl5\""; export PERL_MB_OPT;
-    PERL_MM_OPT="INSTALL_BASE=/home/gbiamby/perl5"; export PERL_MM_OPT;
-fi

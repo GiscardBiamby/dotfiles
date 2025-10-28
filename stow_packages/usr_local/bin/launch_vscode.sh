@@ -3,13 +3,19 @@
 REAL_CLI="/usr/share/code/bin/code"   # VS Code's real CLI entrypoint
 REAL_BIN="/usr/bin/code"              # The Electron binary launcher
 
+# * This version is slower:
+# vscode_running() {
+#     # If Code is running, --status begins with a Version line; otherwise prints a Warning
+#     if "$REAL_CLI" --status 2>&1 | grep -q '^Version:'; then
+#         return 0
+#     else
+#         return 1
+#     fi
+# }
+
 vscode_running() {
-    # If Code is running, --status begins with a Version line; otherwise prints a Warning
-    if "$REAL_CLI" --status 2>&1 | grep -q '^Version:'; then
-        return 0
-    else
-        return 1
-    fi
+    # Match any process containing 'code' (more permissive)
+    pgrep -f '/usr/share/code' >/dev/null 2>&1
 }
 
 has_arg() { printf '%s\0' "$@" | grep -z -q -- "$1"; }
