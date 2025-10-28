@@ -738,7 +738,7 @@
         "ub24gpu": "linux"
     },
     "remote.SSH.showLoginTerminal": true,
-    "rewrap.wrappingColumn": 88,
+    "rewrap.wrappingColumn": 120,
     "security.workspace.trust.untrustedFiles": "open",
     "settingsSync.ignoredSettings": [
         "editor.fontFamily"
@@ -955,9 +955,7 @@
     "auto-scroll.enabled": false,
     "explorer.confirmDragAndDrop": false,
     "svg.preview.mode": "img",
-    "github.copilot.advanced": {
-    
-    },
+    "github.copilot.advanced": {},
     "editor.quickSuggestionsDelay": 100,
     "diffEditor.ignoreTrimWhitespace": false,
     "markdown.marp.pptx.editable": "smart",
