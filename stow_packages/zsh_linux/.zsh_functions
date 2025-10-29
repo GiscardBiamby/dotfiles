@@ -199,12 +199,31 @@ function tar_multicore() {
 
 function optimize_pdf_in_dir() {
     local dir_path="${1:-.}"
+
+    # Resolve to an absolute, normalized path so '.' and trailing slashes behave
+    local dir_abs
+    dir_abs="$(realpath "$dir_path")" || { echo "Path not found: $dir_path"; return 1; }
+
     echo "Optimizing pdfs in dir: ${dir_path}"
+
+
+    # Parent directory + last segment
+    local parent last
+    parent="$(dirname "$dir_abs")"
+    last="$(basename "$dir_abs")"
+
+    # Output path is sibling with `_optimized` suffix
+    output_path="${parent}/${last}_optimized"
+
     # Create a folder at $dir_path with "_optimized" in the name, to store optimized pdfs:
-    output_path="${dir_path%/}/pdf_optimized"
     mkdir -p "${output_path}"
-    find "${dir_path}" -type f -name '*.pdf' -print0 | parallel -0 -j "$(nproc || sysctl -n hw.ncpu)" 'gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dQUIET \
-    -o "${output_path}/{/}" -f "{}"'
+    echo "input_path: ${dir_abs}"
+    echo "output path: ${output_path}"
+    find "${dir_abs}" -type f -name '*.pdf' -print0 | \
+        parallel -0 -j "$(nproc || sysctl -n hw.ncpu)" -- \
+            gs -dNOSAFER -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dQUIET \
+                -o "${output_path/}/{/}" -f "{}"
+    
 }
 
 function list_git_repos() {
