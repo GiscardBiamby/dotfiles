@@ -16,6 +16,7 @@ sudo apt update
 
 # Workstation only
 install anki
+install avahi-browse
 install calibre
 install cifs-utils
 install cpu-checker

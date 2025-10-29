@@ -7,11 +7,8 @@ echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 # shellcheck disable=SC1091
 source "${SCRIPT_DIR}/../util.sh"
 
+echo "🔍🔍 Installing fd-find"
 
-echo "🔐  Installing Keybase"
-# curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
-wget \
-    https://prerelease.keybase.io/keybase_amd64.deb -O \
-    "${SCRIPT_DIR}/downloads/keybase_amd64.deb"
-sudo apt install "${SCRIPT_DIR}/downloads/keybase_amd64.deb"
-run_keybase
+sudo apt install zoxide fd-find
+mkdir -p ~/local/bin
+ln -s "$(command -v fdfind)" ~/local/bin/fd

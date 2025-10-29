@@ -42,12 +42,11 @@ add-apt-repository -y ppa:git-core/ppa
 sudo apt update
 
 # Common
-install p7zip
-install p7zip-rar
-install git
 install curl
 install "dconf*"
+install exiftool
 install ffmpeg
+install git
 install gnupg
 install gzip
 install htop
@@ -55,14 +54,18 @@ install jq
 install libvirtiofsd
 install ncdu
 install net-tools
+install nfs-common
 install nmap
-install silversearcher-ag
 install pandoc
+install parallel
+install p7zip
+install p7zip-rar
 install pip
 install piper
 install pigz
 install python-is-python3
 install shellcheck
+install silversearcher-ag
 install stow
 install texlive-xetex
 install texlive-fonts-recommended
@@ -75,6 +78,7 @@ install unzip
 install wakeonlan
 install wget
 install xclip
+install zoxide
 install zsh
 
 # Image processing
