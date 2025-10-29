@@ -1,15 +1,44 @@
-always_yes: true
-auto_activate_base: false
+always_yes: true                    # Use -y in scripts instead of forcing global yes
+auto_activate: false                # 2025-05-21: auto_activate_base is deprecated. use auto_activate instead.
 channel_priority: strict
 channels: [conda-forge]
-env_prompt: '({default_env}) '
-pip_interop_enabled: true
 show_channel_urls: true
+env_prompt: '({default_env}) '
+# * prefix_data_interoperability: pip can upgrade/downgrade libs behind conda’s back. Prefer pip
+# *  install --no-deps inside envs and run pip check after mixed installs.
+prefix_data_interoperability: true  # 2025-05-21: pip_interop_enabled is deprecated, use prefix_data_interoperability instead.
 solver: libmamba
 
+# * Performance / hygiene
+# * Put package cache on a fast SSD; add a secondary fallback if you like
+# pkgs_dirs:
+#   - /data/mamba/pkgs
+#   - ~/.mamba/pkgs
 
-# dependencies:
-#   - mkl
-#   - dkl-devel
-#   - libblas=*=*mkl
-#   - blas=*=*mkl
+
+# * Keep envs somewhere you back up or can clean easily
+# envs_dirs:
+#   - /data/mamba/envs
+
+
+# * Avoid surprise updates of pip/setuptools/wheel when creating envs
+# aggressive_update_packages: []
+
+# * Optional: include tools you always want in every new env
+create_default_packages:
+  - pip
+  - setuptools
+  - wheel
+
+# * Optional: pin blas flavor per your CPU (do this per-environment when possible). For AMD CPUs
+# *  openblas might be faster.
+# * This tells the solver: “Across the board, prefer the OpenBLAS variant.” Any environment you create
+# * will try to use OpenBLAS unless the env itself asks for something else (e.g., libblas=*=*mkl in
+# * that env’s dependencies), which can override the global pin.
+# pinned_packages:
+#   - libblas=*=*openblas
+
+# * Examples you might put into your environment.yaml:
+# * dependencies:
+# *   - libblas=*=*mkl
+# *   - libblas=*=*openblas

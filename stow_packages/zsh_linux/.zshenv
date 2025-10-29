@@ -26,23 +26,31 @@ fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/${USER}/mambaforge/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+__conda_setup="$("/home/${USER}/miniforge3/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/${USER}/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/home/${USER}/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "/home/${USER}/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/${USER}/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/${USER}/mambaforge/bin:$PATH"
+        export PATH="/home/${USER}/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
-
-if [ -f "/home/${USER}/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/home/${USER}/mambaforge/etc/profile.d/mamba.sh"
-fi
 # <<< conda initialize <<<
 
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE="/home/${USER}/miniforge3/bin/mamba"
+export MAMBA_ROOT_PREFIX="/home/${USER}/miniforge3"
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2>/dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
 
 # * FZF defaults placed in .zshenv so both interactive shells and scripts inherit them.
 # * .zshenv runs before .zshrc/oh-my-zsh, so OMZ keybindings (Ctrl-T/Alt-C) see these values.
@@ -77,13 +85,13 @@ export PAGER="/bin/cat"
 
 if [[ -f "${HOME}/perl5/bin" ]]; then
     path+="${HOME}/perl5/bin"
-    PERL5LIB="/home/gbiamby/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+    PERL5LIB="/home/${USER}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
     export PERL5LIB
-    PERL_LOCAL_LIB_ROOT="/home/gbiamby/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+    PERL_LOCAL_LIB_ROOT="/home/${USER}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
     export PERL_LOCAL_LIB_ROOT
-    PERL_MB_OPT="--install_base \"/home/gbiamby/perl5\""
+    PERL_MB_OPT="--install_base \"/home/${USER}/perl5\""
     export PERL_MB_OPT
-    PERL_MM_OPT="INSTALL_BASE=/home/gbiamby/perl5"
+    PERL_MM_OPT="INSTALL_BASE=/home/${USER}/perl5"
     export PERL_MM_OPT
 fi
 

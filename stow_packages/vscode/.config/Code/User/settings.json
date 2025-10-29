@@ -999,4 +999,5 @@
     "git.repositoryScanMaxDepth": -1,
     "git-graph.repository.commits.loadMore": 300,
     "git-graph.maxDepthOfRepoSearch": -1,
+    "security.workspace.trust.enabled": false,
 }
