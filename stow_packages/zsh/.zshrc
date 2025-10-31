@@ -1,3 +1,10 @@
+# zmodload zsh/zprof # top of your .zshrc file
+
+# .zshrc is for interactive shells. You set options for the interactive shell there with the setopt
+# and unsetopt commands. You can also load shell modules, set your history options, change your
+# prompt, set up zle and completion, et cetera. You also set any variables that are only used in the
+# interactive shell (e.g. $LS_COLORS).
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -70,9 +77,10 @@ HIST_STAMPS="yyyy-mm-dd--%H-%M"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+zstyle ':omz:plugins:nvm' lazy yes
 plugins=(
-    ag
-    colorize
+    # ag
+    # colorize
     command-not-found
     conda-zsh-completion
     copybuffer
@@ -80,7 +88,7 @@ plugins=(
     docker
     docker-compose
     extract
-    gcloud
+    # gcloud
     git
     git-prompt
     gitignore
@@ -114,57 +122,35 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
     plugins+=(yt-dlp)
 fi
 
-# Update this to only do auto complete cache once every 24hr. The original code (commented out line)
-# slows down zsh startup time by a lot:
-#
-# autoload -U compinit && compinit
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-    compinit
-done
-compinit -C
+# * Tell OMZ not to run compinit (we'll do it ourselves)
+zstyle ':omz:completion' skip yes
 
+# * Use the same dump file OMZ would use
+export ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump-${HOST}-${ZSH_VERSION}"
+
+# * ssh-agent plugin settings
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent lazy yes
 zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
 zstyle :omz:plugins:ssh-agent identities id_ed25519 id_ed25519_sem id_rsa-bairdev
+
 source $ZSH/oh-my-zsh.sh
-# Don't think these are needed since the plugins are loaded above:
-# source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-#ssh
-# ssh-add ~/.ssh/id_rsa-bairdev
+# *  Show conda/mamba env in the prompt
+setopt PROMPT_SUBST
+PROMPT='${CONDA_PROMPT_MODIFIER:-${CONDA_DEFAULT_ENV:+($CONDA_DEFAULT_ENV) }}'"$PROMPT"
 
-
-# Preferred editor for local and remote sessions
+# * Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='code --wait'
 else
     export EDITOR='vim'
 fi
 
-
-## PATH
-# Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
-path=(
-    "~/local/bin"
-    "/usr/local/ossh/bin"
-    "/usr/local/krb5/bin"
-    "/usr/local/bin"
-    "/usr/local/sbin"
-    "~/bin"
-    $path
-)
-# Manually install noisetorch. Still need to load the app and activate it after each startup.
-if [ -d "/opt/noisetorch/bin" ] ; then
-    path+="/opt/noisetorch/bin"
-fi
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-
+# # Dont need becausse se use omzsh's nvm plugin
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 # yubikey
 # To use this SSH agent, set this variable in your ~/.zshrc and/or ~/.bashrc:
@@ -174,27 +160,6 @@ export NVM_DIR="$HOME/.nvm"
 #   brew services restart yubikey-agent
 # Or, if you don't want/need a background service you can just run:
 #   /opt/homebrew/opt/yubikey-agent/bin/yubikey-agent -l /opt/homebrew/var/run/yubikey-agent.sock
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/gbiamby/mambaforge/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/gbiamby/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/Users/gbiamby/mambaforge/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/gbiamby/mambaforge/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/Users/gbiamby/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/Users/gbiamby/mambaforge/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
-export PATH
 
 # Load machine-specific .zshrc_local if one exists:
 [ -f "$HOME/.zshrc_local" ] && . "$HOME/.zshrc_local"
@@ -214,6 +179,22 @@ if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
+# * Do auto complete cache once every 24hr. The original code slows down zsh startup time by a lot:
+# Initialize completion ONCE with 24h caching (use zstat to avoid glob issues)
+zmodload zsh/stat
+autoload -Uz compinit
+if [[ -e "$ZSH_COMPDUMP" ]]; then
+    local -A st
+    zstat -H st -- "$ZSH_COMPDUMP"
+    if ((EPOCHSECONDS - st[mtime] < 86400)); then
+        compinit -C -d "$ZSH_COMPDUMP" # fresh: fast path
+    else
+        compinit -d "$ZSH_COMPDUMP"  # old: regenerate
+    fi
+else
+    compinit -d "$ZSH_COMPDUMP"      # missing: create
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Customize the prompt to show directory:
@@ -222,3 +203,5 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# * To profile the zsh load speed uncomment the top line and this bottom line:
+# zprof # bottom of .zshrc

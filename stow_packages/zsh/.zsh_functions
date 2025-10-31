@@ -71,12 +71,11 @@ function sync_dir() {
     # might be '-z' to enable compression).
     local src="${1}"
     local target="${2}"
-    local flags="${3:-}"
     # Ensure paths have trailing slashes so we sync folder contents rather than folder itself:
     [[ "${src}" != */ ]] && src="${src}/"
     [[ "${target}" != */ ]] && target="${target}/"
     echo "Synching dir FROM: '${src}', TO: '${target}'..."
-    get_dir_size "${src}"
+    # get_dir_size "${src}"
     mkdir -p "${target}"
 
     #   - -a: The archive mode. It's a shorthand that includes several other options: -rlptgoD. It
@@ -104,7 +103,7 @@ function sync_dir() {
     #     the source. It tells rsync to delete extraneous files from the target directory—those
     #     files that are not present in the source directory. This ensures that the target directory
     #     only contains files that are present in the source directory.
-    rsync -auh --ignore-existing --info=progress2 --no-inc-recursive "${flags}" "${src}" "${target}"
+    rsync -auh --ignore-existing -P "${src}" "${target}"
 }
 
 function mirror_dir() {
@@ -124,6 +123,7 @@ function mirror_dir() {
     [[ "${src}" != */ ]] && src="${src}/"
     [[ "${target}" != */ ]] && target="${target}/"
     echo "Synching dir FROM: '${src}', TO: '${target}'..."
+    echo "Using flags: '${flags}'"
     get_dir_size "${src}"
     mkdir -p "${target}"
 
