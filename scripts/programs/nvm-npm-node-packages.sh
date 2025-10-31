@@ -14,7 +14,14 @@ export NVM_DIR="$HOME/.nvm" && (
     git checkout $(git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1))
 ) && \. "$NVM_DIR/nvm.sh"
 
-source ~/.bashrc
+# TODO: Fix this to use zshrc instead of bashrc, and also don't use "source" since it will interrupt
+# the headless script.
+# source ~/.bashrc
+
+# Load nvm:
+export NVM_DIR="$HOME/.nvm"
+# shellcheck disable=SC1091
+source "$NVM_DIR/nvm.sh"
 
 nvm install node
 nvm install-latest-npm
