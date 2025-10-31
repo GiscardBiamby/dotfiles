@@ -24,4 +24,7 @@
     ],
     "python.testing.unittestEnabled": false,
     "rewrap.wrappingColumn": 100,
+    "editor.formatOnSave": true,
+    "git.repositoryScanMaxDepth": 2,
+    "git-graph.maxDepthOfRepoSearch": 2,
 }

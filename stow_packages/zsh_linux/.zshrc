@@ -92,7 +92,7 @@ plugins=(
     # colorize
     conda-zsh-completion
     copybuffer
-    # direnv
+    direnv
     docker
     docker-compose
     extract
@@ -149,6 +149,10 @@ zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-b
 
 source $ZSH/oh-my-zsh.sh
 
+# *  Show conda/mamba env in the prompt
+setopt PROMPT_SUBST
+PROMPT='${CONDA_PROMPT_MODIFIER:-${CONDA_DEFAULT_ENV:+($CONDA_DEFAULT_ENV) }}'"$PROMPT"
+
 # ssh
 # eval `keychain --eval id_ed25519 id_rsa-bairdev`
 # eval $(ssh-agent -s)
@@ -167,7 +171,6 @@ if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
 # else
 #     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
 fi
-
 
 # Load machine-specific .zshrc_local if one exists (it's not managed by stow):
 if [[ -f "$HOME/.zshrc_local" ]]; then
@@ -211,8 +214,6 @@ fi
 
 # Display if login/interactive shell
 [[ $- == *i* ]] && echo 'Interactive shell' || echo 'Not interactive shell'
-
-
 
 # * To profile the zsh load speed uncomment the top line and this bottom line:
 # zprof # bottom of .zshrc

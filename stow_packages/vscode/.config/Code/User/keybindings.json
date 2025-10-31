@@ -15,10 +15,6 @@
         "when": "hasChatProvider"
     },
     {
-        "key": "ctrl+alt+i",
-        "command": "ruff.executeOrganizeImports"
-    },
-    {
         "key": "ctrl+alt+u",
         "command": "editor.action.transformToUppercase"
     },
@@ -29,5 +25,9 @@
     {
         "key": "ctrl+i",
         "command": "composerMode.agent"
+    },
+    {
+        "key": "ctrl+alt+i",
+        "command": "ruff.executeOrganizeImports"
     }
 ]

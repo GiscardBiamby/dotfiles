@@ -3,15 +3,6 @@
         {
             "path": "."
         },
-        {
-            "path": "../.local"
-        },
-        {
-            "path": "../../../usr/share/applications"
-        },
-        {
-            "path": "../.config"
-        }
     ],
     "settings": {
         "auto-scroll.enabled": false,
