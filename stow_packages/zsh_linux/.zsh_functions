@@ -99,7 +99,7 @@ function sync_dir() {
     #     the source. It tells rsync to delete extraneous files from the target directory—those
     #     files that are not present in the source directory. This ensures that the target directory
     #     only contains files that are present in the source directory.
-    rsync -auh --info=progress2 --no-inc-recursive "${src}" "${target}"
+    rsync -auh --info=progress2 --no-inc-recursive ${flags} "${src}" "${target}"
 }
 
 function mirror_dir() {
@@ -112,13 +112,22 @@ function mirror_dir() {
     # '-z' to enable compression).
     #
     #   Add `--delete` to remove files on target that are not on source
-    local src="${1}"
-    local target="${2}"
-    local flags="${3:-}"
+    # Usage: mirror_dir SRC DST [EXTRA_RSYNC_FLAGS...]
+    local src="$1" target="$2"
+    shift 2
+    local -a extra_flags=( "$@" )
+
+    # Default to --delete unless caller already provided one
+    # (remove this block if you *don't* want --delete by default)
+    if (( ${extra_flags[(Ie)--delete]} == 0 )); then
+        extra_flags+=( --delete )
+    fi
+
     # Ensure paths have trailing slashes so we sync folder contents rather than folder itself:
-    [[ "${src}" != */ ]] && src="${src}/"
+    [[ "${src}"    != */ ]] && src="${src}/"
     [[ "${target}" != */ ]] && target="${target}/"
-    echo "Synching dir FROM: '${src}', TO: '${target}'..."
+
+    print -r -- "Syncing dir FROM: '$src' TO: '$target'..."
     get_dir_size "${src}"
     mkdir -p "${target}"
 
@@ -152,7 +161,10 @@ function mirror_dir() {
     #     maximum of 19)
     #   - --checksum-choice=xxh3: Use xxh3 hashing algorithm (very fast)
 
-    rsync -ah --info=progress2 --no-inc-recursive "${flags}" "${src}" "${target}"
+    # -a archive, -h human sizes, --info=progress2 one progress, --no-inc-recursive for stable progress
+    rsync -ah --info=progress2 --no-inc-recursive \
+        "${extra_flags[@]}" \
+        -- "${src}" "${target}"
 }
 
 # ex - archive extractor
@@ -209,7 +221,7 @@ function optimize_pdf_in_dir() {
 
 
     # Parent directory + last segment
-    local parent last
+    local parent last output_path
     parent="$(dirname "$dir_abs")"
     last="$(basename "$dir_abs")"
 
@@ -220,11 +232,13 @@ function optimize_pdf_in_dir() {
     mkdir -p "${output_path}"
     echo "input_path: ${dir_abs}"
     echo "output path: ${output_path}"
+
+    local jobs
+    jobs="$(command -v nproc >/dev/null && nproc || sysctl -n hw.ncpu)"
     find "${dir_abs}" -type f -name '*.pdf' -print0 | \
-        parallel -0 -j "$(nproc || sysctl -n hw.ncpu)" -- \
+        parallel -0 -j "${jobs}" -- \
             gs -dNOSAFER -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dQUIET \
-                -o "${output_path/}/{/}" -f "{}"
-    
+                -o "${output_path}/{/}" -f "{}"
 }
 
 function list_git_repos() {
@@ -271,11 +285,10 @@ function deactivate_envs() {
 }
 
 function kill_vscode_server() {
-    # Kill server processes
-    # kill -9 $(ps aux | \grep vscode-server | \grep "${USER"} | \grep -v grep | awk '{print $2}')
-    kill -9 $(ps aux | \grep vscode-server | \grep -v grep | awk '{print $2}')
+    # Kill server processes; kill by user and process name
+    pkill -u "$USER" -f 'vscode-server' || true
     # Delete related files and folder
-    rm -rf $HOME/.vscode-server # Or ~/.vscode-server-insiders
+    rm -rf "$HOME/.vscode-server"
 }
 
 function restart_pipewire() {

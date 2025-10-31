@@ -20,7 +20,7 @@ path=(
 
 # * Manually install noisetorch. Still need to load the app and activate it after each startup.
 if [ -d "/opt/noisetorch/bin" ]; then
-    path+="/opt/noisetorch/bin"
+    path+=("/opt/noisetorch/bin")
 fi
 
 export PATH
@@ -99,15 +99,16 @@ fi
 # * Example: set the default libvirt URI for QEMU/KVM virtual machines
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 
-if [[ -f "${HOME}/perl5/bin" ]]; then
-    path+="${HOME}/perl5/bin"
+if [[ -d "${HOME}/perl5/bin" ]]; then
+    # Put ~/perl5/bin on PATH (zsh array append)
+    path+=("${HOME}/perl5/bin")
     PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
     export PERL5LIB
     PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
     export PERL_LOCAL_LIB_ROOT
-    PERL_MB_OPT="--install_base \"/home/${USER}/perl5\""
+    PERL_MB_OPT="--install_base \"$HOME/perl5\""
     export PERL_MB_OPT
-    PERL_MM_OPT="INSTALL_BASE=/home/${USER}/perl5"
+    PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
     export PERL_MM_OPT
 fi
 

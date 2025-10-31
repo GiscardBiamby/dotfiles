@@ -82,6 +82,12 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+
+# * Shell Options (load before loading omz)
+if [ -f ~/.zsh_options ]; then
+    . ~/.zsh_options
+fi
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -157,11 +163,6 @@ PROMPT='${CONDA_PROMPT_MODIFIER:-${CONDA_DEFAULT_ENV:+($CONDA_DEFAULT_ENV) }}'"$
 # * Load machine-specific .zshrc_local if one exists (it's not managed by stow):
 if [[ -f "$HOME/.zshrc_local" ]]; then
     . "$HOME/.zshrc_local"
-fi
-
-# * Shell Options
-if [ -f ~/.zsh_options ]; then
-    . ~/.zsh_options
 fi
 
 # * Functions

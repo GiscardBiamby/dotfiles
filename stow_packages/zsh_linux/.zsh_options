@@ -20,6 +20,7 @@ setopt HIST_VERIFY                               # don't execute expanded histor
 setopt EXTENDED_HISTORY                          # timestamps and runtime
 setopt HIST_SAVE_NO_DUPS                         # don't write dupes
 setopt HIST_IGNORE_ALL_DUPS                      # remove older dupes
+setopt HIST_IGNORE_SPACE                         # ignore commands starting with a space
 
 
 # Reliability / UX
@@ -64,3 +65,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # Cache completion results (writes under $XDG_CACHE_HOME/zsh by default)
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+
+# Ensure complist for menu-select UI is available
+zmodload -i zsh/complist
