@@ -17,23 +17,24 @@ path=(
     # "/usr/bin/Postman/app"
     $path
 )
-export PATH
 
 # * Manually install noisetorch. Still need to load the app and activate it after each startup.
 if [ -d "/opt/noisetorch/bin" ]; then
     path+="/opt/noisetorch/bin"
 fi
 
+export PATH
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("/home/${USER}/miniforge3/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
+__conda_setup="$("${HOME}/miniforge3/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/${USER}/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/${USER}/miniforge3/etc/profile.d/conda.sh"
+    if [ -f "${HOME}/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "${HOME}/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/${USER}/miniforge3/bin:$PATH"
+        export PATH="${HOME}/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -41,8 +42,8 @@ unset __conda_setup
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba shell init' !!
-export MAMBA_EXE="/home/${USER}/miniforge3/bin/mamba"
-export MAMBA_ROOT_PREFIX="/home/${USER}/miniforge3"
+export MAMBA_EXE="${HOME}/miniforge3/bin/mamba"
+export MAMBA_ROOT_PREFIX="${HOME}/miniforge3"
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"
@@ -72,22 +73,37 @@ export ZDOTDIR="${ZDOTDIR:-$HOME}"
 # * Prevent global compinit so we fully control it
 typeset -g skip_global_compinit=1
 
-# * Note, if you want an environment var to take effect even for GUI apps (aka .desktop shortcuts),
-# * add the environment vars to ~/.config/environment.d/
+# * Prevents long command outputs (like apt, man, git) from opening a scrollable pager (like less) by
+# * forcing output to stream directly to the terminal using /bin/cat.
+export PAGER="/bin/cat"
+
+# * Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='code --wait'
+else
+    export EDITOR='nano'
+fi
+
+## * ossh krb config
+if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
+    export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
+# else
+#     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
+fi
+
+# * Note: .zshenv is only sourced for shells, not GUI apps. If you want an environment var to take
+# * effect even for GUI apps (aka .desktop shortcuts), add the environment vars to
+# * ~/.config/environment.d/
 #export MOZ_ENABLE_WAYLAND=1
 
 # * Example: set the default libvirt URI for QEMU/KVM virtual machines
 export LIBVIRT_DEFAULT_URI="qemu:///system"
 
-# * Prevents long command outputs (like apt, man, git) from opening a scrollable pager (like less) by
-# * forcing output to stream directly to the terminal using /bin/cat.
-export PAGER="/bin/cat"
-
 if [[ -f "${HOME}/perl5/bin" ]]; then
     path+="${HOME}/perl5/bin"
-    PERL5LIB="/home/${USER}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+    PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
     export PERL5LIB
-    PERL_LOCAL_LIB_ROOT="/home/${USER}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+    PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
     export PERL_LOCAL_LIB_ROOT
     PERL_MB_OPT="--install_base \"/home/${USER}/perl5\""
     export PERL_MB_OPT

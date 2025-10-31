@@ -34,30 +34,33 @@ setopt NUMERIC_GLOB_SORT                         # sort numbers naturally
 
 ##
 ## Advanced zsh completions
+# Disabling this because we generate the auto-complete cache manually in .zshrc
 # https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
 ##<!-- autoload -Uz compinit && compinit -->
 
 ##
-## case insensitive path-completion
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
+# Case-insensitive + fragment/substring matching (locale-aware)
+zstyle ':completion:*' matcher-list \
+    'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
+    'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 
 ##
-## partial completion suggestions
+## Partial completion suggestions
 #
 # This is a particularly nice feature. You can type fragments of each path segment and the
 # completion will try to complete them all at once:
 #
 # % cd /u/lo/b⇥
 # % cd /usr/local/bin
-zstyle ':completion:*' list-suffixeszstyle ':completion:*' expand prefix suffix
+zstyle ':completion:*' list-suffixes yes
+zstyle ':completion:*' expand prefix suffix
 
 # Completion UX
 zstyle ':completion:*' menu select
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format '%F{cyan}%B%d%b%f'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
 # Cache completion results (writes under $XDG_CACHE_HOME/zsh by default)
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'  # case-insensitive completion
-zstyle ':completion:*:descriptions' format '%F{cyan}%B%d%b%f'

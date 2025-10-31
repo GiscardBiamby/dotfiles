@@ -87,10 +87,10 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+zstyle ':omz:plugins:nvm' lazy yes
+typeset -U plugins
 plugins=(
-    # ag
-    # colorize
-    conda-zsh-completion
+    colorize
     copybuffer
     direnv
     docker
@@ -106,16 +106,21 @@ plugins=(
     # gpg-agent
     history
     keychain
-    # nvm
-    # npm
+    nvm
+    npm
     pip
     python
     rsync
     # ssh-agent
+    sudo # allows you to easily prepend sudo to your current or previous commands by pressing Esc twice.
     tmux
     zoxide
 )
 # Load custom pugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
+if [[ -d ~/.oh-my-zsh/custom/plugins/conda-zsh-completion ]]; then
+    echo "Loading zsh plugin: conda-zsh-completion"
+    plugins+=(conda-zsh-completion)
+fi
 if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
     echo "Loading zsh plugin: zsh-autosuggestions"
     plugins+=(zsh-autosuggestions)
@@ -124,20 +129,10 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
     echo "Loading zsh plugin: zsh-syntax-highlighting"
     plugins+=(zsh-syntax-highlighting)
 fi
-if [[ -d ~/.oh-my-zsh/custom/plugins/conda-zsh-completion ]]; then
-    echo "Loading zsh plugin: conda-zsh-completion"
-    plugins+=(conda-zsh-completion)
-fi
-if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
-    echo "Loading zsh plugin: yt-dlp"
-    plugins+=(yt-dlp)
-fi
-
-# * Tell OMZ not to run compinit (we'll do it ourselves)
-zstyle ':omz:completion' skip yes
-
-# * Use the same dump file OMZ would use
-export ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump-${HOST}-${ZSH_VERSION}"
+# if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
+#     echo "Loading zsh plugin: yt-dlp"
+#     plugins+=(yt-dlp)
+# fi
 
 # * Keychain: will start, start ssh-agent for you if it has not yet been started, use ssh-add to add
 # * your id_rsa private key file to ssh-agent, and set up your shell environment so that ssh will be
@@ -147,57 +142,44 @@ export ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump-${HOST}-${ZSH_VERSION}"
 zstyle :omz:plugins:keychain agents gpg,ssh
 zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
 
+# * Tell OMZ not to run compinit (we'll do it ourselves)
+zstyle ':omz:completion' skip yes
+
+# * Use the same dump file OMZ would use
+export ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump-${HOST}-${ZSH_VERSION}"
+
 source $ZSH/oh-my-zsh.sh
 
 # *  Show conda/mamba env in the prompt
 setopt PROMPT_SUBST
 PROMPT='${CONDA_PROMPT_MODIFIER:-${CONDA_DEFAULT_ENV:+($CONDA_DEFAULT_ENV) }}'"$PROMPT"
 
-# ssh
-# eval `keychain --eval id_ed25519 id_rsa-bairdev`
-# eval $(ssh-agent -s)
-# ssh-add ~/.ssh/id_rsa-bairdev
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='code --wait'
-else
-    export EDITOR='nano'
-fi
-
-## PATH
-if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
-    export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
-# else
-#     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
-fi
-
-# Load machine-specific .zshrc_local if one exists (it's not managed by stow):
+# * Load machine-specific .zshrc_local if one exists (it's not managed by stow):
 if [[ -f "$HOME/.zshrc_local" ]]; then
     . "$HOME/.zshrc_local"
 fi
 
-# Shell Options
+# * Shell Options
 if [ -f ~/.zsh_options ]; then
     . ~/.zsh_options
 fi
 
-# Functions
+# * Functions
 if [ -f ~/.zsh_functions ]; then
     . ~/.zsh_functions
 fi
 
-# Alias definitions.
+# * Alias definitions.
 if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
-# * Do auto complete cache once every 24hr. The original code slows down zsh startup time by a lot:
-# Initialize completion ONCE with 24h caching (use zstat to avoid glob issues)
+# * Generate auto-complete cache once every 24hr. The original code slows down zsh startup time by a
+# *  lot (use zstat to avoid glob issues):
 zmodload zsh/stat
 autoload -Uz compinit
 if [[ -e "$ZSH_COMPDUMP" ]]; then
-    local -A st
+    typeset -A st
     zstat -H st -- "$ZSH_COMPDUMP"
     if ((EPOCHSECONDS - st[mtime] < 86400)); then
         compinit -C -d "$ZSH_COMPDUMP" # fresh: fast path
@@ -208,11 +190,7 @@ else
     compinit -d "$ZSH_COMPDUMP"      # missing: create
 fi
 
-# Customize the prompt to show directory:
-# PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %{%}%c%{%} $(git_prompt_info)"
-# export PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %F{blue}%~%f $(git_prompt_info)"
-
-# Display if login/interactive shell
+# * Display if login/interactive shell
 [[ $- == *i* ]] && echo 'Interactive shell' || echo 'Not interactive shell'
 
 # * To profile the zsh load speed uncomment the top line and this bottom line:
