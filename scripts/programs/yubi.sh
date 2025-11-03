@@ -10,7 +10,7 @@ source "${SCRIPT_DIR}/../util.sh"
 # https://support.yubico.com/hc/en-us/articles/360013708900-Using-Your-U2F-YubiKey-with-Linux
 echo "Installing yubikey support for linux"
 wget \
-    https://github.com/Yubico/libfido2/blob/main/udev/70-u2f.rules -O "${SCRIPT_DIR}/downloads/70-u2f.rules"
+    https://github.com/Yubico/libfido2/raw/refs/heads/main/udev/70-u2f.rules -O "${SCRIPT_DIR}/downloads/70-u2f.rules"
 sudo cp "${SCRIPT_DIR}/downloads/70-u2f.rules" /etc/udev/rules.d/70-u2f.rules
 
 # https://support.yubico.com/hc/en-us/articles/360016649039-Installing-Yubico-Software-on-Linux
