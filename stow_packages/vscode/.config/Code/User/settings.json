@@ -827,7 +827,8 @@
         "brb": "linux",
         "sif": "linux",
         "d6": "linux",
-        "ub24gpu": "linux"
+        "ub24gpu": "linux",
+        "ydrag.asgardgb.com": "linux"
     },
     "remote.SSH.showLoginTerminal": true,
     "rewrap.wrappingColumn": 120,
