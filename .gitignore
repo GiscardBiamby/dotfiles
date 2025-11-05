@@ -8,3 +8,4 @@
 .zshrc_local
 *junk*
 stow_packages/jupyter/.local/share/jupyter/kernels
+stow_packages/jupyter/.local/share/jupyter/runtime

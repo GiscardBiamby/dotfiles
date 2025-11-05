@@ -40,6 +40,12 @@ function get_biggest_folders() {
     du -ah "${_path}" | sort -h -r | head -n "${num_results}"
 }
 
+function get_biggest_folders_by_num_files() {
+    local _path="${1:-./}"
+    du "${_path}" --inodes -S | sort -rh | sed -n \
+        '1,50{/^.\{71\}/s/^\(.\{30\}\).*\(.\{37\}\)$/\1...\2/;p}'
+}
+
 function get_large_files() {
     local _path="${1:-./}"
     local size="${2:-500}"
@@ -55,6 +61,10 @@ function get_dir_size() {
 function get_file_count() {
     local _path="${1:-./}"
     find "${_path}" -type f | wc -l
+}
+
+function get_file_extensions() {
+    find . -type f -name '*.*' | sed 's|.*\.||' | sort -u
 }
 
 function sync_dir() {
