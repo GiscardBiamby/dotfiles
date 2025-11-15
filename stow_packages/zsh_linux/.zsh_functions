@@ -284,12 +284,18 @@ function deactivate_envs() {
     done
 }
 
-function kill_vscode_server() {
-    # Kill server processes; kill by user and process name
-    pkill -u "$USER" -f 'vscode-server' || true
-    # Delete related files and folder
-    rm -rf "$HOME/.vscode-server"
+kill_vscode_server () {
+    # This command finds and kills all processes that
+    # are owned by your user (-u $USER)
+    # and match the string 'vscode-server' (-f 'vscode-server')
+    pkill -9 -f -u $USER 'vscode-server'
+
+    # This part was already correct and user-specific
+    rm -rf $HOME/.vscode-server
+    echo "Killed all vscode-server processes for user: $USER"
+    echo "Removed $HOME/.vscode-server"
 }
+
 
 function restart_pipewire() {
     # Sometimes my audio gets scratchy, and has weird echos and reverb. Seems to happen after wake

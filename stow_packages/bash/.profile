@@ -29,3 +29,6 @@ fi
 # # Only on workstations, maybe need a separate include
 # export PATH=$PATH:/usr/bin/Postman
 [ -f "/usr/bin/Postman" ] && export PATH="$PATH:/usr/bin/Postman"
+
+# Make Flatpak apps show in the app grid
+export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
