@@ -7,11 +7,19 @@ echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 # shellcheck disable=SC1091
 source "${SCRIPT_DIR}/util.sh"
 
-# Script to update all plugins for various tools (e.g., oh-my-zsh, tmux, vim, etc.)
-# Run this script after pulling updates to dotfiles repo.
+# Sync submodule URLs from .gitmodules to .git/config (safe to run always)
+git submodule sync --recursive
+
+# Ensure all submodules are initialized and checked out
+git submodule update --init --recursive
 
 # Update all git submodules recursively:
 git submodule update --remote --merge --recursive
+
+# Reset nested submodules to their recorded commits
+pushd "${SCRIPT_DIR}/../stow_packages/tmux/.tmux/plugins/tpm"
+git submodule update --init
+popd
 
 # Update tmux plugins using TPM:
 echo "Updating tmux plugins..."
