@@ -37,7 +37,7 @@
         "diffEditor.ignoreTrimWhitespace": false
     },
     "[shellscript]": {
-        "editor.defaultFormatter": "foxundermoon.shell-format"
+        "editor.defaultFormatter": "lumirelle.shell-format-rev"
     },
     "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -1066,7 +1066,7 @@
         "editorconfig.editorconfig",
         "esbenp.prettier-vscode",
         "euskadi31.json-pretty-printer",
-        "foxundermoon.shell-format",
+        "lumirelle.shell-format-rev",
         "george-alisson.html-preview-vscode",
         "gruntfuggly.todo-tree",
         "guyskk.language-cython",
@@ -1127,7 +1127,7 @@
         "shd101wyy.markdown-preview-enhanced",
         "sissel.shopify-liquid",
         "spikespaz.vscode-smoothtype",
-        "stkb.rewrap",
+        "dnut.rewrap-revived",
         "streetsidesoftware.code-spell-checker",
         "takumii.markdowntable",
         "tamasfe.even-better-toml",

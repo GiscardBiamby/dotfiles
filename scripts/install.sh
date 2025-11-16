@@ -46,6 +46,7 @@ install curl
 install "dconf*"
 install exiftool
 install ffmpeg
+install fzf
 install git
 install gnupg
 install gzip
