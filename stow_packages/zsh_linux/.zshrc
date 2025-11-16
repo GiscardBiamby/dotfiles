@@ -27,7 +27,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # ZSH_THEME="apple"
 ZSH_THEME="gbiamby"
 
-# Disable SSH hosts completion to speed up shell startup time. 
+# Disable SSH hosts completion to speed up shell startup time.
 # From: https://destinmoulton.com/notes/howto/how-to-disable-zsh-ssh-hosts-completion/
 zstyle ':completion:*:ssh:*' hosts off
 
