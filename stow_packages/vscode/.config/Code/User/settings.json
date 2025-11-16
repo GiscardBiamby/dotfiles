@@ -558,6 +558,7 @@
         "setaf",
         "setfacl",
         "setuptools",
+        "setw",
         "Shilliday",
         "shutil",
         "simdjson",

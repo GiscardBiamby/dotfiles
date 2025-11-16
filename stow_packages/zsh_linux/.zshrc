@@ -27,6 +27,10 @@ export ZSH="$HOME/.oh-my-zsh"
 # ZSH_THEME="apple"
 ZSH_THEME="gbiamby"
 
+# Disable SSH hosts completion to speed up shell startup time. 
+# From: https://destinmoulton.com/notes/howto/how-to-disable-zsh-ssh-hosts-completion/
+zstyle ':completion:*:ssh:*' hosts off
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -81,7 +85,6 @@ COMPLETION_WAITING_DOTS="true"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
-
 
 # * Shell Options (load before loading omz)
 if [ -f ~/.zsh_options ]; then

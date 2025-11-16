@@ -21,7 +21,7 @@ setopt EXTENDED_HISTORY                          # timestamps and runtime
 setopt HIST_SAVE_NO_DUPS                         # don't write dupes
 setopt HIST_IGNORE_ALL_DUPS                      # remove older dupes
 setopt HIST_IGNORE_SPACE                         # ignore commands starting with a space
-
+unsetopt pathdirs                                # don't search $PATH for commands. This avoids possible slow zsh auto-completion.
 
 # Reliability / UX
 setopt PIPEFAIL                                  # fail pipelines on first failing command
