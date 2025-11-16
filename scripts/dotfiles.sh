@@ -57,7 +57,10 @@ if [[ "${machine}" == "Linux" ]]; then
         sudo desktop-file-install ~/.local/share/applications/code-url-handler.desktop
     fi
 
-    mkdir "${HOME}/bin"
+    # If ~/bin doesn't exist, create it and stow home_bin there
+    if [ ! -d "${HOME}/bin" ]; then
+        mkdir "${HOME}/bin"
+    fi
     stow --target="${HOME}/bin" home_bin
 fi
 if [[ "${machine}" == "Mac" ]]; then

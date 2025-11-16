@@ -37,3 +37,7 @@
 [submodule "stow_packages/vim/.vim/pack/syntax/start/ale"]
 	path = stow_packages/vim/.vim/pack/syntax/start/ale
 	url = https://github.com/dense-analysis/ale
+
+[submodule "stow_packages/tmux/.tmux/plugins/tpm"]
+	path = stow_packages/tmux/.tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
