@@ -167,6 +167,7 @@
         "cifar",
         "circleci",
         "ckpt",
+        "ckpts",
         "CLI",
         "cmdline",
         "cmds",
@@ -311,6 +312,7 @@
         "ints",
         "invariances",
         "iopath",
+        "ious",
         "ipykernel",
         "ipynb",
         "ipython",
@@ -432,6 +434,7 @@
         "openai",
         "openblas",
         "opencv",
+        "openmmlab",
         "operationalized",
         "operationalizing",
         "optim",
@@ -445,6 +448,7 @@
         "pandas",
         "panopticapi",
         "Parallelization",
+        "paramwise",
         "parquet",
         "patchified",
         "patchify",
@@ -471,6 +475,7 @@
         "puppeteering",
         "pushd",
         "pyarrow",
+        "pybind",
         "pycache",
         "pycocotools",
         "pycodestyle",
@@ -672,6 +677,7 @@
         "xmax",
         "xmin",
         "xrange",
+        "xticks",
         "Xview",
         "XVIEWCOCO",
         "xyxy",
@@ -727,6 +733,7 @@
     "files.exclude": {
         "**/__pycache__": true,
         "**/.git": true,
+        "**/*egg-info": true,
         "**/.svn": true,
         "**/.idea": true,
         "**/.DS_Store": true,
@@ -744,10 +751,12 @@
     },
     "files.watcherExclude": {
         "**/__pycache__/**": true,
-        "**/.git/**": true,
-        "**/.svn/**": true,
-        "**/.idea/**": true,
         "**/.DS_Store": true,
+        "**/.git/**": true,
+        "**/.idea/**": true,
+        "**/.mim/**": true,
+        "**/.svn/**": true,
+        "**/*.egg-info": true,
         "**/.pytest_cache/**": true,
         "**/.ruff_cache/**": true,
         "**/.mypy_cache/**": true,
@@ -917,6 +926,15 @@
     "python.analysis.diagnosticMode": "workspace",
     "python.analysis.indexing": true,
     "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.aiCodeActions": {
+        "generateDocstring": true,
+        "implementAbstractClasses": true,
+        "generateSymbol": true,
+        "convertFormatString": true,
+        "convertLambdaToNamedFunction": true,
+    },
+    "python.analysis.aiHoverSummaries": true,
+    "python.analysis.generateWithTypeAnnotation": true,
     "python.diagnostics.sourceMapsEnabled": true,
     "python.envFile": "${workspaceFolder}/.env",
     "python.languageServer": "Pylance",
@@ -938,7 +956,6 @@
         "ydrag.asgardgb.com": "linux",
         "dgx1": "linux"
     },
-    "remote.SSH.showLoginTerminal": true,
     "rewrap.wrappingColumn": 120,
     "security.workspace.trust.untrustedFiles": "open",
     // --- Search: Exclude artifacts and data from search results ---
@@ -1211,14 +1228,12 @@
     "evenBetterToml.schema.associations": {
         // "pyproject.toml": "https://json.schemastore.org/pyproject.json"
     },
-    "[pip-requirements]": {
-        "editor.defaultFormatter": "mrtz-cdstb00.reqformatter"
-    },
     "flake8.enabled": false,
     "[toml]": {
         "editor.defaultFormatter": "tamasfe.even-better-toml"
     },
     "docker.extension.enableComposeLanguageServer": false,
     "workbench.editorLargeFileConfirmation": 100,
+    "pylint.enabled": false,
     // "git.path": "/home/gbiamby/bin/git-vscode-wrapper",
 }

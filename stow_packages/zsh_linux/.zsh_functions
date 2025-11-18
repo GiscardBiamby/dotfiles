@@ -267,9 +267,19 @@ function map_shared() {
     sshfs -o idmap=user gbiamby@cthu5:/shared "${TARGET_PATH}"
 }
 
-function map_cthu() {
+map_cthu()  {
     TARGET_PATH=~/bair_cthu5
+
+    # 1. Create dir if it doesn't exist
     mkdir -p "${TARGET_PATH}"
+
+    # 2. Check if already mounted or stale, and unmount if necessary
+    if mountpoint -q "${TARGET_PATH}"; then
+        echo "Directory already mounted or stale. Attempting to unmount..."
+        fusermount -uz "${TARGET_PATH}"
+    fi
+
+    # 3. Mount
     sshfs -o idmap=user gbiamby@cthulhu5:/home/gbiamby/ "${TARGET_PATH}"
 }
 
