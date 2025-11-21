@@ -1,11 +1,16 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
     "[dockercompose]": {
         //     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "[dockerfile]": {
         "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -22,6 +27,9 @@
     "[latex]": {
         "editor.defaultFormatter": "mathematic.vscode-latex"
     },
+    "[lua]": {
+        "editor.defaultFormatter": "yinfei.luahelper"
+    },
     "[markdown]": {
         // "editor.defaultFormatter": "mervin.markdown-formatter",
         "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -32,12 +40,18 @@
         }
     },
     "[python]": {
-        "editor.formatOnType": true,
+        "diffEditor.ignoreTrimWhitespace": false,
         "editor.defaultFormatter": "charliermarsh.ruff",
-        "diffEditor.ignoreTrimWhitespace": false
+        "editor.formatOnType": true
     },
     "[shellscript]": {
         "editor.defaultFormatter": "lumirelle.shell-format-rev"
+    },
+    "[toml]": {
+        "editor.defaultFormatter": "tamasfe.even-better-toml"
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
     },
     "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -45,11 +59,28 @@
     "accessibility.signals.terminalBell": {
         "sound": "on"
     },
+    "auto-scroll.enabled": false,
     "autoDocstring.docstringFormat": "sphinx",
     "autoDocstring.startOnNewLine": true,
     "black-formatter.showNotifications": "onWarning",
     "breadcrumbs.enabled": true,
+    "chatgpt.commentCodeLensEnabled": false,
+    // "git.path": "/home/gbiamby/bin/git-vscode-wrapper",
     "cSpell.allowCompoundWords": true,
+    "cSpell.enabledSchemes": {
+        "comment": true,
+        "file": true,
+        "gist": true,
+        "repo": true,
+        "sftp": true,
+        "untitled": true,
+        "vscode-notebook-cell": true,
+        "vscode-scm": true,
+        "vscode-userdata": true,
+        "vscode-vfs": true,
+        "vsls": true,
+        "overleaf-workshop": true
+    },
     "cSpell.enableFiletypes": [
         "!cpp",
         "!csharp",
@@ -256,6 +287,7 @@
         "faiss",
         "Fanalyze",
         "fastapi",
+        "fastcocoeval",
         "finetune",
         "Fiscus",
         "flake8",
@@ -382,6 +414,7 @@
         "minival",
         "MIZZOU",
         "mkdir",
+        "mkdocs",
         "mlflow",
         "mlops",
         "mlpipeline",
@@ -700,10 +733,13 @@
         "zstd"
     ],
     "diffEditor.diffAlgorithm": "advanced",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "docker.extension.enableComposeLanguageServer": false,
     "editor.bracketPairColorization.enabled": true,
     "editor.copyWithSyntaxHighlighting": false,
     "editor.cursorBlinking": "smooth",
     "editor.cursorSmoothCaretAnimation": "on",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.detectIndentation": false,
     "editor.fastScrollSensitivity": 9,
     "editor.fontFamily": "'Atkinson Hyperlegible Mono', 'Source Code Pro','Droid Sans Mono', 'monospace', monospace, Menlo, Monaco, 'Courier New'",
@@ -711,43 +747,50 @@
     "editor.guides.bracketPairs": "active",
     "editor.largeFileOptimizations": false,
     "editor.maxTokenizationLineLength": 200000,
+    "editor.minimap.autohide": "mouseover",
     "editor.minimap.showSlider": "always",
     "editor.mouseWheelScrollSensitivity": 2,
     "editor.mouseWheelZoom": true,
+    "editor.quickSuggestionsDelay": 100,
     "editor.renderControlCharacters": true,
     "editor.renderWhitespace": "all",
     "editor.smoothScrolling": true,
     "editor.stickyScroll.enabled": true,
     "editor.suggestSelection": "first",
     "editor.wordWrapColumn": 100,
+    "evenBetterToml.schema.associations": {
+        // "pyproject.toml": "https://json.schemastore.org/pyproject.json"
+    },
     "explorer.autoReveal": false,
     "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
     "files.associations": {
-        ".pylintrc": "ini",
         ".desktop": "ini",
-        ".slurm": "bash",
         ".out": "text",
+        ".pylintrc": "ini",
+        ".slurm": "bash",
         "docker-compose.y*ml": "yaml"
     },
     "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1500,
     "files.exclude": {
         "**/__pycache__": true,
-        "**/.git": true,
-        "**/*egg-info": true,
-        "**/.svn": true,
-        "**/.idea": true,
         "**/.DS_Store": true,
-        "**/*.swp": true,
-        "**/*~": true,
+        "**/.git": true,
+        "**/.idea": true,
+        "**/.ipynb_checkpoints": true,
+        "**/.mypy_cache": true,
         "**/.pytest_cache": true,
         "**/.ruff_cache": true,
-        "**/.mypy_cache": true,
-        "**/.ipynb_checkpoints": true,
+        "**/.svn": true,
+        "**/.tox": true,
+        "**/.venv": true,
         "**/*.egg-info": true,
         "**/*.pyc": true,
-        "**/.venv": true,
-        "**/venv": true,
-        "**/.tox": true,
+        "**/*.swp": true,
+        "**/*~": true,
+        "**/*egg-info": true,
+        "**/venv": true
     },
     "files.watcherExclude": {
         "**/__pycache__/**": true,
@@ -814,16 +857,21 @@
         "**/*.pkl": true,
         "**/*.pt": true
     },
+    "flake8.enabled": false,
+    "git-graph.maxDepthOfRepoSearch": 3,
+    "git-graph.repository.commits.loadMore": 300,
     "git.autofetch": true,
     "git.confirmSync": false,
     "git.detectSubmodulesLimit": 100,
     "git.fetchOnPull": true,
     "git.openRepositoryInParentFolders": "never",
+    "git.repositoryScanMaxDepth": -1,
     "git.showPushSuccessNotification": true,
     "git.suggestSmartCommit": false,
     "git.supportCancellation": true,
     "git.terminalGitEditor": true,
     "git.untrackedChanges": "separate",
+    "github.copilot.advanced": {},
     "isort.showNotifications": "onWarning",
     "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
     "jupyter.allowUnauthorizedRemoteConnection": true,
@@ -834,6 +882,7 @@
     ],
     "latex-workshop.intellisense.package.enabled": true,
     "latex-workshop.view.pdf.viewer": "tab",
+    "markdown.marp.pptx.editable": "smart",
     "markdown.preview.breaks": true,
     "markdown.preview.typographer": true,
     "materialTheme.accent": "Blue",
@@ -921,152 +970,27 @@
             "value": "#da2fbd"
         }
     ],
+    "pylint.enabled": false,
+    "python.analysis.aiCodeActions": {
+        "convertFormatString": true,
+        "convertLambdaToNamedFunction": true,
+        "generateDocstring": true,
+        "generateSymbol": true,
+        "implementAbstractClasses": true
+    },
+    "python.analysis.aiHoverSummaries": true,
     "python.analysis.autoImportCompletions": true,
     "python.analysis.completeFunctionParens": true,
     "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.generateWithTypeAnnotation": true,
     "python.analysis.indexing": true,
     "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.aiCodeActions": {
-        "generateDocstring": true,
-        "implementAbstractClasses": true,
-        "generateSymbol": true,
-        "convertFormatString": true,
-        "convertLambdaToNamedFunction": true,
-    },
-    "python.analysis.aiHoverSummaries": true,
-    "python.analysis.generateWithTypeAnnotation": true,
     "python.diagnostics.sourceMapsEnabled": true,
     "python.envFile": "${workspaceFolder}/.env",
+    "python.experiments.enabled": false,
     "python.languageServer": "Pylance",
     "python.testing.autoTestDiscoverOnSaveEnabled": false,
     "redhat.telemetry.enabled": false,
-    "remote.SSH.remotePlatform": {
-        "angler": "linux",
-        "nautilus": "linux",
-        "raider": "linux",
-        "raider.afrl.hpc.mil": "linux",
-        "cthulhu5": "linux",
-        "jormungandr": "linux",
-        "dgx": "linux",
-        "ydrag": "linux",
-        "brb": "linux",
-        "sif": "linux",
-        "d6": "linux",
-        "ub24gpu": "linux",
-        "ydrag.asgardgb.com": "linux",
-        "dgx1": "linux"
-    },
-    "rewrap.wrappingColumn": 120,
-    "security.workspace.trust.untrustedFiles": "open",
-    // --- Search: Exclude artifacts and data from search results ---
-    "search.exclude": {
-        // All entries from files.watcherExclude are automatically excluded from search.
-        // This list only needs to contain patterns NOT in files.watcherExclude.
-        "**/*.code-search": true,
-    },
-    "settingsSync.ignoredSettings": [
-        "editor.fontFamily"
-    ],
-    "telemetry.telemetryLevel": "error",
-    "terminal.integrated.automationProfile.linux": {
-        "args": [
-            "--login"
-        ],
-        "icon": "console",
-        "path": "zsh"
-    },
-    "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.defaultProfile.linux": "my_zsh",
-    "terminal.integrated.enableMultiLinePasteWarning": false,
-    "terminal.integrated.enableVisualBell": true,
-    "terminal.integrated.fastScrollSensitivity": 9,
-    "terminal.integrated.inheritEnv": true,
-    "terminal.integrated.mouseWheelScrollSensitivity": 2,
-    "terminal.integrated.persistentSessionScrollback": 1000000,
-    "terminal.integrated.profiles.linux": {
-        "bash": null,
-        "Javascript Debug Terminal": null,
-        "my_bash": {
-            "args": [
-                "--login"
-            ],
-            "path": "bash"
-        },
-        "my_zsh": {
-            "args": [
-                "--login"
-            ],
-            "path": "zsh"
-        },
-        "R Terminal": null
-    },
-    "terminal.integrated.scrollback": 1000000,
-    "terminal.integrated.shellIntegration.suggestEnabled": true,
-    "terminal.integrated.smoothScrolling": true,
-    "todo-tree.general.tags": [
-        "BUG",
-        "HACK",
-        "FIXME",
-        "TODO",
-        "XXX",
-        "DEBUG",
-        "[ ]",
-        "[x]"
-    ],
-    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-    "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-    "vsicons.dontShowNewVersionMessage": true,
-    "vsicons.presets.jsonOfficial": true,
-    "window.commandCenter": true,
-    "window.restoreWindows": "all",
-    "window.title": "${remoteName}${separator}${activeEditorShort}${separator}${rootName}${separator}${profileName}",
-    "window.titleBarStyle": "custom",
-    "window.zoomLevel": 1,
-    "workbench.colorCustomizations": {
-        "activityBar.activeBorder": "#2979FF",
-        "activityBar.background": "#163414",
-        "activityBarBadge.background": "#2979FF",
-        "breadcrumb.activeSelectionForeground": "#2979FF",
-        "editor.findMatchBorder": "#2979FF",
-        "editorSuggestWidget.highlightForeground": "#2979FF",
-        "editorWidget.border": "#2979FF",
-        "editorWidget.resizeBorder": "#2979FF",
-        "list.activeSelectionForeground": "#2979FF",
-        "list.highlightForeground": "#2979FF",
-        "list.inactiveSelectionForeground": "#2979FF",
-        "menu.selectionForeground": "#2979FF",
-        "menubar.selectionForeground": "#2979FF",
-        "notificationLink.foreground": "#2979FF",
-        "panelTitle.activeBorder": "#2979FF",
-        "pickerGroup.foreground": "#2979FF",
-        "progressBar.background": "#2979FF",
-        "scrollbarSlider.activeBackground": "#2979FF50",
-        "selection.background": "#2979FF40",
-        "settings.headerForeground": "#2979FF",
-        "settings.modifiedItemIndicator": "#2979FF",
-        "tab.activeBorder": "#2979FF",
-        "textLink.foreground": "#2979FF",
-        "titleBar.activeBackground": "#1F491D",
-        "titleBar.activeForeground": "#F5FBF5"
-    },
-    "workbench.colorTheme": "Tinacious Design",
-    "workbench.editor.empty.hint": "hidden",
-    "workbench.editor.enablePreview": true,
-    "workbench.editor.highlightModifiedTabs": true,
-    "workbench.editor.revealIfOpen": true,
-    "workbench.editor.wrapTabs": true,
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook",
-        "*.out": "default"
-    },
-    "workbench.iconTheme": "vscode-icons",
-    "workbench.list.fastScrollSensitivity": 9,
-    "workbench.list.smoothScrolling": true,
-    "workbench.settings.openDefaultKeybindings": true,
-    "workbench.tree.indent": 15,
-    "remote.SSH.useFlock": false,
-    "python.experiments.enabled": false,
-    "remote.SSH.path": "/usr/bin/ssh",
     // "remote.SSH.path": "/usr/local/ossh/bin/ssh",
     "remote.SSH.connectTimeout": 120,
     "remote.SSH.defaultExtensions": [
@@ -1157,49 +1081,50 @@
         "voidei.vscode-vimrc",
         "xshrim.txt-syntax",
         "zaaack.markdown-editor",
-        "ziyasal.vscode-open-in-github",
+        "ziyasal.vscode-open-in-github"
     ],
-    "terminal.integrated.cursorStyle": "line",
-    "slurm-dashboard.job-dashboard.showJobInfo": true,
-    "editor.minimap.autohide": "mouseover",
-    "slurm-dashboard.job-dashboard.refreshInterval": 30,
-    "[cpp]": {
-        "editor.defaultFormatter": "ms-vscode.cpptools"
-    },
-    "scm.showChangesSummary": false,
-    "scm.showIncomingChanges": "never",
-    "scm.showOutgoingChanges": "never",
-    "files.autoSaveDelay": 1500,
-    "scm.showHistoryGraph": false,
     "remote.SSH.defaultForwardedPorts": [],
-    "remote.SSH.useLocalServer": false,
+    "remote.SSH.enableAgentForwarding": true,
+    "remote.SSH.path": "/usr/bin/ssh",
+    "remote.SSH.remotePlatform": {
+        "angler": "linux",
+        "brb": "linux",
+        "cthulhu5": "linux",
+        "d6": "linux",
+        "dgx": "linux",
+        "dgx1": "linux",
+        "jormungandr": "linux",
+        "nautilus": "linux",
+        "raider": "linux",
+        "raider.afrl.hpc.mil": "linux",
+        "sif": "linux",
+        "ub24gpu": "linux",
+        "ydrag": "linux",
+        "ydrag.asgardgb.com": "linux"
+    },
     "remote.SSH.serverPickPortsFromRange": {
         "raider": "39660-39699"
     },
-    "auto-scroll.enabled": false,
-    "explorer.confirmDragAndDrop": false,
-    "svg.preview.mode": "img",
-    "github.copilot.advanced": {},
-    "editor.quickSuggestionsDelay": 100,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "markdown.marp.pptx.editable": "smart",
-    "cSpell.enabledSchemes": {
-        "comment": true,
-        "file": true,
-        "gist": true,
-        "repo": true,
-        "sftp": true,
-        "untitled": true,
-        "vscode-notebook-cell": true,
-        "vscode-scm": true,
-        "vscode-userdata": true,
-        "vscode-vfs": true,
-        "vsls": true,
-        "overleaf-workshop": true
+    "remote.SSH.showLoginTerminal": true,
+    "remote.SSH.useFlock": false,
+    "remote.SSH.useLocalServer": false,
+    "rewrap.wrappingColumn": 120,
+    "ruff.organizeImports": false,
+    "scm.showChangesSummary": false,
+    "scm.showHistoryGraph": false,
+    "scm.showIncomingChanges": "never",
+    "scm.showOutgoingChanges": "never",
+    // --- Search: Exclude artifacts and data from search results ---
+    "search.exclude": {
+        // All entries from files.watcherExclude are automatically excluded from search.
+        // This list only needs to contain patterns NOT in files.watcherExclude.
+        "**/*.code-search": true
     },
-    "[github-actions-workflow]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml"
-    },
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "settingsSync.ignoredSettings": [
+        "editor.fontFamily"
+    ],
     "shellformat.effectLanguages": [
         "shellscript",
         "dockerfile",
@@ -1213,27 +1138,107 @@
         "azcli",
         "bats"
     ],
-    "[xml]": {
-        "editor.defaultFormatter": "redhat.vscode-xml"
-    },
-    "[lua]": {
-        "editor.defaultFormatter": "yinfei.luahelper"
-    },
     "shellformat.flag": "-ci -bn -kp",
-    "git.repositoryScanMaxDepth": -1,
-    "git-graph.repository.commits.loadMore": 300,
-    "git-graph.maxDepthOfRepoSearch": 3,
-    "security.workspace.trust.enabled": false,
-    "ruff.organizeImports": false,
-    "evenBetterToml.schema.associations": {
-        // "pyproject.toml": "https://json.schemastore.org/pyproject.json"
+    "slurm-dashboard.job-dashboard.refreshInterval": 30,
+    "slurm-dashboard.job-dashboard.showJobInfo": true,
+    "svg.preview.mode": "img",
+    "telemetry.telemetryLevel": "error",
+    "terminal.integrated.automationProfile.linux": {
+        "args": [
+            "--login"
+        ],
+        "icon": "console",
+        "path": "zsh"
     },
-    "flake8.enabled": false,
-    "[toml]": {
-        "editor.defaultFormatter": "tamasfe.even-better-toml"
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.defaultProfile.linux": "my_zsh",
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "terminal.integrated.enableVisualBell": true,
+    "terminal.integrated.fastScrollSensitivity": 9,
+    "terminal.integrated.inheritEnv": true,
+    "terminal.integrated.mouseWheelScrollSensitivity": 2,
+    "terminal.integrated.persistentSessionScrollback": 1000000,
+    "terminal.integrated.profiles.linux": {
+        "bash": null,
+        "Javascript Debug Terminal": null,
+        "my_bash": {
+            "args": [
+                "--login"
+            ],
+            "path": "bash"
+        },
+        "my_zsh": {
+            "args": [
+                "--login"
+            ],
+            "path": "zsh"
+        },
+        "R Terminal": null
     },
-    "docker.extension.enableComposeLanguageServer": false,
+    "terminal.integrated.scrollback": 1000000,
+    "terminal.integrated.shellIntegration.suggestEnabled": true,
+    "terminal.integrated.smoothScrolling": true,
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "XXX",
+        "DEBUG",
+        "[ ]",
+        "[x]"
+    ],
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "vsicons.presets.jsonOfficial": true,
+    "window.commandCenter": true,
+    "window.restoreWindows": "all",
+    "window.title": "${remoteName}${separator}${activeEditorShort}${separator}${rootName}${separator}${profileName}",
+    "window.titleBarStyle": "custom",
+    "window.zoomLevel": 1,
+    "workbench.colorCustomizations": {
+        "activityBar.activeBorder": "#2979FF",
+        "activityBar.background": "#163414",
+        "activityBarBadge.background": "#2979FF",
+        "breadcrumb.activeSelectionForeground": "#2979FF",
+        "editor.findMatchBorder": "#2979FF",
+        "editorSuggestWidget.highlightForeground": "#2979FF",
+        "editorWidget.border": "#2979FF",
+        "editorWidget.resizeBorder": "#2979FF",
+        "list.activeSelectionForeground": "#2979FF",
+        "list.highlightForeground": "#2979FF",
+        "list.inactiveSelectionForeground": "#2979FF",
+        "menu.selectionForeground": "#2979FF",
+        "menubar.selectionForeground": "#2979FF",
+        "notificationLink.foreground": "#2979FF",
+        "panelTitle.activeBorder": "#2979FF",
+        "pickerGroup.foreground": "#2979FF",
+        "progressBar.background": "#2979FF",
+        "scrollbarSlider.activeBackground": "#2979FF50",
+        "selection.background": "#2979FF40",
+        "settings.headerForeground": "#2979FF",
+        "settings.modifiedItemIndicator": "#2979FF",
+        "tab.activeBorder": "#2979FF",
+        "textLink.foreground": "#2979FF",
+        "titleBar.activeBackground": "#1F491D",
+        "titleBar.activeForeground": "#F5FBF5"
+    },
+    "workbench.colorTheme": "Tinacious Design",
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.revealIfOpen": true,
+    "workbench.editor.wrapTabs": true,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook",
+        "*.out": "default"
+    },
     "workbench.editorLargeFileConfirmation": 100,
-    "pylint.enabled": false,
-    // "git.path": "/home/gbiamby/bin/git-vscode-wrapper",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.list.fastScrollSensitivity": 9,
+    "workbench.list.smoothScrolling": true,
+    "workbench.settings.openDefaultKeybindings": true,
+    "workbench.tree.indent": 15
 }
