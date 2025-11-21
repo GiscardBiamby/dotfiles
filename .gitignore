@@ -9,3 +9,4 @@
 *junk*
 stow_packages/jupyter/.local/share/jupyter/kernels
 stow_packages/jupyter/.local/share/jupyter/runtime
+stow_packages/tmux/.tmux/plugins/tmux-*
