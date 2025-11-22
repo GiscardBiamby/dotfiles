@@ -147,6 +147,7 @@ fi
 # * already-running ssh-agent.
 # * NOTE: don't use on a remote where you want to use agent forwarding:
 if [[ -z "$SSH_CONNECTION" ]]; then
+    echo "Loading zsh plugin: keychain"
     plugins+=(keychain)
     zstyle :omz:plugins:keychain agents gpg,ssh
     zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
