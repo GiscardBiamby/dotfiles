@@ -42,6 +42,7 @@ add-apt-repository -y ppa:git-core/ppa
 sudo apt update
 
 # Common
+install bat
 install curl
 install "dconf*"
 install exiftool
