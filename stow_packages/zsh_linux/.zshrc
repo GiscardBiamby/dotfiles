@@ -112,15 +112,12 @@ plugins=(
     gitignore
     git-extras
     git-lfs
-    # gpg-agent
     history
-    keychain
     nvm
     npm
     pip
     python
     rsync
-    # ssh-agent
     sudo # allows you to easily prepend sudo to your current or previous commands by pressing Esc twice.
     tmux
     zoxide
@@ -138,18 +135,19 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
     echo "Loading zsh plugin: zsh-syntax-highlighting"
     plugins+=(zsh-syntax-highlighting)
 fi
-# if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
-#     echo "Loading zsh plugin: yt-dlp"
-#     plugins+=(yt-dlp)
-# fi
+
 
 # * Keychain: will start, start ssh-agent for you if it has not yet been started, use ssh-add to add
 # * your id_rsa private key file to ssh-agent, and set up your shell environment so that ssh will be
 # * able to find ssh-agent. If ssh-agent is already running, keychain will ensure that your id_rsa
 # * private key has been added to ssh-agent and then set up your environment so that ssh can find the
 # * already-running ssh-agent.
-zstyle :omz:plugins:keychain agents gpg,ssh
-zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
+# * NOTE: don't use on a remote where you want to use agent forwarding:
+if [[ -z "$SSH_CONNECTION" ]]; then
+    plugins+=(keychain)
+    zstyle :omz:plugins:keychain agents gpg,ssh
+    zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
+fi
 
 # * Tell OMZ not to run compinit (we'll do it ourselves)
 zstyle ':omz:completion' skip yes
