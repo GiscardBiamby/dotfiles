@@ -29,6 +29,9 @@ alias mkdir='mkdir -pv'
 alias mv='mv -v'
 # alias wget='wget -c'
 
+alias bat="batcat"
+alias cat="batcat"
+
 # # Use programs without a root-equivalent group
 # alias docker='sudo docker'
 # alias docker-compose='sudo docker-compose'

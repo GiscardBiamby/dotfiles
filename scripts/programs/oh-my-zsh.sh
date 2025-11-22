@@ -7,7 +7,6 @@ echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 # shellcheck disable=SC1091
 source "${SCRIPT_DIR}/../util.sh"
 
-
 echo "Installing Oh-my-zsh"
 
 if [[ ! -f ~/.oh-my-zsh/oh-my-zsh.sh ]]; then
@@ -20,7 +19,9 @@ else
 fi
 
 # Install zsh plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/esc/conda-zsh-completion.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/conda-zsh-completion
-git clone https://github.com/clavelm/yt-dlp-omz-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/yt-dlp
+git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+git clone https://github.com/esc/conda-zsh-completion.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/conda-zsh-completion"
+git clone https://github.com/clavelm/yt-dlp-omz-plugin.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/yt-dlp"
+git clone https://github.com/fdellwing/zsh-bat.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-bat"
+git clone https://github.com/Aloxaf/fzf-tab "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab"

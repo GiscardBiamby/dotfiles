@@ -105,7 +105,9 @@ plugins=(
     docker
     docker-compose
     extract
+    # eza # a modern replacement for ls with git integration, icons and better colors
     fzf
+    # fzf-tab # Should load this after compinit, so it's loaded at the end of this file.
     # gcloud
     git
     git-prompt
@@ -121,6 +123,7 @@ plugins=(
     sudo # allows you to easily prepend sudo to your current or previous commands by pressing Esc twice.
     tmux
     zoxide
+    zsh-bat # a cat(1) clone with syntax highlighting and Git integration
 )
 # Load custom pugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
 if [[ -d ~/.oh-my-zsh/custom/plugins/conda-zsh-completion ]]; then
@@ -131,11 +134,11 @@ if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
     echo "Loading zsh plugin: zsh-autosuggestions"
     plugins+=(zsh-autosuggestions)
 fi
-if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
-    echo "Loading zsh plugin: zsh-syntax-highlighting"
-    plugins+=(zsh-syntax-highlighting)
-fi
-
+# Moved to bottom for proper loading order. Keep here temporarily:
+# if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
+#     echo "Loading zsh plugin: zsh-syntax-highlighting"
+#     plugins+=(zsh-syntax-highlighting)
+# fi
 
 # * Keychain: will start, start ssh-agent for you if it has not yet been started, use ssh-add to add
 # * your id_rsa private key file to ssh-agent, and set up your shell environment so that ssh will be
@@ -158,8 +161,11 @@ export ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump-${HOST}-${ZSH_VERSION}"
 source $ZSH/oh-my-zsh.sh
 
 # *  Show conda/mamba env in the prompt
+# Only prepend if not already there to avoid duplication on reload
 setopt PROMPT_SUBST
-PROMPT='${CONDA_PROMPT_MODIFIER:-${CONDA_DEFAULT_ENV:+($CONDA_DEFAULT_ENV) }}'"$PROMPT"
+if [[ "$PROMPT" != *'${CONDA_DEFAULT_ENV'* ]]; then
+    PROMPT='${CONDA_PROMPT_MODIFIER:-${CONDA_DEFAULT_ENV:+($CONDA_DEFAULT_ENV) }}'"$PROMPT"
+fi
 
 # * Load machine-specific .zshrc_local if one exists (it's not managed by stow):
 if [[ -f "$HOME/.zshrc_local" ]]; then
@@ -192,8 +198,20 @@ else
     compinit -d "$ZSH_COMPDUMP"      # missing: create
 fi
 
+# * Load fzf-tab (Must be loaded AFTER compinit)
+# if [[ -f "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab/fzf-tab.plugin.zsh" ]]; then
+#     source "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab/fzf-tab.plugin.zsh"
+# fi
+
+# * Syntax Highlighting (Best loaded at the very end)
+if [[ -f "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    echo "Loading zsh plugin: zsh-syntax-highlighting"
+    source "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
 # * Display if login/interactive shell
-[[ $- == *i* ]] && echo 'Interactive shell' || echo 'Not interactive shell'
+# This is a debugging print statement. Comment this out to keep terminal clean and avoid SCP noise
+# [[ $- == *i* ]] && echo 'Interactive shell' || echo 'Not interactive shell'
 
 # * To profile the zsh load speed uncomment the top line and this bottom line:
 # zprof # bottom of .zshrc
