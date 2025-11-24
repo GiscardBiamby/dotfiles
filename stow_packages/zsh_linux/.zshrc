@@ -1,3 +1,6 @@
+# * The ultimate order is .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if
+# *  login] → [.zlogout sometimes].
+
 # zmodload zsh/zprof # top of your .zshrc file
 
 # For Tilix:

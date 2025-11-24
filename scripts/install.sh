@@ -66,6 +66,7 @@ install pip
 install piper
 install pigz
 install python-is-python3
+install ripgrep
 install shellcheck
 install silversearcher-ag
 install stow

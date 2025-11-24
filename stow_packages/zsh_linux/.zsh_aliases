@@ -1,9 +1,13 @@
 #!/bin/bash
 
+# * The ultimate order is .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if
+# *  login] → [.zlogout sometimes].
+
 # Alias definitions.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 # enable color support of ls and also add handy aliases
+# TODO: Replace this with ripgrep, and check ripgrep color support
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias grep='grep --color=auto'
