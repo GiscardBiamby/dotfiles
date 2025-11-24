@@ -93,7 +93,7 @@ install figlet
 install lolcat
 
 # TODO: Is this still needed now that we use zsh plugins?
-git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+# git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
 pushd "${SCRIPT_DIR}/../stow_packages/vim"
 git submodule update --init --recursive --remote

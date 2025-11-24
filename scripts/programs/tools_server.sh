@@ -7,8 +7,7 @@ echo "SCRIPT_DIR: ${SCRIPT_DIR}"
 # shellcheck disable=SC1091
 source "${SCRIPT_DIR}/../util.sh"
 
-
-echo "Installing workstation tools"
+echo "Installing server tools"
 sudo apt-add-repository -y universe
 sudo add-apt-repository -y ppa:jonmagon/kdiskmark
 sudo add-apt-repository -y ppa:tomtomtom/yt-dlp
