@@ -129,4 +129,6 @@ if [[ -d "${HOME}/perl5/bin" ]]; then
     export PERL_MM_OPT
 fi
 
+export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgrep/.ripgreprc"
+
 export PATH
