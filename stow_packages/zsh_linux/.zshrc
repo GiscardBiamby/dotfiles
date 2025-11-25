@@ -113,7 +113,7 @@ plugins=(
     # fzf-tab # Should load this after compinit, so it's loaded at the end of this file.
     # gcloud
     git
-    git-prompt
+    # git-prompt
     gitignore
     git-extras
     git-lfs
@@ -211,6 +211,32 @@ fi
 if [[ -f "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
     echo "Loading zsh plugin: zsh-syntax-highlighting"
     source "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
+# * ===============================================================================================
+# * VS Code Shell Integration for Copilot
+# * Fix for terminal completion detection issue
+# * https://github.com/orgs/community/discussions/161238
+# * ===============================================================================================
+# VS Code shell integration - must be at the end of .zshrc
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+    # # Load VS Code shell integration if available
+    # [[ -f "${HOME}/.config/vscode-shell-integration.zsh" ]] && source "${HOME}/.config/vscode-shell-integration.zsh"
+
+    # Disable RPROMPT in VS Code (causes detection issues)
+    unset RPROMPT
+    unset RPS1
+
+    # Ensure simple prompt format for command detection
+    # This helps Copilot detect when commands finish
+    typeset -g POWERLEVEL9K_DISABLE_RPROMPT=true
+
+    # Increase command timeout for longer operations
+    export VSCODE_SHELL_INTEGRATION_TIMEOUT=60000
+
+    # Load VS Code shell integration
+    [[ -f "$(code --locate-shell-integration-path zsh)" ]] \
+                                                           && . "$(code --locate-shell-integration-path zsh)"
 fi
 
 # * Display if login/interactive shell

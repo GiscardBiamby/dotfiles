@@ -340,6 +340,7 @@
         "ifeq",
         "iloc",
         "imageio",
+        "imcoords",
         "imgs",
         "imread",
         "inpaint",
@@ -1185,6 +1186,8 @@
     "terminal.integrated.scrollback": 1000000,
     "terminal.integrated.shellIntegration.suggestEnabled": true,
     "terminal.integrated.smoothScrolling": true,
+    "terminal.integrated.shellIntegration.showWelcome": false,
+    "terminal.integrated.commandTimeout": 30000
     "todo-tree.general.tags": [
         "BUG",
         "HACK",
@@ -1246,5 +1249,5 @@
     "workbench.list.fastScrollSensitivity": 9,
     "workbench.list.smoothScrolling": true,
     "workbench.settings.openDefaultKeybindings": true,
-    "workbench.tree.indent": 15
+    "workbench.tree.indent": 15,
 }
