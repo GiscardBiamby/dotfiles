@@ -1,3 +1,6 @@
+# * The ultimate order is .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if
+# *  login] → [.zlogout sometimes].
+
 # .zshenv is always sourced. It often contains exported variables that should be available to other
 # programs. For example, $PATH, $EDITOR, and $PAGER are often set in .zshenv. Also, you can set
 # $ZDOTDIR in .zshenv to specify an alternative location for the rest of your zsh configuration.
@@ -8,39 +11,66 @@ typeset -U path
 # Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
 # Disable the krb line in order for yubikey ssh auth to work (there must be a better way?):
 path=(
-    "~/local/bin"
-    # "/usr/local/ossh/bin"
-    # "/usr/local/krb5/bin"
+    "${HOME}/.local/bin"
+    "${HOME}/local/bin"
     "/usr/local/bin"
+    # "/usr/local/ossh/bin"     # macos only
+    # "/usr/local/krb5/bin"     # needed for kerberos (kinit)
     "/usr/local/sbin"
-    "~/bin"
+    "${HOME}/bin"
+    # "/usr/bin/Postman/app"
     $path
 )
+
+# * Manually install noisetorch. Still need to load the app and activate it after each startup.
+if [ -d "/opt/noisetorch/bin" ]; then
+    path+=("/opt/noisetorch/bin")
+fi
+
 export PATH
 
-# Manually install noisetorch. Still need to load the app and activate it after each startup.
-if [ -d "/opt/noisetorch/bin" ]; then
-    path+="/opt/noisetorch/bin"
+# * Add custom completion directory to fpath BEFORE compinit runs in `.zshrc`
+fpath+=("$HOME/.zsh-complete")
+
+# * Detect conda/mamba installation and initialize:
+# CONDA_ROOT="${HOME}/miniforge3" # home
+# CONDA_ROOT="${HOME}/mambaforge" # remote
+if [ -d "${HOME}/miniforge3" ]; then
+    CONDA_ROOT="${HOME}/miniforge3"
+elif [ -d "${HOME}/mambaforge" ]; then
+    CONDA_ROOT="${HOME}/mambaforge"
+else
+    # Only warn in interactive shells
+    [[ -o interactive ]] && echo "WARNING: No conda/mamba installation found in ${HOME}/miniforge3 or ${HOME}/mambaforge" >&2
 fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/gbiamby/mambaforge/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+__conda_setup="$("${CONDA_ROOT}/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/gbiamby/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/Users/gbiamby/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "${CONDA_ROOT}/etc/profile.d/conda.sh" ]; then
+        . "${CONDA_ROOT}/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/gbiamby/mambaforge/bin:$PATH"
+        export PATH="${CONDA_ROOT}/bin:$PATH"
     fi
 fi
 unset __conda_setup
-
-if [ -f "/Users/gbiamby/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/Users/gbiamby/mambaforge/etc/profile.d/mamba.sh"
-fi
 # <<< conda initialize <<<
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE="${CONDA_ROOT}/bin/mamba"
+export MAMBA_ROOT_PREFIX="${CONDA_ROOT}"
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2>/dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
 
 # * FZF defaults placed in .zshenv so both interactive shells and scripts inherit them.
 # * .zshenv runs before .zshrc/oh-my-zsh, so OMZ keybindings (Ctrl-T/Alt-C) see these values.
@@ -62,5 +92,53 @@ export ZDOTDIR="${ZDOTDIR:-$HOME}"
 # * Prevent global compinit so we fully control it
 typeset -g skip_global_compinit=1
 
+# * Prevents long command outputs (like apt, man, git) from opening a scrollable pager (like less) by
+# * forcing output to stream directly to the terminal using /bin/cat.
+export PAGER="/bin/cat"
 
-export PATH
+# * Preferred editor for local and remote sessions
+# Note: $SSH_CONNECTION is only set in interactive, remote shells. Doesn't matter for this cases
+# since EDITOR is only used in interactive shells.
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='nano'
+else
+    export EDITOR='code --wait'
+fi
+
+## * ossh krb config
+if [[ "$(uname)" != "Darwin" ]]; then
+    # Only needed on linux, not macos:
+    if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
+        export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
+    # else
+    #     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
+    fi
+fi
+
+# * Enable wayland support for firefox on linux
+if [[ "$(uname)" != "Darwin" ]]; then
+    # * Note: .zshenv is only sourced for shells, not GUI apps. If you want an environment var to take
+    # * effect even for GUI apps (aka .desktop shortcuts), add the environment vars to
+    # * ~/.config/environment.d/
+    #export MOZ_ENABLE_WAYLAND=1
+fi
+
+if [[ "$(uname)" != "Darwin" ]]; then
+    # * Example: set the default libvirt URI for QEMU/KVM virtual machines
+    export LIBVIRT_DEFAULT_URI="qemu:///system"
+fi
+
+if [[ -d "${HOME}/perl5/bin" ]]; then
+    # Put ~/perl5/bin on PATH (zsh array append)
+    path+=("${HOME}/perl5/bin")
+    PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+    export PERL5LIB
+    PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+    export PERL_LOCAL_LIB_ROOT
+    PERL_MB_OPT="--install_base \"$HOME/perl5\""
+    export PERL_MB_OPT
+    PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
+    export PERL_MM_OPT
+fi
+
+export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgrep/.ripgreprc"

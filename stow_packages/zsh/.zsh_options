@@ -1,3 +1,7 @@
+# * The ultimate order is .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if
+# *  login] → [.zlogout sometimes].
+
+
 # case insensitive globbing:
 setopt NO_CASE_GLOB
 
@@ -20,7 +24,8 @@ setopt HIST_VERIFY                               # don't execute expanded histor
 setopt EXTENDED_HISTORY                          # timestamps and runtime
 setopt HIST_SAVE_NO_DUPS                         # don't write dupes
 setopt HIST_IGNORE_ALL_DUPS                      # remove older dupes
-
+setopt HIST_IGNORE_SPACE                         # ignore commands starting with a space
+unsetopt pathdirs                                # don't search $PATH for commands. This avoids possible slow zsh auto-completion.
 
 # Reliability / UX
 setopt PIPEFAIL                                  # fail pipelines on first failing command
@@ -34,36 +39,69 @@ setopt NUMERIC_GLOB_SORT                         # sort numbers naturally
 
 ##
 ## Advanced zsh completions
+# Disabling this because we generate the auto-complete cache manually in .zshrc
 # https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
 ##<!-- autoload -Uz compinit && compinit -->
 
 ##
-## case insensitive path-completion
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
+# Case-insensitive + fragment/substring matching (locale-aware)
+zstyle ':completion:*' matcher-list \
+    'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
+    'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 
 ##
-## partial completion suggestions
+## Partial completion suggestions
 #
 # This is a particularly nice feature. You can type fragments of each path segment and the
 # completion will try to complete them all at once:
 #
 # % cd /u/lo/b⇥
 # % cd /usr/local/bin
-zstyle ':completion:*' list-suffixeszstyle ':completion:*' expand prefix suffix
+zstyle ':completion:*' list-suffixes yes
+zstyle ':completion:*' expand prefix suffix
 
-# Completion UX
-zstyle ':completion:*' menu select
+# * Completion UX
+# zstyle ':completion:*' menu select  # Disabled: fzf-tab uses 'menu no' below
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*:descriptions' format '%F{cyan}%B%d%b%f'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# zstyle ':completion:*:descriptions' format '%F{cyan}%B%d%b%f'   # Remove: overridden below for fzf-tab
+# set list-colors to enable filename colorizing
+# shellcheck disable=SC2086
+# shellcheck disable=SC2296
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
 # Cache completion results (writes under $XDG_CACHE_HOME/zsh by default)
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'  # case-insensitive completion
-zstyle ':completion:*:descriptions' format '%F{cyan}%B%d%b%f'
 
-# On macOS completions are stored in /usr/share/zsh/5.3/functions (replace the5.3 with 5.7.1 in
-# Catalina). This directory stores many functions used with zsh and is in the default fpath. All the
-# files in that directory that start with an underscore _ contain the completion definitions
-# command. So, the file _cp contains the definition for the cp command. (Some of the definition
-# files contain the definitions for multiple commands.)
+# Ensure complist for menu-select UI is available
+zmodload -i zsh/complist
+
+# * Completion settings
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# Disable SSH hosts completion to speed up shell startup time.
+# From: https://destinmoulton.com/notes/howto/how-to-disable-zsh-ssh-hosts-completion/
+zstyle ':completion:*:ssh:*' hosts off
+
+# * On macOS completions are stored in `/usr/share/zsh/VERSION_NUM/functions` (replace the 5.3 with
+# * 5.7.1 in Catalina). This directory stores many functions used with zsh and is in the default
+# * fpath. All the files in that directory that start with an underscore _ contain the completion
+# * definitions command. So, the file _cp contains the definition for the cp command. (Some of the
+# * definition files contain the definitions for multiple commands.)
+
+# * zsh fzf-tab plugin settings
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# custom fzf flags
+# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+# To make fzf-tab follow FZF_DEFAULT_OPTS.
+# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'

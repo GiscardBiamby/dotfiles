@@ -60,11 +60,14 @@ zstyle ':completion:*' matcher-list \
 zstyle ':completion:*' list-suffixes yes
 zstyle ':completion:*' expand prefix suffix
 
-# Completion UX
-zstyle ':completion:*' menu select
+# * Completion UX
+# zstyle ':completion:*' menu select  # Disabled: fzf-tab uses 'menu no' below
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*:descriptions' format '%F{cyan}%B%d%b%f'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# zstyle ':completion:*:descriptions' format '%F{cyan}%B%d%b%f'   # Remove: overridden below for fzf-tab
+# set list-colors to enable filename colorizing
+# shellcheck disable=SC2086
+# shellcheck disable=SC2296
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Cache completion results (writes under $XDG_CACHE_HOME/zsh by default)
 zstyle ':completion:*' use-cache on
@@ -73,16 +76,25 @@ zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 # Ensure complist for menu-select UI is available
 zmodload -i zsh/complist
 
-# * zsh fzf-tab plugin settings
+# * Completion settings
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
 # NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
 zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
+# Disable SSH hosts completion to speed up shell startup time.
+# From: https://destinmoulton.com/notes/howto/how-to-disable-zsh-ssh-hosts-completion/
+zstyle ':completion:*:ssh:*' hosts off
+
+# * On macOS completions are stored in `/usr/share/zsh/VERSION_NUM/functions` (replace the 5.3 with
+# * 5.7.1 in Catalina). This directory stores many functions used with zsh and is in the default
+# * fpath. All the files in that directory that start with an underscore _ contain the completion
+# * definitions command. So, the file _cp contains the definition for the cp command. (Some of the
+# * definition files contain the definitions for multiple commands.)
+
+# * zsh fzf-tab plugin settings
 # preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # custom fzf flags

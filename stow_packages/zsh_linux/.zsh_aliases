@@ -33,8 +33,10 @@ alias mkdir='mkdir -pv'
 alias mv='mv -v'
 # alias wget='wget -c'
 
-alias bat="batcat"
-alias cat="batcat"
+if [[ "$(uname)" != "Darwin" ]]; then
+    alias bat="batcat"
+    alias cat="batcat"
+fi
 
 # # Use programs without a root-equivalent group
 # alias docker='sudo docker'
@@ -45,7 +47,9 @@ alias cat="batcat"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # * Only define these aliases if not an SSH session:
-if [[ -z "$SSH_CONNECTION" ]]; then
-    alias code='/usr/local/bin/launch_vscode.sh'
-    alias gedit='gnome-text-editor'
+if [[ "$(uname)" != "Darwin" ]]; then
+    if [[ -z "$SSH_CONNECTION" ]]; then
+        alias code='/usr/local/bin/launch_vscode.sh'
+        alias gedit='gnome-text-editor'
+    fi
 fi

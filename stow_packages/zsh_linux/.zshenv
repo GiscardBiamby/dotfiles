@@ -14,7 +14,8 @@ path=(
     "${HOME}/.local/bin"
     "${HOME}/local/bin"
     "/usr/local/bin"
-    "/usr/local/krb5/bin" # needed for kerberos (kinit)
+    # "/usr/local/ossh/bin"     # macos only
+    "/usr/local/krb5/bin"       # needed for kerberos (kinit)
     "/usr/local/sbin"
     "${HOME}/bin"
     # "/usr/bin/Postman/app"
@@ -31,7 +32,7 @@ export PATH
 # * Add custom completion directory to fpath BEFORE compinit runs in `.zshrc`
 fpath+=("$HOME/.zsh-complete")
 
-# Detect conda/mamba installation and initialize:
+# * Detect conda/mamba installation and initialize:
 # CONDA_ROOT="${HOME}/miniforge3" # home
 # CONDA_ROOT="${HOME}/mambaforge" # remote
 if [ -d "${HOME}/miniforge3" ]; then
@@ -39,12 +40,13 @@ if [ -d "${HOME}/miniforge3" ]; then
 elif [ -d "${HOME}/mambaforge" ]; then
     CONDA_ROOT="${HOME}/mambaforge"
 else
-    echo "WARNING: No conda/mamba installation found in ${HOME}/miniforge3 or ${HOME}/mambaforge"
+    # Only warn in interactive shells
+    [[ -o interactive ]] && echo "WARNING: No conda/mamba installation found in ${HOME}/miniforge3 or ${HOME}/mambaforge" >&2
 fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("${HOME}/miniforge3/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
+__conda_setup="$("${CONDA_ROOT}/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -95,26 +97,36 @@ typeset -g skip_global_compinit=1
 export PAGER="/bin/cat"
 
 # * Preferred editor for local and remote sessions
+# Note: $SSH_CONNECTION is only set in interactive, remote shells. Doesn't matter for this cases
+# since EDITOR is only used in interactive shells.
 if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='code --wait'
-else
     export EDITOR='nano'
+else
+    export EDITOR='code --wait'
 fi
 
 ## * ossh krb config
-if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
-    export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
-# else
-#     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
+if [[ "$(uname)" != "Darwin" ]]; then
+    # Only needed on linux, not macos:
+    if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
+        export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
+    # else
+    #     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
+    fi
 fi
 
-# * Note: .zshenv is only sourced for shells, not GUI apps. If you want an environment var to take
-# * effect even for GUI apps (aka .desktop shortcuts), add the environment vars to
-# * ~/.config/environment.d/
-#export MOZ_ENABLE_WAYLAND=1
+# * Enable wayland support for firefox on linux
+if [[ "$(uname)" != "Darwin" ]]; then
+    # * Note: .zshenv is only sourced for shells, not GUI apps. If you want an environment var to take
+    # * effect even for GUI apps (aka .desktop shortcuts), add the environment vars to
+    # * ~/.config/environment.d/
+    #export MOZ_ENABLE_WAYLAND=1
+fi
 
-# * Example: set the default libvirt URI for QEMU/KVM virtual machines
-export LIBVIRT_DEFAULT_URI="qemu:///system"
+if [[ "$(uname)" != "Darwin" ]]; then
+    # * Example: set the default libvirt URI for QEMU/KVM virtual machines
+    export LIBVIRT_DEFAULT_URI="qemu:///system"
+fi
 
 if [[ -d "${HOME}/perl5/bin" ]]; then
     # Put ~/perl5/bin on PATH (zsh array append)
@@ -130,5 +142,3 @@ if [[ -d "${HOME}/perl5/bin" ]]; then
 fi
 
 export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgrep/.ripgreprc"
-
-export PATH

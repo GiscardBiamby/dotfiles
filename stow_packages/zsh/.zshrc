@@ -1,5 +1,20 @@
+# * The ultimate order is .zshenv → [.zprofile if login] → [.zshrc if interactive] → [.zlogin if
+# *  login] → [.zlogout sometimes].
+
 # zmodload zsh/zprof # top of your .zshrc file
 
+# * For Tilix:
+if [[ "$(uname)" != "Darwin" ]]; then
+    # https://github.com/gnunn1/tilix/wiki/VTE-Configuration-Issue
+    # On Ubuntu you probably need a symlink for vte.sh in order for the below line to work:
+    # ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
+
+    if [[ ($TILIX_ID || $VTE_VERSION) && -f /etc/profile.d/vte.sh   ]]; then
+        source /etc/profile.d/vte.sh
+    fi
+fi
+
+# TODO: Move the comments into zsh_options
 # .zshrc is for interactive shells. You set options for the interactive shell there with the setopt
 # and unsetopt commands. You can also load shell modules, set your history options, change your
 # prompt, set up zle and completion, et cetera. You also set any variables that are only used in the
@@ -15,6 +30,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ZSH_THEME="random"
+# ZSH_THEME="apple"
 ZSH_THEME="gbiamby"
 
 # Set list of themes to pick from when loading at random
@@ -72,54 +89,95 @@ HIST_STAMPS="yyyy-mm-dd--%H-%M"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# * Shell Options (load before loading omz)
+if [ -f ~/.zsh_options ]; then
+    . ~/.zsh_options
+fi
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 zstyle ':omz:plugins:nvm' lazy yes
+typeset -U plugins
 plugins=(
-    # ag
-    # colorize
+    colorize
     command-not-found
-    conda-zsh-completion
     copybuffer
     direnv
     docker
     docker-compose
     extract
+    # eza # a modern replacement for ls with git integration, icons and better colors
+    fzf
+    # fzf-tab # Should load this after compinit, so it's loaded at the end of this file.
     # gcloud
     git
-    git-prompt
+    # git-prompt
     gitignore
     git-extras
     git-lfs
-    gpg-agent
+    history
     nvm
     npm
     pip
     python
     rsync
-    ssh-agent
-    zsh-autosuggestions
-    zsh-syntax-highlighting
+    sudo # allows you to easily prepend sudo to your current or previous commands by pressing Esc twice.
+    tmux
+    zoxide
+    zsh-bat # a cat(1) clone with syntax highlighting and Git integration
 )
-# Load custom pugsin (these are installed in `scripts/programs/oh-my-zsh.sh`):
-if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
-    echo "Loading zsh plugin: zsh-autosuggestions"
-    plugins+=(zsh-autosuggestions)
-fi
-if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
-    echo "Loading zsh plugin: zsh-syntax-highlighting"
-    plugins+=(zsh-syntax-highlighting)
-fi
+# Load custom plugins (these are installed in `scripts/programs/oh-my-zsh.sh`):
 if [[ -d ~/.oh-my-zsh/custom/plugins/conda-zsh-completion ]]; then
     echo "Loading zsh plugin: conda-zsh-completion"
     plugins+=(conda-zsh-completion)
 fi
-if [[ -d ~/.oh-my-zsh/custom/plugins/yt-dlp ]]; then
-    echo "Loading zsh plugin: yt-dlp"
-    plugins+=(yt-dlp)
+if [[ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
+    echo "Loading zsh plugin: zsh-autosuggestions"
+    plugins+=(zsh-autosuggestions)
+fi
+
+if [[ "$(uname)" != "Darwin" ]]; then
+    # * Keychain: will start, start ssh-agent for you if it has not yet been started, use ssh-add to add
+    # * your id_rsa private key file to ssh-agent, and set up your shell environment so that ssh will be
+    # * able to find ssh-agent. If ssh-agent is already running, keychain will ensure that your id_rsa
+    # * private key has been added to ssh-agent and then set up your environment so that ssh can find the
+    # * already-running ssh-agent.
+    # * NOTE: don't use on a remote where you want to use agent forwarding (hence the SSH_CONNECTION check):
+    if [[ -z "$SSH_CONNECTION" ]]; then
+        echo "Loading zsh plugin: keychain"
+        plugins+=(keychain)
+        zstyle :omz:plugins:keychain agents gpg,ssh
+        zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
+    fi
+else
+    echo "Loading zsh plugin: ssh-agent"
+    plugins+=(ssh-agent)
+    # * ssh-agent plugin settings
+    zstyle :omz:plugins:ssh-agent agent-forwarding yes
+    zstyle :omz:plugins:ssh-agent lazy yes
+    zstyle :omz:plugins:ssh-agent ssh-add-args --apple-use-keychain --apple-load-keychain
+    zstyle :omz:plugins:ssh-agent identities id_ed25519 id_ed25519_sem id_rsa-bairdev
+    # * Also ensure your ~/.ssh/config includes below lines. This tells macOS's native SSH to
+    # * automatically add keys to the agent and use Keychain for passphrases—works alongside the OMZ
+    # * plugin:
+    #
+    # Host *
+    # AddKeysToAgent yes
+    # UseKeychain yes
+fi
+
+if [[ "$(uname)" == "Darwin" ]]; then
+    # yubikey
+    # To use this SSH agent, set this variable in your ~/.zshrc and/or ~/.bashrc:
+    #   export SSH_AUTH_SOCK="/opt/homebrew/var/run/yubikey-agent.sock"
+
+    # To restart yubikey-agent after an upgrade:
+    #   brew services restart yubikey-agent
+    # Or, if you don't want/need a background service you can just run:
+    #   /opt/homebrew/opt/yubikey-agent/bin/yubikey-agent -l /opt/homebrew/var/run/yubikey-agent.sock
 fi
 
 # * Tell OMZ not to run compinit (we'll do it ourselves)
@@ -128,63 +186,36 @@ zstyle ':omz:completion' skip yes
 # * Use the same dump file OMZ would use
 export ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump-${HOST}-${ZSH_VERSION}"
 
-# * ssh-agent plugin settings
-zstyle :omz:plugins:ssh-agent agent-forwarding yes
-zstyle :omz:plugins:ssh-agent lazy yes
-zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
-zstyle :omz:plugins:ssh-agent identities id_ed25519 id_ed25519_sem id_rsa-bairdev
-
 source $ZSH/oh-my-zsh.sh
 
 # *  Show conda/mamba env in the prompt
+# Only prepend if not already there to avoid duplication on reload
 setopt PROMPT_SUBST
-PROMPT='${CONDA_PROMPT_MODIFIER:-${CONDA_DEFAULT_ENV:+($CONDA_DEFAULT_ENV) }}'"$PROMPT"
-
-# * Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='code --wait'
-else
-    export EDITOR='vim'
+if [[ "$PROMPT" != *'${CONDA_DEFAULT_ENV'* ]]; then
+    PROMPT='${CONDA_PROMPT_MODIFIER:-${CONDA_DEFAULT_ENV:+($CONDA_DEFAULT_ENV) }}'"$PROMPT"
 fi
 
-# # Dont need becausse se use omzsh's nvm plugin
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
-# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-
-# yubikey
-# To use this SSH agent, set this variable in your ~/.zshrc and/or ~/.bashrc:
-#   export SSH_AUTH_SOCK="/opt/homebrew/var/run/yubikey-agent.sock"
-
-# To restart yubikey-agent after an upgrade:
-#   brew services restart yubikey-agent
-# Or, if you don't want/need a background service you can just run:
-#   /opt/homebrew/opt/yubikey-agent/bin/yubikey-agent -l /opt/homebrew/var/run/yubikey-agent.sock
-
-# Load machine-specific .zshrc_local if one exists:
-[ -f "$HOME/.zshrc_local" ] && . "$HOME/.zshrc_local"
-
-# Shell Options
-if [ -f ~/.zsh_options ]; then
-    . ~/.zsh_options
+# * Load machine-specific .zshrc_local if one exists (it's not managed by stow):
+if [[ -f "$HOME/.zshrc_local" ]]; then
+    . "$HOME/.zshrc_local"
 fi
 
-# Functions
+# * Functions
 if [ -f ~/.zsh_functions ]; then
     . ~/.zsh_functions
 fi
 
-# Alias definitions.
+# * Alias definitions.
 if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
-# * Do auto complete cache once every 24hr. The original code slows down zsh startup time by a lot:
-# Initialize completion ONCE with 24h caching (use zstat to avoid glob issues)
+# * Generate auto-complete cache once every 24hr. The original code slows down zsh startup time by a
+# *  lot (use zstat to avoid glob issues):
 zmodload zsh/stat
 autoload -Uz compinit
 if [[ -e "$ZSH_COMPDUMP" ]]; then
-    local -A st
+    typeset -A st
     zstat -H st -- "$ZSH_COMPDUMP"
     if ((EPOCHSECONDS - st[mtime] < 86400)); then
         compinit -C -d "$ZSH_COMPDUMP" # fresh: fast path
@@ -195,13 +226,56 @@ else
     compinit -d "$ZSH_COMPDUMP"      # missing: create
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# * Load fzf-tab (Must be loaded AFTER compinit)
+# if [[ -f "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab/fzf-tab.plugin.zsh" ]]; then
+#     source "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab/fzf-tab.plugin.zsh"
+# fi
 
-# Customize the prompt to show directory:
-# PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %{%}%c%{%} $(git_prompt_info)"
-# PROMPT="%(?:%{%}%1{➜%} :%{%}%1{➜%} ) %F{blue}%~%f $(git_prompt_info)"
+# * Syntax Highlighting (Best loaded at the very end)
+if [[ -f "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    echo "Loading zsh plugin: zsh-syntax-highlighting"
+    source "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+if [[ "$(uname)" == "Darwin" ]]; then
+    if [[ -f ~/.fzf.zsh ]]; then
+        source ~/.fzf.zsh
+    fi
+fi
+
+# * ===============================================================================================
+# * VS Code Shell Integration for Copilot
+# * Fix for terminal completion detection issue
+# * https://github.com/orgs/community/discussions/161238
+# * ===============================================================================================
+# VS Code shell integration - must be at the end of .zshrc
+if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+    # # Load VS Code shell integration if available
+    # [[ -f "${HOME}/.config/vscode-shell-integration.zsh" ]] && source "${HOME}/.config/vscode-shell-integration.zsh"
+
+    # Disable RPROMPT in VS Code (causes detection issues)
+    unset RPROMPT
+    unset RPS1
+
+    # Ensure simple prompt format for command detection
+    # This helps Copilot detect when commands finish
+    typeset -g POWERLEVEL9K_DISABLE_RPROMPT=true
+
+    # Increase command timeout for longer operations
+    export VSCODE_SHELL_INTEGRATION_TIMEOUT=60000
+
+    # Load VS Code shell integration
+    [[ -f "$(code --locate-shell-integration-path zsh)" ]] && . "$(code --locate-shell-integration-path zsh)"
+fi
+
+# * Display if login/interactive shell
+# This is a debugging print statement. Comment this out to keep terminal clean and avoid SCP noise
+# [[ $- == *i* ]] && echo 'Interactive shell' || echo 'Not interactive shell'
+
+if [[ "$(uname)" == "Darwin" ]]; then
+    # * iTerm2 Shell Integration
+    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+fi
 
 # * To profile the zsh load speed uncomment the top line and this bottom line:
 # zprof # bottom of .zshrc
