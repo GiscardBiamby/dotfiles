@@ -44,32 +44,34 @@ else
     [[ -o interactive ]] && echo "WARNING: No conda/mamba installation found in ${HOME}/miniforge3 or ${HOME}/mambaforge" >&2
 fi
 
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("${CONDA_ROOT}/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
+if [[ -n "$CONDA_ROOT" ]]; then
+    # CLEAN FIX: Source the static script directly.
+    # This avoids running the 'conda' binary, preventing the recursive
+    # .zshenv -> conda -> zsh -> .zshenv loop.
     if [ -f "${CONDA_ROOT}/etc/profile.d/conda.sh" ]; then
         . "${CONDA_ROOT}/etc/profile.d/conda.sh"
     else
         export PATH="${CONDA_ROOT}/bin:$PATH"
     fi
 fi
-unset __conda_setup
 # <<< conda initialize <<<
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba shell init' !!
-export MAMBA_EXE="${CONDA_ROOT}/bin/mamba"
-export MAMBA_ROOT_PREFIX="${CONDA_ROOT}"
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2>/dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+if [[ -n "$CONDA_ROOT" ]]; then
+    export MAMBA_EXE="${CONDA_ROOT}/bin/mamba"
+    export MAMBA_ROOT_PREFIX="${CONDA_ROOT}"
+
+    # CLEAN FIX: Source mamba.sh if it exists, otherwise alias.
+    if [ -f "${CONDA_ROOT}/etc/profile.d/mamba.sh" ]; then
+        . "${CONDA_ROOT}/etc/profile.d/mamba.sh"
+    else
+        alias mamba="$MAMBA_EXE"
+    fi
 fi
-unset __mamba_setup
 # <<< mamba initialize <<<
 
 # * FZF defaults placed in .zshenv so both interactive shells and scripts inherit them.
