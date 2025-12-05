@@ -44,7 +44,6 @@ else
     [[ -o interactive ]] && echo "WARNING: No conda/mamba installation found in ${HOME}/miniforge3 or ${HOME}/mambaforge" >&2
 fi
 
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 if [[ -n "$CONDA_ROOT" ]]; then
@@ -144,3 +143,8 @@ if [[ -d "${HOME}/perl5/bin" ]]; then
 fi
 
 export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgrep/.ripgreprc"
+
+# * Skip the verification of [oh-my-zsh] insecure directories to fix this error from compinit:
+# *     [oh-my-zsh] Insecure completion-dependent directories detected:
+# *     -rw-r--r-- 1 nobody nogroup 2554 Dec  3 16:26 /usr/share/zsh/vendor-completions/_antigravity
+export ZSH_DISABLE_COMPFIX=true
