@@ -74,8 +74,8 @@ stow_dotfiles() {
 
     # pushd stow_packages
     # local dotfiles="ag bash conda direnv espanso fd git kitty nvim ripgrep ssh tmux vim zsh"
-    info "Stowing: $dotfiles"
-    for pkg_name in ag bash conda direnv espanso fd git kitty nvim ripgrep ssh tmux vim zsh; do
+    info "Stowing: dotfiles"
+    for pkg_name in ag bash conda direnv espanso fd git nvim omz ripgrep tmux vim zsh; do
         # Add `-n` flag for dry run:
         stow -d ./stow_packages -S --verbose 1 --target $HOME "${pkg_name}"
     done

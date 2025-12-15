@@ -1,18 +1,25 @@
 #!/usr/bin/env bash
 
+# Get the directory of this script so that we can reference paths correctly no matter which folder
+# the script was launched from:
+SCRIPT_DIR="$(builtin cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+echo "SCRIPT_DIR: ${SCRIPT_DIR}"
+# shellcheck disable=SC1091
+
 set -o errexit
 set -o nounset
 set -o pipefail
 
-. ./@macOS/scripts/utils.sh
-. ./@macOS/scripts/brew.sh
-. ./@macOS/scripts/apps.sh
-. ./@macOS/scripts/cli.sh
-. ./@macOS/scripts/config.sh
-. ./@macOS/scripts/osx.sh
-. ./@macOS/scripts/fonts.sh
-. ./@macOS/scripts/packages.sh
-. ./@macOS/scripts/oh-my-zsh.sh
+# shellcheck disable=SC1091
+. "${SCRIPT_DIR}/scripts/utils.sh"
+. "${SCRIPT_DIR}/scripts/brew.sh"
+. "${SCRIPT_DIR}/scripts/apps.sh"
+. "${SCRIPT_DIR}/scripts/cli.sh"
+. "${SCRIPT_DIR}/scripts/config.sh"
+. "${SCRIPT_DIR}/scripts/osx.sh"
+. "${SCRIPT_DIR}/scripts/fonts.sh"
+. "${SCRIPT_DIR}/scripts/packages.sh"
+. "${SCRIPT_DIR}/scripts/oh-my-zsh.sh"
 
 cleanup() {
     echo "Finishing..."
@@ -54,11 +61,6 @@ main() {
     install_neovim
     success "Finished installing neovim"
 
-    info "======= Mambaforge ======="
-    # wait_input
-    install_mamba
-    success "Finished installing Mambaforge"
-
     #info "======= PiP modules ======="
     #wait_input
     #install_python_packages
@@ -98,11 +100,11 @@ main() {
 
     select yn in "y" "n"; do
         case $yn in
-        y)
-            sudo shutdown -r now
-            break
-            ;;
-        n) exit ;;
+            y)
+                sudo shutdown -r now
+                break
+                ;;
+            n) exit ;;
         esac
     done
 }

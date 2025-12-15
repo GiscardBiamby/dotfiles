@@ -18,12 +18,28 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
+# some more ls/eza aliases with graceful fallback
 alias reload_tmux="update_tmux_conf"
-alias ls='gls  -aF --color=auto'
-alias ll='gls -ahlF --group-directories-first --color=auto'
-alias la='gls -a --group-directories-first --color=auto'
-alias l='gls -CF --group-directories-first --color=auto'
+
+if command -v eza >/dev/null 2>&1; then
+    # eza is a modern ls replacement with built-in color/grouping
+    alias ls='eza -aF'
+    alias ll='eza -ahlF --group-directories-first'
+    alias la='eza -a --group-directories-first'
+    alias l='eza -CF --group-directories-first'
+elif command -v gls >/dev/null 2>&1; then
+    # GNU ls from coreutils (gls)
+    alias ls='gls  -aF --color=auto'
+    alias ll='gls -ahlF --group-directories-first --color=auto'
+    alias la='gls -a --group-directories-first --color=auto'
+    alias l='gls -CF --group-directories-first --color=auto'
+else
+    # macOS BSD ls fallback
+    alias ls='ls -aF'
+    alias ll='ls -ahlF'
+    alias la='ls -a'
+    alias l='ls -CF'
+fi
 alias ag='ag --hidden --path-to-ignore ~/.agignore'
 alias xclip="xclip -selection c"
 

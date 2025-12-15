@@ -37,8 +37,18 @@ fpath+=("$HOME/.zsh-complete")
 # CONDA_ROOT="${HOME}/mambaforge" # remote
 if [ -d "${HOME}/miniforge3" ]; then
     CONDA_ROOT="${HOME}/miniforge3"
+    export MAMBA_EXE="${CONDA_ROOT}/bin/mamba"
+    export MAMBA_ROOT_PREFIX="${CONDA_ROOT}"
 elif [ -d "${HOME}/mambaforge" ]; then
     CONDA_ROOT="${HOME}/mambaforge"
+    export MAMBA_EXE="${CONDA_ROOT}/bin/mamba"
+    export MAMBA_ROOT_PREFIX="${CONDA_ROOT}"
+elif [ -d /opt/homebrew/opt/micromamba ]; then
+    # * micromamba installed via homebrew (Apple Silicon macs)
+    CONDA_ROOT="/opt/homebrew/opt/micromamba"
+    # Homebrew micromamba on macOS: exe and root-prefix differ
+    export MAMBA_EXE='/opt/homebrew/opt/micromamba/bin/mamba'
+    export MAMBA_ROOT_PREFIX="${HOME}/mamba"
 else
     # Only warn in interactive shells
     [[ -o interactive ]] && echo "WARNING: No conda/mamba installation found in ${HOME}/miniforge3 or ${HOME}/mambaforge" >&2
@@ -46,23 +56,24 @@ fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$("${CONDA_ROOT}/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "${CONDA_ROOT}/etc/profile.d/conda.sh" ]; then
-        . "${CONDA_ROOT}/etc/profile.d/conda.sh"
+# Only run conda init if a real conda exists (not micromamba-only installs)
+if [ -x "${CONDA_ROOT}/bin/conda" ]; then
+    __conda_setup="$("${CONDA_ROOT}/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="${CONDA_ROOT}/bin:$PATH"
+        if [ -f "${CONDA_ROOT}/etc/profile.d/conda.sh" ]; then
+            . "${CONDA_ROOT}/etc/profile.d/conda.sh"
+        else
+            export PATH="${CONDA_ROOT}/bin:$PATH"
+        fi
     fi
+    unset __conda_setup
 fi
-unset __conda_setup
 # <<< conda initialize <<<
 
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba shell init' !!
-export MAMBA_EXE="${CONDA_ROOT}/bin/mamba"
-export MAMBA_ROOT_PREFIX="${CONDA_ROOT}"
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__mamba_setup"
@@ -75,7 +86,7 @@ unset __mamba_setup
 # * FZF defaults placed in .zshenv so both interactive shells and scripts inherit them.
 # * .zshenv runs before .zshrc/oh-my-zsh, so OMZ keybindings (Ctrl-T/Alt-C) see these values.
 # * Semantics: Ctrl-T sources files; Alt-C sources directories. Prefer fd; fall back to rg/find if absent.
-# * This block only exports env vars (no heavy work), so it’s safe here and applies to all new zsh sessions.
+# * This block only exports env vars (no heavy work), so it's safe here and applies to all new zsh sessions.
 if command -v fd >/dev/null 2>&1; then
     export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git 2>/dev/null'
     export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git 2>/dev/null'

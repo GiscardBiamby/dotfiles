@@ -1,16 +1,14 @@
 # Cask apps:
 apps=(
-    abricotine
     anki
-    clipy
+    cursor
     docker
     dropbox
     firefox
     google-chrome
+    iterm2
     keepassxc
-    kitty
     mactex
-    mambaforge
     obs
     rectangle
     signal
@@ -45,9 +43,8 @@ install_masApps() {
 }
 
 install_mamba() {
-    curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-    bash Mambaforge-$(uname)-$(uname -m).sh
-    rm Mambaforge-$(uname)-$(uname -m).sh
+
+    info "Configuring conda..."
     # https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/pip-interoperability.html:
     conda config --set pip_interop_enabled True
     conda config --set auto_activate_base False

@@ -1,20 +1,14 @@
-taps=(
-    homebrew/cask
-    homebrew/cask-fonts
-    homebrew/core
-    espanso/espanso
-)
-
 packages=(
     bat       #  https://github.com/sharkdp/bat
     bandwhich #  https://github.com/imsnif/bandwhich
     cmake
+    coreutils # GNU core utilities
     ctags
     curl
     direnv
     duti    #  https://github.com/moretension/duti
     espanso #  https://github.com/federico-terzi/espanso
-    exa     #  https://github.com/ogham/exa
+    eza     #  https://github.com/eza-community/eza
     fzf     #  https://github.com/junegunn/fzf
     fd      #  https://github.com/sharkdp/fd
     gettext
@@ -27,11 +21,13 @@ packages=(
     libpq
     macpass #  https://macpassapp.org/
     mas
+    micromamba
     ncdu
     nedit
     node
     nvm
     openjdk
+    openssh
     openssl
     pandoc
     pigz
@@ -53,15 +49,13 @@ packages=(
     yubico-piv-tool
     yubikey-agent
     ykman
+    zoxide
     zsh
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
 
 install_packages() {
-    info "Configuring taps"
-    apply_brew_taps "${taps[@]}"
-
     info "Installing packages..."
     install_brew_formulas "${packages[@]}"
 
