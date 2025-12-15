@@ -155,13 +155,16 @@ if [[ "$(uname)" != "Darwin" ]]; then
 else
     echo "Loading zsh plugin: ssh-agent"
     plugins+=(ssh-agent)
+    # * macOS by default has its own ssh-agent running, which sets SSH_AUTH_SOCK. To avoid conflicts, we
+    # * unset SSH_AUTH_SOCK to ensure the OMZ ssh plugin starts a fresh agent instance:
+    unset SSH_AUTH_SOCK
     # * ssh-agent plugin settings
     zstyle :omz:plugins:ssh-agent agent-forwarding yes
     zstyle :omz:plugins:ssh-agent lazy yes
     zstyle :omz:plugins:ssh-agent ssh-add-args --apple-use-keychain --apple-load-keychain
     zstyle :omz:plugins:ssh-agent identities id_ed25519 id_ed25519_sem id_rsa-bairdev
     # * Also ensure your ~/.ssh/config includes below lines. This tells macOS's native SSH to
-    # * automatically add keys to the agent and use Keychain for passphrases—works alongside the OMZ
+    # * automatically add keys to the agent and use Keychain for passphrases; works alongside the OMZ
     # * plugin:
     #
     # Host *

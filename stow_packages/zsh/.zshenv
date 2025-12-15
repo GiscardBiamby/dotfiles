@@ -18,6 +18,7 @@ path=(
     # "/usr/local/krb5/bin"     # needed for kerberos (kinit)
     "/usr/local/sbin"
     "${HOME}/bin"
+    "/opt/homebrew/bin"
     # "/usr/bin/Postman/app"
     $path
 )
