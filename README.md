@@ -51,6 +51,11 @@ Restart your terminal or `source ~/.zshrc` to see changes.
 
 There are some weird things happening with nvm that I haven't looked into yet. But it can block diff-so-fancy from installing correctly, forcing you to install in manually.
 
+```sh
+cd dotfiles/scripts/
+./update_plugins.sh
+```
+
 ## Manual Steps
 
 ### Change the `LIBVA_DRIVER_NAME` value in `~/.config/environment.d/90-libva.conf`

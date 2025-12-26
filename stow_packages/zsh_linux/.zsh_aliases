@@ -53,3 +53,5 @@ if [[ "$(uname)" != "Darwin" ]]; then
         alias gedit='gnome-text-editor'
     fi
 fi
+
+alias git_log="git log --graph --color --oneline --branches -10"

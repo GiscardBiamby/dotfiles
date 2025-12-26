@@ -28,43 +28,49 @@ mkdir -p "${HOME}/.config"
 pushd "${PROJ_ROOT}/stow_packages"
 stow --target="${HOME}" ag
 stow --target="${HOME}" bash
-stow --target="${HOME}" chrome
-stow --target="${HOME}" chromium
 stow --target="${HOME}" conda
 stow --target="${HOME}" direnv
 stow --target="${HOME}" git
+stow --target="${HOME}" local
 stow --target="${HOME}" jupyter --restow
-stow --adopt --target="${HOME}" obsidian
 stow --target="${HOME}" omz
 stow --target="${HOME}" ripgrep
 stow --target="${HOME}" shellcheck
 stow --target="${HOME}" tmux
 stow --target="${HOME}" vim
-stow --target="${HOME}" vscode
-stow --target="${HOME}" user_env
 # stow --target="${HOME}" zoom
 
 if [[ "${machine}" == "Linux" ]]; then
     stow --target="${HOME}" zsh_linux
-
-    hostname=$(hostname)
-    echo "hostname: $hostname"
-    if [[ $hostname == brb* || $hostname == ub* ]]; then
-        echo "STOWING brb specific files into /usr/..."
-        # sudo stow --target="/usr/share" usr_share --adopt
-        sudo stow --target="/usr/local" usr_local --adopt
-        sudo desktop-file-install ~/.local/share/applications/code.desktop
-        sudo desktop-file-install ~/.local/share/applications/code-url-handler.desktop
-    fi
 
     # If ~/bin doesn't exist, create it and stow home_bin there
     if [ ! -d "${HOME}/bin" ]; then
         mkdir "${HOME}/bin"
     fi
     stow --target="${HOME}/bin" home_bin
+
+    hostname=$(hostname)
+    echo "hostname: $hostname"
+    if [[ $hostname == brb* || $hostname == ub* ]]; then
+        stow --target="${HOME}" chrome
+        stow --target="${HOME}" chromium
+        stow --adopt --target="${HOME}" obsidian
+        stow --target="${HOME}" vscode
+        stow --target="${HOME}" user_env
+
+        echo "STOWING brb specific files into /usr/..."
+        # sudo stow --target="/usr/share" usr_share --adopt
+        sudo stow --target="/usr/local" usr_local --adopt
+        sudo desktop-file-install ~/.local/share/applications/code.desktop
+        sudo desktop-file-install ~/.local/share/applications/code-url-handler.desktop
+    fi
 fi
 if [[ "${machine}" == "Mac" ]]; then
     stow --target="${HOME}" zsh
+    stow --target="${HOME}" chrome
+    stow --target="${HOME}" chromium
+    stow --adopt --target="${HOME}" obsidian
+    stow --target="${HOME}" vscode
 fi
 
 popd
