@@ -29,5 +29,33 @@
     {
         "key": "ctrl+alt+i",
         "command": "ruff.executeOrganizeImports"
+    },
+    {
+        "key": "ctrl+shift+alt+i",
+        "command": "composer.newAgentChat"
+    },
+    {
+        "key": "ctrl+shift+i",
+        "command": "-composer.newAgentChat"
+    },
+    {
+        "key": "ctrl+alt+a",
+        "command": "workbench.panel.chat",
+        "when": "workbench.panel.chat.view.copilot.active"
+    },
+    {
+        "key": "ctrl+alt+i",
+        "command": "-workbench.panel.chat",
+        "when": "workbench.panel.chat.view.copilot.active"
+    },
+    {
+        "key": "ctrl+shift+alt+k",
+        "command": "aipopup.action.modal.generate",
+        "when": "editorFocus && !composerBarIsVisible"
+    },
+    {
+        "key": "ctrl+shift+k",
+        "command": "-aipopup.action.modal.generate",
+        "when": "editorFocus && !composerBarIsVisible"
     }
 ]

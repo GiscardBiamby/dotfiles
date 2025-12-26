@@ -65,6 +65,7 @@
     "black-formatter.showNotifications": "onWarning",
     "breadcrumbs.enabled": true,
     "chatgpt.commentCodeLensEnabled": false,
+    "chat.viewSessions.orientation": "stacked",
     // "git.path": "/home/gbiamby/bin/git-vscode-wrapper",
     "cSpell.allowCompoundWords": true,
     "cSpell.enabledSchemes": {
@@ -412,7 +413,9 @@
         "matplotlib",
         "maxormin",
         "mccabe",
+        "mediastinum",
         "medifor",
+        "merlinabdct",
         "mers",
         "microservice",
         "middleware",
@@ -703,6 +706,7 @@
         "vitl",
         "vmcondev",
         "vocoding",
+        "Voio",
         "vscode's",
         "vstack",
         "wakeonlan",
@@ -879,7 +883,7 @@
     "git.detectSubmodulesLimit": 100,
     "git.fetchOnPull": true,
     "git.openRepositoryInParentFolders": "never",
-    "git.repositoryScanMaxDepth": -1,
+    "git.repositoryScanMaxDepth": 3, // Controls the depth used when scanning workspace folders for Git repositories when `git.autoRepositoryDetection` is set to true or subFolders. Can be set to -1 for no limit.
     "git.showPushSuccessNotification": true,
     "git.suggestSmartCommit": false,
     "git.supportCancellation": true,
@@ -1097,7 +1101,8 @@
     ],
     "remote.SSH.defaultForwardedPorts": [],
     "remote.SSH.enableAgentForwarding": true,
-    "remote.SSH.path": "/usr/bin/ssh",
+    "remote.SSH.lockfilesInTmp": true,
+    "remote.SSH.path": "/opt/homebrew/bin/ssh", // `/usr/bin/ssh` or `/opt/homebrew/bin/ssh`
     "remote.SSH.remotePlatform": {
         "angler": "linux",
         "brb": "linux",
@@ -1112,7 +1117,8 @@
         "sif": "linux",
         "ub24gpu": "linux",
         "ydrag": "linux",
-        "ydrag.asgardgb.com": "linux"
+        "ydrag.asgardgb.com": "linux",
+        "hyperbolic-*": "linux"
     },
     "remote.SSH.serverPickPortsFromRange": {
         "raider": "39660-39699"
@@ -1120,6 +1126,7 @@
     "remote.SSH.showLoginTerminal": true,
     "remote.SSH.useFlock": false,
     "remote.SSH.useLocalServer": false,
+    "remote.SSH.useExecServer": false,
     "rewrap.wrappingColumn": 120,
     "ruff.organizeImports": false,
     // --- Search: Exclude artifacts and data from search results ---
@@ -1131,7 +1138,7 @@
     "security.workspace.trust.enabled": false,
     "security.workspace.trust.untrustedFiles": "open",
     "settingsSync.ignoredSettings": [
-        "editor.fontFamily"
+        "remote.SSH.path"
     ],
     "shellformat.effectLanguages": [
         "shellscript",
@@ -1187,7 +1194,7 @@
     "terminal.integrated.shellIntegration.suggestEnabled": true,
     "terminal.integrated.smoothScrolling": true,
     "terminal.integrated.shellIntegration.showWelcome": false,
-    "terminal.integrated.commandTimeout": 30000
+    "terminal.integrated.commandTimeout": 60000,
     "todo-tree.general.tags": [
         "BUG",
         "HACK",
