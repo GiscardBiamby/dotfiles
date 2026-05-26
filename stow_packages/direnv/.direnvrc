@@ -1,3 +1,20 @@
+# Activate a uv-managed venv. Defaults to ./.venv; pass a path to override.
+# Creates the venv via `uv venv` if missing. Use in a project's .envrc as:  use uv
+use_uv() {
+    local venv="${1:-.venv}"
+    if [[ ! -d "$venv" ]]; then
+        if command -v uv >/dev/null 2>&1; then
+            log_status "creating venv at $venv via uv"
+            uv venv "$venv" || return 1
+        else
+            log_error "no $venv directory and uv is not on PATH"
+            return 1
+        fi
+    fi
+    export VIRTUAL_ENV="$(expand_path "$venv")"
+    PATH_add "$VIRTUAL_ENV/bin"
+}
+
 layout_anaconda() {
     local ANACONDA_HOME="${HOME}/mambaforge/"
     PATH_add "$ANACONDA_HOME"/bin
