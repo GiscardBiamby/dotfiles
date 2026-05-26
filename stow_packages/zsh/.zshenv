@@ -11,21 +11,21 @@ typeset -U path
 # Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
 # Disable the krb line in order for yubikey ssh auth to work (there must be a better way?):
 path=(
-    "${HOME}/.local/bin"
-    "${HOME}/local/bin"
-    "/usr/local/bin"
-    # "/usr/local/ossh/bin"     # macos only
-    # "/usr/local/krb5/bin"     # needed for kerberos (kinit)
-    "/usr/local/sbin"
-    "${HOME}/bin"
-    "/opt/homebrew/bin"
-    # "/usr/bin/Postman/app"
-    $path
+	"${HOME}/.local/bin"
+	"${HOME}/local/bin"
+	"/usr/local/bin"
+	# "/usr/local/ossh/bin"     # macos only
+	# "/usr/local/krb5/bin"     # needed for kerberos (kinit)
+	"/usr/local/sbin"
+	"${HOME}/bin"
+	"/opt/homebrew/bin"
+	# "/usr/bin/Postman/app"
+	$path
 )
 
 # * Manually install noisetorch. Still need to load the app and activate it after each startup.
 if [ -d "/opt/noisetorch/bin" ]; then
-    path+=("/opt/noisetorch/bin")
+	path+=("/opt/noisetorch/bin")
 fi
 
 export PATH
@@ -37,39 +37,39 @@ fpath+=("$HOME/.zsh-complete")
 # CONDA_ROOT="${HOME}/miniforge3" # home
 # CONDA_ROOT="${HOME}/mambaforge" # remote
 if [ -d "${HOME}/miniforge3" ]; then
-    CONDA_ROOT="${HOME}/miniforge3"
-    export MAMBA_EXE="${CONDA_ROOT}/bin/mamba"
-    export MAMBA_ROOT_PREFIX="${CONDA_ROOT}"
+	CONDA_ROOT="${HOME}/miniforge3"
+	export MAMBA_EXE="${CONDA_ROOT}/bin/mamba"
+	export MAMBA_ROOT_PREFIX="${CONDA_ROOT}"
 elif [ -d "${HOME}/mambaforge" ]; then
-    CONDA_ROOT="${HOME}/mambaforge"
-    export MAMBA_EXE="${CONDA_ROOT}/bin/mamba"
-    export MAMBA_ROOT_PREFIX="${CONDA_ROOT}"
+	CONDA_ROOT="${HOME}/mambaforge"
+	export MAMBA_EXE="${CONDA_ROOT}/bin/mamba"
+	export MAMBA_ROOT_PREFIX="${CONDA_ROOT}"
 elif [ -d /opt/homebrew/opt/micromamba ]; then
-    # * micromamba installed via homebrew (Apple Silicon macs)
-    CONDA_ROOT="/opt/homebrew/opt/micromamba"
-    # Homebrew micromamba on macOS: exe and root-prefix differ
-    export MAMBA_EXE='/opt/homebrew/opt/micromamba/bin/mamba'
-    export MAMBA_ROOT_PREFIX="${HOME}/mamba"
+	# * micromamba installed via homebrew (Apple Silicon macs)
+	CONDA_ROOT="/opt/homebrew/opt/micromamba"
+	# Homebrew micromamba on macOS: exe and root-prefix differ
+	export MAMBA_EXE='/opt/homebrew/opt/micromamba/bin/mamba'
+	export MAMBA_ROOT_PREFIX="${HOME}/mamba"
 else
-    # Only warn in interactive shells
-    [[ -o interactive ]] && echo "WARNING: No conda/mamba installation found in ${HOME}/miniforge3 or ${HOME}/mambaforge" >&2
+	# Only warn in interactive shells
+	[[ -o interactive ]] && echo "WARNING: No conda/mamba installation found in ${HOME}/miniforge3 or ${HOME}/mambaforge" >&2
 fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 # Only run conda init if a real conda exists (not micromamba-only installs)
 if [ -x "${CONDA_ROOT}/bin/conda" ]; then
-    __conda_setup="$("${CONDA_ROOT}/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "${CONDA_ROOT}/etc/profile.d/conda.sh" ]; then
-            . "${CONDA_ROOT}/etc/profile.d/conda.sh"
-        else
-            export PATH="${CONDA_ROOT}/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
+	__conda_setup="$("${CONDA_ROOT}/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)"
+	if [ $? -eq 0 ]; then
+		eval "$__conda_setup"
+	else
+		if [ -f "${CONDA_ROOT}/etc/profile.d/conda.sh" ]; then
+			. "${CONDA_ROOT}/etc/profile.d/conda.sh"
+		else
+			export PATH="${CONDA_ROOT}/bin:$PATH"
+		fi
+	fi
+	unset __conda_setup
 fi
 # <<< conda initialize <<<
 
@@ -77,9 +77,9 @@ fi
 # !! Contents within this block are managed by 'mamba shell init' !!
 __mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2>/dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
+	eval "$__mamba_setup"
 else
-    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+	alias mamba="$MAMBA_EXE" # Fallback on help from mamba activate
 fi
 unset __mamba_setup
 # <<< mamba initialize <<<
@@ -89,11 +89,11 @@ unset __mamba_setup
 # * Semantics: Ctrl-T sources files; Alt-C sources directories. Prefer fd; fall back to rg/find if absent.
 # * This block only exports env vars (no heavy work), so it's safe here and applies to all new zsh sessions.
 if command -v fd >/dev/null 2>&1; then
-    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git 2>/dev/null'
-    export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git 2>/dev/null'
+	export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git 2>/dev/null'
+	export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git 2>/dev/null'
 else
-    export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git" 2>/dev/null' # files
-    export FZF_ALT_C_COMMAND='find -L . -type d -not -path "*/.git/*" 2>/dev/null'      # dirs
+	export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git" 2>/dev/null' # files
+	export FZF_ALT_C_COMMAND='find -L . -type d -not -path "*/.git/*" 2>/dev/null'       # dirs
 fi
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--height=40% --layout=reverse --border --inline-info'
@@ -112,45 +112,72 @@ export PAGER="/bin/cat"
 # Note: $SSH_CONNECTION is only set in interactive, remote shells. Doesn't matter for this cases
 # since EDITOR is only used in interactive shells.
 if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='nano'
+	export EDITOR='nano'
 else
-    export EDITOR='code --wait'
+	export EDITOR='code --wait'
 fi
 
 ## * ossh krb config
 if [[ "$(uname)" != "Darwin" ]]; then
-    # Only needed on linux, not macos:
-    if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
-        export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
-    # else
-    #     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
-    fi
+	# Only needed on linux, not macos:
+	if [[ -f /usr/local/krb5/etc/krb5.conf ]]; then
+		export KRB5_CONFIG=/usr/local/krb5/etc/krb5.conf
+	# else
+	#     echo "WARNING: /usr/local/krb5/etc/krb5.conf does not exist"
+	fi
 fi
 
 # * Enable wayland support for firefox on linux
 if [[ "$(uname)" != "Darwin" ]]; then
-    # * Note: .zshenv is only sourced for shells, not GUI apps. If you want an environment var to take
-    # * effect even for GUI apps (aka .desktop shortcuts), add the environment vars to
-    # * ~/.config/environment.d/
-    #export MOZ_ENABLE_WAYLAND=1
+
 fi
 
 if [[ "$(uname)" != "Darwin" ]]; then
-    # * Example: set the default libvirt URI for QEMU/KVM virtual machines
-    export LIBVIRT_DEFAULT_URI="qemu:///system"
+	# * Example: set the default libvirt URI for QEMU/KVM virtual machines
+	export LIBVIRT_DEFAULT_URI="qemu:///system"
 fi
 
 if [[ -d "${HOME}/perl5/bin" ]]; then
-    # Put ~/perl5/bin on PATH (zsh array append)
-    path+=("${HOME}/perl5/bin")
-    PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
-    export PERL5LIB
-    PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
-    export PERL_LOCAL_LIB_ROOT
-    PERL_MB_OPT="--install_base \"$HOME/perl5\""
-    export PERL_MB_OPT
-    PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
-    export PERL_MM_OPT
+	# Put ~/perl5/bin on PATH (zsh array append)
+	path+=("${HOME}/perl5/bin")
+	PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+	export PERL5LIB
+	PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+	export PERL_LOCAL_LIB_ROOT
+	PERL_MB_OPT="--install_base \"$HOME/perl5\""
+	export PERL_MB_OPT
+	PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
+	export PERL_MM_OPT
 fi
 
 export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgrep/.ripgreprc"
+
+# * Secrets: ~/.config/secrets/<name> is a `KEY=value` file (perms 600). _load_secret
+# * sources one and auto-exports its vars. Defined here so non-interactive shells
+# * (scripts, cron, editor subprocesses) can also use it.
+function _load_secret() {
+	local name="$1"
+	local file="$HOME/.config/secrets/$name"
+	[[ -r "$file" ]] || {
+		echo "secret file not readable: $file" >&2
+		return 1
+	}
+	local perms
+	perms="$(stat -f '%Lp' "$file" 2>/dev/null)"
+	[[ "$perms" == "600" ]] || echo "warning: $file has perms $perms, expected 600" >&2
+	set -a
+	source "$file"
+	set +a
+}
+
+# * Auto-load tokens that other tools read from env. Silent if the file is missing
+# * so fresh machines don't spam errors.
+[[ -r "$HOME/.config/secrets/github" ]] && _load_secret github >/dev/null 2>&1
+[[ -r "$HOME/.config/secrets/sky" ]] && _load_secret sky >/dev/null 2>&1
+[[ -r "$HOME/.config/secrets/hf" ]] && _load_secret hf >/dev/null 2>&1
+[[ -r "$HOME/.config/secrets/wandb" ]] && _load_secret wandb >/dev/null 2>&1
+
+# Expose OMZ-managed ssh-agent socket to non-interactive shells too
+SSH_ENV_CACHE="$HOME/.ssh/environment-$(hostname -s)"
+[ -f "$SSH_ENV_CACHE" ] && . "$SSH_ENV_CACHE" >/dev/null 2>&1
+unset SSH_ENV_CACHE

@@ -260,3 +260,707 @@ function kill_vscode_server() {
     # Delete related files and folder
     rm -rf $HOME/.vscode-server # Or ~/.vscode-server-insiders
 }
+
+function sky_login() {
+    _load_secret sky || return 1
+    local url="http://${SKY_API_USER}:${SKY_API_PASSWORD}@${SKY_API_HOST}"
+    expect <<EOF
+set timeout -1
+spawn sky api login -e "$url" --relogin
+expect "fall back to legacy auth method"
+send "\x03"
+expect "enter token manually"
+send "\x03"
+interact
+EOF
+}
+
+# Show all SkyPilot clusters + managed jobs with the hyperbolic-N host they're on.
+# IP -> hyperbolic-N mappings are hardcoded below; update if the cluster changes.
+# Runs `sky status` / `sky jobs queue` from $SKY_PROJECT_DIR (default ~/proj/pillar)
+# so the function works from anywhere.
+function sky_hosts() {
+    local project_dir="${SKY_PROJECT_DIR:-$HOME/proj/pillar}"
+    local k8s_host="${SKY_K8S_HOST:-${SKY_ZOMBIES_K8S_HOST:-hyperbolic-1}}"
+    local kubeconfig="${SKY_K8S_KUBECONFIG:-${SKY_ZOMBIES_KUBECONFIG:-/mnt/nfs/home/gbiamby/.kube/config}}"
+    local namespace="${SKY_K8S_NAMESPACE:-${SKY_ZOMBIES_NAMESPACE:-default}}"
+    local show_finished=0
+    local status_filter=""
+    local skip_priority=0
+    while [ $# -gt 0 ]; do
+        case "$1" in
+            --show-finished|-a|--all)
+                show_finished=1; shift ;;
+            --status=*)
+                status_filter="${1#--status=}"; shift ;;
+            --status)
+                shift; status_filter="$1"; shift ;;
+            --no-priority|--skip-kubectl)
+                skip_priority=1; shift ;;
+            -h|--help)
+                cat >&2 <<'USAGE'
+Usage: sky_hosts [--show-finished|-a] [--status=A,B,C] [--no-priority]
+
+By default hides managed jobs in terminal statuses:
+  SUCCEEDED, FAILED, FAILED_SETUP, FAILED_PRECHECKS,
+  FAILED_DRIVER, FAILED_CONTROLLER, CANCELLED, CANCELLING
+
+Options:
+  --show-finished, -a, --all   include terminal-status jobs
+  --status=A,B,C               show ONLY these statuses (comma-separated,
+                               case-insensitive); applies to BOTH clusters
+                               and jobs. e.g. --status=RUNNING,UP
+  --no-priority,
+  --skip-kubectl               skip the kubectl pod query used to populate the
+                               PRIO column (faster, works offline; PRIO shows '?')
+  -h, --help                   this help
+
+Env vars (with sky_zombies fallback):
+  SKY_PROJECT_DIR        sky project dir   (default: ~/proj/pillar)
+  SKY_K8S_HOST           ssh host w/ kubectl (default: hyperbolic-1)
+  SKY_K8S_KUBECONFIG     kubeconfig path on that host
+  SKY_K8S_NAMESPACE      k8s namespace      (default: default)
+USAGE
+                return 0 ;;
+            *)
+                echo "sky_hosts: unknown argument: $1  (try --help)" >&2
+                return 1 ;;
+        esac
+    done
+
+    if [ ! -d "$project_dir" ]; then
+        echo "sky_hosts: project dir not found: $project_dir" >&2
+        echo "  set SKY_PROJECT_DIR to a dir with a configured uv/sky environment" >&2
+        return 1
+    fi
+
+    local clusters_file jobs_file pods_file
+    clusters_file="$(mktemp -t sky_clusters.XXXXXX.json)" || return 1
+    jobs_file="$(mktemp -t sky_jobs.XXXXXX.json)" || return 1
+    pods_file="$(mktemp -t k8s_pods.XXXXXX.json)" || return 1
+    trap "rm -f '$clusters_file' '$jobs_file' '$pods_file' '$clusters_file.err' '$jobs_file.err' '$pods_file.err'" EXIT INT TERM
+
+    # Use `builtin cd` to bypass the user-defined `cd` function (which runs
+    # `ls -G` and would otherwise pollute the JSON stdout we capture below).
+    (builtin cd "$project_dir" && sky status -u -o json) >"$clusters_file" 2>"$clusters_file.err" \
+        || { echo "sky_hosts: 'sky status' failed (are you logged in?)" >&2; sed -n '1,20p' "$clusters_file.err" | sed 's/^/  stderr: /' >&2; return 1; }
+    (builtin cd "$project_dir" && sky jobs queue -a -u -o json) >"$jobs_file" 2>"$jobs_file.err" \
+        || echo "[]" >"$jobs_file"
+
+    # Fetch pods to populate priorityClassName column (graceful fallback to
+    # empty list so PRIO shows "?" instead of erroring out).
+    if [ "$skip_priority" = "1" ]; then
+        echo '{"items":[]}' >"$pods_file"
+    else
+        # Fetch nodes + pods in a single kubectl call so the per-host table can
+        # filter to nodes actually registered with k8s (skipping retired hosts).
+        ssh -o ConnectTimeout=10 "$k8s_host" "KUBECONFIG='$kubeconfig' kubectl get nodes,pods -n '$namespace' -o json" \
+            >"$pods_file" 2>"$pods_file.err" \
+            || { echo "sky_hosts: kubectl via $k8s_host failed; PRIO column will be '?'" >&2;
+                 sed -n '1,3p' "$pods_file.err" | sed 's/^/  stderr: /' >&2;
+                 echo '{"items":[]}' >"$pods_file"; }
+    fi
+
+    python3 - "$clusters_file" "$jobs_file" "$show_finished" "$status_filter" "$pods_file" <<'PYEOF'
+import json, re, sys
+
+# argv: [script-self, clusters_file, jobs_file, show_finished, status_filter, pods_file]
+_show_all          = (len(sys.argv) > 3 and sys.argv[3] == "1")
+_status_filter_raw = (sys.argv[4] if len(sys.argv) > 4 else "").strip()
+_wanted_statuses   = ({s.strip().upper() for s in _status_filter_raw.split(",") if s.strip()}
+                      if _status_filter_raw else None)
+_pods_path         = sys.argv[5] if len(sys.argv) > 5 else None
+TERMINAL = {"SUCCEEDED","FAILED","FAILED_SETUP","FAILED_PRECHECKS",
+            "FAILED_DRIVER","FAILED_CONTROLLER","CANCELLED","CANCELLING"}
+
+def _keep_status(status):
+    s = (status or "").upper()
+    if _wanted_statuses is not None:
+        return s in _wanted_statuses
+    if not _show_all and s in TERMINAL:
+        return False
+    return True
+
+# Load k8s items (nodes + pods, mixed by `kubectl get nodes,pods -o json`).
+_pods = []
+_alive_node_ips = set()
+if _pods_path:
+    try:
+        _raw_items = json.load(open(_pods_path)).get("items", [])
+    except Exception:
+        _raw_items = []
+    for _it in _raw_items:
+        _kind = _it.get("kind", "")
+        if _kind == "Pod":
+            _pods.append(_it)
+        elif _kind == "Node":
+            # Skip nodes that are not Ready (e.g. retired/drained)
+            _conds = _it.get("status", {}).get("conditions", []) or []
+            _ready = any(c.get("type") == "Ready" and c.get("status") == "True"
+                         for c in _conds)
+            if _ready:
+                _alive_node_ips.add(_it.get("metadata", {}).get("name", ""))
+
+# Build prio_map: pod-cluster-prefix ("<cluster_name>-<userhash>") -> priorityClassName
+prio_map = {}
+_pod_pat = re.compile(r"^(.+)-([0-9a-f]{8})-(head|worker\d+)$")
+for _p in _pods:
+    _name = _p.get("metadata", {}).get("name", "")
+    _m = _pod_pat.match(_name)
+    if not _m:
+        continue
+    _cluster_part, _uh, _role = _m.group(1), _m.group(2), _m.group(3)
+    # head is canonical (one per cluster). For worker-only pods we still record
+    # but head will overwrite if both exist, which is what we want.
+    _prefix = f"{_cluster_part}-{_uh}"
+    _pcn = _p.get("spec", {}).get("priorityClassName") or "-"
+    if _role == "head" or _prefix not in prio_map:
+        prio_map[_prefix] = _pcn
+
+# hyperbolic-N -> public IP (matches ~/.ssh/config HostName entries)
+PUBLIC = {
+    "95.134.196.171": "hyperbolic-1",
+    "95.134.196.163": "hyperbolic-2",
+    "95.134.196.162": "hyperbolic-3",
+    "95.134.196.138": "hyperbolic-4",
+    "95.134.196.217": "hyperbolic-5",
+    "95.134.196.240": "hyperbolic-6",
+    "95.134.196.184": "hyperbolic-7",
+    "95.134.196.221": "hyperbolic-8",
+    "95.134.196.173": "hyperbolic-9",
+    "95.134.196.142": "hyperbolic-10",
+    "95.134.196.228": "hyperbolic-11",
+    "95.134.196.155": "hyperbolic-12",
+    "95.134.196.198": "hyperbolic-13",
+    "95.134.196.227": "hyperbolic-14",
+    "95.134.196.192": "hyperbolic-15",
+    "95.134.196.233": "hyperbolic-16",
+    "95.134.196.139": "hyperbolic-17",
+}
+# Internal fabric IPs (commented in ~/.ssh/config). hyperbolic-7 has no internal IP.
+INTERNAL = {
+    "10.0.4.178": "hyperbolic-1",
+    "10.0.2.234": "hyperbolic-2",
+    "10.0.0.248": "hyperbolic-3",
+    "10.0.0.141": "hyperbolic-4",
+    "10.0.2.237": "hyperbolic-5",
+    "10.0.2.54":  "hyperbolic-6",
+    "10.0.1.172": "hyperbolic-8",
+    "10.0.1.77":  "hyperbolic-9",
+    "10.0.0.170": "hyperbolic-10",
+    "10.0.3.221": "hyperbolic-11",
+    "10.0.2.188": "hyperbolic-12",
+    "10.0.3.137": "hyperbolic-13",
+    "10.0.3.230": "hyperbolic-14",
+    "10.0.2.1":   "hyperbolic-15",
+    "10.0.3.168": "hyperbolic-16",
+    "10.0.7.58":  "hyperbolic-17",
+}
+
+def hostof(ip):
+    if not ip:
+        return "?"
+    return PUBLIC.get(ip) or INTERNAL.get(ip) or f"unknown({ip})"
+
+def _read_err(path):
+    """Return up to 20 lines of the matching .err file for a stdout temp file."""
+    try:
+        with open(path + ".err") as ef:
+            lines = ef.read().splitlines()
+    except Exception:
+        return ""
+    head = lines[:20]
+    out = "\n".join("  stderr: " + ln for ln in head)
+    if len(lines) > 20:
+        out += f"\n  stderr: ... ({len(lines) - 20} more line(s))"
+    return out
+
+def load(path):
+    try:
+        with open(path) as f:
+            raw = f.read()
+        txt = raw.strip()
+        if not txt:
+            print(f"sky_hosts: {path} is empty (command produced no stdout)", file=sys.stderr)
+            err = _read_err(path)
+            if err:
+                print(err, file=sys.stderr)
+            else:
+                print("  (no stderr either — command silently produced nothing)", file=sys.stderr)
+            return []
+        return json.loads(txt)
+    except json.JSONDecodeError as e:
+        print(f"sky_hosts: failed to parse {path}: {e}", file=sys.stderr)
+        snippet = raw[:200].replace("\n", "\\n")
+        print(f"  stdout (first 200 chars): {snippet!r}", file=sys.stderr)
+        err = _read_err(path)
+        if err:
+            print(err, file=sys.stderr)
+        return []
+    except Exception as e:
+        print(f"sky_hosts: failed to read {path}: {e}", file=sys.stderr)
+        return []
+
+clusters = load(sys.argv[1])
+jobs     = load(sys.argv[2])
+
+# ---- Clusters ----
+rows = []
+for c in clusters:
+    status = c.get("status") or ""
+    if not _keep_status(status):
+        continue
+    name   = c.get("name") or ""
+    user   = c.get("user_name") or ""
+    res    = c.get("resources_str") or ""
+    nodes  = c.get("node_names") or []
+    if isinstance(nodes, str):
+        # Multi-node clusters return node_names as a comma-joined string;
+        # split it so each IP gets resolved to its hyperbolic-N name.
+        nodes = [n.strip() for n in nodes.split(",") if n.strip()]
+    hosts = ",".join(hostof(n) for n in nodes) if nodes else "?"
+    ips   = ",".join(nodes) if nodes else "?"
+    prio  = prio_map.get(f"{name.replace('_','-')}-{c.get('user_hash','')}", "?")
+    rows.append((name, user, status, prio, res, hosts, ips))
+
+if rows:
+    rows.sort(key=lambda r: (r[5], r[1], r[0]))  # by host, then user, then name
+    headers = ("CLUSTER", "USER", "STATUS", "PRIO", "RESOURCES", "HOST", "NODE_IP")
+    widths  = [max(len(h), max(len(r[i]) for r in rows)) for i, h in enumerate(headers)]
+    fmt = "  ".join("{:<" + str(w) + "}" for w in widths)
+    print("Clusters")
+    print(fmt.format(*headers))
+    print("  ".join("-" * w for w in widths))
+    for r in rows:
+        print(fmt.format(*r))
+elif clusters:
+    print("Clusters: (none matching filter)")
+else:
+    print("Clusters: (none)")
+
+# ---- Managed jobs ----
+print()
+
+# For managed jobs, find the matching pod via trailing -<job_id> heuristic:
+# pod prefix ends in "-<job_id>-<user_hash>", iterate prio_map to find a match.
+# Precompute: (user_hash, job_id) -> prio  by parsing prio_map keys.
+_PFXJ = re.compile(r"^(.+)-(\d+)-([0-9a-f]{8})$")
+_job_prio = {}
+for _pfx, _pcn in prio_map.items():
+    _m = _PFXJ.match(_pfx)
+    if _m:
+        _job_prio[(_m.group(3), int(_m.group(2)))] = _pcn
+
+jrows = []
+for j in jobs:
+    status = j.get("status") or ""
+    if not _keep_status(status):
+        continue
+    jid_int = j.get("job_id") or j.get("id")
+    jid     = str(jid_int or "")
+    name    = j.get("job_name") or j.get("name") or ""
+    user    = j.get("user_name") or j.get("user") or ""
+    uh      = j.get("user_hash") or ""
+    res     = j.get("resources") or j.get("resources_str") or ""
+    cn      = j.get("cluster_name") or ""
+    recov   = str(j.get("num_recoveries") if j.get("num_recoveries") is not None else "")
+    prio    = _job_prio.get((uh, int(jid_int)), "?") if jid_int is not None else "?"
+    jrows.append((jid, name, user, status, prio, str(res), recov, cn))
+
+if jrows:
+    headers = ("ID", "NAME", "USER", "STATUS", "PRIO", "RESOURCES", "RECOV", "CLUSTER")
+    widths  = [max(len(h), max(len(r[i]) for r in jrows)) for i, h in enumerate(headers)]
+    fmt = "  ".join("{:<" + str(w) + "}" for w in widths)
+    print("Managed jobs")
+    print(fmt.format(*headers))
+    print("  ".join("-" * w for w in widths))
+    for r in jrows:
+        print(fmt.format(*r))
+elif jobs:
+    print("Managed jobs: (none matching filter; use --show-finished to include terminal statuses)")
+else:
+    print("Managed jobs: (none)")
+
+# ---- Per-host summary ----
+# One row per machine in the cluster. Aggregates when a host has multiple
+# skypilot pods (comma-separated). Blank columns if nothing is on the host.
+print()
+
+# Build lookups by pod prefix
+_cluster_meta = {}
+for c in clusters:
+    p = f"{c['name'].replace('_','-')}-{c['user_hash']}"
+    _cluster_meta[p] = {
+        "name": c["name"],
+        "user": c.get("user_name",""),
+        "status": c.get("status",""),
+        "resources": c.get("resources_str",""),
+    }
+
+_job_meta = {}
+for j in jobs:
+    jid = j.get("job_id")
+    uh  = j.get("user_hash")
+    if jid is None or uh is None: continue
+    _job_meta[(uh, int(jid))] = {
+        "name": j.get("job_name") or "?",
+        "user": j.get("user_name",""),
+        "status": j.get("status",""),
+        "resources": str(j.get("resources","")),
+        "job_id": jid,
+    }
+
+# Reuse _pods loaded earlier (may be empty list if kubectl failed)
+_per_host = {}  # host_name -> list of dicts
+_host_to_ip = {hn: ip for ip, hn in PUBLIC.items()}
+
+POD_PAT2 = re.compile(r"^(.+)-([0-9a-f]{8})-(head|worker\d+)$")
+try:
+    _pods_iter = _pods
+except NameError:
+    _pods_iter = []
+for _p in _pods_iter:
+    _name = _p.get("metadata",{}).get("name","")
+    _labels = _p.get("metadata",{}).get("labels") or {}
+    if not _labels.get("skypilot-cluster"):
+        continue
+    _m = POD_PAT2.match(_name)
+    if not _m:
+        continue
+    _cluster_part, _uh, _role = _m.group(1), _m.group(2), _m.group(3)
+    _node_ip = _p.get("spec",{}).get("nodeName","?")
+    _host    = hostof(_node_ip)
+    _prio    = _p.get("spec",{}).get("priorityClassName") or "-"
+    _prefix  = f"{_cluster_part}-{_uh}"
+
+    # Try cluster lookup first
+    _meta = _cluster_meta.get(_prefix)
+    if _meta:
+        _entry = {
+            "name": _meta["name"],
+            "user": _meta["user"],
+            "status": _meta["status"],
+            "prio": _prio,
+            "resources": _meta["resources"],
+            "node_ip": _node_ip,
+        }
+    else:
+        # Managed job match via trailing -<job_id>
+        _jm = re.search(r"-(\d+)$", _cluster_part)
+        _jmeta = _job_meta.get((_uh, int(_jm.group(1)))) if _jm else None
+        if _jmeta:
+            _entry = {
+                "name": f"{_jmeta['name']} (job#{_jmeta['job_id']})",
+                "user": _jmeta["user"],
+                "status": _jmeta["status"],
+                "prio": _prio,
+                "resources": _jmeta["resources"],
+                "node_ip": _node_ip,
+            }
+        else:
+            # Unknown / orphan — show what we know from labels + spec
+            _entry = {
+                "name": _cluster_part,
+                "user": _labels.get("skypilot-user","?"),
+                "status": _p.get("status",{}).get("phase","?"),
+                "prio": _prio,
+                "resources": "",
+                "node_ip": _node_ip,
+            }
+    _per_host.setdefault(_host, []).append(_entry)
+
+# Apply same status filter to host rows: only keep entries whose status passes.
+# Then build aggregated rows.
+def _uniq_join(xs):
+    seen, out = set(), []
+    for x in xs:
+        if x and x not in seen:
+            seen.add(x); out.append(x)
+    return ",".join(out)
+
+# Only show hosts that are currently registered & Ready in k8s. If kubectl
+# data was unavailable (_alive_node_ips empty), fall back to showing all
+# hosts from the PUBLIC map so we don't hide everything on offline runs.
+def _is_alive(host):
+    if not _alive_node_ips:
+        return True
+    return _host_to_ip.get(host, "") in _alive_node_ips
+
+all_hosts = sorted(set(PUBLIC.values()), key=lambda h: int(h.split("-")[1]))
+all_hosts = [h for h in all_hosts if _is_alive(h)]
+host_rows = []
+for h in all_hosts:
+    entries = [e for e in _per_host.get(h, []) if _keep_status(e["status"])]
+    ip = _host_to_ip.get(h, "")
+    if not entries:
+        host_rows.append((h, "", "", "", "", "", ip))
+    else:
+        host_rows.append((
+            h,
+            _uniq_join(e["name"] for e in entries),
+            _uniq_join(e["user"] for e in entries),
+            _uniq_join(e["status"] for e in entries),
+            _uniq_join(e["prio"] for e in entries),
+            _uniq_join(e["resources"] for e in entries),
+            ip,
+        ))
+
+print("Per-host summary")
+headers = ("HOST", "NAME", "USER", "STATUS", "PRIO", "RESOURCES", "NODE_IP")
+widths = [max(len(h), max(len(str(r[i])) for r in host_rows)) for i, h in enumerate(headers)]
+fmt = "  ".join("{:<" + str(w) + "}" for w in widths)
+print(fmt.format(*headers))
+print("  ".join("-" * w for w in widths))
+for r in host_rows:
+    print(fmt.format(*r))
+PYEOF
+
+    rm -f "$clusters_file" "$jobs_file" "$pods_file" "$clusters_file.err" "$jobs_file.err" "$pods_file.err"
+    trap - EXIT INT TERM
+}
+
+# sky_zombies: find k8s pods with skypilot labels that don't correspond to any
+# active sky cluster. Three categories printed:
+#   LIKELY ZOMBIES — no matching sky cluster, AND no active managed jobs from
+#                    that user. High confidence the pod is abandoned.
+#   AMBIGUOUS     — no matching sky cluster, but the user has active managed
+#                    jobs. The pod is likely a managed-job pod (sky's API
+#                    doesn't expose the cluster name for managed jobs, so we
+#                    can't disambiguate further from data alone).
+#   matched count — pods that map cleanly to a current sky cluster (not shown).
+#
+# Env vars (all optional, with sensible defaults for the pillar setup):
+#   SKY_PROJECT_DIR          — project dir with sky CLI available  (default: ~/proj/pillar)
+#   SKY_ZOMBIES_K8S_HOST     — ssh host with kubectl access        (default: hyperbolic-1)
+#   SKY_ZOMBIES_KUBECONFIG   — KUBECONFIG path on that host        (default: /mnt/nfs/home/gbiamby/.kube/config)
+#   SKY_ZOMBIES_NAMESPACE    — k8s namespace to search             (default: default)
+function sky_zombies() {
+    local project_dir="${SKY_PROJECT_DIR:-$HOME/proj/pillar}"
+    local k8s_host="${SKY_ZOMBIES_K8S_HOST:-hyperbolic-1}"
+    local kubeconfig="${SKY_ZOMBIES_KUBECONFIG:-/mnt/nfs/home/gbiamby/.kube/config}"
+    local namespace="${SKY_ZOMBIES_NAMESPACE:-default}"
+
+    if [ ! -d "$project_dir" ]; then
+        echo "sky_zombies: project dir not found: $project_dir" >&2
+        return 1
+    fi
+
+    local clusters_file jobs_file pods_file
+    clusters_file="$(mktemp -t sky_clusters.XXXXXX.json)" || return 1
+    jobs_file="$(mktemp -t sky_jobs.XXXXXX.json)" || return 1
+    pods_file="$(mktemp -t k8s_pods.XXXXXX.json)" || return 1
+    trap "rm -f '$clusters_file' '$jobs_file' '$pods_file' '$clusters_file.err' '$jobs_file.err' '$pods_file.err'" EXIT INT TERM
+
+    (builtin cd "$project_dir" && sky status -u -o json) >"$clusters_file" 2>"$clusters_file.err" \
+        || { echo "sky_zombies: 'sky status' failed" >&2; sed -n '1,10p' "$clusters_file.err" | sed 's/^/  stderr: /' >&2; return 1; }
+    (builtin cd "$project_dir" && sky jobs queue -a -u -o json) >"$jobs_file" 2>"$jobs_file.err" \
+        || echo "[]" >"$jobs_file"
+
+    ssh -o ConnectTimeout=15 "$k8s_host" "KUBECONFIG='$kubeconfig' kubectl get pods -n '$namespace' -o json" \
+        >"$pods_file" 2>"$pods_file.err" \
+        || { echo "sky_zombies: kubectl via $k8s_host failed" >&2; sed -n '1,10p' "$pods_file.err" | sed 's/^/  stderr: /' >&2; return 1; }
+
+    python3 - "$clusters_file" "$jobs_file" "$pods_file" <<'PYEOF'
+import json, re, sys
+
+clusters = json.load(open(sys.argv[1]))
+jobs     = json.load(open(sys.argv[2]))
+pods     = json.load(open(sys.argv[3])).get("items", [])
+
+# Expected pod prefixes from sky clusters: "<cluster-name>-<userhash>-"
+# Note: sky uses hyphens in pod names even when cluster names have underscores.
+expected_prefixes = set()
+for c in clusters:
+    p = f"{c['name'].replace('_','-')}-{c['user_hash']}-"
+    expected_prefixes.add(p)
+
+# (user_hash, job_id) -> job. Any status — recently-completed jobs may still
+# have pods terminating.
+known_jobs = {}
+for j in jobs:
+    uh = j.get("user_hash")
+    jid = j.get("job_id")
+    if uh and jid is not None:
+        known_jobs[(uh, int(jid))] = j
+
+# user_hashes with at least one active managed job (used as a softer fallback
+# signal when we can't pin a specific job_id from the cluster name).
+ACTIVE_STATUSES = {"RUNNING","PENDING","SETTING_UP","STARTING","RECOVERING","SUBMITTED"}
+active_user_hashes = {uh for (uh, _), j in known_jobs.items()
+                     if j.get("status") in ACTIVE_STATUSES}
+
+POD_PAT   = re.compile(r"^(.+)-([0-9a-f]{8})-(head|worker\d+)$")
+JOBID_PAT = re.compile(r"-(\d+)$")
+
+cat_matched_cluster, cat_matched_job, cat_ambiguous, cat_orphan = [], [], [], []
+
+for pod in pods:
+    md = pod["metadata"]
+    name = md["name"]
+    labels = md.get("labels") or {}
+    if not labels.get("skypilot-cluster"):
+        continue  # not a sky-owned pod
+    m = POD_PAT.match(name)
+    if not m:
+        continue
+    cluster_part, uh, role = m.group(1), m.group(2), m.group(3)
+    prefix   = f"{cluster_part}-{uh}-"
+    sky_user = labels.get("skypilot-user","?")
+    phase    = pod["status"].get("phase","?")
+    node     = pod["spec"].get("nodeName","?")
+
+    # Rule 1: matches an active sky cluster
+    if prefix in expected_prefixes:
+        cat_matched_cluster.append((name, cluster_part, sky_user, role, phase, node, ""))
+        continue
+    # Rule 2: trailing -<int> matches a managed-job id from this user
+    jm = JOBID_PAT.search(cluster_part)
+    if jm:
+        jid = int(jm.group(1))
+        j = known_jobs.get((uh, jid))
+        if j is not None:
+            jstatus = j.get("status","?")
+            cat_matched_job.append((name, cluster_part, sky_user, role, phase, node,
+                                    f"job#{jid} ({jstatus})"))
+            continue
+    # Rule 3: user has active managed jobs but we can't pin a specific id
+    if uh in active_user_hashes:
+        cat_ambiguous.append((name, cluster_part, sky_user, role, phase, node, ""))
+    else:
+        cat_orphan.append((name, cluster_part, sky_user, role, phase, node, ""))
+
+def print_table(title, rows, with_match_col=False):
+    print(f"=== {title}: {len(rows)} pod(s) ===")
+    if not rows:
+        print()
+        return
+    if with_match_col:
+        headers = ("POD","CLUSTER_GUESS","USER","ROLE","PHASE","NODE","MATCH")
+        cols = rows
+    else:
+        headers = ("POD","CLUSTER_GUESS","USER","ROLE","PHASE","NODE")
+        cols = [r[:6] for r in rows]
+    widths = [max(len(h), max(len(str(c[i])) for c in cols)) for i, h in enumerate(headers)]
+    fmt = "  ".join("{:<" + str(w) + "}" for w in widths)
+    print(fmt.format(*headers))
+    print("  ".join("-"*w for w in widths))
+    for c in cols:
+        print(fmt.format(*c))
+    print()
+
+print_table("LIKELY ZOMBIES (no sky cluster + no managed-job match + no active jobs from user)", cat_orphan)
+print_table("AMBIGUOUS (no specific managed-job id match, but user has active managed jobs)", cat_ambiguous)
+print_table("MATCHED MANAGED JOB (pod cluster name ends in -<job_id>, user_hash agrees)",
+            cat_matched_job, with_match_col=True)
+print(f"=== matched to active sky cluster: {len(cat_matched_cluster)} pod(s) (not shown) ===")
+PYEOF
+
+    rm -f "$clusters_file" "$jobs_file" "$pods_file" "$clusters_file.err" "$jobs_file.err" "$pods_file.err"
+    trap - EXIT INT TERM
+}
+
+# sky_get_zombies: print ONLY the names of high-confidence zombie pods, one per
+# line. Pipeable into kubectl or xargs.
+#
+# Classification (stricter than sky_zombies):
+#   1. Pod prefix matches a current sky cluster                       -> legit
+#   2. Pod prefix ends in `-<int>` matching a job_id whose user_hash
+#      matches the pod's user_hash (managed-job convention)           -> legit
+#   3. Otherwise                                                       -> ZOMBIE
+#
+# Rule 2 uses the empirical pattern that sky names managed-job pod
+# clusters as "<truncated-job-name>-<job_id>". If sky changes this
+# convention, rule 2 will silently stop matching and pods will move to
+# the zombie bucket — visible immediately because they'll show up here.
+#
+# Exits 0 even when no zombies (so `sky_get_zombies | xargs ...` is safe).
+#
+# Same env vars as sky_zombies:
+#   SKY_PROJECT_DIR, SKY_ZOMBIES_K8S_HOST, SKY_ZOMBIES_KUBECONFIG, SKY_ZOMBIES_NAMESPACE
+#
+# Examples:
+#   sky_get_zombies                                  # list names
+#   sky_get_zombies | wc -l                          # count
+#   sky_get_zombies | xargs -I{} echo "would delete: {}"
+#   sky_get_zombies | xargs ssh hyperbolic-1 \
+#       "KUBECONFIG=/mnt/nfs/home/gbiamby/.kube/config kubectl delete pod -n default --"
+function sky_get_zombies() {
+    local project_dir="${SKY_PROJECT_DIR:-$HOME/proj/pillar}"
+    local k8s_host="${SKY_ZOMBIES_K8S_HOST:-hyperbolic-1}"
+    local kubeconfig="${SKY_ZOMBIES_KUBECONFIG:-/mnt/nfs/home/gbiamby/.kube/config}"
+    local namespace="${SKY_ZOMBIES_NAMESPACE:-default}"
+
+    if [ ! -d "$project_dir" ]; then
+        echo "sky_get_zombies: project dir not found: $project_dir" >&2
+        return 1
+    fi
+
+    local clusters_file jobs_file pods_file
+    clusters_file="$(mktemp -t sky_clusters.XXXXXX.json)" || return 1
+    jobs_file="$(mktemp -t sky_jobs.XXXXXX.json)" || return 1
+    pods_file="$(mktemp -t k8s_pods.XXXXXX.json)" || return 1
+    trap "rm -f '$clusters_file' '$jobs_file' '$pods_file' '$clusters_file.err' '$jobs_file.err' '$pods_file.err'" EXIT INT TERM
+
+    (builtin cd "$project_dir" && sky status -u -o json) >"$clusters_file" 2>"$clusters_file.err" \
+        || { echo "sky_get_zombies: 'sky status' failed" >&2; sed -n '1,10p' "$clusters_file.err" | sed 's/^/  stderr: /' >&2; return 1; }
+    (builtin cd "$project_dir" && sky jobs queue -a -u -o json) >"$jobs_file" 2>"$jobs_file.err" \
+        || echo "[]" >"$jobs_file"
+
+    ssh -o ConnectTimeout=15 "$k8s_host" "KUBECONFIG='$kubeconfig' kubectl get pods -n '$namespace' -o json" \
+        >"$pods_file" 2>"$pods_file.err" \
+        || { echo "sky_get_zombies: kubectl via $k8s_host failed" >&2; sed -n '1,10p' "$pods_file.err" | sed 's/^/  stderr: /' >&2; return 1; }
+
+    python3 - "$clusters_file" "$jobs_file" "$pods_file" <<'PYEOF'
+import json, re, sys
+
+clusters = json.load(open(sys.argv[1]))
+jobs     = json.load(open(sys.argv[2]))
+pods     = json.load(open(sys.argv[3])).get("items", [])
+
+# Rule 1: prefix from sky status
+expected_prefixes = {
+    f"{c['name'].replace('_','-')}-{c['user_hash']}-"
+    for c in clusters
+}
+
+# Rule 2: (user_hash, job_id) -> job   (any status, not just active —
+# a pod for a recently-completed job may still be terminating)
+known_jobs = {}
+for j in jobs:
+    uh = j.get("user_hash")
+    jid = j.get("job_id")
+    if uh and jid is not None:
+        known_jobs[(uh, int(jid))] = j
+
+POD_PAT    = re.compile(r"^(.+)-([0-9a-f]{8})-(head|worker\d+)$")
+JOBID_PAT  = re.compile(r"-(\d+)$")
+
+zombies = []
+for pod in pods:
+    md = pod["metadata"]
+    name = md["name"]
+    labels = md.get("labels") or {}
+    if not labels.get("skypilot-cluster"):
+        continue
+    m = POD_PAT.match(name)
+    if not m:
+        continue
+    cluster_part, uh, _role = m.group(1), m.group(2), m.group(3)
+    prefix = f"{cluster_part}-{uh}-"
+
+    # Rule 1
+    if prefix in expected_prefixes:
+        continue
+    # Rule 2: trailing -<int> matches a job_id from this user
+    jm = JOBID_PAT.search(cluster_part)
+    if jm and (uh, int(jm.group(1))) in known_jobs:
+        continue
+    zombies.append(name)
+
+for n in zombies:
+    print(n)
+PYEOF
+
+    rm -f "$clusters_file" "$jobs_file" "$pods_file" "$clusters_file.err" "$jobs_file.err" "$pods_file.err"
+    trap - EXIT INT TERM
+}
