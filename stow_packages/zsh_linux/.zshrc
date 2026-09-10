@@ -150,7 +150,7 @@ if [[ "$(uname)" != "Darwin" ]]; then
         echo "Loading zsh plugin: keychain"
         plugins+=(keychain)
         zstyle :omz:plugins:keychain agents gpg,ssh
-        zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
+        zstyle :omz:plugins:keychain identities id_ed25519 id_rsa-bairdev id_ed25519_gbmb2 id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
     fi
 else
     echo "Loading zsh plugin: ssh-agent"
@@ -159,7 +159,7 @@ else
     zstyle :omz:plugins:ssh-agent agent-forwarding yes
     zstyle :omz:plugins:ssh-agent lazy yes
     zstyle :omz:plugins:ssh-agent ssh-add-args --apple-use-keychain --apple-load-keychain
-    zstyle :omz:plugins:ssh-agent identities id_ed25519 id_ed25519_sem id_rsa-bairdev
+    zstyle :omz:plugins:ssh-agent identities id_ed25519 id_ed25519_sem id_rsa-bairdev id_ed25519_gbmb2
     # * Also ensure your ~/.ssh/config includes below lines. This tells macOS's native SSH to
     # * automatically add keys to the agent and use Keychain for passphrases—works alongside the OMZ
     # * plugin:

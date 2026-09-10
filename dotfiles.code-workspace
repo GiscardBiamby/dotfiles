@@ -26,13 +26,18 @@
             "statusBar.debuggingForeground": "#15202b",
             "statusBar.foreground": "#15202b",
             "statusBarItem.hoverBackground": "#748390",
-            "statusBarItem.remoteBackground": "#909ca7",
+            "statusBarItem.remoteBackground": "#a73872",
             "statusBarItem.remoteForeground": "#15202b",
             "tab.activeBorder": "#acb5be",
             "titleBar.activeBackground": "#909ca7",
             "titleBar.activeForeground": "#15202b",
             "titleBar.inactiveBackground": "#909ca799",
-            "titleBar.inactiveForeground": "#15202b99"
+            "titleBar.inactiveForeground": "#15202b99",
+            "activityBarTop.activeBackground": "#acb5be",
+            "activityBarTop.background": "#acb5be",
+            "activityBarTop.foreground": "#15202b",
+            "activityBarTop.inactiveForeground": "#15202b99",
+            "commandCenter.foreground": "#15202b"
         },
         "cSpell.words": [
             "phoerious"

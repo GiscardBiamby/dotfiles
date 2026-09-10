@@ -45,7 +45,7 @@
         "editor.formatOnType": true
     },
     "[shellscript]": {
-        "editor.defaultFormatter": "lumirelle.shell-format-rev"
+        "editor.defaultFormatter": "mkhl.shfmt"
     },
     "[toml]": {
         "editor.defaultFormatter": "tamasfe.even-better-toml"
@@ -69,6 +69,7 @@
     // "git.path": "/home/gbiamby/bin/git-vscode-wrapper",
     "cSpell.allowCompoundWords": true,
     "cSpell.enabledSchemes": {
+        "chatSessionInput": true,
         "comment": true,
         "file": true,
         "gist": true,
@@ -1118,7 +1119,12 @@
         "ub24gpu": "linux",
         "ydrag": "linux",
         "ydrag.asgardgb.com": "linux",
-        "hyperbolic-*": "linux"
+        "hyperbolic-*": "linux",
+        "hyperbolic-1": "linux",
+        "hyperbolic-5": "linux",
+        "hyperbolic-6": "linux",
+        "gb_natrezd_001": "linux",
+        "gb_dev_00": "linux"
     },
     "remote.SSH.serverPickPortsFromRange": {
         "raider": "39660-39699"
@@ -1257,4 +1263,7 @@
     "workbench.list.smoothScrolling": true,
     "workbench.settings.openDefaultKeybindings": true,
     "workbench.tree.indent": 15,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "editor.accessibilitySupport": "off",
 }
