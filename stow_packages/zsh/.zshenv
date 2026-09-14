@@ -8,19 +8,20 @@
 # Ensure PATH has no duplicates and preserves first occurrence
 typeset -U path
 
-# Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of https://stackoverflow.com/a/18077919)
-# Disable the krb line in order for yubikey ssh auth to work (there must be a better way?):
+# Prepend PATH. lowercase "path" is bound to uppercase "PATH" (courtesy of
+# https://stackoverflow.com/a/18077919) Disable the krb line in order for yubikey ssh auth to work
+# (there must be a better way?):
 path=(
-	"${HOME}/.local/bin"
-	"${HOME}/local/bin"
-	"/usr/local/bin"
-	# "/usr/local/ossh/bin"     # macos only
-	# "/usr/local/krb5/bin"     # needed for kerberos (kinit)
-	"/usr/local/sbin"
-	"${HOME}/bin"
-	"/opt/homebrew/bin"
-	# "/usr/bin/Postman/app"
-	$path
+    "${HOME}/.local/bin"
+    "${HOME}/local/bin"
+    "/usr/local/bin"
+    # "/usr/local/ossh/bin"     # macos only
+    # "/usr/local/krb5/bin"     # needed for kerberos (kinit)
+    "/usr/local/sbin"
+    "${HOME}/bin"
+    # "/usr/bin/Postman/app"
+    "/opt/homebrew/bin"
+    $path
 )
 
 # * Manually install noisetorch. Still need to load the app and activate it after each startup.
