@@ -10,7 +10,7 @@
         "peacock.remoteColor": "#909ca7",
         "workbench.colorCustomizations": {
             "activityBar.activeBackground": "#acb5be",
-            "activityBar.activeBorder": "#bf4080",
+            "activityBar.activeBorder": "#15202b",
             "activityBar.background": "#acb5be",
             "activityBar.foreground": "#15202b",
             "activityBar.inactiveForeground": "#15202b99",
@@ -37,7 +37,8 @@
             "activityBarTop.background": "#acb5be",
             "activityBarTop.foreground": "#15202b",
             "activityBarTop.inactiveForeground": "#15202b99",
-            "commandCenter.foreground": "#15202b"
+            "commandCenter.foreground": "#15202b",
+            "activityBarTop.activeBorder": "#15202b"
         },
         "cSpell.words": [
             "phoerious"
