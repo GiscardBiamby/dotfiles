@@ -12,16 +12,16 @@ typeset -U path
 # https://stackoverflow.com/a/18077919) Disable the krb line in order for yubikey ssh auth to work
 # (there must be a better way?):
 path=(
-    "${HOME}/.local/bin"
-    "${HOME}/local/bin"
-    "/usr/local/bin"
-    # "/usr/local/ossh/bin"     # macos only
-    # "/usr/local/krb5/bin"     # needed for kerberos (kinit)
-    "/usr/local/sbin"
-    "${HOME}/bin"
-    # "/usr/bin/Postman/app"
-    "/opt/homebrew/bin"
-    $path
+	"${HOME}/.local/bin"
+	"${HOME}/local/bin"
+	"/usr/local/bin"
+	# "/usr/local/ossh/bin"     # macos only
+	# "/usr/local/krb5/bin"     # needed for kerberos (kinit)
+	"/usr/local/sbin"
+	"${HOME}/bin"
+	# "/usr/bin/Postman/app"
+	"/opt/homebrew/bin"
+	$path
 )
 
 # * Manually install noisetorch. Still need to load the app and activate it after each startup.
@@ -178,7 +178,7 @@ function _load_secret() {
 [[ -r "$HOME/.config/secrets/hf" ]] && _load_secret hf >/dev/null 2>&1
 [[ -r "$HOME/.config/secrets/wandb" ]] && _load_secret wandb >/dev/null 2>&1
 
-# Expose OMZ-managed ssh-agent socket to non-interactive shells too
-SSH_ENV_CACHE="$HOME/.ssh/environment-$(hostname -s)"
-[ -f "$SSH_ENV_CACHE" ] && . "$SSH_ENV_CACHE" >/dev/null 2>&1
-unset SSH_ENV_CACHE
+# # Expose OMZ-managed ssh-agent socket to non-interactive shells too
+# SSH_ENV_CACHE="$HOME/.ssh/environment-$(hostname -s)"
+# [ -f "$SSH_ENV_CACHE" ] && . "$SSH_ENV_CACHE" >/dev/null 2>&1
+# unset SSH_ENV_CACHE

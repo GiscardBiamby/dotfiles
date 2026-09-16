@@ -154,48 +154,17 @@ if [[ "$(uname)" != "Darwin" ]]; then
 	fi
 else
 	# * ssh-agent plugin settings for MacOS
-	# echo "Loading zsh plugin: ssh-agent"
-	plugins+=(ssh-agent)
-	# * macOS by default has its own ssh-agent running, which sets SSH_AUTH_SOCK. To avoid conflicts, we
-	# * unset SSH_AUTH_SOCK to ensure the OMZ ssh plugin starts a fresh agent instance:
-	unset SSH_AUTH_SOCK
-	# # MacOS old ssh-agent plugin settings (before switching to the homebrew openssh that supports yubikey):
-	# * ssh-agent plugin settings
-	zstyle :omz:plugins:ssh-agent agent-forwarding yes
-	zstyle :omz:plugins:ssh-agent lazy yes
-	zstyle :omz:plugins:ssh-agent ssh-add-args --apple-use-keychain --apple-load-keychain
-	zstyle :omz:plugins:ssh-agent identities id_ed25519 id_ed25519_gbmb2 id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
 
-	# * Also ensure your ~/.ssh/config includes below lines. This tells macOS's native SSH to
-	# * automatically add keys to the agent and use Keychain for passphrases; works alongside the OMZ
-	# * plugin:
-	#
-	# Host *
-	# AddKeysToAgent yes
-	# UseKeychain yes
-
-	# # yubikey compatible ssh-agent settings
-	# zstyle :omz:plugins:ssh-agent agent-forwarding yes
-	# # Don't lazy load (start it immediately so we can type the PIN)
-	# zstyle :omz:plugins:ssh-agent lazy no
-	# # IMPORTANT: REMOVED --apple-use-keychain arguments.
-	# # Homebrew OpenSSH does not support these.
-	# zstyle :omz:plugins:ssh-agent ssh-add-args -t 4h
-	# # Added your FIDO key (id_ed25519sk-brb-sk01) to the list
-	# # zstyle :omz:plugins:ssh-agent identities id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02 id_ed25519 id_ed25519_sem id_rsa-bairdev
-
-	# zstyle :omz:plugins:ssh-agent identities id_ed25519sk-brb-sk01 id_ed25519sk-brb-sk02
+	# * macOS: always use the system launchd ssh-agent (every app inherits it). Re-derive the socket
+	# * from launchd rather than trusting the inherited env (tmux, old agent caches can leave it stale).
+	export SSH_AUTH_SOCK="$(launchctl getenv SSH_AUTH_SOCK)"
+	# * Passphrase keys live in Keychain (one-time: /usr/bin/ssh-add --apple-use-keychain ~/.ssh/<key>).
+	# * sk-* (YubiKey) keys can't live in Apple's agent; Homebrew's ssh uses them from the key file.
+	/usr/bin/ssh-add --apple-load-keychain -q
 fi
 
 if [[ "$(uname)" == "Darwin" ]]; then
-	# yubikey
-	# To use this SSH agent, set this variable in your ~/.zshrc and/or ~/.bashrc:
-	#   export SSH_AUTH_SOCK="/opt/homebrew/var/run/yubikey-agent.sock"
 
-	# To restart yubikey-agent after an upgrade:
-	#   brew services restart yubikey-agent
-	# Or, if you don't want/need a background service you can just run:
-	#   /opt/homebrew/opt/yubikey-agent/bin/yubikey-agent -l /opt/homebrew/var/run/yubikey-agent.sock
 fi
 
 # * Tell OMZ not to run compinit (we'll do it ourselves)
